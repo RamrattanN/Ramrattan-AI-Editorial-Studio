@@ -97,3 +97,77 @@ the Editorial Context.
 
 The recorded origin of a claim, source, statistic, quotation, or
 significant editorial input.
+
+<!-- CAPABILITY_005_GLOSSARY_START -->
+
+## Portable Editorial Project
+
+A small, human-readable, Author-owned project file containing enough
+Adaptive Editorial Context to resume work later.
+
+## VCM
+
+The version control method using:
+
+```text
+YYYY.MM.DDvNN
+```
+
+The daily sequence begins at `v01`.
+
+## Project ID
+
+A permanent machine-readable identifier that remains stable even
+when the project title or filename changes.
+
+## Resume Existing Project
+
+The opening action that validates and restores a compatible
+Portable Editorial Project.
+
+## Stateless by Default
+
+The architectural principle that the Studio does not require hosted
+custody of Author project files.
+
+## Durable Source Context
+
+The source metadata, concise summary, key claims, statistics,
+Author interpretation, verification notes, and editorial role
+preserved so a project remains understandable when a URL expires or
+changes.
+
+## Author-Supplied Excerpt
+
+Material copied or pasted by the Author, including material from a
+source that may be paywalled or unavailable later.
+
+## Reverification
+
+A future review required when a source can no longer be accessed,
+may have changed, or cannot be independently confirmed.
+
+## Editorial Contribution
+
+Any Author input that may alter or enrich the Adaptive Editorial
+Context.
+
+## Editorial Event
+
+The interpreted meaning of a contribution, such as adding evidence,
+revising perspective, changing the thesis, approving an asset, or
+recording publication.
+
+## Editorial Integrity
+
+The collection of source-quality, evidence, attribution,
+originality, privacy, safety, professional-conduct, and publication
+readiness checks associated with a project.
+
+## Capability Demo
+
+The document that explains what a completed capability changed,
+demonstrates Author value, records acceptance criteria, and captures
+learning.
+
+<!-- CAPABILITY_005_GLOSSARY_END -->

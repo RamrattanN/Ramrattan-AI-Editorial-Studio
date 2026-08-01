@@ -75,3 +75,62 @@ The Studio remembers, organizes, connects, and preserves.
 
 The Author decides, creates, revises, approves, rejects, and
 publishes.
+
+<!-- CAPABILITY_005_PRODUCT_PRINCIPLES_START -->
+
+## Capability 5 Principles
+
+### The Studio's Memory Belongs to the Author
+
+Every completed project should be portable, resumable,
+human-readable, and remain under the Author's control.
+
+### Stateless by Default
+
+The Studio should not require hosted storage to preserve project
+continuity.
+
+### Preserve Editorial Meaning, Not Storage Paths
+
+The Studio should preserve editorial intent, source context,
+evidence, and decisions.
+
+It should not depend on knowing where the Author saved downloaded
+files.
+
+### Preserve Source Value, Not Merely URLs
+
+A source's key claims, evidence, metadata, and editorial role should
+remain understandable when its URL later expires or changes.
+
+### Handle Paywalled Material Responsibly
+
+Preserve the editorial context required for future work without
+automatically storing the complete paywalled source.
+
+### Explain the Value of Saving
+
+The Studio should help the Author understand that the Portable
+Editorial Project preserves context needed for future interactions.
+
+### Resume Without Repetition
+
+A resumed project should restore useful context without forcing the
+Author to reconstruct earlier decisions.
+
+### Reuse Responsibly
+
+Reuse should reduce effort without silently carrying outdated,
+weak, or unsupported claims into new work.
+
+### Integrity Before Publication
+
+Source quality, attribution, originality, privacy, safety, and
+evidence support must be considered before publication readiness.
+
+### Capability Completion Requires Demonstration
+
+A capability is not complete until its Author value and behaviour
+have been demonstrated and documented.
+
+<!-- CAPABILITY_005_PRODUCT_PRINCIPLES_END -->

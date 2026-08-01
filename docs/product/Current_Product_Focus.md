@@ -110,3 +110,58 @@ or deleted.
 Author work is private by default.
 
 The Library supports the creation process. It does not replace it.
+
+<!-- CAPABILITY_005_CURRENT_FOCUS_START -->
+
+## Capability 5 - Current Architecture Direction
+
+The Adaptive Editorial Context is the system kernel.
+
+The Studio continuously interprets Author contributions and updates
+a shared representation of:
+
+- intent,
+- sources,
+- durable source context,
+- evidence,
+- Author perspective,
+- thesis,
+- article state,
+- Hero Visual state,
+- integrity,
+- readiness,
+- and revision history.
+
+The Studio is stateless by default.
+
+Project continuity is provided through Portable Editorial Projects
+owned and stored by the Author.
+
+The Product does not request or rely on storage paths.
+
+Each project may be exported as a small Markdown file using:
+
+```text
+Ramrattan-Editorial-Project_<Article-Slug>_YYYY.MM.DDvNN.md
+```
+
+Generated filenames must not exceed 255 characters.
+
+The opening experience supports:
+
+- Start a New Editorial Project
+- Resume an Existing Editorial Project
+
+The Author may download or copy:
+
+- the article,
+- the Hero Visual,
+- the Portable Editorial Project,
+- or an optional ZIP package.
+
+The project preserves enough source context to remain useful when
+URLs expire or paywalled material becomes inaccessible.
+
+Editorial Integrity is a first-class component.
+
+<!-- CAPABILITY_005_CURRENT_FOCUS_END -->

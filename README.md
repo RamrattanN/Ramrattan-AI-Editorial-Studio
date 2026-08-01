@@ -185,3 +185,95 @@ This project is licensed under the MIT License.
 ---
 
 **The Author owns the idea. The Studio helps make it publishable.**
+
+<!-- CAPABILITY_005_README_START -->
+
+## Capability 5 - Adaptive Editorial Context
+
+The Adaptive Editorial Context is the working memory of the Studio.
+
+It interprets natural Author contributions and preserves:
+
+- intent,
+- sources,
+- durable source context,
+- evidence,
+- perspective,
+- thesis,
+- article state,
+- Hero Visual state,
+- integrity,
+- readiness,
+- and meaningful revision history.
+
+The Author does not need to select a workflow mode.
+
+## Portable Editorial Projects
+
+The Studio is stateless by default.
+
+Authors can save a small project file containing the context needed
+to resume later.
+
+Project files use:
+
+```text
+Ramrattan-Editorial-Project_<Article-Slug>_YYYY.MM.DDvNN.md
+```
+
+Filenames never exceed 255 characters.
+
+Authors may:
+
+- download or copy the article,
+- download or copy the Hero Visual,
+- download the Portable Editorial Project,
+- or export an optional ZIP.
+
+The Author chooses where files are stored.
+
+The Product does not request or depend on storage paths.
+
+## Durable Source Context
+
+URLs may expire, change, or become inaccessible.
+
+The project preserves:
+
+- citation metadata,
+- concise source summaries,
+- key claims,
+- statistics used,
+- Author interpretation,
+- verification notes,
+- and editorial significance.
+
+Paywalled material is preserved selectively.
+
+The complete source is not automatically archived.
+
+## Resume Existing Project
+
+A future opening experience will support:
+
+- Start a New Editorial Project
+- Resume an Existing Editorial Project
+
+Resume validates and restores the saved context without requiring
+the Author to reconstruct previous work.
+
+## Editorial Integrity
+
+The Studio evaluates:
+
+- source quality,
+- evidence support,
+- attribution,
+- uncertainty,
+- originality,
+- privacy,
+- safety,
+- professional conduct,
+- and publication blockers.
+
+<!-- CAPABILITY_005_README_END -->

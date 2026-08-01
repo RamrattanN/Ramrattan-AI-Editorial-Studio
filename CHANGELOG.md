@@ -78,3 +78,38 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - Visual-generation rules are not yet implemented
 - Full regression tests are not yet implemented
 - GitHub Project board is not yet configured
+
+<!-- CAPABILITY_005_CHANGELOG_START -->
+
+### Added - Capability 5 Architecture Baseline
+
+- Adaptive Editorial Context Model
+- Portable Editorial Project Specification
+- Editorial Integrity Charter
+- Capability Definition of Done
+- Capability 5 Demo
+- PRD v1.2
+- ADR-004 - Adopt Portable Editorial Projects
+- VCM project filename standard
+- 255-character filename maximum
+- Resume Existing Project experience
+- Download and copy output model
+- Durable source context
+- Expired URL resilience
+- Paywalled excerpt handling
+- Optional project ZIP concept
+- Capability architecture tests
+
+### Changed - Capability 5 Architecture Baseline
+
+- Replaced the hosted Author Library direction with Author-owned
+  Portable Editorial Projects
+- Established the Studio as stateless by default
+- Removed external file-path dependency
+- Made publication URLs optional metadata
+- Required preservation of source meaning beyond the URL
+- Defined selective retention for paywalled material
+- Made Editorial Integrity a first-class context component
+- Established Capability Demos as part of completion
+
+<!-- CAPABILITY_005_CHANGELOG_END -->

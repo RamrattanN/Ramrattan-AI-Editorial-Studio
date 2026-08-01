@@ -51,3 +51,56 @@ The Studio will not disguise weak foundations with generic prose.
 - The right to remove prior perspective.
 - The right to reject evidence or recommendations.
 - Responsibility for final publication approval.
+
+<!-- CAPABILITY_005_STUDIO_CONTRACT_START -->
+
+## Portable Project Commitment
+
+The Studio will:
+
+- offer an Author-controlled project export,
+- explain why the project file matters,
+- preserve enough context for future resumption,
+- validate a resumed project before using it,
+- preserve readable version information,
+- preserve durable source context,
+- and avoid silently overwriting earlier versions.
+
+The Studio will not:
+
+- require hosted storage,
+- request a file-storage path unnecessarily,
+- depend on Dropbox, OneDrive, Google Drive, or local paths,
+- claim ownership of project files,
+- or imply that a missing optional asset destroys the project
+  context.
+
+## Source Continuity Commitment
+
+The Studio will:
+
+- retain useful citation metadata,
+- preserve concise source summaries,
+- record key claims and statistics used,
+- preserve the Author's interpretation,
+- and identify future reverification limitations.
+
+It will not automatically archive complete paywalled publications.
+
+## Editorial Integrity Commitment
+
+The Studio will not knowingly assist with content intended to:
+
+- cause harm,
+- facilitate illegal activity,
+- deceive,
+- harass,
+- defraud,
+- impersonate,
+- reveal private information improperly,
+- or spread false information deliberately.
+
+It will explain source-quality concerns and help the Author develop
+a stronger, safer, or more defensible foundation where appropriate.
+
+<!-- CAPABILITY_005_STUDIO_CONTRACT_END -->

@@ -1,0 +1,112 @@
+# Current Product Focus
+
+## Status
+
+Active product direction as of 2026-08-01.
+
+## Product Definition
+
+Ramrattan AI Editorial Studio is an adaptive editorial operating
+system for developing publication-ready professional articles and
+their supporting 720 × 425 Hero Visuals.
+
+## Primary Outcome
+
+The primary outcome is an article publication package containing:
+
+- Hero Visual - 720 × 425
+- Headline
+- Publication-ready article
+- Source attribution
+- Practical takeaway
+- Call to action
+- Hashtags
+- LinkedIn description
+- Relevant publication metadata
+
+## Time-to-Value Target
+
+When sufficient material is available, the Studio should aim to
+produce the first publication-ready package within approximately
+10 minutes of the Author's original specification.
+
+This is a product target, not permission to sacrifice editorial
+quality.
+
+## Sufficient Starting Material
+
+A starting point is sufficient when it provides enough information
+to establish at least:
+
+- a meaningful topic,
+- a plausible Author intent,
+- and a path to defensible evidence or experience.
+
+Examples include:
+
+- A reputable URL
+- Copied source material
+- A headline plus Author perspective
+- A news recollection that can be researched
+- A professional observation with relevant detail
+- Notes or a draft containing a discernible argument
+- Multiple partial inputs that become sufficient together
+
+## Insufficient Starting Material
+
+Material is insufficient when it cannot support a distinctive,
+defensible article without inventing facts, intent, or expertise.
+
+The Studio should not produce generic filler.
+
+It should respond with:
+
+1. A concise explanation of the limitation.
+2. The specific information that is missing.
+3. An example of an improved starting point.
+4. One clear next action.
+
+## Active Capabilities
+
+1. Adaptive Editorial Context
+2. Article Engine
+3. Hero Visual
+4. Author Library
+5. Editorial Intelligence
+6. Evidence and Research
+7. Platform Services
+
+## Current Scope
+
+Included:
+
+- Professional articles
+- LinkedIn-oriented publication packages
+- 720 × 425 Hero Visuals
+- Adaptive Author input
+- Evidence and attribution
+- Revision and context preservation
+- Local-first Author Library planning
+
+Excluded from current scope:
+
+- Carousels
+- Social-media threads
+- Video scripts
+- Podcast scripts
+- General marketing-content suites
+- Cloud collaboration
+- Multi-tenant storage
+- Automatic direct publishing
+
+## Relationship Between Context and Library
+
+The Editorial Context is the active workspace.
+
+The Author Library stores paused or completed work so it can be
+recalled, reviewed, resumed, revised, exported, archived, restored,
+or deleted.
+
+Author work is private by default.
+
+The Library supports the creation process. It does not replace it.

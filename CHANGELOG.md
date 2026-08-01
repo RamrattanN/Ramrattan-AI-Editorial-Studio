@@ -4,6 +4,28 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 
 ## [Unreleased]
 
+### Added - PR-004 Article-First Product Alignment
+
+- Current Product Focus document
+- Product Requirements Document v1.1
+- Article-first publication-package definition
+- Hero Visual terminology and 720 × 425 specification
+- Ten-minute time-to-value target
+- Constructive insufficient-input behaviour
+- Author Library terminology
+- ADR-003 - Adopt an Article-First Publication Package
+- Article-first alignment tests
+
+### Changed - PR-004 Article-First Product Alignment
+
+- Narrowed the active product scope to professional articles
+- Removed carousels from the active product roadmap
+- Defined the Hero Visual as part of the article publication package
+- Reframed the Author Library as supporting paused and completed work
+- Clarified that the existing linear workflow is a historical prototype
+- Established Author confidence to publish as the primary usefulness measure
+
+
 ### Added - Sprint 2 Editorial Workflow System
 
 - Explicit editorial workflow state machine

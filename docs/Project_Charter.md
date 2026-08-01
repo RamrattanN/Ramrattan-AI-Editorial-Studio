@@ -1,77 +1,38 @@
 # Project Charter
 
-## Project
+## Product
 
 Ramrattan AI Editorial Studio
 
-## Version
+## Current Stage
 
-`v3.0.0-rc1`
+Sprint 2.5 - Product Foundation
 
-## Motto
+## North Star
 
-> Engineering AI-assisted thought leadership with the discipline of software development.
+> The Studio adapts to the Author's creative process. The Author should
+> never have to adapt to the Studio.
 
 ## Vision
 
-Build a maintainable, transparent, and professional AI-powered editorial studio for executive thought leadership.
+Build an adaptive editorial partner that helps professionals develop,
+challenge, refine, and communicate ideas.
 
 ## Mission
 
-Transform a single source into publication-ready thought leadership with minimal user effort while maintaining originality, evidence quality, editorial coherence, and visual excellence.
+Combine Author expertise, defensible evidence, editorial reasoning, and
+visual storytelling while preserving authorship and creative control.
 
-## Initial Scope
+## Product Identity
 
-The first module creates:
+The Studio is not defined by a URL, one publishing channel, one output
+format, or one AI model.
 
-- LinkedIn articles
-- Seven-slide LinkedIn carousels
-- 720 × 425 LinkedIn hero infographics
-- Supporting headlines and descriptions
-- Practical takeaways
-- Discussion-oriented calls to action
-- Source attribution
-- Structured hashtags
+It is defined by its relationship with the Author.
 
-## Core Principles
+## Current Architectural Direction
 
-- Visual-first
-- Guided
-- Evidence-based
-- Original
-- Transparent
-- Maintainable
-- Reversible
+The target architecture is an evolving Editorial Context.
 
-## Primary Audience
-
-- Managers
-- Executives
-- Industry practitioners
-- Consultants
-- Real estate professionals
-- Business-to-business content creators
-
-## Current Non-Goals
-
-The initial release will not:
-
-- Publish directly to LinkedIn
-- Replace human editorial judgment
-- Guarantee interface-level clickable buttons
-- Reproduce another organization's visual identity
-- Store private user credentials
-- Train on private content without explicit direction
-
-## Sprint 1 Definition of Done
-
-Sprint 1 is complete when:
-
-- Repository structure is established
-- Project charter is published
-- Changelog and roadmap exist
-- ADR framework exists
-- Versioning is explicit
-- Initial CLI validates the structure
-- GitHub contribution templates exist
-- PR-001 is reviewed and merged into `develop`
+The existing linear workflow package remains an experimental reference
+and will be migrated incrementally.

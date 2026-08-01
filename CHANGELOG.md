@@ -4,6 +4,32 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 
 ## [Unreleased]
 
+### Added - PR-003A Product Foundation
+
+- Product Requirements Document v1.0
+- Product Constitution
+- Product Principles
+- Studio Contract
+- Adaptive Editorial Model
+- Author Journey
+- Product constraints
+- Product Glossary
+- Product Decision Log
+- Editorial Intelligence Manifesto
+- ADR-002 - Adopt an Adaptive Editorial Context
+- Product-foundation tests
+
+### Changed - PR-003A Product Foundation
+
+- Repositioned the product from URL-first generation to adaptive
+  editorial collaboration
+- Established Author perspective as a first-class input
+- Established non-linear revision and context preservation as core
+  requirements
+- Marked the current linear workflow package as an experimental
+  reference
+
+
 ### Added - Sprint 2 Editorial Workflow System
 
 - Explicit editorial workflow state machine

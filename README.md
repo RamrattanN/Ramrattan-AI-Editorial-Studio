@@ -1,156 +1,89 @@
 # Ramrattan AI Editorial Studio
 
-> **Engineering AI-assisted thought leadership with the discipline of software development.**
+> **Engineering AI-assisted thought leadership with the discipline of
+> software development.**
 
-[![Status](https://img.shields.io/badge/status-v3.0.0--rc1-blue)](VERSION)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Stage](https://img.shields.io/badge/stage-foundation-orange)](ROADMAP.md)
+Ramrattan AI Editorial Studio is an adaptive editorial partner that
+helps Authors transform evolving ideas, evidence, expertise, and
+perspective into publication-ready thought leadership.
 
-Ramrattan AI Editorial Studio is an open-source framework for turning a single source URL into premium, visual-first LinkedIn thought leadership.
+**The Studio adapts to the Author's creative process - never the other
+way around.**
 
-The project treats AI editorial workflows as maintainable products rather than isolated prompts.
+## Authors May Begin With
 
-## Why This Project Exists
+- a URL,
+- a headline,
+- a topic,
+- something seen in the news,
+- a personal observation,
+- a developed perspective,
+- rough notes,
+- a draft,
+- or any useful combination.
 
-AI can produce content quickly. Producing content that is original, evidence-based, visually coherent, reviewable, and repeatable is a more demanding problem.
+The Studio interprets what is happening before imposing structure.
 
-This project addresses that gap through:
+## Core Commitments
 
-- Versioned prompt architecture
-- Guided editorial workflows
-- Visual-first content design
-- Explicit review checkpoints
-- Architecture Decision Records
-- Regression testing
-- Reversible releases
-- Documented editorial standards
+- Infer before asking.
+- Preserve creative momentum.
+- Treat perspective as a first-class input.
+- Keep every editorial decision revisable.
+- Preserve useful context across changes.
+- Use evidence to strengthen thinking.
+- Explain significant recommendations.
+- Synthesize rather than imitate.
+- Optimize for quality rather than content volume.
 
-## Current Scope
+## Initial Publishing Module
 
 The first production module focuses on LinkedIn:
 
-- Short LinkedIn articles
-- Seven-slide LinkedIn carousels
-- 720 × 425 hero infographics
-- Executive Editorial visual direction
-- Magazine Cover visual direction
-- Data Story visual direction
-- Guided option-based selection
-- Editable visual and written content
-- Source attribution and originality controls
+- thought-leadership articles,
+- seven-slide carousels,
+- hero infographics,
+- headlines and hooks,
+- evidence-supported insights,
+- practical takeaways,
+- calls to action,
+- attribution,
+- hashtags,
+- and LinkedIn descriptions.
 
-## Core Workflow
+LinkedIn is the first channel, not the permanent boundary.
 
-```text
-Source URL
-    ↓
-Source Analysis
-    ↓
-Strongest Defensible Insight
-    ↓
-Content Type
-    ↓
-Visual Direction
-    ↓
-Hero Copy Selection
-    ↓
-720 × 425 Infographic
-    ↓
-Graphic Review
-    ↓
-Written Content
-    ↓
-Final Review
-```
+## Product Documentation
 
-## Product Principles
+1. [PRD v1.0](docs/product/PRD_v1.0.md)
+2. [Product Constitution](docs/product/Constitution.md)
+3. [Product Principles](docs/product/Product_Principles.md)
+4. [Studio Contract](docs/product/Studio_Contract.md)
+5. [Adaptive Editorial Model](docs/product/Adaptive_Editorial_Model.md)
+6. [Author Journey](docs/product/Author_Journey.md)
+7. [Things We Will Not Do](docs/product/Things_We_Will_Not_Do.md)
+8. [Glossary](docs/product/Glossary.md)
+9. [Decision Log](docs/product/Decision_Log.md)
+10. [Editorial Intelligence Manifesto](docs/product/Editorial_Intelligence_Manifesto.md)
 
-### Visual-First
+## Architecture Status
 
-The hero graphic establishes the editorial narrative. The written content reinforces it.
+The current `studio.workflow` package remains an engineering prototype.
 
-### Guided
+The target architecture is an adaptive Editorial Context model.
 
-The system presents concise options instead of requiring unnecessary free-form input.
-
-### Original
-
-Reference material may inform sentiment or context, but output must use a distinct argument, structure, and language.
-
-### Evidence-Based
-
-Every final piece includes at least one meaningful number and identifies relevant assumptions.
-
-### Maintainable
-
-Prompts, decisions, releases, and tests are versioned and documented.
-
-### Reversible
-
-Each significant change has a rollback path.
-
-## Repository Structure
-
-```text
-.
-├── .github/                  GitHub templates and automation
-├── assets/                   Visual and branding assets
-├── docs/                     Architecture and project documentation
-│   ├── architecture/adr/     Architecture Decision Records
-│   ├── Handoff/              Historical and transition records
-│   └── learning/             Educational material
-├── examples/                 Curated examples
-├── prompts/                  Versioned GPT instructions
-├── releases/                 Release snapshots
-├── scripts/                  Maintenance and release utilities
-├── templates/                Reusable project templates
-├── tests/                    Regression and acceptance tests
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── ROADMAP.md
-├── VERSION
-└── studio.py
-```
-
-## Current Release
-
-**Version:** `v3.0.0-rc1`
-
-**Stage:** Sprint 1 - The Foundation
-
-This release candidate establishes the repository structure, governance model, versioning strategy, and initial command-line interface.
-
-## Documentation
-
-Start with:
-
-1. [Project Charter](docs/Project_Charter.md)
-2. [Architecture Decision Records](docs/architecture/adr/README.md)
-3. [Roadmap](ROADMAP.md)
-4. [Contributing Guide](CONTRIBUTING.md)
-5. [Changelog](CHANGELOG.md)
-
-## Command-Line Interface
+## Validation
 
 ```bash
-python3 studio.py status
-python3 studio.py structure
+python3 -m compileall -q studio tests
+python3 -m unittest discover -s tests -v
 python3 studio.py validate
-python3 studio.py version
 ```
-
-## Contributing
-
-Contributions, issue reports, documentation improvements, and design discussions are welcome.
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+This project is licensed under the MIT License.
 
 ---
 
-**Ramrattan AI Editorial Studio**
-
-Clarity over cleverness. Quality over speed. Documented decisions over hidden assumptions.
+The Author owns the idea. The Studio helps make it stronger.

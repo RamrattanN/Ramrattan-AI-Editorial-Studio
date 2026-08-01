@@ -73,3 +73,32 @@ The project should improve:
 - Maintainability
 - Reproducibility
 - Release confidence
+
+<!-- PR003A_PRODUCT_FOUNDATION_START -->
+
+## Current - Sprint 2.5 Product Foundation
+
+- [x] Define adaptive editorial-partner identity
+- [x] Define supported natural starting points
+- [x] Define the Product Constitution
+- [x] Define Product Principles
+- [x] Define the Studio Contract
+- [x] Define the Adaptive Editorial Model
+- [x] Define the Author Journey
+- [x] Define product constraints
+- [x] Standardize product terminology
+- [x] Record the architectural pivot
+- [x] Add product-foundation tests
+
+## Next - Adaptive Context Architecture
+
+- [ ] Define the Editorial Context data model
+- [ ] Model editorial components and statuses
+- [ ] Model revision events
+- [ ] Model provenance
+- [ ] Model dependencies
+- [ ] Model recoverable history
+- [ ] Add intent and perspective confidence
+- [ ] Migrate beyond the linear workflow prototype
+
+<!-- PR003A_PRODUCT_FOUNDATION_END -->

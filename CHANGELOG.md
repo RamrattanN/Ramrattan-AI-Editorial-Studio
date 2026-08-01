@@ -4,6 +4,18 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 
 ## [Unreleased]
 
+### Added - Sprint 2 Editorial Workflow System
+
+- Explicit editorial workflow state machine
+- Serializable editorial session state
+- Centralized selectable user choices
+- Back and restart navigation
+- Dependency-aware downstream resets
+- Hero-copy validation
+- Unit tests for workflow behavior
+- ADR-001 - The Workflow Is the Product
+
+
 ### Planned
 
 - Versioned GPT prompt architecture

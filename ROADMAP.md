@@ -73,3 +73,49 @@ The project should improve:
 - Maintainability
 - Reproducibility
 - Release confidence
+
+<!-- ARTICLE_FIRST_ALIGNMENT_START -->
+
+## Current Focus - Article-First Editorial Operating System
+
+### Completed
+
+- [x] Repository foundation
+- [x] Linear workflow prototype
+- [x] Adaptive product foundation
+- [x] Article-first product definition
+- [x] Hero Visual terminology
+- [x] 720 × 425 Hero Visual specification
+- [x] Author Library naming and scope
+- [x] Ten-minute time-to-value target
+- [x] Insufficient-input behaviour
+
+### Next Capabilities
+
+1. Adaptive Editorial Context
+2. Article Engine and Publication Package
+3. Author Library - local-first
+4. Intent and Revision Intelligence
+5. Evidence and Research
+6. Hero Visual System
+
+### Current Scope
+
+- [x] Professional articles
+- [x] 720 × 425 Hero Visuals
+- [x] LinkedIn-oriented publication packages
+- [ ] Adaptive Editorial Context implementation
+- [ ] Article Engine implementation
+- [ ] Author Library implementation
+- [ ] Evidence and Research implementation
+- [ ] Hero Visual implementation
+
+### Deferred
+
+- [ ] Carousels
+- [ ] Other social-media formats
+- [ ] Direct publishing
+- [ ] Cloud synchronization
+- [ ] Collaboration and shared workspaces
+
+<!-- ARTICLE_FIRST_ALIGNMENT_END -->

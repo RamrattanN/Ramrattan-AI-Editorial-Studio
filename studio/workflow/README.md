@@ -1,3 +1,13 @@
+> **Historical prototype notice**
+>
+> This package represents the earlier linear workflow experiment.
+> It is retained for engineering traceability and test coverage.
+>
+> It is not the current product architecture.
+>
+> The active product is article-first and uses an adaptive Editorial
+> Context. Earlier carousel concepts in this prototype are not part
+> of the current product scope.
 # Editorial Workflow System
 
 ## Purpose

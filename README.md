@@ -1,156 +1,187 @@
 # Ramrattan AI Editorial Studio
 
-> **Engineering AI-assisted thought leadership with the discipline of software development.**
+> **Engineering AI-assisted thought leadership with the discipline
+> of software development.**
 
-[![Status](https://img.shields.io/badge/status-v3.0.0--rc1-blue)](VERSION)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Stage](https://img.shields.io/badge/stage-foundation-orange)](ROADMAP.md)
+Ramrattan AI Editorial Studio is an adaptive editorial operating
+system that helps Authors transform evolving ideas, evidence,
+expertise, and perspective into publication-ready professional
+articles.
 
-Ramrattan AI Editorial Studio is an open-source framework for turning a single source URL into premium, visual-first LinkedIn thought leadership.
+**The Studio adapts to the Author's creative process - never the
+other way around.**
 
-The project treats AI editorial workflows as maintainable products rather than isolated prompts.
+## Current Product Focus
 
-## Why This Project Exists
+The current product creates one complete article publication
+package:
 
-AI can produce content quickly. Producing content that is original, evidence-based, visually coherent, reviewable, and repeatable is a more demanding problem.
+- A publication-ready professional article
+- A 720 × 425 Hero Visual
+- A strong headline
+- A clear opening hook
+- Evidence-supported insights
+- A practical takeaway
+- Source attribution
+- A pointed call to action
+- Relevant hashtags
+- A concise LinkedIn description
 
-This project addresses that gap through:
+The Hero Visual may also be described informally as an infographic.
+In the product architecture, **Hero Visual** is the standard term.
 
-- Versioned prompt architecture
-- Guided editorial workflows
-- Visual-first content design
-- Explicit review checkpoints
-- Architecture Decision Records
-- Regression testing
-- Reversible releases
-- Documented editorial standards
+## Author Starting Points
 
-## Current Scope
+Authors may begin naturally with:
 
-The first production module focuses on LinkedIn:
+- one or more URLs,
+- copied source material,
+- a headline,
+- a topic,
+- something seen in the news,
+- a personal observation,
+- a developed perspective,
+- rough notes,
+- an incomplete idea,
+- a previous draft,
+- or any useful combination.
 
-- Short LinkedIn articles
-- Seven-slide LinkedIn carousels
-- 720 × 425 hero infographics
-- Executive Editorial visual direction
-- Magazine Cover visual direction
-- Data Story visual direction
-- Guided option-based selection
-- Editable visual and written content
-- Source attribution and originality controls
+The Studio interprets what is happening before imposing structure.
 
-## Core Workflow
+## Product Promise
 
-```text
-Source URL
-    ↓
-Source Analysis
-    ↓
-Strongest Defensible Insight
-    ↓
-Content Type
-    ↓
-Visual Direction
-    ↓
-Hero Copy Selection
-    ↓
-720 × 425 Infographic
-    ↓
-Graphic Review
-    ↓
-Written Content
-    ↓
-Final Review
-```
+When the Author provides sufficient material, the Studio should aim
+to produce a publication-ready first draft and Hero Visual within
+approximately 10 minutes.
 
-## Product Principles
+Speed does not override quality, originality, evidence, or Author
+control.
 
-### Visual-First
+## Insufficient Starting Material
 
-The hero graphic establishes the editorial narrative. The written content reinforces it.
+The Studio must not manufacture confidence from a weak foundation.
 
-### Guided
+When the starting material cannot support a distinctive,
+defensible article, the Studio should:
 
-The system presents concise options instead of requiring unnecessary free-form input.
+1. Explain specifically why the material is insufficient.
+2. Identify what is missing.
+3. Show an example of a stronger starting point.
+4. Offer the smallest useful next action.
 
-### Original
+A constructive response is better than generating generic or
+unsupported content.
 
-Reference material may inform sentiment or context, but output must use a distinct argument, structure, and language.
-
-### Evidence-Based
-
-Every final piece includes at least one meaningful number and identifies relevant assumptions.
-
-### Maintainable
-
-Prompts, decisions, releases, and tests are versioned and documented.
-
-### Reversible
-
-Each significant change has a rollback path.
-
-## Repository Structure
+## Core Product Capabilities
 
 ```text
-.
-├── .github/                  GitHub templates and automation
-├── assets/                   Visual and branding assets
-├── docs/                     Architecture and project documentation
-│   ├── architecture/adr/     Architecture Decision Records
-│   ├── Handoff/              Historical and transition records
-│   └── learning/             Educational material
-├── examples/                 Curated examples
-├── prompts/                  Versioned GPT instructions
-├── releases/                 Release snapshots
-├── scripts/                  Maintenance and release utilities
-├── templates/                Reusable project templates
-├── tests/                    Regression and acceptance tests
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── ROADMAP.md
-├── VERSION
-└── studio.py
+Ramrattan AI Editorial Studio
+├── Adaptive Editorial Context
+├── Article Engine
+│   ├── Headline
+│   ├── Hero Visual - 720 × 425
+│   ├── Article
+│   ├── Source Attribution
+│   └── Publication Package
+├── Author Library
+├── Editorial Intelligence
+├── Evidence and Research
+└── Platform Services
 ```
 
-## Current Release
+## Adaptive Editorial Context
 
-**Version:** `v3.0.0-rc1`
+The Editorial Context is the active workspace while an article is
+being developed.
 
-**Stage:** Sprint 1 - The Foundation
+It may contain:
 
-This release candidate establishes the repository structure, governance model, versioning strategy, and initial command-line interface.
+- Author intent
+- Source material
+- Author perspective
+- Research
+- Evidence
+- Candidate angles
+- Current thesis
+- Constraints
+- Article structure
+- Hero Visual concepts
+- Draft assets
+- Decisions
+- Revisions
+- Publication readiness
 
-## Documentation
+The Author may change direction at any time. The Studio preserves
+useful work and updates only affected components where practical.
 
-Start with:
+## Author Library
 
-1. [Project Charter](docs/Project_Charter.md)
-2. [Architecture Decision Records](docs/architecture/adr/README.md)
-3. [Roadmap](ROADMAP.md)
-4. [Contributing Guide](CONTRIBUTING.md)
-5. [Changelog](CHANGELOG.md)
+The Author Library stores paused and completed editorial work.
 
-## Command-Line Interface
+It should eventually support:
+
+- Save
+- Recall
+- Review
+- Resume
+- Revise
+- Duplicate
+- Archive
+- Restore
+- Export
+- Delete
+
+Author work is private by default.
+
+## Current Scope Boundary
+
+The present product is focused on professional articles and their
+Hero Visuals.
+
+Carousels and other publishing formats are not part of the active
+product scope.
+
+Historical workflow code may still contain earlier carousel
+concepts. Those remain only for traceability until the adaptive
+architecture replaces the prototype.
+
+## Product Documentation
+
+Begin here:
+
+1. [Current Product Focus](docs/product/Current_Product_Focus.md)
+2. [PRD v1.1](docs/product/PRD_v1.1.md)
+3. [Product Constitution](docs/product/Constitution.md)
+4. [Product Principles](docs/product/Product_Principles.md)
+5. [Studio Contract](docs/product/Studio_Contract.md)
+6. [Adaptive Editorial Model](docs/product/Adaptive_Editorial_Model.md)
+7. [Author Journey](docs/product/Author_Journey.md)
+8. [Product Glossary](docs/product/Glossary.md)
+9. [Product Decision Log](docs/product/Decision_Log.md)
+
+PRD v1.0 remains available as a historical product baseline.
+
+## Architecture Status
+
+The existing `studio.workflow` package is a historical linear
+workflow prototype.
+
+The target architecture is an adaptive Editorial Context shared by
+the Article Engine, Hero Visual capability, Author Library,
+Evidence Engine, and Editorial Intelligence.
+
+## Validation
 
 ```bash
-python3 studio.py status
-python3 studio.py structure
+python3 -m compileall -q studio tests
+python3 -m unittest discover -s tests -v
 python3 studio.py validate
-python3 studio.py version
 ```
-
-## Contributing
-
-Contributions, issue reports, documentation improvements, and design discussions are welcome.
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+This project is licensed under the MIT License.
 
 ---
 
-**Ramrattan AI Editorial Studio**
-
-Clarity over cleverness. Quality over speed. Documented decisions over hidden assumptions.
+**The Author owns the idea. The Studio helps make it publishable.**

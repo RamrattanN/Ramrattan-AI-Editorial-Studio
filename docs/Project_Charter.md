@@ -1,77 +1,79 @@
 # Project Charter
 
-## Project
+## Product
 
 Ramrattan AI Editorial Studio
 
-## Version
+## Current Stage
 
-`v3.0.0-rc1`
+Article-first product alignment
 
-## Motto
+## North Star
 
-> Engineering AI-assisted thought leadership with the discipline of software development.
+> The Studio adapts to the Author's creative process. The Author
+> should never have to adapt to the Studio.
 
 ## Vision
 
-Build a maintainable, transparent, and professional AI-powered editorial studio for executive thought leadership.
+Build an adaptive editorial operating system that helps
+professionals develop, research, refine, preserve, and publish
+high-quality articles.
 
 ## Mission
 
-Transform a single source into publication-ready thought leadership with minimal user effort while maintaining originality, evidence quality, editorial coherence, and visual excellence.
+Combine Author expertise, defensible evidence, editorial reasoning,
+and visual storytelling while preserving authorship and creative
+control.
 
-## Initial Scope
+## Current Product Scope
 
-The first module creates:
+The current product produces professional article publication
+packages containing:
 
-- LinkedIn articles
-- Seven-slide LinkedIn carousels
-- 720 × 425 LinkedIn hero infographics
-- Supporting headlines and descriptions
-- Practical takeaways
-- Discussion-oriented calls to action
+- A 720 × 425 Hero Visual
+- A headline
+- A publication-ready article
 - Source attribution
-- Structured hashtags
+- Supporting publication copy and metadata
 
-## Core Principles
+Carousels and other publishing formats are outside the active scope.
 
-- Visual-first
-- Guided
-- Evidence-based
-- Original
-- Transparent
-- Maintainable
-- Reversible
+## Time-to-Value Goal
 
-## Primary Audience
+When sufficient starting material exists, the Studio should aim to
+deliver the first publication-ready package within approximately
+10 minutes.
 
-- Managers
-- Executives
-- Industry practitioners
-- Consultants
-- Real estate professionals
-- Business-to-business content creators
+## Product Architecture
 
-## Current Non-Goals
+```text
+Adaptive Editorial Context
+        │
+        ├── Article Engine
+        ├── Hero Visual
+        ├── Evidence and Research
+        ├── Editorial Intelligence
+        └── Author Library
+```
 
-The initial release will not:
+## Author Library
 
-- Publish directly to LinkedIn
-- Replace human editorial judgment
-- Guarantee interface-level clickable buttons
-- Reproduce another organization's visual identity
-- Store private user credentials
-- Train on private content without explicit direction
+The Author Library stores paused and completed article projects for
+recall, review, resumption, revision, export, archive, restoration,
+or deletion.
 
-## Sprint 1 Definition of Done
+Author work remains private by default.
 
-Sprint 1 is complete when:
+## Engineering Commitments
 
-- Repository structure is established
-- Project charter is published
-- Changelog and roadmap exist
-- ADR framework exists
-- Versioning is explicit
-- Initial CLI validates the structure
-- GitHub contribution templates exist
-- PR-001 is reviewed and merged into `develop`
+The project uses:
+
+- Version control
+- Reviewable branches
+- Automated validation
+- Tests
+- Architecture Decision Records
+- Product Decision Logs
+- Changelogs
+- Reversible changes
+- Explicit scope boundaries

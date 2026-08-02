@@ -364,3 +364,13 @@ Next capability after delivery: Capability 009 - Article Engine and
 Publication Package.
 
 <!-- CAPABILITY_008_ROADMAP_END -->
+
+<!-- CAPABILITY_008A_PROGRAM_ROADMAP_START -->
+
+## Capability 008A - Engineering Hardening Program
+
+The authoritative implementation plan for Capability 008A is:
+
+- [`docs/programs/Capability_008A_Master_Roadmap.md`](docs/programs/Capability_008A_Master_Roadmap.md)
+
+<!-- CAPABILITY_008A_PROGRAM_ROADMAP_END -->

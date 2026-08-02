@@ -593,3 +593,36 @@ Local and CI validation are complementary. Neither substitutes for the other.
 
 A capability is complete only when repository state, GitHub state,
 documentation, tests, and branch state all agree.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_START -->
+
+## Authorization Continuity Within a Profile
+
+An explicitly authorized Start, Publish, or Complete profile remains satisfied
+through every documented transition in that same phase. The Implementation
+Agent must not request that profile again merely because it reports status,
+reruns the helper, or advances to another state inside the authorized phase.
+
+Authorization ends when the profile reaches its stopping boundary, a genuine
+fail-closed condition occurs, verified prerequisites materially change, scope
+materially changes, authority is revoked or changed, or the current task or
+conversation no longer supplies the authorization context. A later profile
+always requires new explicit authorization.
+
+The helper receives the active profile per invocation. It never stores approval
+as permanent repository authority and never infers it from prior sessions,
+historical commits, earlier capabilities, or old chats.
+
+Helper output distinguishes:
+
+- `authorization already satisfied` for an action or status inside the active
+  current-task profile;
+- `new profile authorization required` at a later profile boundary; and
+- `blocked by fail-closed condition` when state is unsafe, unavailable,
+  ambiguous, mismatched, pending, failed, or otherwise blocking.
+
+A status report is not an approval request. A transition inside an already
+authorized profile is not a new approval boundary. Conservative delivery
+remains available and requires explicit approval for each protected mutation.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_END -->

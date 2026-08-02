@@ -195,3 +195,23 @@ The complete Version 1.0 Publication Package remains pending until
 Capabilities 010 and 011 deliver their assigned outputs.
 
 <!-- CAPABILITY_009_SCORECARD_END -->
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_START -->
+
+## RC1 Checkpoint - Current Status
+
+| Area | Status | Evidence |
+|---|---|---|
+| Capability 009 | Complete | PR #43 and ADR-015 |
+| Initiative B001 | Complete | PR #42 and approved master hashes |
+| Capability 010 | Todo and unstarted | Issue #16 |
+| Capability 011 | Todo and unstarted | Issue #17 |
+| B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
+| Current delivered baseline | Complete | `2026.08.02v10` |
+| Complete RC1 readiness | Blocked | Capabilities 010, 011, and issue #18 |
+
+The Article Engine and textual Publication Package are delivered. Version 1 is
+not release-ready until the remaining Hero Visual, Portable Project, and
+end-to-end evidence is complete.
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->

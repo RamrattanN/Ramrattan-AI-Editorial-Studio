@@ -15,7 +15,7 @@ v1.0
 Architecture baseline:
 
 ```text
-2026.08.01v06
+2026.08.02v10
 ```
 
 ## Version 1.0 Promise
@@ -215,3 +215,20 @@ behavior. Capability 009 remains not started until all Capability 008A
 handoff criteria are satisfied.
 
 <!-- CAPABILITY_008A1_RELEASE_STATUS_END -->
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_START -->
+
+## RC1 Checkpoint - Current Release Status
+
+- Capability 009 - Complete
+- Capability 010 - Next, Todo, and unstarted
+- Capability 011 - Todo and unstarted
+- B001 - Complete
+- B002 - Todo, Low Priority, Post-RC1, and non-blocking
+- Current delivered architecture baseline - `2026.08.02v10`
+
+Version 1 is not release-ready. The 720 x 425 Hero Visual, Portable Editorial
+Project resume/export path, and end-to-end release-readiness evidence remain
+outstanding.
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->

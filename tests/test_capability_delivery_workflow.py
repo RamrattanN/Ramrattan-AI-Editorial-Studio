@@ -515,7 +515,10 @@ class DelegatedApprovalProfileTests(unittest.TestCase):
             command="git add AGENTS.md",
         )
         self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.START)
-        self.assertIn("conditionally covered", self.render(result, delivery.ApprovalProfile.START))
+        self.assertEqual(
+            result.authorization_status(delivery.ApprovalProfile.START),
+            delivery.AuthorizationStatus.ALREADY_SATISFIED,
+        )
 
     def test_publish_boundary_does_not_accept_start_authorization(self) -> None:
         result = delivery.DeliveryRecommendation(
@@ -524,7 +527,10 @@ class DelegatedApprovalProfileTests(unittest.TestCase):
             command="git commit -m test",
         )
         self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.PUBLISH)
-        self.assertIn("does not authorize this transition. Stop.", self.render(result, delivery.ApprovalProfile.START))
+        self.assertEqual(
+            result.authorization_status(delivery.ApprovalProfile.START),
+            delivery.AuthorizationStatus.NEW_PROFILE_REQUIRED,
+        )
 
     def test_complete_boundary_is_distinct_from_publish(self) -> None:
         result = delivery.DeliveryRecommendation(
@@ -533,7 +539,10 @@ class DelegatedApprovalProfileTests(unittest.TestCase):
             command="gh pr merge 42 --merge --delete-branch",
         )
         self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.COMPLETE)
-        self.assertIn("does not authorize this transition. Stop.", self.render(result, delivery.ApprovalProfile.PUBLISH))
+        self.assertEqual(
+            result.authorization_status(delivery.ApprovalProfile.PUBLISH),
+            delivery.AuthorizationStatus.NEW_PROFILE_REQUIRED,
+        )
 
     def test_conservative_requires_specific_mutation_approval(self) -> None:
         result = delivery.DeliveryRecommendation(
@@ -541,7 +550,10 @@ class DelegatedApprovalProfileTests(unittest.TestCase):
             summary="Create PR.",
             command="gh pr create",
         )
-        self.assertIn("explicit approval is required", self.render(result, delivery.ApprovalProfile.CONSERVATIVE))
+        self.assertEqual(
+            result.authorization_status(delivery.ApprovalProfile.CONSERVATIVE),
+            delivery.AuthorizationStatus.CONSERVATIVE_APPROVAL_REQUIRED,
+        )
 
     def test_read_only_ci_monitoring_needs_no_separate_approval(self) -> None:
         result = recommendation(
@@ -549,7 +561,11 @@ class DelegatedApprovalProfileTests(unittest.TestCase):
             discovery(pull_request(review=delivery.ReviewState.READY_FOR_REVIEW, checks=delivery.CheckState.PENDING)),
         )
         self.assertTrue(result.read_only)
-        self.assertIn("read-only observation; no separate approval required", self.render(result, delivery.ApprovalProfile.CONSERVATIVE))
+        self.assertEqual(
+            result.authorization_status(delivery.ApprovalProfile.CONSERVATIVE),
+            delivery.AuthorizationStatus.BLOCKED_FAIL_CLOSED,
+        )
+        self.assertIn("read-only diagnostic may run", self.render(result, delivery.ApprovalProfile.CONSERVATIVE))
 
     def test_unknown_state_reports_stop_boundary(self) -> None:
         result = delivery.DeliveryRecommendation(state=delivery.DeliveryState.UNKNOWN, summary="Unknown.")

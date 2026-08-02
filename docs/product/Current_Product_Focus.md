@@ -329,3 +329,17 @@ Rendered Hero Visual remains Capability 010. Portable Editorial Project
 behavior remains Capability 011.
 
 <!-- CAPABILITY_009_CURRENT_FOCUS_END -->
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_START -->
+
+## RC1 Checkpoint - Current Product Status
+
+Capability 009 is complete. The Article Engine and textual Publication Package
+are delivered under ADR-015 and baseline `2026.08.02v10`.
+
+Capability 010 is next, Todo, and unstarted. Capability 011 is Todo and
+unstarted. B002 remains deferred, Low Priority, Post-RC1, and non-blocking.
+Version 1 is not release-ready until the remaining Hero Visual, Portable
+Project, and end-to-end release-readiness work is complete.
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->

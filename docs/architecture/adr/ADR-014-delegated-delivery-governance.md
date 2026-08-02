@@ -83,3 +83,23 @@ remain synchronized.
 ## Architecture Baseline
 
 Recorded by Architecture Baseline `2026.08.01v09`.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_START -->
+
+## Authorization Continuity Amendment
+
+An explicitly authorized Standard profile remains valid through all verified
+states assigned to that phase. Repeated status reporting and helper invocations
+inside the phase do not require duplicate authorization. The helper now reports
+authorization already satisfied, new profile authorization required, or blocked
+by fail-closed condition as distinct outcomes.
+
+Authorization remains current-task context only. It expires at the profile
+boundary or on material mismatch, scope change, revocation, fail-closed state,
+or loss of current conversational authority. It is never persisted or inferred
+from repository history. Conservative per-mutation approval remains unchanged.
+
+Architecture Baseline `2026.08.02v11` records the executable helper change when
+this increment is delivered.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_END -->

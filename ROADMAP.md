@@ -495,3 +495,22 @@ Capability 010 and Capability 011 remain Todo and unstarted. B002
 remains Todo, Low Priority, Post-RC1, and non-blocking.
 
 <!-- CAPABILITY_009_ROADMAP_END -->
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_START -->
+
+## RC1 Checkpoint - Current Status
+
+- Capability 009 - Complete
+- Initiative B001 - Complete
+- RC1 Checkpoint and Delegated Authorization Hardening - In Progress
+- Capability 010 - Next, Todo, and unstarted
+- Capability 011 - Todo and unstarted
+- B002 - Todo, Low Priority, Post-RC1, and non-blocking
+- Current delivered architecture baseline - `2026.08.02v10`
+
+Version 1 is not release-ready. Capability 010, Capability 011, and the
+end-to-end release-readiness evidence remain outstanding. Earlier capability
+status sections are historical delivery records; this section is authoritative
+for the current checkpoint increment.
+
+<!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->

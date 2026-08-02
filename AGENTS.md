@@ -522,3 +522,21 @@ A change to governance authority requires a focused ADR, contract tests,
 generator synchronization, complete validation, and deliberate review.
 
 <!-- CAPABILITY_008A1_GOVERNANCE_AUTHORITY_END -->
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_START -->
+
+## Authorization Continuity
+
+Once Start, Publish, or Complete is explicitly authorized in the current task
+or conversation, the Implementation Agent must not request that same profile
+again during its documented phase. Status reporting and internal state
+transitions do not create new approval boundaries.
+
+Authorization remains conditional on unchanged scope, targets, prerequisites,
+and current-task authority. It ends at the profile stopping boundary or when a
+genuine fail-closed condition, material mismatch, material scope change,
+revocation, or loss of current conversational authorization occurs. A later
+profile still requires explicit authorization. Never persist or infer approval
+from earlier tasks, sessions, chats, commits, or capabilities.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_END -->

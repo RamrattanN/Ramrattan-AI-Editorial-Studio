@@ -453,3 +453,20 @@ Earlier status sections are historical delivery records; this section owns the
 active increment.
 
 <!-- CAPABILITY_008A3_ROADMAP_END -->
+
+<!-- INITIATIVE_B001_BRAND_IDENTITY_START -->
+
+## Initiative B001 - Brand Identity & Visual Assets
+
+Status: **In Progress**
+
+B001 adopts the Repository Author-supplied RC1 shield, metallic R, and golden
+quill mark plus the approved Ramrattan AI Editorial Studio horizontal lockup.
+Immutable raster masters live in `assets/brand/logo/master/`; proportional
+derivatives live in `assets/brand/logo/exports/`.
+
+**B002 - Brand Identity Refinement** is a Low-priority, Post-RC1 evolutionary
+refinement and does not block Capability 009. Capability 009 remains Todo and
+has not started.
+
+<!-- INITIATIVE_B001_BRAND_IDENTITY_END -->

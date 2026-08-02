@@ -190,3 +190,25 @@ Carousels, hosted storage, team collaboration, direct publishing,
 and analytics remain outside the Version 1.0 scope.
 
 <!-- CAPABILITY_006_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_006A_CURRENT_FOCUS_START -->
+
+## Constitutional Freeze
+
+Version 0.9 establishes the constitutional foundation for Version
+1.0 implementation.
+
+The current governing documents define:
+
+- trust-first product design,
+- the Author, Editor, and Reader relationship,
+- Editorial Confidence,
+- component-based collaboration,
+- Reader Experience Principles,
+- Editorial Language Framework,
+- Editorial Fingerprint,
+- and the Canonical Editorial Session.
+
+After this freeze, Capabilities 007-011 focus on implementation.
+
+<!-- CAPABILITY_006A_CURRENT_FOCUS_END -->

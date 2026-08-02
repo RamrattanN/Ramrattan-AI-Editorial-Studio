@@ -143,3 +143,26 @@ Future versions may introduce:
 - and additional publication formats.
 
 These require separate product and architecture decisions.
+
+<!-- CAPABILITY_006A_RELEASE_START -->
+
+## Version 0.9 Constitutional Freeze
+
+Before Version 1.0 runtime implementation begins, the Studio adopts
+and freezes its Constitutional Layer.
+
+The freeze establishes:
+
+- trust-first governance,
+- Author, Editor, and Reader responsibilities,
+- Editorial Confidence,
+- Reader Experience Principles,
+- component-based collaboration,
+- Editorial Language Framework,
+- Editorial Fingerprint,
+- and the Canonical Editorial Session.
+
+Version 1.0 implementation should conform to the Constitution unless
+implementation evidence demonstrates a necessary amendment.
+
+<!-- CAPABILITY_006A_RELEASE_END -->

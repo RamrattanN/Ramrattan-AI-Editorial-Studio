@@ -186,3 +186,25 @@ Revalidate time-sensitive evidence when a project is resumed or
 republished.
 
 <!-- CAPABILITY_006_PRODUCT_PRINCIPLES_END -->
+
+<!-- CAPABILITY_006A_PRODUCT_PRINCIPLES_START -->
+
+## Constitutional Principles
+
+Product Principles are subordinate to the Constitution.
+
+Significant product changes must complete a Constitutional Impact
+Review.
+
+Product implementation must preserve:
+
+- trust above convenience,
+- Author ownership,
+- responsible editorial judgement,
+- Reader trust,
+- Editorial Confidence,
+- approved work,
+- component-based collaboration,
+- and naturally varied editorial language.
+
+<!-- CAPABILITY_006A_PRODUCT_PRINCIPLES_END -->

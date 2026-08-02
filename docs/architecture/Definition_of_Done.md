@@ -196,3 +196,33 @@ Before a Version 1.0 capability is Done, confirm:
 - The GitHub Project and backlog are current.
 
 <!-- CAPABILITY_006_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_006A_DEFINITION_OF_DONE_START -->
+
+## Constitutional Impact Review
+
+Before a significant capability is Done, answer:
+
+- Does this alter the Constitution?
+- Does this alter the Human Collaboration Model?
+- Does this alter the Editor Charter?
+- Does this alter Reader Experience Principles?
+- Does this alter the Canonical Editorial Session?
+- Does this alter Editorial Confidence behaviour?
+- Does this alter approved component preservation?
+- Does this alter CTA or editorial language behaviour?
+
+If yes:
+
+- document the reason,
+- update constitutional documents first,
+- update the Decision Log,
+- create or amend an ADR,
+- update complementary documents,
+- update validation,
+- and obtain deliberate review.
+
+Version 1.0 implementation should not expand foundational philosophy
+without implementation evidence.
+
+<!-- CAPABILITY_006A_DEFINITION_OF_DONE_END -->

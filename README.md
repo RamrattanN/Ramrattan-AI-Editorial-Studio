@@ -325,3 +325,33 @@ See:
 - `docs/architecture/Publication_Package_Contract.md`
 
 <!-- CAPABILITY_006_README_END -->
+
+<!-- CAPABILITY_006A_README_START -->
+
+## Constitutional Layer
+
+Version 0.9 establishes a Constitutional Layer above Product,
+Architecture, Implementation, and Tests.
+
+Begin with:
+
+- `docs/START_HERE.md`
+- `docs/constitution/Constitution.md`
+- `docs/constitution/Human_Collaboration_Model.md`
+- `docs/constitution/Canonical_Editorial_Session.md`
+
+The governing relationship is:
+
+- Author - owns intent and publication authority
+- Editor - provides editorial judgement
+- Reader - receives work whose trust must be earned
+
+Editorial Risk remains an internal LMHS assessment.
+
+Editorial Confidence is the primary Author-facing outcome.
+
+Motto:
+
+> Trust earned. Confidence shared. Conversations inspired.
+
+<!-- CAPABILITY_006A_README_END -->

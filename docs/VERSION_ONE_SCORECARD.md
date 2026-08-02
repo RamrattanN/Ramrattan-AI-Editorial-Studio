@@ -176,3 +176,22 @@ Capability 008A.3 hardens existing Version 1.0 editorial behavior. It does not
 begin the Article Engine, Publication Package, or any Capability 009 scope.
 
 <!-- CAPABILITY_008A3_SCORECARD_END -->
+
+<!-- CAPABILITY_009_SCORECARD_START -->
+
+## Capability 009 Progress
+
+| Area | Status | Evidence |
+|---|---|---|
+| Article Engine | Complete locally | `studio/article_engine.py` |
+| Textual Publication Package | Complete locally | `studio/publication_package.py` |
+| Evidence and attribution gate | Complete locally | Behavioral tests |
+| Editorial Intent preservation | Complete locally | Provider-boundary tests |
+| High and Severe blocking | Complete locally | Risk-gate tests |
+| Rendered Hero Visual | Planned | Capability 010 |
+| Portable Editorial Project | Planned | Capability 011 |
+
+The complete Version 1.0 Publication Package remains pending until
+Capabilities 010 and 011 deliver their assigned outputs.
+
+<!-- CAPABILITY_009_SCORECARD_END -->

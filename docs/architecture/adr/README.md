@@ -38,3 +38,11 @@ Each ADR explains:
 - [ADR-012 - Delivery Hardening](ADR-012-delivery-hardening.md)
 - [ADR-013 - Editorial Integrity Hardening](ADR-013-editorial-integrity-hardening.md)
 - [ADR-014 - Delegated Delivery Governance](ADR-014-delegated-delivery-governance.md)
+
+<!-- CAPABILITY_009_ADR_INDEX_START -->
+
+## Capability 009 Decision
+
+- [ADR-015 - Article Engine and Publication Package](ADR-015-article-engine-publication-package.md)
+
+<!-- CAPABILITY_009_ADR_INDEX_END -->

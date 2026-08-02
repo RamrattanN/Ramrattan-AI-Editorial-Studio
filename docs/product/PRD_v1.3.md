@@ -279,3 +279,28 @@ The Product shall:
 - prevent High or Severe risk from receiving a publication recommendation.
 
 <!-- CAPABILITY_008_PRD_END -->
+
+<!-- CAPABILITY_009_PRD_START -->
+
+## Capability 009 Scope Clarification
+
+Version 1.0 shall provide an Article Engine that:
+
+- preserves approved Editorial Intent and Author perspective;
+- consumes completed Evidence Validation rather than bypassing it;
+- requires attribution for evidence used;
+- blocks generation when Editorial Risk is High or Severe; and
+- uses a provider-independent draft boundary.
+
+Capability 009 shall assemble the textual Publication Package with a
+Hero Visual prompt, headline, hook, one or two insights, practical
+takeaway, CTA, source and attribution, hashtags, LinkedIn Description,
+article Markdown, Editorial Confidence, and LMHS Editorial Risk.
+
+Integrated Editorial Workspace, Adaptive Editorial Context runtime,
+Component Collaboration, stable Author-facing orchestration API, and
+final integrated Editorial Confidence presentation are deferred.
+Rendered Hero Visual remains Capability 010 and Portable Editorial
+Project behavior remains Capability 011.
+
+<!-- CAPABILITY_009_PRD_END -->

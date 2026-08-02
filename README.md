@@ -434,3 +434,19 @@ Capability 008 includes:
 - Author-facing Editorial Confidence translation
 
 <!-- CAPABILITY_008_README_END -->
+
+<!-- CAPABILITY_009_README_START -->
+
+## Capability 009 - Article Engine and Publication Package
+
+The executable Article Engine now converts approved Author inputs and
+completed Evidence Validation into an evidence-aligned professional
+article. A provider-independent boundary preserves Editorial Intent,
+attribution, and publication gates.
+
+The Capability 009 Publication Package contains the article and its
+textual publication components. Rendered Hero Visual generation remains
+Capability 010, and Portable Editorial Project behavior remains
+Capability 011.
+
+<!-- CAPABILITY_009_README_END -->

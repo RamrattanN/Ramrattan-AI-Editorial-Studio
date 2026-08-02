@@ -293,3 +293,23 @@ Confirm:
 - and repository validation passes.
 
 <!-- CAPABILITY_008_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_009_DEFINITION_OF_DONE_START -->
+
+## Capability 009 Completion Additions
+
+Confirm:
+
+- Article generation preserves approved Editorial Intent;
+- evidence used by the article has explicit attribution;
+- High and Severe Editorial Risk block article and package creation;
+- the provider boundary cannot bypass deterministic integrity checks;
+- every Capability 009 textual component is validated;
+- rendered Hero Visual and Portable Editorial Project outputs remain
+  explicitly deferred;
+- no new Author-facing workflow, collaboration feature, orchestration
+  API, persistence model, or later-capability behavior is introduced;
+- the Capability 009 demo is current; and
+- complete repository validation passes.
+
+<!-- CAPABILITY_009_DEFINITION_OF_DONE_END -->

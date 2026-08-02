@@ -270,3 +270,22 @@ Earlier capability focus sections are delivery records. This section owns
 the current implementation status until the next increment updates it.
 
 <!-- CAPABILITY_008A1_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_008A2_CURRENT_FOCUS_START -->
+
+## Current Implementation Status - Capability 008A.2
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - Complete
+- Capability 008A.2 - Delivery Hardening - In Progress
+- Capability 008A.3 - Editorial Integrity Hardening - Todo
+- Capability 009 - Todo
+
+The active engineering focus is fail-closed capability delivery under
+ADR-012. Product runtime remains at Capability 008. Evidence Validation,
+StageState, and publication behavior do not change in this increment.
+
+Architecture Baseline `2026.08.01v07` records the hardened delivery
+architecture. Earlier focus sections remain delivery history.
+
+<!-- CAPABILITY_008A2_CURRENT_FOCUS_END -->

@@ -23,5 +23,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate project structure
+      - name: Compile Python sources
+        run: python3 -m compileall -q studio scripts tests
+
+      - name: Run complete unit-test suite
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate repository
         run: python3 studio.py validate

@@ -203,3 +203,18 @@ reputation.
 ADR-011 records the durable governance decision.
 
 <!-- CAPABILITY_008A1_DECISION_LOG_END -->
+
+<!-- CAPABILITY_008A2_DECISION_LOG_START -->
+
+## Capability 008A.2 Delivery Hardening Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-02 | D4 | Fail closed on unavailable or ambiguous delivery evidence | Missing evidence cannot justify a protected transition. |
+| 2026-08-02 | D4 | Observe remote heads directly | Cached remote-tracking references do not prove freshness. |
+| 2026-08-02 | D4 | Model draft, review, mergeability, and checks independently | PRs #30, #31, and #33 exposed optimistic state collapse. |
+| 2026-08-02 | D4 | Treat zero checks as unavailable | Repository policy requires canonical CI validation. |
+| 2026-08-02 | D4 | Recover post-merge cleanup one step at a time | Merge success does not prove cleanup completed. |
+| 2026-08-02 | D4 | Create Architecture Baseline 2026.08.01v07 | Delivery observation and recovery are durable engineering architecture. |
+
+<!-- CAPABILITY_008A2_DECISION_LOG_END -->

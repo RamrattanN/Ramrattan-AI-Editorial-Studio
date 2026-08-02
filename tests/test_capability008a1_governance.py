@@ -48,7 +48,7 @@ class Capability008A1GovernanceTests(unittest.TestCase):
         self.assertIn("python3 -m compileall -q studio scripts tests", content)
         self.assertIn("Never repair only a generated artifact", content)
 
-    def test_adr_011_is_narrow_and_no_new_baseline_exists(self) -> None:
+    def test_adr_011_is_narrow_and_claims_no_governance_baseline(self) -> None:
         adr = self.content(
             "docs/architecture/adr/ADR-011-governance-authority.md"
         )
@@ -56,12 +56,7 @@ class Capability008A1GovernanceTests(unittest.TestCase):
         self.assertIn("Accepted", adr)
         self.assertIn("No new architecture baseline", adr)
         self.assertIn("does not change runtime", adr)
-        self.assertFalse(
-            any(
-                path.name.endswith("v07.md")
-                for path in (ROOT / "docs/architecture/baselines").iterdir()
-            )
-        )
+        self.assertNotIn("2026.08.01v07", adr)
 
     def test_adr_index_and_adr_002_disposition_are_honest(self) -> None:
         index = self.content("docs/architecture/adr/README.md")

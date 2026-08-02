@@ -21,6 +21,8 @@ from pathlib import Path
 from typing import Iterable
 from urllib.parse import urlparse
 
+from .editorial_guidance import EditorialStage, STAGE_NAMES, StageState
+
 
 class InputKind(str, Enum):
     """Canonical Editorial Intake classifications."""
@@ -37,23 +39,7 @@ class InputKind(str, Enum):
     UNKNOWN = "unknown"
 
 
-class WorkspaceStage(str, Enum):
-    """Visible Editorial Integrity Pipeline stages."""
-
-    UNDERSTANDING_INPUT = "understanding_input"
-    ASSESSING_SOURCES = "assessing_sources"
-    VERIFYING_EVIDENCE = "verifying_evidence"
-    REVIEWING_EDITORIAL_RISKS = "reviewing_editorial_risks"
-    CREATING_PUBLICATION_PACKAGE = "creating_publication_package"
-
-
-class StageState(str, Enum):
-    """Presentation state for a visible Workspace stage."""
-
-    COMPLETE = "complete"
-    ACTIVE = "active"
-    PENDING = "pending"
-    BLOCKED = "blocked"
+WorkspaceStage = EditorialStage
 
 
 class IdentityAssetKind(str, Enum):
@@ -228,13 +214,7 @@ class EditorialWorkspace:
         "Optional logo or headshot for the Hero Visual",
     )
 
-    STAGE_NAMES = (
-        "Understanding your input",
-        "Assessing your sources",
-        "Verifying the evidence",
-        "Reviewing editorial risks",
-        "Creating your publication package",
-    )
+    STAGE_NAMES = tuple(STAGE_NAMES[number] for number in range(1, 6))
 
     def welcome_message(
         self,
@@ -439,17 +419,17 @@ class EditorialWorkspace:
             WorkspaceStageView(
                 number=3,
                 name=self.STAGE_NAMES[2],
-                state=StageState.PENDING,
+                state=StageState.NOT_STARTED,
             ),
             WorkspaceStageView(
                 number=4,
                 name=self.STAGE_NAMES[3],
-                state=StageState.PENDING,
+                state=StageState.NOT_STARTED,
             ),
             WorkspaceStageView(
                 number=5,
                 name=self.STAGE_NAMES[4],
-                state=StageState.PENDING,
+                state=StageState.NOT_STARTED,
             ),
         ]
 

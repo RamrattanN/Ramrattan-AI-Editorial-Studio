@@ -425,3 +425,31 @@ records the resulting engineering architecture. Earlier status sections are
 historical delivery records; this section owns the active increment.
 
 <!-- CAPABILITY_008A2_ROADMAP_END -->
+
+<!-- CAPABILITY_008A3_ROADMAP_START -->
+
+## Capability 008A.3 - Editorial Integrity Hardening
+
+Status: **In Progress**
+
+Current authoritative sequence:
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - Complete
+- Capability 008A.2 - Delivery Hardening - Complete
+- Capability 008A.3 - Editorial Integrity Hardening - In Progress
+- Capability 009 - Todo
+
+Capability 008A.3 makes Verified Fact earned, preserves semantic claim
+classifications and attribution, deduplicates corroboration by source identity,
+aligns contradiction and publication-blocking risk, and establishes one
+canonical StageState across affected runtime components.
+
+ADR-013 records Editorial Integrity Hardening. Architecture Baseline
+`2026.08.01v08` records the resulting product architecture and becomes current
+when this increment is delivered. Capability 009 remains Todo.
+
+Earlier status sections are historical delivery records; this section owns the
+active increment.
+
+<!-- CAPABILITY_008A3_ROADMAP_END -->

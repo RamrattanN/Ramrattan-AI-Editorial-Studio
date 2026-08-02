@@ -150,3 +150,29 @@ Capability 008A.2 changes engineering delivery safety only. Version 1.0
 product-runtime readiness remains unchanged.
 
 <!-- CAPABILITY_008A2_SCORECARD_END -->
+
+<!-- CAPABILITY_008A3_SCORECARD_START -->
+
+## Capability 008A Editorial Integrity Hardening Status
+
+- Capability 008A.1 - Complete
+- Capability 008A.2 - Complete
+- Capability 008A.3 - In Progress
+- Capability 009 - Todo
+
+| Editorial integrity area | Status | Evidence |
+|---|---|---|
+| Earned Verified Fact | Complete | Claim transition tests |
+| Durable Author attribution | Complete | Classification contract tests |
+| Distinct-source corroboration | Complete | Duplicate identity tests |
+| Semantic classification preservation | Complete | Inference, forecast, and uncertainty tests |
+| Contradiction severity | Complete | Material and non-material risk tests |
+| Publication blocking | Complete | High and Severe gate tests |
+| Editorial Confidence translation | Complete | Author-message tests |
+| Canonical StageState | Complete | Cross-component identity and transition tests |
+| Editorial architecture | Complete | ADR-013 and baseline v08 |
+
+Capability 008A.3 hardens existing Version 1.0 editorial behavior. It does not
+begin the Article Engine, Publication Package, or any Capability 009 scope.
+
+<!-- CAPABILITY_008A3_SCORECARD_END -->

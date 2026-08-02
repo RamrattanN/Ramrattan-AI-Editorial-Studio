@@ -3623,6 +3623,14 @@ def main() -> int:
 # CAPABILITY_007_EDITORIAL_INTAKE_COMPLETE
 # END OF SCRIPT - CAPABILITY 007
 
+# CAPABILITY_008A3_GENERATOR_OVERRIDE_START
+from bootstrap_capability008a3_editorial_integrity_hardening import (
+    EDITORIAL_INTAKE_RUNTIME as CAPABILITY_008A3_EDITORIAL_INTAKE_RUNTIME,
+)
+NEW_FILES["studio/editorial_intake.py"] = (
+    CAPABILITY_008A3_EDITORIAL_INTAKE_RUNTIME
+)
+# CAPABILITY_008A3_GENERATOR_OVERRIDE_END
 
 if __name__ == "__main__":
     raise SystemExit(main())

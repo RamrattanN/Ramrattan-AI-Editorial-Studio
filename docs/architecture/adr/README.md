@@ -36,3 +36,4 @@ Each ADR explains:
 - [ADR-010 - Implement Evidence Validation and Editorial Risk](ADR-010-implement-evidence-validation-and-editorial-risk.md)
 - [ADR-011 - Governance Authority](ADR-011-governance-authority.md)
 - [ADR-012 - Delivery Hardening](ADR-012-delivery-hardening.md)
+- [ADR-013 - Editorial Integrity Hardening](ADR-013-editorial-integrity-hardening.md)

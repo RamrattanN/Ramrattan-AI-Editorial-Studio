@@ -16,6 +16,12 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Iterable
 
+from .editorial_guidance import (
+    StageState,
+    initial_stage_states,
+    transition_stage,
+)
+
 
 class ContributionKind(str, Enum):
     """What a new Author contribution appears to mean."""
@@ -62,15 +68,6 @@ class WorkspaceState(str, Enum):
     ABORTED = "aborted"
     COMPLETED = "completed"
     ARCHIVED = "archived"
-
-
-class StageState(str, Enum):
-    """Lifecycle of one Editorial Integrity stage."""
-
-    NOT_STARTED = "not_started"
-    IN_PROGRESS = "in_progress"
-    COMPLETE = "complete"
-    BLOCKED = "blocked"
 
 
 class EditorialComponent(str, Enum):
@@ -147,13 +144,7 @@ class EditorialSession:
     intent: EditorialIntent
     workspace_state: WorkspaceState = WorkspaceState.CREATED
     stage_states: dict[int, StageState] = field(
-        default_factory=lambda: {
-            1: StageState.NOT_STARTED,
-            2: StageState.NOT_STARTED,
-            3: StageState.NOT_STARTED,
-            4: StageState.NOT_STARTED,
-            5: StageState.NOT_STARTED,
-        }
+        default_factory=initial_stage_states
     )
     approved_components: set[EditorialComponent] = field(
         default_factory=set
@@ -276,11 +267,8 @@ class EditorialSession:
         number: int,
         state: StageState,
     ) -> None:
-        """Update one stage without changing session lifecycle."""
-        if number not in self.stage_states:
-            raise ValueError("Stage number must be from 1 to 5.")
-
-        self.stage_states[number] = state
+        """Apply one canonical stage transition without changing workspace state."""
+        self.stage_states = transition_stage(self.stage_states, number, state)
 
 
 class EditorialDiscernmentEngine:

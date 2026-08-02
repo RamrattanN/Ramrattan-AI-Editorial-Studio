@@ -289,3 +289,23 @@ Architecture Baseline `2026.08.01v07` records the hardened delivery
 architecture. Earlier focus sections remain delivery history.
 
 <!-- CAPABILITY_008A2_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_008A3_CURRENT_FOCUS_START -->
+
+## Current Engineering Hardening Increment - Capability 008A.3
+
+Capability 008A.1 Governance Consolidation and Capability 008A.2 Delivery
+Hardening are complete. Capability 008A.3 Editorial Integrity Hardening is in
+progress. Capability 009 remains Todo and has not started.
+
+This increment corrects evidence certainty, source independence,
+contradiction-to-risk behavior, publication blocking, Author-facing Editorial
+Confidence translation, and canonical StageState ownership. It does not add an
+Article Engine, Publication Package, Component Collaboration, Hero Visual,
+Portable Project, real ingestion, UI, or release behavior.
+
+ADR-013 records the durable decision. Architecture Baseline
+`2026.08.01v08` becomes current when Capability 008A.3 is delivered; baseline
+`2026.08.01v07` remains the merged baseline during implementation.
+
+<!-- CAPABILITY_008A3_CURRENT_FOCUS_END -->

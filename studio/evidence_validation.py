@@ -68,8 +68,8 @@ class EditorialConfidence(str, Enum):
 
     READY = "Ready for publication"
     READY_WITH_REVIEW = "Ready with review"
-    NEEDS_EVIDENCE = "Needs stronger evidence"
-    NOT_READY = "Not ready for publication"
+    NEEDS_EVIDENCE = "Not ready - stronger evidence required"
+    NOT_READY = "Not ready - publication blocked"
 
 
 @dataclass(frozen=True)
@@ -81,10 +81,23 @@ class Claim:
     classification: ClaimClassification
     material: bool = True
     time_sensitive: bool = False
+    attribution: str | None = None
 
     def __post_init__(self) -> None:
         if not self.identifier.strip() or not self.text.strip():
             raise ValueError("Claims require an identifier and text.")
+        if self.classification is ClaimClassification.VERIFIED_FACT:
+            raise ValueError(
+                "Verified Fact is earned by Evidence Validation and cannot "
+                "be selected as an initial claim classification."
+            )
+        if self.classification in {
+            ClaimClassification.AUTHOR_EXPERIENCE,
+            ClaimClassification.OPINION,
+        } and not (self.attribution and self.attribution.strip()):
+            raise ValueError(
+                "Author experience and opinion require durable attribution."
+            )
 
 
 @dataclass(frozen=True)
@@ -117,6 +130,7 @@ class ClaimAssessment:
     """Transparent assessment of one claim."""
 
     claim: Claim
+    resolved_classification: ClaimClassification
     evidence_status: EvidenceStatus
     temporal_status: TemporalStatus
     supporting_sources: tuple[str, ...]
@@ -135,6 +149,7 @@ class EvidenceValidationReport:
     editorial_confidence: EditorialConfidence
     author_message: str
     may_recommend_publication: bool
+    publication_blocked: bool
     significant_findings: tuple[str, ...]
 
 
@@ -182,18 +197,20 @@ class EvidenceValidator:
         }:
             return ClaimAssessment(
                 claim=claim,
+                resolved_classification=claim.classification,
                 evidence_status=EvidenceStatus.NOT_APPLICABLE,
                 temporal_status=TemporalStatus.NOT_APPLICABLE,
                 supporting_sources=(),
                 contradicting_sources=(),
                 independent_support_count=0,
                 explanation=(
-                    "This is identified as Author experience or opinion, "
-                    "not presented as an independently verified fact."
+                    f"This is attributed as {claim.classification.value.replace('_', ' ')} "
+                    f"to {claim.attribution}; it is not presented as an "
+                    "independently verified fact."
                 ),
             )
 
-        credible = tuple(item for item in records if item.source_is_credible)
+        credible = self._distinct_credible_records(records)
         supports = tuple(
             item for item in credible
             if item.position is EvidencePosition.SUPPORTS
@@ -204,18 +221,37 @@ class EvidenceValidator:
         )
         groups = {item.independent_group for item in supports}
         temporal = self._temporal_status(claim, supports)
+        resolved = claim.classification
 
         if contradicts:
             status = EvidenceStatus.CONTRADICTED
             explanation = "Credible evidence materially contradicts this claim."
             action = "Rebuild or remove the claim using defensible evidence."
-        elif len(groups) >= 2:
+        elif (
+            len(groups) >= 2
+            and claim.classification is ClaimClassification.SOURCE_ASSERTION
+            and temporal in {
+                TemporalStatus.CURRENT,
+                TemporalStatus.NOT_APPLICABLE,
+            }
+        ):
             status = EvidenceStatus.VERIFIED
+            resolved = ClaimClassification.VERIFIED_FACT
             explanation = (
                 "The claim has support from at least two independent "
                 "credible source groups."
             )
             action = None
+        elif len(groups) >= 2:
+            status = EvidenceStatus.PARTIALLY_SUPPORTED
+            explanation = (
+                "Independent evidence supports this claim, but its semantic "
+                f"classification remains {claim.classification.value.replace('_', ' ')}."
+            )
+            action = (
+                "Preserve the claim qualification and attribution; do not "
+                "present it as a Verified Fact."
+            )
         elif len(groups) == 1:
             status = EvidenceStatus.PARTIALLY_SUPPORTED
             explanation = (
@@ -228,11 +264,16 @@ class EvidenceValidator:
             explanation = "No credible supporting evidence was recorded."
             action = "Provide evidence, qualify the claim, or remove it."
 
-        if temporal in {TemporalStatus.OUTDATED, TemporalStatus.UNDATED}:
+        if temporal in {
+            TemporalStatus.REVIEW_REQUIRED,
+            TemporalStatus.OUTDATED,
+            TemporalStatus.UNDATED,
+        }:
             action = "Revalidate the time-sensitive evidence before publication."
 
         return ClaimAssessment(
             claim=claim,
+            resolved_classification=resolved,
             evidence_status=status,
             temporal_status=temporal,
             supporting_sources=tuple(item.source_identifier for item in supports),
@@ -243,6 +284,24 @@ class EvidenceValidator:
             explanation=explanation,
             recommended_action=action,
         )
+
+    @staticmethod
+    def _distinct_credible_records(
+        records: tuple[EvidenceRecord, ...],
+    ) -> tuple[EvidenceRecord, ...]:
+        """Deduplicate by source identity, preserving contradictions safely."""
+        by_source: dict[str, EvidenceRecord] = {}
+        for record in records:
+            if not record.source_is_credible:
+                continue
+            identity = record.source_identifier.strip().casefold()
+            existing = by_source.get(identity)
+            if existing is None or (
+                record.position is EvidencePosition.CONTRADICTS
+                and existing.position is not EvidencePosition.CONTRADICTS
+            ):
+                by_source[identity] = record
+        return tuple(by_source.values())
 
     def _temporal_status(
         self,
@@ -297,8 +356,17 @@ class EditorialRiskReviewer:
         ):
             risk = EditorialRisk.HIGH
         elif any(
-            item.evidence_status is EvidenceStatus.PARTIALLY_SUPPORTED
-            or item.temporal_status is TemporalStatus.REVIEW_REQUIRED
+            item.evidence_status in {
+                EvidenceStatus.PARTIALLY_SUPPORTED,
+                EvidenceStatus.UNSUPPORTED,
+                EvidenceStatus.CONTRADICTED,
+            }
+            or item.temporal_status in {
+                TemporalStatus.REVIEW_REQUIRED,
+                TemporalStatus.OUTDATED,
+                TemporalStatus.UNDATED,
+            }
+            or item.recommended_action is not None
             for item in items
         ):
             risk = EditorialRisk.MODERATE
@@ -321,12 +389,12 @@ class EditorialRiskReviewer:
                 "specific evidence or timing points to review."
             ),
             EditorialRisk.HIGH: (
-                "Important claims need stronger or more current evidence "
-                "before publication can be recommended."
+                "Publication is blocked until important claims have stronger "
+                "or more current evidence."
             ),
             EditorialRisk.SEVERE: (
-                "The material cannot responsibly be recommended for "
-                "publication as presented. A defensible alternative is required."
+                "Publication is blocked. The material cannot responsibly be "
+                "recommended as presented; a defensible alternative is required."
             ),
         }
         findings = tuple(
@@ -334,16 +402,19 @@ class EditorialRiskReviewer:
             for item in items
             if item.recommended_action
         )
+        blocked = risk in {EditorialRisk.HIGH, EditorialRisk.SEVERE}
+        if blocked:
+            findings += (f"Publication gate: {messages[risk]}",)
+        if risk is EditorialRisk.LOW and findings:
+            raise ValueError("Low Editorial Risk cannot contain actionable findings.")
 
         return EvidenceValidationReport(
             assessments=items,
             editorial_risk=risk,
             editorial_confidence=confidence,
             author_message=messages[risk],
-            may_recommend_publication=risk in {
-                EditorialRisk.LOW,
-                EditorialRisk.MODERATE,
-            },
+            may_recommend_publication=not blocked,
+            publication_blocked=blocked,
             significant_findings=findings,
         )
 

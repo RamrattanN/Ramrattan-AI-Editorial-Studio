@@ -1150,6 +1150,18 @@ def main() -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
+# CAPABILITY_008A3_GENERATOR_OVERRIDE_START
+from bootstrap_capability008a3_editorial_integrity_hardening import (
+    EVIDENCE_VALIDATION_RUNTIME as CAPABILITY_008A3_EVIDENCE_RUNTIME,
+    EVIDENCE_VALIDATION_TESTS as CAPABILITY_008A3_EVIDENCE_TESTS,
+)
+FILES["studio/evidence_validation.py"] = (
+    CAPABILITY_008A3_EVIDENCE_RUNTIME
+)
+FILES["tests/test_capability008_evidence_validation.py"] = (
+    CAPABILITY_008A3_EVIDENCE_TESTS
+)
+# CAPABILITY_008A3_GENERATOR_OVERRIDE_END
 
 if __name__ == "__main__":
     raise SystemExit(main())

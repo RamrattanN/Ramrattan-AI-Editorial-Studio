@@ -304,3 +304,27 @@ Rendered Hero Visual remains Capability 010 and Portable Editorial
 Project behavior remains Capability 011.
 
 <!-- CAPABILITY_009_PRD_END -->
+
+<!-- CAPABILITY_010_PRD_START -->
+
+## Capability 010 Requirements
+
+Version 1.0 shall provide a Hero Visual System that:
+
+- consumes the approved Capability 009 Hero Visual prompt;
+- preserves approved visual intent and editorial context;
+- uses a provider-independent generation boundary;
+- validates an exact 720 × 425 PNG artifact and provenance;
+- distinguishes ready, generation failed, validation failed, unsupported
+  provider, malformed request, and policy/editorial blocking;
+- includes an offline deterministic provider for repository validation;
+- remains brand-neutral unless explicit approved context permits otherwise;
+- never reports a failed or unvalidated artifact as ready; and
+- attaches one existing result without silently regenerating approved package
+  components.
+
+Capability 011 retains Portable Editorial Project serialization, resume, and
+export. Capability 010 adds no workspace, collaboration, orchestration, UI,
+publishing automation, release packaging, or Version 2 product surface.
+
+<!-- CAPABILITY_010_PRD_END -->

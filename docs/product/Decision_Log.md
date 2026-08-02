@@ -234,3 +234,19 @@ ADR-015 and Architecture Baseline `2026.08.02v10` record the durable
 architecture.
 
 <!-- CAPABILITY_009_DECISION_LOG_END -->
+
+<!-- CAPABILITY_010_DECISION_LOG_START -->
+
+## Capability 010 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-02 | D4 | Adopt a provider-independent Hero Visual boundary | Visual-generation providers must not define the stable product contract. |
+| 2026-08-02 | D4 | Validate every provider artifact in the core | Provider claims cannot substitute for verified dimensions, format, bytes, and provenance. |
+| 2026-08-02 | D4 | Include an offline deterministic provider | Tests, demos, bootstrap recovery, and repository validation must not require network access. |
+| 2026-08-02 | D4 | Attach results without implicit generation | Approved prompts and textual package components must not be silently regenerated. |
+
+ADR-016 and proposed Architecture Baseline `2026.08.02v12` record the durable
+architecture.
+
+<!-- CAPABILITY_010_DECISION_LOG_END -->

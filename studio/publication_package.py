@@ -6,7 +6,7 @@ Editorial Project serialization remains Capability 011.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from enum import Enum
 
 from .article_engine import ArticleDraft, PublicationBlockedError
@@ -15,6 +15,7 @@ from .evidence_validation import (
     EditorialRisk,
     EvidenceValidationReport,
 )
+from .hero_visual import HeroVisualResult, HeroVisualStatus
 
 
 class PackageReadiness(str, Enum):
@@ -22,6 +23,15 @@ class PackageReadiness(str, Enum):
 
     READY_FOR_HERO_VISUAL = "ready_for_hero_visual"
     REVIEW_BEFORE_HERO_VISUAL = "review_before_hero_visual"
+
+
+class HeroVisualPackageState(str, Enum):
+    """Hero Visual state at the narrow Publication Package boundary."""
+
+    PENDING = "pending"
+    READY = "ready"
+    FAILED = "failed"
+    BLOCKED = "blocked"
 
 
 @dataclass(frozen=True)
@@ -42,7 +52,8 @@ class PublicationPackage:
     editorial_risk: EditorialRisk
     readiness: PackageReadiness
     review_findings: tuple[str, ...]
-    rendered_hero_visual: None = None
+    hero_visual_state: HeroVisualPackageState = HeroVisualPackageState.PENDING
+    rendered_hero_visual: HeroVisualResult | None = None
     portable_editorial_project: None = None
     deferred_components: tuple[str, ...] = (
         "Rendered Hero Visual - Capability 010",
@@ -114,3 +125,34 @@ class PublicationPackageBuilder:
                 "Publication Packages require every textual component."
             )
         return package
+
+    def attach_hero_visual(
+        self,
+        package: PublicationPackage,
+        result: HeroVisualResult,
+    ) -> PublicationPackage:
+        """Attach one existing result without regenerating textual components."""
+        if package.hero_visual_state is not HeroVisualPackageState.PENDING:
+            raise ValueError("The Publication Package already has a Hero Visual result.")
+        if result.prompt != package.hero_visual_prompt:
+            raise ValueError("The Hero Visual result must preserve the approved prompt.")
+
+        if result.ready:
+            state = HeroVisualPackageState.READY
+            deferred = tuple(
+                item for item in package.deferred_components
+                if item != "Rendered Hero Visual - Capability 010"
+            )
+        elif result.status is HeroVisualStatus.BLOCKED:
+            state = HeroVisualPackageState.BLOCKED
+            deferred = package.deferred_components
+        else:
+            state = HeroVisualPackageState.FAILED
+            deferred = package.deferred_components
+
+        return replace(
+            package,
+            hero_visual_state=state,
+            rendered_hero_visual=result,
+            deferred_components=deferred,
+        )

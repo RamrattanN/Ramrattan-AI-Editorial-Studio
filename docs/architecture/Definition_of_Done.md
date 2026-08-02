@@ -313,3 +313,25 @@ Confirm:
 - complete repository validation passes.
 
 <!-- CAPABILITY_009_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_010_DEFINITION_OF_DONE_START -->
+
+## Capability 010 Completion Additions
+
+Confirm:
+
+- the approved Capability 009 Hero Visual prompt is preserved;
+- provider-specific behavior remains behind `HeroVisualProvider`;
+- ready output is a validated 720 × 425 PNG with provenance;
+- deterministic generation is offline and repeatable;
+- malformed, unsupported, failed, invalid, and blocked states remain distinct;
+- no failed or unvalidated artifact is reported ready;
+- Publication Package attachment does not regenerate or change textual content;
+- already attached results are protected from silent replacement;
+- approved brand masters remain unchanged and are not Hero Visual inputs;
+- no Portable Project, workspace, collaboration, orchestration, UI, publishing
+  automation, release packaging, or Version 2 behavior is introduced;
+- the Capability 010 demo is current; and
+- complete repository validation passes.
+
+<!-- CAPABILITY_010_DEFINITION_OF_DONE_END -->

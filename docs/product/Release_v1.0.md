@@ -15,7 +15,7 @@ v1.0
 Architecture baseline:
 
 ```text
-2026.08.02v10
+2026.08.02v11
 ```
 
 ## Version 1.0 Promise
@@ -232,3 +232,20 @@ Project resume/export path, and end-to-end release-readiness evidence remain
 outstanding.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
+
+<!-- CAPABILITY_010_RELEASE_STATUS_START -->
+
+## Capability 010 Release Contribution
+
+Capability 010 is In Progress and adds the provider-independent 720 × 425 Hero
+Visual System, deterministic validation provider, explicit failure states, and
+the narrow Publication Package attachment boundary.
+
+The current delivered architecture baseline is `2026.08.02v11`. Proposed
+baseline `2026.08.02v12` becomes current only when Capability 010 is delivered.
+
+Version 1 remains incomplete. Capability 011 Portable Editorial Project resume
+and export and issue #18 end-to-end release-readiness evidence remain
+outstanding. B002 remains non-blocking Post-RC1 work.
+
+<!-- CAPABILITY_010_RELEASE_STATUS_END -->

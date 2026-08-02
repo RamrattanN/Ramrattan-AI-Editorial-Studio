@@ -1,5 +1,15 @@
 # Ramrattan AI Editorial Studio
 
+<!-- INITIATIVE_B001_BRAND_LOCKUP_START -->
+
+<p align="center">
+  <img src="assets/brand/logo/exports/editorial-compass-lockup-1200.png"
+       alt="Ramrattan AI Editorial Studio shield with metallic R and golden quill"
+       width="800">
+</p>
+
+<!-- INITIATIVE_B001_BRAND_LOCKUP_END -->
+
 > **Engineering AI-assisted thought leadership with the discipline
 > of software development.**
 

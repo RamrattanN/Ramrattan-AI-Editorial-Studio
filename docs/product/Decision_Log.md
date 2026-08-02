@@ -168,3 +168,22 @@ reputation.
 | 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v04 | The engineering delivery process is now part of the architecture baseline. |
 
 <!-- CAPABILITY_DELIVERY_DECISION_LOG_END -->
+
+<!-- CAPABILITY_008_DECISION_LOG_START -->
+
+## Capability 008 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-01 | D4 | Adopt one Editorial Intent per Editorial Session | A publication must remain coherent and traceable. |
+| 2026-08-01 | D4 | Adopt Editorial Discernment Engine internally | The Studio must interpret what new contributions mean. |
+| 2026-08-01 | D4 | Use Editorial Guidance with Authors | Internal engine language should not dominate the Author experience. |
+| 2026-08-01 | D4 | Adopt No Silent Scope Expansion | Material scope changes require Author awareness. |
+| 2026-08-01 | D4 | Adopt Editorial Never Events | Unacceptable trust failures require explicit guardrails. |
+| 2026-08-01 | D4 | Separate Workspace State from Stage State | Session lifecycle and work progress are different concerns. |
+| 2026-08-01 | D4 | Distinguish Cancelled from Aborted | Deliberate Author cancellation differs from exceptional termination. |
+| 2026-08-01 | D4 | Preserve aborted work | Interruption must not destroy provenance, approvals, or project history. |
+| 2026-08-01 | D4 | Ask one clarification question | Minimise Author effort while avoiding unsafe assumptions. |
+| 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v05 | Editorial Discernment becomes part of the Version 1.0 runtime baseline. |
+
+<!-- CAPABILITY_008_DECISION_LOG_END -->

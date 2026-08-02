@@ -405,3 +405,21 @@ The helper resolves branch and pull-request state before suggesting
 the next command.
 
 <!-- CAPABILITY_DELIVERY_README_END -->
+
+<!-- CAPABILITY_008_README_START -->
+
+## Capability 008 - Editorial Discernment
+
+Capability 008 adds:
+
+- Editorial Discernment Engine
+- Author-facing Editorial Guidance
+- Editorial Intent
+- Editorial Coherence Guard
+- No Silent Scope Expansion
+- Workspace lifecycle
+- Pause, resume, cancel, abort, complete, and archive behaviour
+- Approved-component protection
+- One-question clarification
+
+<!-- CAPABILITY_008_README_END -->

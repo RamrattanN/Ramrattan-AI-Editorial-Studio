@@ -232,3 +232,22 @@ Editorial Session:
 Full evidence verification remains Capability 008.
 
 <!-- CAPABILITY_007_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_008_CURRENT_FOCUS_START -->
+
+## Capability 008 Active Focus
+
+The current Product focus is Editorial Discernment:
+
+- interpret each new Author contribution,
+- preserve one coherent Editorial Intent,
+- accept related supporting material,
+- detect separate publication objectives,
+- prevent silent scope expansion,
+- protect approved work,
+- and manage the Editorial Session lifecycle.
+
+Evidence-validation depth remains part of Capability 008's next
+implementation increment.
+
+<!-- CAPABILITY_008_CURRENT_FOCUS_END -->

@@ -99,3 +99,21 @@ A capability is not complete until the repository has returned to a
 clean, current `develop` baseline.
 
 <!-- CAPABILITY_DELIVERY_START_HERE_END -->
+
+<!-- CAPABILITY_008_START_HERE_START -->
+
+## Capability 008 Governance
+
+Before changing session behaviour, read:
+
+- `constitution/Editorial_Coherence_Principle.md`
+- `constitution/Editorial_Never_Events.md`
+- `constitution/Editorial_Session_Lifecycle.md`
+- `architecture/Editorial_Discernment_Runtime.md`
+- `architecture/Editorial_Intent_Runtime.md`
+
+Governing rule:
+
+> One Editorial Intent per Editorial Session.
+
+<!-- CAPABILITY_008_START_HERE_END -->

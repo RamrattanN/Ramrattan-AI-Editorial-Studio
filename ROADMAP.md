@@ -330,3 +330,45 @@ Deliverables:
 Capability 008 must use this workflow.
 
 <!-- CAPABILITY_DELIVERY_ROADMAP_END -->
+
+<!-- CAPABILITY_008_ROADMAP_START -->
+
+## Capability 008 - Editorial Discernment
+
+Status:
+
+```text
+In implementation
+```
+
+Delivered in this increment:
+
+- [x] Editorial Intent
+- [x] Editorial Discernment Engine
+- [x] Editorial Guidance
+- [x] Intent Alignment
+- [x] Editorial Coherence Guard
+- [x] No Silent Scope Expansion
+- [x] Workspace lifecycle
+- [x] Stage lifecycle
+- [x] Pause
+- [x] Resume
+- [x] Cancel
+- [x] Abort
+- [x] Complete
+- [x] Archive
+- [x] Approved-component protection
+- [x] One-question clarification
+- [x] Runtime tests
+- [x] Capability demo
+
+Next Capability 008 increment:
+
+- Evidence Validation
+- Claim classification
+- Corroboration
+- Temporal Integrity
+- LMHS Editorial Risk
+- Editorial Confidence translation
+
+<!-- CAPABILITY_008_ROADMAP_END -->

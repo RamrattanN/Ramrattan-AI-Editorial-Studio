@@ -172,3 +172,43 @@ A new concept requires:
 - constitutional-impact review,
 - affected-document updates,
 - and validation where practical.
+
+<!-- CAPABILITY_008_CANONICAL_VOCABULARY_START -->
+
+## Capability 008 Vocabulary
+
+### Editorial Discernment Engine
+
+Internal runtime that interprets what a new Author contribution
+means.
+
+### Editorial Guidance
+
+Author-facing expression of Editorial Discernment.
+
+### Editorial Intent
+
+The single coherent publication objective for one Editorial Session.
+
+### Intent Alignment
+
+The relationship between new material and the existing Editorial
+Intent:
+
+- Aligned
+- Related
+- Diverging
+- Separate Intent
+- Ambiguous
+
+### Workspace State
+
+Lifecycle of the complete Editorial Workspace.
+
+### Stage State
+
+Lifecycle of one Editorial Integrity stage.
+
+Workspace State and Stage State are not synonyms.
+
+<!-- CAPABILITY_008_CANONICAL_VOCABULARY_END -->

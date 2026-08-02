@@ -64,3 +64,20 @@ Any amendment requires:
 | Missing identity assets do not block resume | Accepted | 2026-08-01 | Editorial Workspace |
 
 <!-- CAPABILITY_007_DECISION_REGISTER_END -->
+
+<!-- CAPABILITY_008_DECISION_REGISTER_START -->
+
+## Capability 008 Constitutional Decisions
+
+| Decision | Status | Adopted | Primary Evidence |
+|---|---|---|---|
+| Every feature must earn trust before convenience | Accepted | 2026-08-01 | Constitution |
+| One Editorial Intent per Editorial Session | Accepted | 2026-08-01 | Editorial Coherence Principle |
+| No Silent Scope Expansion | Accepted | 2026-08-01 | Editorial Coherence Principle |
+| Unrelated publication objectives are not silently merged | Accepted | 2026-08-01 | Editorial Never Events |
+| Workspace State is distinct from Stage State | Accepted | 2026-08-01 | Editorial Session Lifecycle |
+| Cancelled is distinct from Aborted | Accepted | 2026-08-01 | Editorial Session Lifecycle |
+| Aborted work remains preserved | Accepted | 2026-08-01 | Editorial Session Lifecycle |
+| Ambiguity produces one concise clarification question | Accepted | 2026-08-01 | ADR-009 |
+
+<!-- CAPABILITY_008_DECISION_REGISTER_END -->

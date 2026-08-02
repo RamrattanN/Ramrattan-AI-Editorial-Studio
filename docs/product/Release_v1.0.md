@@ -184,3 +184,17 @@ Editorial Workspace behaviours:
 It does not deliver full evidence verification.
 
 <!-- CAPABILITY_007_RELEASE_END -->
+
+<!-- CAPABILITY_008_RELEASE_START -->
+
+## Capability 008 Release Contribution
+
+Capability 008 adds the Guided Editorial Session foundation.
+
+It protects editorial coherence, identifies separate publication
+objectives, preserves approved work, and introduces explicit
+Editorial Workspace lifecycle states.
+
+It does not permit silent merging of unrelated sources or intents.
+
+<!-- CAPABILITY_008_RELEASE_END -->

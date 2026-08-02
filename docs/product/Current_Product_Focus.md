@@ -251,3 +251,22 @@ Evidence-validation depth remains part of Capability 008's next
 implementation increment.
 
 <!-- CAPABILITY_008_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_008A1_CURRENT_FOCUS_START -->
+
+## Current Implementation Status - Capability 008A.1
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - In Progress
+- Capability 008A.2 - Delivery Hardening - Not started
+- Capability 008A.3 - Editorial Integrity Hardening - Not started
+- Capability 009 - Not started
+
+The active engineering focus is Governance Consolidation. Product runtime
+remains at the completed Capability 008 baseline while governance
+authority, current status, and historical reference integrity are hardened.
+
+Earlier capability focus sections are delivery records. This section owns
+the current implementation status until the next increment updates it.
+
+<!-- CAPABILITY_008A1_CURRENT_FOCUS_END -->

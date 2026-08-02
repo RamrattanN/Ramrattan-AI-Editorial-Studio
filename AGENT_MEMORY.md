@@ -11,7 +11,7 @@ Unlike AGENTS.md, this file is expected to evolve over time.
 
 ## One verified step
 
-The Author strongly prefers one verified step at a time.
+Nilesh prefers one verified step at a time.
 
 Do not provide multiple future commands unless explicitly requested.
 
@@ -182,3 +182,26 @@ Append new lessons rather than rewriting history.
 Date each significant lesson.
 
 Keep observations concise and actionable.
+
+<!-- CAPABILITY_008A1_MEMORY_GOVERNANCE_START -->
+
+# Authority and Lifecycle
+
+`AGENT_MEMORY.md` is advisory. It records engineering experience but never
+overrides the Constitution, Canonical Vocabulary, accepted ADRs, the
+current architecture baseline, the Capability Delivery Workflow,
+`AGENTS.md`, or `CONTRIBUTING.md`.
+
+This file must not define current repository status or silently create
+normative policy.
+
+Maintain it chronologically:
+
+- append dated lessons rather than rewriting history;
+- annotate a correction when an earlier lesson is no longer reliable;
+- promote a normative lesson into its authoritative governance document;
+- keep repository and GitHub state in their designated current-status
+  records; and
+- keep entries concise, evidence-based, and actionable.
+
+<!-- CAPABILITY_008A1_MEMORY_GOVERNANCE_END -->

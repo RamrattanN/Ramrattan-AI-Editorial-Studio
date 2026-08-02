@@ -49,7 +49,7 @@ documents or ADRs.
 ## Related ADRs
 
 - ADR-001 - Historical workflow decision
-- ADR-002 - Adaptive Editorial Context
+- Adaptive Editorial Context architecture - `docs/architecture/Editorial_Context_Model.md`
 - ADR-003 - Article-First Publication Package
 - ADR-004 - Portable Editorial Projects
 - ADR-005 - Editorial Integrity Pipeline

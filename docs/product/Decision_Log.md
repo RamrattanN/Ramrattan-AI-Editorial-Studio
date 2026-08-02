@@ -97,7 +97,7 @@ interpretation, and editorial significance, not merely its URL.
 ## Active Architecture Baseline
 
 ```text
-2026.08.01v01
+2026.08.01v06
 ```
 
 ## Capability 006 Learning
@@ -187,3 +187,19 @@ reputation.
 | 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v05 | Editorial Discernment becomes part of the Version 1.0 runtime baseline. |
 
 <!-- CAPABILITY_008_DECISION_LOG_END -->
+
+<!-- CAPABILITY_008A1_DECISION_LOG_START -->
+
+## Capability 008A.1 Governance Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-02 | D4 | Adopt explicit Governance Authority | Each governance concept requires one authoritative owner and deterministic precedence. |
+| 2026-08-02 | D4 | Keep `AGENT_MEMORY.md` advisory | Chronological experience must not silently become policy or current status. |
+| 2026-08-02 | D4 | Assign current-status responsibilities | Roadmap, scorecard, release definition, and architecture records answer different status questions. |
+| 2026-08-02 | D4 | Do not recreate ADR-002 | No ADR-002 artifact exists in repository history; the broken reference is repaired to surviving architecture evidence. |
+| 2026-08-02 | D4 | Retain Architecture Baseline 2026.08.01v06 | Governance clarification does not change executable architecture. |
+
+ADR-011 records the durable governance decision.
+
+<!-- CAPABILITY_008A1_DECISION_LOG_END -->

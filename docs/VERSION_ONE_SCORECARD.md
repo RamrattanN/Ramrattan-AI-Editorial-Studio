@@ -25,12 +25,12 @@ Canonical Editorial Session.
 
 | Area | Status | Planned Capability |
 |---|---|---|
-| Editorial Workspace | Planned | Capability 007 |
-| Editorial Intake | Planned | Capability 007 |
-| Source Assessment | Planned | Capability 007 |
-| Evidence Validation | Planned | Capability 008 |
-| LMHS Editorial Risk | Planned | Capability 008 |
-| Editorial Confidence Translation | Planned | Capability 008 |
+| Editorial Workspace | Complete | Capability 007 runtime |
+| Editorial Intake | Complete | Capability 007 runtime |
+| Source Assessment | Complete | Capability 007 runtime |
+| Evidence Validation | Complete | Capability 008 runtime |
+| LMHS Editorial Risk | Complete | Capability 008 runtime |
+| Editorial Confidence Translation | Complete | Capability 008 runtime |
 | Article Engine | Planned | Capability 009 |
 | Publication Package | Planned | Capability 009 |
 | Hero Visual System | Planned | Capability 010 |
@@ -102,3 +102,27 @@ Canonical Editorial Session is complete and demonstrable.
 | Editorial Confidence Translation | Complete | Publication-gate tests |
 
 <!-- CAPABILITY_008_SCORECARD_END -->
+
+<!-- CAPABILITY_008A1_SCORECARD_START -->
+
+## Capability 008A Engineering Hardening Status
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - In Progress
+- Capability 008A.2 - Delivery Hardening - Not started
+- Capability 008A.3 - Editorial Integrity Hardening - Not started
+- Capability 009 - Not started
+
+| Governance area | Status | Evidence |
+|---|---|---|
+| Agent operating contract | Complete | `AGENTS.md` and governance tests |
+| Advisory memory lifecycle | Complete | `AGENT_MEMORY.md` |
+| Contributor workflow alignment | Complete | `CONTRIBUTING.md` |
+| Governance authority | Complete | ADR-011 |
+| ADR-002 reference integrity | Complete | Baseline v01 direct architecture reference |
+| Current baseline | Complete | `2026.08.01v06` |
+
+Capability 008A.1 changes governance and status integrity only. It does not
+advance product-runtime release readiness.
+
+<!-- CAPABILITY_008A1_SCORECARD_END -->

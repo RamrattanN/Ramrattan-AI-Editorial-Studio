@@ -370,3 +370,35 @@ Prefer:
 
 The Agent succeeds when Nilesh can focus on engineering decisions rather than
 workflow administration.
+
+<!-- CAPABILITY_008A1_GOVERNANCE_AUTHORITY_START -->
+
+## Governance Document Responsibilities
+
+Apply one authoritative owner for each governance concept:
+
+- the Constitution owns enduring product principles;
+- Canonical Vocabulary owns active product terminology;
+- accepted ADRs own durable architecture and governance decisions;
+- the current architecture baseline owns the coherent implemented
+  architecture checkpoint;
+- the Capability Delivery Workflow owns delivery sequence and recovery;
+- `AGENTS.md` owns the operational contract for repository agents;
+- `CONTRIBUTING.md` translates repository governance for contributors;
+- `AGENT_MEMORY.md` preserves advisory, chronological experience;
+- `ROADMAP.md` owns current capability sequence and program status;
+- the Version 1.0 Scorecard owns release-readiness evidence; and
+- the Version 1.0 Release Definition owns the product promise and release
+  boundary.
+
+Summaries must reference their authority rather than create competing
+rules. The capability that changes a governed fact updates its authority
+and affected summaries in the same increment.
+
+Historical capability sections are delivery records. They do not override
+a later, explicitly identified current-status section.
+
+A change to governance authority requires a focused ADR, contract tests,
+generator synchronization, complete validation, and deliberate review.
+
+<!-- CAPABILITY_008A1_GOVERNANCE_AUTHORITY_END -->

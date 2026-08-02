@@ -2,38 +2,39 @@
 
 Thank you for contributing to Ramrattan AI Editorial Studio.
 
-This repository is governed by the Constitution and follows a capability-driven development workflow.
-
----
-
-# Guiding Principle
-
-Every enhancement must make the product more maintainable, more intuitive, or more valuable.
-
 Trust before convenience.
 
-Repository state is the source of truth.
+The repository is the source of truth for repository state. Contributions
+follow the Constitution and the Capability Delivery Workflow.
 
----
+## Authority and Required Reading
 
-# Before You Begin
+Nilesh's current request defines the maximum scope and authorization for a
+task. Repository governance defines how authorized work is performed.
 
-Read:
+Before capability work, read:
 
-- README.md
-- AGENTS.md
-- AGENT_MEMORY.md
-- docs/constitution/Constitution.md
+- `AGENTS.md`
+- `AGENT_MEMORY.md`
+- `CONTRIBUTING.md`
+- `docs/constitution/Constitution.md`
+- `docs/constitution/Canonical_Vocabulary.md`
+- `docs/engineering/Capability_Delivery_Workflow.md`
+- the current architecture baseline and relevant ADRs
+- the active capability plan, roadmap, and scorecard
 
-These documents define both the engineering workflow and the editorial principles.
+`AGENTS.md` is the operational agent contract. `AGENT_MEMORY.md` is
+advisory experience and never overrides normative repository guidance.
 
----
-
-# Development Model
+## Development Model
 
 - `main` contains stable releases.
 - `develop` contains integrated work for the next release.
-- Feature branches contain focused changes.
+- Feature and documentation branches contain one focused increment.
+
+Verify a clean, synchronized `develop` before branch creation. Treat
+pre-existing changes as Nilesh's work and never discard, overwrite, stage,
+or relocate them without explicit authorization.
 
 Recommended branch names:
 
@@ -44,170 +45,127 @@ fix/short-description
 test/short-description
 ```
 
-One capability should be developed on one feature branch.
+## Capability Delivery Workflow
 
----
+Use `scripts/capability_delivery.py` to determine the next safe state. Do
+not reconstruct or skip the workflow manually.
 
-# Capability Delivery Workflow
+The canonical lifecycle is:
 
-Every capability follows the same lifecycle.
+1. Verify baseline.
+2. Create or resume the feature branch.
+3. Create the bootstrap.
+4. Preview.
+5. Apply.
+6. Recover from partial apply when necessary.
+7. Validate.
+8. Synchronize GitHub planning.
+9. Review local changes.
+10. Stage and review staged changes.
+11. Commit.
+12. Push.
+13. Create or reuse the pull request.
+14. Wait for successful CI and required review state.
+15. Merge and delete the feature branch.
+16. Return to clean, synchronized `develop`.
+17. Synchronize completion planning.
 
-1. Create or resume the feature branch.
-2. Implement the capability.
-3. Validate the repository.
-4. Synchronize the GitHub Project.
-5. Review staged changes.
-6. Commit.
-7. Push.
-8. Create or reuse the Pull Request.
-9. Wait for successful CI.
-10. Merge.
-11. Delete the feature branch.
-12. Return to a clean `develop` branch.
+Resume from the helper's verified state. Recover a partial transition
+instead of restarting it.
 
-The canonical workflow is implemented by:
+## Autonomous Work and Approval Boundaries
 
-```text
-scripts/capability_delivery.py
+Inspection, in-scope editing, bootstrap preview and apply, validation,
+non-destructive repair, and diff review may proceed autonomously once the
+phase is authorized.
+
+Explicit Nilesh approval is required before:
+
+- staging changes with `git add`;
+- commit;
+- push;
+- creating or mutating a pull request;
+- merge;
+- deleting branches;
+- creating, editing, closing, or reopening issues;
+- changing GitHub Project or milestone state;
+- changing the frozen Constitution or Canonical Vocabulary;
+- publication or external submission;
+- dependency installation; or
+- destructive or difficult-to-recover operations.
+
+An approval applies only to the described action, targets, and verified
+state.
+
+## Validation
+
+Before staging or commit, all contributions must pass:
+
+```bash
+python3 -m compileall -q studio scripts tests
+python3 -m unittest discover -s tests -v
+python3 studio.py validate
 ```
 
-Do not manually reconstruct workflow state.
+Repair failures within scope, regenerate when required, and rerun the
+complete suite. A merge, regeneration, or code change invalidates earlier
+validation.
 
-Always inspect repository state before recommending the next action.
+## Generated Files
 
----
+Bootstrap scripts are canonical for the files and managed sections they
+declare. Generated artifacts are derived.
 
-# Validation
+When generated behavior or documentation changes:
 
-Every contribution must successfully complete:
+1. Update every affected implementation or document.
+2. Update every owning generator.
+3. Regenerate.
+4. Validate.
+5. Confirm the repair survives regeneration.
 
-- compileall
-- unittest
-- studio.py validate
+Never repair only a generated artifact or only its generator.
 
-Repository validation must succeed before creating a commit.
+## Governance and Architecture
 
----
+Create or update an ADR when a change establishes a lasting constraint,
+changes the system model, changes governance authority, or rejects a
+credible alternative.
 
-# Generated Files
+Update the architecture baseline only when executable architecture changes.
+Governance-only clarification does not require a new baseline.
 
-Where runtime files are generated from bootstrap scripts:
+Planning and status artifacts are maintained by the capability that changes
+their facts. Do not create a separate reconciliation exercise unless it is
+explicitly required.
 
-- modify the generator
-- regenerate the runtime files
-- validate the repository
+## Commits and Pull Requests
 
-Do not permanently repair generated files without updating their generator.
+Use a concise conventional commit message for one coherent increment.
 
-Generator and generated output must remain synchronized.
+Pull requests must explain:
 
----
+- summary;
+- problem;
+- rationale;
+- changes;
+- validation;
+- architecture decision impact;
+- related issues; and
+- rollback.
 
-# Commit Messages
+CI must pass before merge.
 
-Use concise conventional prefixes:
+## Stopping Conditions
 
-```text
-feat: add a new capability
-docs: improve documentation
-fix: correct a defect
-test: add or improve tests
-refactor: improve internal structure
-release: prepare or publish a release
-```
+Stop when the requested phase is complete, the next action is protected, a
+conflict requires Nilesh's judgment, unrelated work makes continuation
+unsafe, validation cannot be repaired within scope, or the task would
+materially exceed its approved budget.
 
-One commit should represent one coherent capability increment.
+## Engineering Principles
 
----
-
-# Pull Requests
-
-A pull request should:
-
-- Solve one coherent problem
-- Explain why the change is needed
-- Describe the implementation
-- Include validation notes
-- Mention related issues
-- Preserve approved behaviour unless explicitly replacing it
-- Pass repository validation
-- Follow the Capability Delivery Workflow
-
-Merge only after successful CI.
-
----
-
-# Significant Decisions
-
-Create an Architecture Decision Record when a change:
-
-- Alters the product workflow
-- Alters the prompt architecture
-- Alters the visual system
-- Alters release or versioning policy
-- Creates a lasting constraint
-- Rejects a credible alternative
-
-Architecture baselines should be updated where required.
-
----
-
-# Editorial Standards
-
-Contributions should preserve:
-
-- Originality
-- Evidence-based claims
-- Clear source attribution
-- Jargon-light language
-- Visual and written alignment
-- Brand-neutral output
-- Space - hyphen - space
-- No en dashes or em dashes in generated editorial copy
-
-Editorial integrity is always preferred over convenience.
-
----
-
-# AI-Assisted Development
-
-AI agents should follow:
-
-- AGENTS.md
-- AGENT_MEMORY.md
-
-Repository inspection takes precedence over conversation history.
-
-Always continue from the verified repository state.
-
-Recommend one verified workflow step at a time.
-
-Avoid asking contributors to repeat completed work.
-
----
-
-# Engineering Principles
-
-Prefer:
-
-- deterministic behaviour
-- explicit state transitions
-- reproducible workflows
-- repository inspection
-- constitutional governance
-- small, safe changes
-- comprehensive automated testing
-
-Avoid:
-
-- hidden state
-- speculative assumptions
-- duplicated logic
-- silent behaviour changes
-- manual workflow reconstruction
-
----
-
-# Code of Conduct
+Prefer deterministic behavior, explicit state, reproducible workflows,
+repository evidence, focused changes, and comprehensive behavioral tests.
 
 Participation is governed by [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).

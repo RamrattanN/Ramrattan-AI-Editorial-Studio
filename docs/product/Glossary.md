@@ -232,3 +232,32 @@ A VCM-versioned checkpoint describing the coherent product and
 system architecture at a particular time.
 
 <!-- CAPABILITY_006_GLOSSARY_END -->
+
+<!-- CAPABILITY_007_GLOSSARY_START -->
+
+## Editorial Workspace
+
+The complete Author-facing collaborative environment for the
+Canonical Editorial Session.
+
+## Editorial Intake
+
+The first capability within the Editorial Workspace.
+
+It receives and interprets Author material.
+
+## Identity Asset
+
+An optional Author-supplied logo or headshot used in a Hero Visual.
+
+Identity assets require rights confirmation and do not create a
+hosted-storage dependency.
+
+## Source Assessment
+
+An initial evaluation of provenance, identifiability, freshness,
+and verification needs.
+
+Source Assessment is not Evidence Verification.
+
+<!-- CAPABILITY_007_GLOSSARY_END -->

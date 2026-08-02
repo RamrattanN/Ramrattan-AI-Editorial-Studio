@@ -57,3 +57,24 @@ current Constitution is materially wrong, incomplete, or harmful.
 ## Motto
 
 > Trust earned. Confidence shared. Conversations inspired.
+
+<!-- CAPABILITY_007_START_HERE_START -->
+
+## Canonical Vocabulary
+
+Read:
+
+- `constitution/Canonical_Vocabulary.md`
+
+before introducing new product, architecture, runtime, test, demo,
+or user-facing terminology.
+
+Governing rule:
+
+> One concept. One canonical name.
+
+Engineering commitment:
+
+> Build once. Name once. Understand everywhere.
+
+<!-- CAPABILITY_007_START_HERE_END -->

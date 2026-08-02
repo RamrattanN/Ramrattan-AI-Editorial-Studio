@@ -355,3 +355,28 @@ Motto:
 > Trust earned. Confidence shared. Conversations inspired.
 
 <!-- CAPABILITY_006A_README_END -->
+
+<!-- CAPABILITY_007_README_START -->
+
+## Capability 007 - Editorial Workspace Runtime
+
+Capability 007 begins Version 1.0 runtime implementation.
+
+The Editorial Workspace now supports:
+
+- natural input recognition,
+- Stage 1 - Understanding your input,
+- Stage 2 - Assessing your sources,
+- optional logo and headshot identity assets,
+- rights confirmation,
+- and brand-neutral Hero Visual defaults.
+
+Editorial Workspace is the complete Author-facing environment.
+
+Editorial Intake is the first capability within that Workspace.
+
+Canonical terminology is defined in:
+
+- `docs/constitution/Canonical_Vocabulary.md`
+
+<!-- CAPABILITY_007_README_END -->

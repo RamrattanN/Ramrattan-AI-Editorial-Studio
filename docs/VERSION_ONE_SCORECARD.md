@@ -43,3 +43,22 @@ Canonical Editorial Session.
 
 Version 1.0 is not ready until every runtime area required by the
 Canonical Editorial Session is complete and demonstrable.
+
+<!-- CAPABILITY_007_SCORECARD_START -->
+
+## Capability 007 Progress
+
+| Area | Status | Evidence |
+|---|---|---|
+| Canonical Vocabulary | Complete | `docs/constitution/Canonical_Vocabulary.md` |
+| Editorial Workspace | Complete | `studio/editorial_intake.py` |
+| Natural Editorial Intake | Complete | Runtime tests |
+| Understanding your input | Complete | Runtime tests |
+| Assessing your sources | Complete | Runtime tests |
+| Optional logo | Complete | Runtime tests |
+| Optional headshot | Complete | Runtime tests |
+| Rights confirmation | Complete | Runtime tests |
+| Resume without assets | Complete | Runtime tests |
+| Evidence verification | Planned | Capability 008 |
+
+<!-- CAPABILITY_007_SCORECARD_END -->

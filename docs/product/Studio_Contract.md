@@ -155,3 +155,26 @@ The Studio's motto is:
 > Trust earned. Confidence shared. Conversations inspired.
 
 <!-- CAPABILITY_006A_STUDIO_CONTRACT_END -->
+
+<!-- CAPABILITY_007_STUDIO_CONTRACT_START -->
+
+## Editorial Workspace Contract
+
+The Editor will:
+
+- accept natural material without forcing technical classification,
+- identify what was supplied,
+- explain the first two Editorial Integrity stages,
+- distinguish source assessment from evidence verification,
+- and preserve the Author's control.
+
+## Identity-Asset Contract
+
+The Editor will not use a logo or headshot without confirmation that
+the Author owns it or is authorised to use it.
+
+Identity assets remain optional.
+
+Missing assets do not invalidate a Portable Editorial Project.
+
+<!-- CAPABILITY_007_STUDIO_CONTRACT_END -->

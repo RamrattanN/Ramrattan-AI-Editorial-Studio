@@ -166,3 +166,21 @@ Version 1.0 implementation should conform to the Constitution unless
 implementation evidence demonstrates a necessary amendment.
 
 <!-- CAPABILITY_006A_RELEASE_END -->
+
+<!-- CAPABILITY_007_RELEASE_START -->
+
+## Capability 007 Release Contribution
+
+Capability 007 delivers the first executable Version 1.0
+Editorial Workspace behaviours:
+
+- welcome experience,
+- natural Editorial Intake,
+- input recognition,
+- source assessment,
+- first two visible stages,
+- and optional Hero Visual identity assets.
+
+It does not deliver full evidence verification.
+
+<!-- CAPABILITY_007_RELEASE_END -->

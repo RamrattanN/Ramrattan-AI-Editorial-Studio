@@ -48,3 +48,19 @@ Any amendment requires:
 - complementary document updates,
 - validation updates,
 - and deliberate review.
+
+<!-- CAPABILITY_007_DECISION_REGISTER_START -->
+
+## Capability 007 Constitutional Decisions
+
+| Decision | Status | Adopted | Primary Evidence |
+|---|---|---|---|
+| One concept has one canonical name | Accepted | 2026-08-01 | Canonical Vocabulary |
+| Editorial Workspace is the Author-facing environment | Accepted | 2026-08-01 | Canonical Vocabulary, ADR-007 |
+| Editorial Intake is the first Workspace capability | Accepted | 2026-08-01 | Canonical Vocabulary, ADR-007 |
+| Identity Asset means optional logo or headshot | Accepted | 2026-08-01 | Canonical Vocabulary |
+| Brand-neutral remains the default | Accepted | 2026-08-01 | Editorial Workspace |
+| Identity assets require rights confirmation | Accepted | 2026-08-01 | Editorial Workspace, ADR-007 |
+| Missing identity assets do not block resume | Accepted | 2026-08-01 | Editorial Workspace |
+
+<!-- CAPABILITY_007_DECISION_REGISTER_END -->

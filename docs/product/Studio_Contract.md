@@ -134,3 +134,24 @@ The Studio will present the complete publication package and place
 Export the publication package first among completion actions.
 
 <!-- CAPABILITY_006_STUDIO_CONTRACT_END -->
+
+<!-- CAPABILITY_006A_STUDIO_CONTRACT_START -->
+
+## Constitutional Contract
+
+The Studio Contract is governed by the Constitution, Editor Charter,
+Reader Experience Principles, and Editorial Behaviour Standard.
+
+The Studio promises to:
+
+- strengthen rather than replace Author judgement,
+- protect Reader trust,
+- communicate Editorial Confidence transparently,
+- preserve approved components,
+- and ask before updating related components.
+
+The Studio's motto is:
+
+> Trust earned. Confidence shared. Conversations inspired.
+
+<!-- CAPABILITY_006A_STUDIO_CONTRACT_END -->

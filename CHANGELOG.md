@@ -150,3 +150,45 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - Added VCM versioning for architecture baselines
 
 <!-- CAPABILITY_006_CHANGELOG_END -->
+
+<!-- CAPABILITY_006A_CHANGELOG_START -->
+
+## Version 0.9 - Constitutional Freeze
+
+### Added
+
+- Constitutional documentation layer
+- START_HERE repository entry point
+- Constitution 2026.08.01v01
+- Product Philosophy
+- Human Collaboration Model
+- Author Journey
+- Editor Journey
+- Editor Charter
+- Reader Experience Principles
+- Editorial Behaviour Standard
+- Editorial Language Framework
+- Editorial Fingerprint
+- Canonical Editorial Session
+- Constitutional Decision Register
+- ADR-006
+- Architecture Baseline 2026.08.01v02
+- Version 1.0 Scorecard
+- Constitutional validation tests
+
+### Changed
+
+- Adopted Editorial Confidence as the primary Author-facing outcome
+- Retained LMHS Editorial Risk as the internal assessment
+- Generalized revision to all Publication Package components
+- Required permission before dependent-component regeneration
+- Established naturally varied CTA and conversation invitation
+  language
+- Established Constitutional Impact Review
+- Froze foundational philosophy for Version 1.0 implementation
+
+### Motto
+
+> Trust earned. Confidence shared. Conversations inspired.
+
+<!-- CAPABILITY_006A_CHANGELOG_END -->

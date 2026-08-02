@@ -56,3 +56,19 @@ Future capabilities must preserve:
 
 Detailed behaviour is defined in the Product Principles, Studio
 Contract, PRD, and architecture documents.
+
+<!-- CAPABILITY_006A_PRODUCT_VISION_START -->
+
+## Constitutional Alignment
+
+The Product Vision is governed by the Constitutional Layer.
+
+The Studio exists to help Authors publish work that earns the trust
+of Readers through the judgement of a responsible Editor.
+
+The Constitution defines enduring principles.
+
+This Product Vision translates those principles into the Product's
+intended purpose and boundary.
+
+<!-- CAPABILITY_006A_PRODUCT_VISION_END -->

@@ -231,3 +231,41 @@ The project should improve:
 - [ ] Automatic direct publishing
 
 <!-- CAPABILITY_006_ROADMAP_END -->
+
+<!-- CAPABILITY_006A_ROADMAP_START -->
+
+## Capability 006A - Constitutional Freeze
+
+Status:
+
+```text
+Complete when merged
+```
+
+Deliverables:
+
+- [x] Constitution
+- [x] Product Philosophy
+- [x] Human Collaboration Model
+- [x] Author Journey
+- [x] Editor Journey
+- [x] Editor Charter
+- [x] Reader Experience Principles
+- [x] Editorial Behaviour Standard
+- [x] Editorial Language Framework
+- [x] Editorial Fingerprint
+- [x] Canonical Editorial Session
+- [x] Constitutional Decision Register
+- [x] ADR-006
+- [x] Architecture Baseline 2026.08.01v02
+- [x] Version 1.0 Scorecard
+- [x] Constitutional validation
+
+## Version 1.0 Implementation Rule
+
+Capabilities 007-011 implement the Canonical Editorial Session.
+
+No new foundational philosophy should be introduced unless
+implementation evidence demonstrates a genuine requirement.
+
+<!-- CAPABILITY_006A_ROADMAP_END -->

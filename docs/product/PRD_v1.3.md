@@ -194,3 +194,27 @@ Version 1.0 excludes:
 - Project resume success
 - Hero Visual compliance
 - Publication-package completeness
+
+<!-- CAPABILITY_006A_PRD_START -->
+
+## Constitutional Authority
+
+Version 1.0 implementation shall conform to:
+
+- the Constitution,
+- Human Collaboration Model,
+- Author Journey,
+- Editor Journey,
+- Editor Charter,
+- Reader Experience Principles,
+- Editorial Behaviour Standard,
+- Editorial Language Framework,
+- Editorial Fingerprint,
+- and Canonical Editorial Session.
+
+Editorial Confidence is the primary Author-facing readiness
+conclusion.
+
+LMHS Editorial Risk remains the internal assessment model.
+
+<!-- CAPABILITY_006A_PRD_END -->

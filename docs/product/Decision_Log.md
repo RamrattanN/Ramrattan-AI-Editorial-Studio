@@ -109,3 +109,26 @@ protects factual quality, publication readiness, and professional
 reputation.
 
 <!-- CAPABILITY_006_DECISION_LOG_END -->
+
+<!-- CAPABILITY_006A_DECISION_LOG_START -->
+
+## Capability 006A Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-01 | D5 | Adopt the Constitutional Layer | Enduring principles require a governing layer above Product and Architecture. |
+| 2026-08-01 | D5 | Freeze the Constitution for Version 1.0 | Implementation should test the design before further foundational change. |
+| 2026-08-01 | D4 | Adopt the Human Collaboration Model | Author, Editor, and Reader have distinct responsibilities. |
+| 2026-08-01 | D4 | Adopt Editorial Confidence as Author-facing | The Author needs a positive publication-readiness outcome while internal risk remains visible when useful. |
+| 2026-08-01 | D4 | Retain LMHS Editorial Risk internally | Risk remains necessary for editorial judgement and governance. |
+| 2026-08-01 | D4 | Adopt Reader Experience Principles | Publications should create Reader value rather than superficial engagement. |
+| 2026-08-01 | D4 | Adopt component-based collaboration | Any publication component may be revised independently. |
+| 2026-08-01 | D4 | Require approval before dependent regeneration | Approved work must not be silently replaced. |
+| 2026-08-01 | D4 | Adopt the Editorial Language Framework | Recurring language should remain consistent in purpose but varied in wording. |
+| 2026-08-01 | D4 | Adopt the Editorial Fingerprint | The Editor is defined by professional behaviour rather than repeated phrases. |
+| 2026-08-01 | D4 | Adopt the Canonical Editorial Session | Version 1.0 requires an end-to-end behavioural acceptance demonstration. |
+| 2026-08-01 | D4 | Adopt Constitutional Impact Review | Significant changes must assess impact on governing documents. |
+| 2026-08-01 | D3 | Adopt the motto | Trust earned. Confidence shared. Conversations inspired. |
+| 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v02 | The same-day VCM revision records the Constitutional Freeze. |
+
+<!-- CAPABILITY_006A_DECISION_LOG_END -->

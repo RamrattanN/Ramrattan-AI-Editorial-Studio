@@ -186,3 +186,15 @@ Prefer deterministic behavior, explicit state, reproducible workflows,
 repository evidence, focused changes, and comprehensive behavioral tests.
 
 Participation is governed by [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_START -->
+
+## Authorization Continuity
+
+Within the current task, an authorized delegated profile covers every verified
+transition assigned to that phase. Do not request the same profile again after
+a status report or internal state transition. Stop at the next profile boundary
+or on a genuine fail-closed condition. Authorization is invocation-scoped and
+must not be inferred from prior sessions or repository history.
+
+<!-- RC1_AUTHORIZATION_CONTINUITY_END -->

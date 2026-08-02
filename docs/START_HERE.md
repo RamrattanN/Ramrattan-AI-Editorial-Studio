@@ -117,3 +117,15 @@ Governing rule:
 > One Editorial Intent per Editorial Session.
 
 <!-- CAPABILITY_008_START_HERE_END -->
+
+<!-- RC1_CHECKPOINT_DISCOVERY_START -->
+
+## RC1 Checkpoint
+
+The current evidence-based engineering and release checkpoint is:
+
+- `product/checkpoints/RC1_Checkpoint_2026.08.02.md`
+
+It distinguishes validated engineering readiness from complete RC1 readiness.
+
+<!-- RC1_CHECKPOINT_DISCOVERY_END -->

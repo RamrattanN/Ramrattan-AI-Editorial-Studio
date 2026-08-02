@@ -72,6 +72,7 @@ class CheckState(str, Enum):
 class DeliveryState(str, Enum):
     """High-level capability delivery states."""
 
+    SCOPE_CONFLICT = "scope_conflict"
     REMOTE_VERIFICATION_FAILED = "remote_verification_failed"
     DEVELOP_DIRTY = "develop_dirty"
     DEVELOP_BEHIND = "develop_behind"
@@ -120,6 +121,15 @@ class ProfileBoundary(str, Enum):
     PUBLISH = "publish"
     COMPLETE = "complete"
     STOP = "stop"
+
+
+class AuthorizationStatus(str, Enum):
+    """Invocation-scoped authorization outcome for the observed action."""
+
+    ALREADY_SATISFIED = "authorization already satisfied"
+    NEW_PROFILE_REQUIRED = "new profile authorization required"
+    CONSERVATIVE_APPROVAL_REQUIRED = "conservative mutation approval required"
+    BLOCKED_FAIL_CLOSED = "blocked by fail-closed condition"
 
 
 @dataclass(frozen=True)
@@ -215,6 +225,24 @@ class DeliveryRecommendation:
     command: str | None = None
     explanation: str = ""
     read_only: bool = False
+    blocked_by_fail_closed: bool = False
+
+    def authorization_status(
+        self,
+        approval_profile: ApprovalProfile,
+    ) -> AuthorizationStatus:
+        """Classify current-task authority without persisting conversation state."""
+        if self.blocked_by_fail_closed:
+            return AuthorizationStatus.BLOCKED_FAIL_CLOSED
+        if self.read_only:
+            return AuthorizationStatus.ALREADY_SATISFIED
+        if approval_profile is ApprovalProfile.CONSERVATIVE:
+            if self.command:
+                return AuthorizationStatus.CONSERVATIVE_APPROVAL_REQUIRED
+            return AuthorizationStatus.ALREADY_SATISFIED
+        if profile_authorizes(approval_profile, self.next_profile_boundary):
+            return AuthorizationStatus.ALREADY_SATISFIED
+        return AuthorizationStatus.NEW_PROFILE_REQUIRED
 
     @property
     def next_profile_boundary(self) -> ProfileBoundary:
@@ -634,8 +662,13 @@ def shell_quote(value: str) -> str:
 
 
 def blocked(state: DeliveryState, summary: str, explanation: str = "") -> DeliveryRecommendation:
-    """Create a recommendation with no mutating command."""
-    return DeliveryRecommendation(state=state, summary=summary, explanation=explanation)
+    """Create a fail-closed recommendation with no mutating command."""
+    return DeliveryRecommendation(
+        state=state,
+        summary=summary,
+        explanation=explanation,
+        blocked_by_fail_closed=True,
+    )
 
 
 def post_merge_recommendation(
@@ -686,9 +719,9 @@ def post_merge_recommendation(
             command=f"git push origin --delete {feature_branch}",
             explanation="Branch deletion requires Complete authorization.",
         )
-    return blocked(
-        DeliveryState.COMPLETE,
-        f"Pull request #{pr.number} is merged and repository cleanup is complete.",
+    return DeliveryRecommendation(
+        state=DeliveryState.COMPLETE,
+        summary=f"Pull request #{pr.number} is merged and repository cleanup is complete.",
     )
 
 
@@ -737,6 +770,7 @@ def open_pr_recommendation(pr: PullRequestSnapshot) -> DeliveryRecommendation:
                 else "Do not merge until successful checks are confirmed."
             ),
             read_only=True,
+            blocked_by_fail_closed=True,
         )
 
     if pr.mergeability is MergeabilityState.CONFLICTING:
@@ -777,8 +811,20 @@ def open_pr_recommendation(pr: PullRequestSnapshot) -> DeliveryRecommendation:
     )
 
 
-def recommend(*, feature_branch: str, commit_message: str, pr_title: str) -> DeliveryRecommendation:
+def recommend(
+    *,
+    feature_branch: str,
+    commit_message: str,
+    pr_title: str,
+    scope_conflict: str = "",
+) -> DeliveryRecommendation:
     """Return the next safe capability-delivery action."""
+    if scope_conflict.strip():
+        return blocked(
+            DeliveryState.SCOPE_CONFLICT,
+            "Product or capability scope requires a human decision.",
+            scope_conflict.strip(),
+        )
     repo = snapshot(feature_branch=feature_branch)
     if repo.remote.state is RemoteState.UNAVAILABLE:
         return blocked(
@@ -904,9 +950,9 @@ def recommend(*, feature_branch: str, commit_message: str, pr_title: str) -> Del
         return open_pr_recommendation(pr)
 
     if repo.head == repo.base_head and repo.remote.feature_head is None:
-        return blocked(
-            DeliveryState.READY_FOR_WORK,
-            "The feature branch is ready for capability implementation.",
+        return DeliveryRecommendation(
+            state=DeliveryState.READY_FOR_WORK,
+            summary="The feature branch is ready for capability implementation.",
         )
     if repo.remote.feature_head is None:
         return DeliveryRecommendation(
@@ -945,33 +991,43 @@ def print_recommendation(
     *,
     approval_profile: ApprovalProfile = ApprovalProfile.CONSERVATIVE,
 ) -> None:
-    """Render one recommendation."""
+    """Render workflow and invocation-scoped authorization evidence."""
+    authorization = recommendation.authorization_status(approval_profile)
+    already_satisfied = authorization is AuthorizationStatus.ALREADY_SATISFIED
+    new_profile_required = authorization is AuthorizationStatus.NEW_PROFILE_REQUIRED
+    fail_closed = authorization is AuthorizationStatus.BLOCKED_FAIL_CLOSED
+
     print()
     print(f"State: {recommendation.state.value}")
     print(f"Next profile boundary: {recommendation.next_profile_boundary.value}")
     print(f"Active approval profile: {approval_profile.value}")
+    print(f"Authorization status: {authorization.value}")
+    print(f"Current action covered: {'yes' if already_satisfied else 'no'}")
+    print(f"New profile authorization required: {'yes' if new_profile_required else 'no'}")
+    print(f"Fail-closed blocked: {'yes' if fail_closed else 'no'}")
     print()
     print(recommendation.summary)
     if recommendation.explanation:
         print()
         print(recommendation.explanation)
     if recommendation.command:
-        if recommendation.read_only:
-            print()
-            print("Authorization: read-only observation; no separate approval required.")
-        elif approval_profile is ApprovalProfile.CONSERVATIVE:
-            print()
-            print("Authorization: explicit approval is required for this mutation.")
-        elif not profile_authorizes(
-            approval_profile, recommendation.next_profile_boundary
-        ):
-            print()
-            print("Authorization: current profile does not authorize this transition. Stop.")
-        else:
-            print()
+        print()
+        if fail_closed:
             print(
-                "Authorization: conditionally covered by the active profile; "
-                "verify every prerequisite before execution."
+                "Execution: blocked by fail-closed condition; only the displayed "
+                "read-only diagnostic may run."
+            )
+        elif authorization is AuthorizationStatus.ALREADY_SATISFIED:
+            print(
+                "Authorization: authorization already satisfied by the active "
+                "current-task profile; verify prerequisites and continue."
+            )
+        elif authorization is AuthorizationStatus.NEW_PROFILE_REQUIRED:
+            print("Authorization: new profile authorization required. Stop.")
+        else:
+            print(
+                "Authorization: Conservative mode requires explicit approval for "
+                "this mutation."
             )
         print()
         print("Next command:")
@@ -979,8 +1035,8 @@ def print_recommendation(
         print(recommendation.command)
 
 
-def parse_args() -> argparse.Namespace:
-    """Parse command-line arguments."""
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Parse invocation-scoped arguments; authorization is never persisted."""
     parser = argparse.ArgumentParser(
         description="Determine the next safe capability-delivery action."
     )
@@ -988,12 +1044,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--commit-message", required=True, help="Resolved commit message.")
     parser.add_argument("--pr-title", required=True, help="Resolved pull-request title.")
     parser.add_argument(
+        "--scope-conflict",
+        default="",
+        help="Current-task scope conflict that must fail closed.",
+    )
+    parser.add_argument(
         "--approval-profile",
         choices=[profile.value for profile in ApprovalProfile],
         default=ApprovalProfile.CONSERVATIVE.value,
         help="Explicitly authorized profile for this invocation (default: conservative).",
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def main() -> int:
@@ -1004,6 +1065,7 @@ def main() -> int:
             feature_branch=args.branch,
             commit_message=args.commit_message,
             pr_title=args.pr_title,
+            scope_conflict=args.scope_conflict,
         )
         print_recommendation(
             recommendation,

@@ -457,6 +457,18 @@ OLD_BOOTSTRAP_OVERRIDE = clean(
 )
 
 
+# RC1_CHECKPOINT_AUTHORIZATION_HARDENING_OWNER_SYNC_START
+from bootstrap_rc1_checkpoint_authorization_hardening import (
+    harden_helper as _rc1_harden_helper,
+    harden_tests as _rc1_harden_tests,
+    harden_workflow as _rc1_harden_workflow,
+)
+
+CAPABILITY_DELIVERY_HELPER = _rc1_harden_helper(CAPABILITY_DELIVERY_HELPER)
+CAPABILITY_DELIVERY_WORKFLOW = _rc1_harden_workflow(CAPABILITY_DELIVERY_WORKFLOW)
+WORKFLOW_TESTS = _rc1_harden_tests(WORKFLOW_TESTS)
+# RC1_CHECKPOINT_AUTHORIZATION_HARDENING_OWNER_SYNC_END
+
 FULL_FILES = {
     "scripts/capability_delivery.py": CAPABILITY_DELIVERY_HELPER,
     "tests/test_capability_delivery_workflow.py": WORKFLOW_TESTS,

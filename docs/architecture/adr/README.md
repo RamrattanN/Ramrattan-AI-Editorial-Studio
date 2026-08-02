@@ -37,3 +37,4 @@ Each ADR explains:
 - [ADR-011 - Governance Authority](ADR-011-governance-authority.md)
 - [ADR-012 - Delivery Hardening](ADR-012-delivery-hardening.md)
 - [ADR-013 - Editorial Integrity Hardening](ADR-013-editorial-integrity-hardening.md)
+- [ADR-014 - Delegated Delivery Governance](ADR-014-delegated-delivery-governance.md)

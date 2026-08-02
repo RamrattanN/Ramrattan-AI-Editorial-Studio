@@ -122,9 +122,31 @@ Work through safe operations autonomously inside the authorized scope. At an
 approval boundary, request one exact approval for the next protected action or
 explicitly bounded group of actions.
 
-Do not combine approval boundaries unless the Repository Author or an
-explicitly authorized Repository Maintainer authorizes the combined scope and
-its conditions in the current task or conversation.
+Combine protected transitions only through an explicitly authorized delegated
+approval profile whose scope and conditions are stated in the current task or
+conversation. Otherwise use the Conservative profile and obtain approval at
+each mutation boundary.
+
+## Change Consolidation
+
+Before editing, inspect whether other approved pending changes affect the same
+files or tightly coupled concern.
+
+When two or more approved pending changes share the same scope, risk profile,
+and delivery timing, consolidate them into one coherent change set. Do not
+split work merely to demonstrate incremental progress.
+
+Separate changes only when required by:
+
+- materially different scope
+- different risk or approval authority
+- safer rollback or recovery
+- conflicting delivery timing
+- an explicit repository constraint
+
+Consolidation never expands authorization. If any pending change has not been
+approved, or its scope, risk, authority, or timing differs materially, keep it
+separate and stop if proceeding would create an unsafe overlap.
 
 ## Repository State Awareness
 
@@ -234,10 +256,59 @@ explicitly delegated to that role. Product direction, governance changes, and
 material scope expansion remain subject to the Repository Author's final
 authority.
 
+## Delegated Approval Profiles
+
+The Standard delegated delivery profile has three independently authorized
+phases. Each authorization must come from the current task or conversation and
+applies only while its targets, scope, and verified prerequisites remain
+unchanged. Authorization for one profile never authorizes a later profile.
+
+### Start
+
+Start may conditionally authorize planning synchronization to `In Progress`,
+branch creation or resumption, implementation, bootstrap preview and apply,
+diagnosis and repair, regeneration, testing and validation, complete diff
+review, and staging of the exact reviewed scope.
+
+Verify every prerequisite before each transition. Stop before publication
+unless Publish was also explicitly authorized.
+
+### Publish
+
+Publish may conditionally authorize committing the approved staged diff,
+verifying the commit hash, pushing, creating or reusing a pull request,
+automatic read-only CI monitoring, and marking the pull request ready for
+review only when every required condition passes.
+
+The staged diff, commit, pull-request head, CI, review-blocking state,
+mergeability, and repository cleanliness must agree with the authorization.
+Stop before merge.
+
+### Complete
+
+Complete may conditionally authorize merge, local and remote feature-branch
+cleanup, return to clean synchronized `develop`, completion planning
+synchronization, Project item `Done`, Project summary update, issue closure,
+and the Capability Delivery Receipt.
+
+Verify each result before advancing. Stop immediately on any unknown,
+unavailable, mismatched, or failed condition.
+
+### Conservative
+
+Use the Conservative profile for exceptional high-risk work or whenever a
+delegated profile was not explicitly authorized. Conservative delivery
+requires approval at each protected mutation boundary.
+
+No Git or GitHub mutation may occur outside the explicitly authorized profile.
+Read-only CI monitoring remains autonomous and does not require a separate
+approval.
+
 ## Capability Delivery Workflow
 
 Use `scripts/capability_delivery.py` to determine the current capability state
-and the next safe transition.
+and the next safe transition. The helper must report both the workflow state
+and the next delegated profile boundary.
 
 The canonical lifecycle is defined in
 `docs/engineering/Capability_Delivery_Workflow.md`:
@@ -260,7 +331,9 @@ The canonical lifecycle is defined in
 16. Return to clean, synchronized `develop`
 17. Synchronize completion planning
 
-Never bypass or skip a reported workflow state.
+Never bypass or skip a reported workflow state. A conditionally authorized
+profile may cover multiple transitions, but each prerequisite must be verified
+before advancing to the next transition.
 
 Rerun the helper after each state-changing transition. If helper output
 conflicts with verified safety, approval requirements, or external state, stop

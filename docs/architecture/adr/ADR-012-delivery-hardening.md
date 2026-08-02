@@ -89,8 +89,8 @@ incomplete. The helper never repeats a confirmed merge.
 
 Read-only observation, validation, and CI monitoring may continue
 automatically inside an authorized phase. Protected mutations retain explicit
-Nilesh approval boundaries. The helper may recommend them but does not execute
-them.
+role-based approval boundaries. The helper may recommend them but does not
+execute them.
 
 ## CI Contract
 

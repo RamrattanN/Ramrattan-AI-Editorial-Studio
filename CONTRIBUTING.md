@@ -9,8 +9,9 @@ follow the Constitution and the Capability Delivery Workflow.
 
 ## Authority and Required Reading
 
-Nilesh's current request defines the maximum scope and authorization for a
-task. Repository governance defines how authorized work is performed.
+The Repository Author's or an explicitly authorized Repository Maintainer's
+current request defines the maximum scope and authorization for a task.
+Repository governance defines how authorized work is performed.
 
 Before capability work, read:
 
@@ -33,7 +34,7 @@ advisory experience and never overrides normative repository guidance.
 - Feature and documentation branches contain one focused increment.
 
 Verify a clean, synchronized `develop` before branch creation. Treat
-pre-existing changes as Nilesh's work and never discard, overwrite, stage,
+pre-existing changes as human-owned work and never discard, overwrite, stage,
 or relocate them without explicit authorization.
 
 Recommended branch names:
@@ -73,13 +74,14 @@ The canonical lifecycle is:
 Resume from the helper's verified state. Recover a partial transition
 instead of restarting it.
 
-## Autonomous Work and Approval Boundaries
+## Autonomous Work and Approval Profiles
 
 Inspection, in-scope editing, bootstrap preview and apply, validation,
 non-destructive repair, and diff review may proceed autonomously once the
 phase is authorized.
 
-Explicit Nilesh approval is required before:
+Explicit approval from the Repository Author or an explicitly authorized
+Repository Maintainer is required before:
 
 - staging changes with `git add`;
 - commit;
@@ -94,8 +96,23 @@ Explicit Nilesh approval is required before:
 - dependency installation; or
 - destructive or difficult-to-recover operations.
 
-An approval applies only to the described action, targets, and verified
-state.
+An approval applies only to the described action, targets, and verified state.
+The Standard delegated delivery profile groups conditional authorization into
+Start, Publish, and Complete. Start ends before publication, Publish ends
+before merge, and Complete ends after verified cleanup and planning
+synchronization. Each prerequisite must be verified before advancing, and one
+profile never authorizes a later profile. Use the Conservative profile when
+approval is required at each mutation boundary. Read-only CI monitoring does
+not require a separate approval.
+
+## Change Consolidation
+
+Before editing, inspect for other approved pending changes to the same files or
+tightly coupled concern. Consolidate them when scope, risk profile, and
+delivery timing agree. Separate them only for materially different scope,
+different risk or approval authority, safer rollback or recovery, conflicting
+delivery timing, or an explicit repository constraint. Do not split work merely
+to demonstrate incremental progress.
 
 ## Validation
 
@@ -159,7 +176,7 @@ CI must pass before merge.
 ## Stopping Conditions
 
 Stop when the requested phase is complete, the next action is protected, a
-conflict requires Nilesh's judgment, unrelated work makes continuation
+conflict requires the Repository Author's judgment, unrelated work makes continuation
 unsafe, validation cannot be repaired within scope, or the task would
 materially exceed its approved budget.
 

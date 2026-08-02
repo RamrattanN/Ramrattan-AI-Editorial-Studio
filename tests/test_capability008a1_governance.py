@@ -42,7 +42,8 @@ class Capability008A1GovernanceTests(unittest.TestCase):
 
     def test_contributing_defers_to_governing_authorities(self) -> None:
         content = self.content("CONTRIBUTING.md")
-        self.assertIn("Nilesh's current request defines the maximum scope", content)
+        self.assertIn("Repository Maintainer's", content)
+        self.assertIn("current request defines the maximum scope", content)
         self.assertIn("staging changes with `git add`", content)
         self.assertIn("scripts/capability_delivery.py", content)
         self.assertIn("python3 -m compileall -q studio scripts tests", content)

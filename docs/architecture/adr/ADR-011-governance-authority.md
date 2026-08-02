@@ -27,7 +27,8 @@ runtime behavior or inventing historical records.
 Adopt an explicit governance authority model with one authoritative owner
 for every concept.
 
-Nilesh's current request defines maximum task scope and authorization.
+The Repository Author's or an explicitly authorized Repository Maintainer's
+current request defines maximum task scope and authorization.
 Within that scope, repository authority is applied in this order:
 
 1. Verified repository and external-system state for factual questions
@@ -80,7 +81,8 @@ create a competing rule.
 Governance consolidation does not weaken approval boundaries. Staging,
 commit, push, pull-request mutations, merge, branch deletion, issue
 mutations, Project mutations, publication, and destructive operations
-remain protected unless Nilesh explicitly authorizes them.
+remain protected unless the Repository Author or an explicitly authorized
+Repository Maintainer authorizes them in the current task or conversation.
 
 ## ADR-002 Reference Integrity
 

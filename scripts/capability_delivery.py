@@ -104,6 +104,24 @@ class DeliveryState(str, Enum):
     UNKNOWN = "unknown"
 
 
+class ApprovalProfile(str, Enum):
+    """Explicitly authorized delivery profile for the current task."""
+
+    START = "start"
+    PUBLISH = "publish"
+    COMPLETE = "complete"
+    CONSERVATIVE = "conservative"
+
+
+class ProfileBoundary(str, Enum):
+    """Next delegated approval boundary implied by verified workflow state."""
+
+    START = "start"
+    PUBLISH = "publish"
+    COMPLETE = "complete"
+    STOP = "stop"
+
+
 @dataclass(frozen=True)
 class CommandResult:
     """Normalized subprocess result."""
@@ -196,6 +214,49 @@ class DeliveryRecommendation:
     summary: str
     command: str | None = None
     explanation: str = ""
+    read_only: bool = False
+
+    @property
+    def next_profile_boundary(self) -> ProfileBoundary:
+        """Return the next delegated boundary without weakening blocked states."""
+        if self.state in {
+            DeliveryState.DEVELOP_DIRTY,
+            DeliveryState.DEVELOP_BEHIND,
+            DeliveryState.READY_FOR_BRANCH,
+            DeliveryState.READY_FOR_WORK,
+            DeliveryState.FEATURE_OUT_OF_SYNC,
+            DeliveryState.READY_TO_STAGE,
+        }:
+            return ProfileBoundary.START
+        if self.state in {
+            DeliveryState.READY_TO_COMMIT,
+            DeliveryState.READY_TO_PUSH,
+            DeliveryState.READY_FOR_PR,
+            DeliveryState.PR_DISCOVERY_UNAVAILABLE,
+            DeliveryState.PR_DISCOVERY_AMBIGUOUS,
+            DeliveryState.PR_CLOSED,
+            DeliveryState.PR_DRAFT,
+            DeliveryState.PR_READY_FOR_REVIEW,
+            DeliveryState.PR_REVIEW_REQUIRED,
+            DeliveryState.PR_CHANGES_REQUESTED,
+            DeliveryState.PR_CHECKS_UNAVAILABLE,
+            DeliveryState.PR_CHECKS_PENDING,
+            DeliveryState.PR_CHECKS_FAILED,
+            DeliveryState.PR_CHECKS_CANCELLED,
+            DeliveryState.PR_CHECKS_TIMED_OUT,
+            DeliveryState.PR_CHECKS_ACTION_REQUIRED,
+            DeliveryState.PR_MERGE_CONFLICT,
+            DeliveryState.PR_MERGE_BLOCKED,
+            DeliveryState.PR_MERGEABILITY_UNKNOWN,
+        }:
+            return ProfileBoundary.PUBLISH
+        if self.state in {
+            DeliveryState.READY_TO_MERGE,
+            DeliveryState.POST_MERGE_CLEANUP,
+            DeliveryState.COMPLETE,
+        }:
+            return ProfileBoundary.COMPLETE
+        return ProfileBoundary.STOP
 
 
 def run(command: list[str], *, cwd: Path) -> CommandResult:
@@ -616,14 +677,14 @@ def post_merge_recommendation(
             state=DeliveryState.POST_MERGE_CLEANUP,
             summary="The merged local feature branch still exists.",
             command=f"git branch -d {feature_branch}",
-            explanation="Branch deletion requires explicit Nilesh approval.",
+            explanation="Branch deletion requires Complete authorization.",
         )
     if repo.remote.feature_head is not None:
         return DeliveryRecommendation(
             state=DeliveryState.POST_MERGE_CLEANUP,
             summary="The merged remote feature branch still exists.",
             command=f"git push origin --delete {feature_branch}",
-            explanation="Branch deletion requires explicit Nilesh approval.",
+            explanation="Branch deletion requires Complete authorization.",
         )
     return blocked(
         DeliveryState.COMPLETE,
@@ -638,7 +699,7 @@ def open_pr_recommendation(pr: PullRequestSnapshot) -> DeliveryRecommendation:
             state=DeliveryState.PR_DRAFT,
             summary=f"Pull request #{pr.number} is a draft.",
             command=f"gh pr ready {pr.number}",
-            explanation="Marking a pull request ready requires explicit Nilesh approval.",
+            explanation="Marking a pull request ready requires Publish authorization.",
         )
     if pr.review is ReviewState.CHANGES_REQUESTED:
         return blocked(
@@ -675,6 +736,7 @@ def open_pr_recommendation(pr: PullRequestSnapshot) -> DeliveryRecommendation:
                 if pr.checks is CheckState.PENDING
                 else "Do not merge until successful checks are confirmed."
             ),
+            read_only=True,
         )
 
     if pr.mergeability is MergeabilityState.CONFLICTING:
@@ -711,7 +773,7 @@ def open_pr_recommendation(pr: PullRequestSnapshot) -> DeliveryRecommendation:
         state=DeliveryState.READY_TO_MERGE,
         summary=f"Pull request #{pr.number} is ready for merge.",
         command=f"gh pr merge {pr.number} --merge --delete-branch",
-        explanation="Merge and branch deletion require explicit Nilesh approval.",
+        explanation="Merge and branch deletion require Complete authorization.",
     )
 
 
@@ -835,7 +897,7 @@ def recommend(*, feature_branch: str, commit_message: str, pr_title: str) -> Del
             state=DeliveryState.READY_TO_STAGE,
             summary="The feature branch contains uncommitted changes.",
             command="git add -A && git diff --cached --name-status",
-            explanation="Staging requires explicit Nilesh approval and staged review.",
+            explanation="Staging requires Start authorization and exact staged-scope review.",
         )
 
     if pr is not None:
@@ -866,20 +928,51 @@ def recommend(*, feature_branch: str, commit_message: str, pr_title: str) -> Del
             f"  --head {feature_branch} \\\n"
             f"  --title {shell_quote(pr_title)}"
         ),
-        explanation="Creating a pull request requires explicit Nilesh approval.",
+        explanation="Creating a pull request requires Publish authorization.",
     )
 
 
-def print_recommendation(recommendation: DeliveryRecommendation) -> None:
+def profile_authorizes(
+    approval_profile: ApprovalProfile,
+    boundary: ProfileBoundary,
+) -> bool:
+    """Return whether a delegated profile covers the reported boundary."""
+    return boundary is not ProfileBoundary.STOP and approval_profile.value == boundary.value
+
+
+def print_recommendation(
+    recommendation: DeliveryRecommendation,
+    *,
+    approval_profile: ApprovalProfile = ApprovalProfile.CONSERVATIVE,
+) -> None:
     """Render one recommendation."""
     print()
     print(f"State: {recommendation.state.value}")
+    print(f"Next profile boundary: {recommendation.next_profile_boundary.value}")
+    print(f"Active approval profile: {approval_profile.value}")
     print()
     print(recommendation.summary)
     if recommendation.explanation:
         print()
         print(recommendation.explanation)
     if recommendation.command:
+        if recommendation.read_only:
+            print()
+            print("Authorization: read-only observation; no separate approval required.")
+        elif approval_profile is ApprovalProfile.CONSERVATIVE:
+            print()
+            print("Authorization: explicit approval is required for this mutation.")
+        elif not profile_authorizes(
+            approval_profile, recommendation.next_profile_boundary
+        ):
+            print()
+            print("Authorization: current profile does not authorize this transition. Stop.")
+        else:
+            print()
+            print(
+                "Authorization: conditionally covered by the active profile; "
+                "verify every prerequisite before execution."
+            )
         print()
         print("Next command:")
         print()
@@ -894,6 +987,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--branch", required=True, help="Resolved feature branch name.")
     parser.add_argument("--commit-message", required=True, help="Resolved commit message.")
     parser.add_argument("--pr-title", required=True, help="Resolved pull-request title.")
+    parser.add_argument(
+        "--approval-profile",
+        choices=[profile.value for profile in ApprovalProfile],
+        default=ApprovalProfile.CONSERVATIVE.value,
+        help="Explicitly authorized profile for this invocation (default: conservative).",
+    )
     return parser.parse_args()
 
 
@@ -906,7 +1005,10 @@ def main() -> int:
             commit_message=args.commit_message,
             pr_title=args.pr_title,
         )
-        print_recommendation(recommendation)
+        print_recommendation(
+            recommendation,
+            approval_profile=ApprovalProfile(args.approval_profile),
+        )
         return 0
     except (RuntimeError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

@@ -78,3 +78,24 @@ Engineering commitment:
 > Build once. Name once. Understand everywhere.
 
 <!-- CAPABILITY_007_START_HERE_END -->
+
+<!-- CAPABILITY_DELIVERY_START_HERE_START -->
+
+## Capability Delivery Workflow
+
+Before delivering a new capability, read:
+
+- `engineering/Capability_Delivery_Workflow.md`
+
+Use:
+
+- `scripts/capability_delivery.py`
+
+to determine the next safe repository action.
+
+Commands must be resolved and paste-ready.
+
+A capability is not complete until the repository has returned to a
+clean, current `develop` baseline.
+
+<!-- CAPABILITY_DELIVERY_START_HERE_END -->

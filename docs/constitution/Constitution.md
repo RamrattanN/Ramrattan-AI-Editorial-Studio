@@ -179,3 +179,23 @@ Governing rule:
 > One concept. One canonical name.
 
 <!-- CAPABILITY_007_CONSTITUTION_END -->
+
+<!-- CAPABILITY_DELIVERY_CONSTITUTION_START -->
+
+## Engineering Stewardship
+
+Capability delivery must preserve trust in the repository.
+
+Engineering guidance should:
+
+- verify state before action,
+- provide exact commands,
+- recover safely,
+- avoid duplicate artifacts,
+- require validation before merge,
+- and return the repository to a clean baseline.
+
+Previously solved operational problems should be converted into
+repeatable process rather than rediscovered.
+
+<!-- CAPABILITY_DELIVERY_CONSTITUTION_END -->

@@ -62,3 +62,20 @@ Canonical Editorial Session is complete and demonstrable.
 | Evidence verification | Planned | Capability 008 |
 
 <!-- CAPABILITY_007_SCORECARD_END -->
+
+<!-- CAPABILITY_DELIVERY_SCORECARD_START -->
+
+## Engineering Delivery Readiness
+
+| Area | Status | Evidence |
+|---|---|---|
+| Delivery workflow | Complete | `docs/engineering/Capability_Delivery_Workflow.md` |
+| State-aware helper | Complete | `scripts/capability_delivery.py` |
+| Exact command resolution | Complete | Automated tests |
+| Existing branch detection | Complete | Automated tests |
+| Pull-request discovery | Complete | Automated tests |
+| CI gating | Complete | Automated tests |
+| Merge cleanup standard | Complete | Delivery workflow |
+| Return-to-develop verification | Complete | Delivery workflow |
+
+<!-- CAPABILITY_DELIVERY_SCORECARD_END -->

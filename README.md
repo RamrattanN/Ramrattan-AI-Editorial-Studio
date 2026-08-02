@@ -380,3 +380,28 @@ Canonical terminology is defined in:
 - `docs/constitution/Canonical_Vocabulary.md`
 
 <!-- CAPABILITY_007_README_END -->
+
+<!-- CAPABILITY_DELIVERY_README_START -->
+
+## Capability Delivery
+
+Repository capabilities use a state-aware, repeatable delivery
+workflow.
+
+Read:
+
+- `docs/engineering/Capability_Delivery_Workflow.md`
+
+Inspect the next safe action with:
+
+```bash
+python3 scripts/capability_delivery.py \
+  --branch "feature/example" \
+  --commit-message "feat: implement example" \
+  --pr-title "Example: Implement capability"
+```
+
+The helper resolves branch and pull-request state before suggesting
+the next command.
+
+<!-- CAPABILITY_DELIVERY_README_END -->

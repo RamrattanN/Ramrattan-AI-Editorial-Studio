@@ -150,3 +150,21 @@ reputation.
 | 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v03 | Version 1.0 runtime implementation begins. |
 
 <!-- CAPABILITY_007_DECISION_LOG_END -->
+
+<!-- CAPABILITY_DELIVERY_DECISION_LOG_START -->
+
+## Capability Delivery Workflow Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-01 | D4 | Adopt a repeatable Capability Delivery Workflow | Previously solved procedural problems recurred. |
+| 2026-08-01 | D4 | Require exact paste-ready commands | Unresolved placeholders caused avoidable shell errors. |
+| 2026-08-01 | D4 | Detect existing branches before creation | Existing branches should be resumed, not recreated. |
+| 2026-08-01 | D4 | Require partial-apply recovery | Validation failures must not force repository reset. |
+| 2026-08-01 | D4 | Reuse existing GitHub issues and pull requests | Duplicate planning artifacts reduce trust. |
+| 2026-08-01 | D4 | Retry delayed Project item propagation | GitHub Project items may not appear immediately. |
+| 2026-08-01 | D4 | Require CI before merge | Local success does not replace repository checks. |
+| 2026-08-01 | D4 | Require return-to-develop verification | A capability is incomplete while repository state remains ambiguous. |
+| 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v04 | The engineering delivery process is now part of the architecture baseline. |
+
+<!-- CAPABILITY_DELIVERY_DECISION_LOG_END -->

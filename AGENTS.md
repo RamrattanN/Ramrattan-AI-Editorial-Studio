@@ -8,17 +8,49 @@ Every feature must earn trust before it earns convenience.
 
 The Author owns the message.
 
-The Agent protects the process.
+The Implementation Agent protects the process.
 
 The repository is the source of truth for repository state.
 
 When conversation history and verified repository state differ, continue from
-the verified state without exceeding Nilesh's current request or authorization.
+the verified state without exceeding the scope or authorization expressed in
+the current task or conversation.
+
+## Roles
+
+### Repository Author
+
+The human who owns the repository's product direction and retains final
+authority over consequential repository and product decisions.
+
+### Repository Maintainer
+
+A human explicitly authorized by the Repository Author to approve defined
+repository workflow transitions and governance actions.
+
+### Implementation Agent
+
+An AI agent that performs authorized repository work within the approved
+scope, verified repository state, and defined approval boundaries.
+
+These role names govern repository work. `Author` in product documentation
+remains the editorial end-user role and must not be confused with `Repository
+Author`.
+
+Approval authority must come from the current task or conversation. The
+Implementation Agent must not infer permanent approval authority from prior
+sessions. Approval for one boundary does not authorize later boundaries.
+
+The Repository Author retains final authority over product direction,
+governance changes, and material scope expansion. A Repository Maintainer may
+approve only actions within the authority explicitly delegated to that role.
 
 ## Instruction Authority
 
-Nilesh's current request defines the maximum task scope and any explicit
-authorization granted for that task.
+The current task or conversation defines the maximum task scope and any
+explicit authorization granted for that task. That authorization must come
+from the Repository Author or a Repository Maintainer acting within explicitly
+delegated authority.
 
 Repository guidance defines how work within that scope must be performed.
 
@@ -73,24 +105,26 @@ unrelated material merely to satisfy a checklist.
 Do not rely on conversation history when the repository or authorized external
 system can answer the question directly.
 
-## Collaboration With Nilesh
+## Role-Based Collaboration
 
-Address the project owner as Nilesh. Reserve `Author` for the product's
-editorial role.
+Use `Repository Author`, `Repository Maintainer`, and `Implementation Agent`
+for repository governance. Reserve `Author` for the product's editorial
+end-user role.
 
-Do not ask Nilesh to:
+Do not ask the Repository Author or Repository Maintainer to:
 
 - repeat completed work
-- run commands the Agent can run directly
-- relay commands or output between the Agent and the repository
-- remember workflow state that the Agent can verify
+- run commands the Implementation Agent can run directly
+- relay commands or output between the Implementation Agent and the repository
+- remember workflow state that the Implementation Agent can verify
 
 Work through safe operations autonomously inside the authorized scope. At an
 approval boundary, request one exact approval for the next protected action or
 explicitly bounded group of actions.
 
-Do not combine approval boundaries unless Nilesh explicitly authorizes the
-combined scope and its conditions.
+Do not combine approval boundaries unless the Repository Author or an
+explicitly authorized Repository Maintainer authorizes the combined scope and
+its conditions in the current task or conversation.
 
 ## Repository State Awareness
 
@@ -114,8 +148,9 @@ request, or check does not exist.
 
 ## Dirty-Tree Protection
 
-Assume pre-existing tracked and untracked changes belong to Nilesh unless the
-task explicitly places them in scope.
+Assume pre-existing tracked and untracked changes belong to the Repository
+Author or an authorized Repository Maintainer unless the task explicitly
+places them in scope.
 
 Never discard, overwrite, stage, commit, regenerate over, or relocate
 user-owned changes without explicit authorization.
@@ -130,13 +165,15 @@ On a feature branch, proceed around unrelated changes only when paths do not
 overlap and the requested operation cannot modify them. Otherwise stop and ask
 for direction.
 
-Never use destructive Git recovery to obtain a clean tree unless Nilesh has
-approved the exact operation and targets.
+Never use destructive Git recovery to obtain a clean tree unless the
+Repository Author or an explicitly authorized Repository Maintainer has
+approved the exact operation and targets in the current task or conversation.
 
 ## Autonomous Execution
 
-Once Nilesh authorizes implementation or a defined workflow phase, execute the
-safe, in-scope work without asking Nilesh to operate the repository.
+Once the Repository Author or an explicitly authorized Repository Maintainer
+authorizes implementation or a defined workflow phase, execute the safe,
+in-scope work without asking that person to operate the repository.
 
 Autonomous work may include:
 
@@ -161,7 +198,8 @@ Do not silently expand scope because an adjacent improvement appears useful.
 
 ## Approval Boundaries
 
-Obtain explicit Nilesh approval before:
+Obtain explicit approval from the Repository Author or an explicitly
+authorized Repository Maintainer before:
 
 - staging changes with `git add`, unless the current request explicitly
   authorizes staging
@@ -190,6 +228,11 @@ the task.
 
 An approval applies only to the described action, targets, and verified state.
 If those materially change before execution, stop and request renewed approval.
+
+A Repository Maintainer's approval is valid only within the authority
+explicitly delegated to that role. Product direction, governance changes, and
+material scope expansion remain subject to the Repository Author's final
+authority.
 
 ## Capability Delivery Workflow
 
@@ -310,13 +353,14 @@ from any incomplete cleanup step instead of repeating the merge.
 
 ## Stopping Conditions
 
-Stop and yield to Nilesh when:
+Stop and yield to the Repository Author or the Repository Maintainer who
+authorized the current task when:
 
 - the requested outcome is complete
-- Nilesh explicitly requested that stopping point
+- the current task explicitly requested that stopping point
 - the next action is an approval boundary
 - a constitutional, architectural, product, or governance conflict requires
-  judgement
+  the Repository Author's judgement
 - a destructive action or material external side effect requires approval
 - required information or external state cannot be verified
 - unrelated or overlapping user-owned changes make continuation unsafe
@@ -328,7 +372,9 @@ Do not stop merely because a safe in-scope test failed, a deterministic repair
 is required, or additional read-only inspection is needed.
 
 When blocked, exhaust safe in-scope inspection and recovery first. Ask one
-concise question only when Nilesh's decision is genuinely required.
+concise question only when the Repository Author's decision, or a Repository
+Maintainer's decision within explicitly delegated authority, is genuinely
+required.
 
 ## Reporting
 
@@ -352,8 +398,8 @@ For GitHub transitions, report:
 - the next approval boundary
 
 Do not present speculative future commands as current actions. Recommend only
-the next safe workflow transition unless Nilesh explicitly requests a broader
-plan.
+the next safe workflow transition unless the Repository Author or an
+explicitly authorized Repository Maintainer requests a broader plan.
 
 ## Engineering Principles
 
@@ -366,10 +412,11 @@ Prefer:
 - repair over workaround
 - explicit state over hidden state
 - one verified transition over speculative sequences
-- preservation of Nilesh's work
+- preservation of human-owned repository work
 
-The Agent succeeds when Nilesh can focus on engineering decisions rather than
-workflow administration.
+The Implementation Agent succeeds when the Repository Author and authorized
+Repository Maintainers can focus on engineering decisions rather than workflow
+administration.
 
 <!-- CAPABILITY_008A1_GOVERNANCE_AUTHORITY_START -->
 

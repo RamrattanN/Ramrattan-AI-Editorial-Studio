@@ -374,3 +374,30 @@ The authoritative implementation plan for Capability 008A is:
 - [`docs/programs/Capability_008A_Master_Roadmap.md`](docs/programs/Capability_008A_Master_Roadmap.md)
 
 <!-- CAPABILITY_008A_PROGRAM_ROADMAP_END -->
+
+<!-- CAPABILITY_008A1_ROADMAP_START -->
+
+## Capability 008A.1 - Governance Consolidation
+
+Status: **In Progress**
+
+Current authoritative sequence:
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - In Progress
+- Capability 008A.2 - Delivery Hardening - Not started
+- Capability 008A.3 - Editorial Integrity Hardening - Not started
+- Capability 009 - Not started
+
+Capability 008A.1 consolidates governance authority, repairs the broken
+ADR-002 reference honestly, aligns current status records, and adds focused
+governance contracts. It does not change product runtime or delivery-helper
+behavior.
+
+Architecture Baseline `2026.08.01v06` remains current. Capability 008A.1
+creates ADR-011 and no new architecture baseline.
+
+Earlier capability-specific status sections in this roadmap are historical
+delivery records. This section is authoritative for the active increment.
+
+<!-- CAPABILITY_008A1_ROADMAP_END -->

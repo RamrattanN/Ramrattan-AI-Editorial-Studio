@@ -1145,7 +1145,7 @@ RELEASE_V1 = clean(
     Architecture baseline:
 
     ```text
-    2026.08.01v01
+    2026.08.01v06
     ```
 
     ## Version 1.0 Promise
@@ -1330,7 +1330,7 @@ ARCHITECTURE_BASELINE = clean(
     ## Related ADRs
 
     - ADR-001 - Historical workflow decision
-    - ADR-002 - Adaptive Editorial Context
+    - Adaptive Editorial Context architecture - `docs/architecture/Editorial_Context_Model.md`
     - ADR-003 - Article-First Publication Package
     - ADR-004 - Portable Editorial Projects
     - ADR-005 - Editorial Integrity Pipeline
@@ -2333,7 +2333,7 @@ DECISION_LOG_BLOCK = clean(
     ## Active Architecture Baseline
 
     ```text
-    {ARCHITECTURE_BASELINE_VERSION}
+    2026.08.01v06
     ```
 
     ## Capability 006 Learning

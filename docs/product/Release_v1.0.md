@@ -15,7 +15,7 @@ v1.0
 Architecture baseline:
 
 ```text
-2026.08.01v01
+2026.08.01v06
 ```
 
 ## Version 1.0 Promise
@@ -198,3 +198,20 @@ Editorial Workspace lifecycle states.
 It does not permit silent merging of unrelated sources or intents.
 
 <!-- CAPABILITY_008_RELEASE_END -->
+
+<!-- CAPABILITY_008A1_RELEASE_STATUS_START -->
+
+## Current Version 1.0 Implementation Status
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - In Progress
+- Capability 008A.2 - Delivery Hardening - Not started
+- Capability 008A.3 - Editorial Integrity Hardening - Not started
+- Capability 009 - Not started
+
+Architecture Baseline `2026.08.01v06` remains the current runtime baseline.
+Capability 008A.1 hardens governance and does not add Version 1.0 product
+behavior. Capability 009 remains not started until all Capability 008A
+handoff criteria are satisfied.
+
+<!-- CAPABILITY_008A1_RELEASE_STATUS_END -->

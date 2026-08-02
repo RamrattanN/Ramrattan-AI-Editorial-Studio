@@ -2183,12 +2183,12 @@ VERSION_ONE_SCORECARD = clean(
 
     | Area | Status | Planned Capability |
     |---|---|---|
-    | Editorial Workspace | Planned | Capability 007 |
-    | Editorial Intake | Planned | Capability 007 |
-    | Source Assessment | Planned | Capability 007 |
-    | Evidence Validation | Planned | Capability 008 |
-    | LMHS Editorial Risk | Planned | Capability 008 |
-    | Editorial Confidence Translation | Planned | Capability 008 |
+    | Editorial Workspace | Complete | Capability 007 runtime |
+    | Editorial Intake | Complete | Capability 007 runtime |
+    | Source Assessment | Complete | Capability 007 runtime |
+    | Evidence Validation | Complete | Capability 008 runtime |
+    | LMHS Editorial Risk | Complete | Capability 008 runtime |
+    | Editorial Confidence Translation | Complete | Capability 008 runtime |
     | Article Engine | Planned | Capability 009 |
     | Publication Package | Planned | Capability 009 |
     | Hero Visual System | Planned | Capability 010 |

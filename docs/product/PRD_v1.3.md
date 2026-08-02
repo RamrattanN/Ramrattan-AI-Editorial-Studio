@@ -250,3 +250,27 @@ Requirements:
 - and resume remains possible without the original asset.
 
 <!-- CAPABILITY_007_PRD_END -->
+
+<!-- CAPABILITY_008_PRD_START -->
+
+## Capability 008 Requirements
+
+The Product shall:
+
+- maintain one Editorial Intent per Editorial Session;
+- classify new material as Aligned, Related, Diverging, Separate
+  Intent, or Ambiguous;
+- recommend a new Editorial Session for separate publication
+  objectives;
+- never silently merge unrelated sources;
+- never silently expand scope;
+- ask one concise clarification question when ambiguity blocks safe
+  progress;
+- preserve approved Publication Package components;
+- distinguish Workspace State from Stage State;
+- support pause, resume, cancel, abort, complete, and archive;
+- preserve work and provenance after abort;
+- and present Editorial Guidance rather than internal engine language
+  to the Author.
+
+<!-- CAPABILITY_008_PRD_END -->

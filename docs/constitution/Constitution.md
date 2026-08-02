@@ -199,3 +199,21 @@ Previously solved operational problems should be converted into
 repeatable process rather than rediscovered.
 
 <!-- CAPABILITY_DELIVERY_CONSTITUTION_END -->
+
+<!-- CAPABILITY_008_CONSTITUTION_START -->
+
+## Product Doctrine
+
+> Every feature must earn trust before it earns convenience.
+
+## Editorial Coherence
+
+Each Editorial Session maintains one coherent Editorial Intent.
+
+The Studio must not silently merge unrelated publication objectives
+or materially expand scope without informing the Author.
+
+Editorial Guidance protects the Author's intent, the Editor's
+standards, and the Reader's confidence.
+
+<!-- CAPABILITY_008_CONSTITUTION_END -->

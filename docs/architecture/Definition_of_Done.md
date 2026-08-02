@@ -272,3 +272,24 @@ Use `docs/engineering/Capability_Delivery_Workflow.md` as the
 governing procedure.
 
 <!-- CAPABILITY_DELIVERY_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_008_DEFINITION_OF_DONE_START -->
+
+## Capability 008 Completion Additions
+
+Confirm:
+
+- one Editorial Intent is maintained per session;
+- related material may continue;
+- separate publication objectives recommend a new session;
+- no silent scope expansion occurs;
+- ambiguous intent produces one concise clarification question;
+- approved components remain protected;
+- Workspace State and Stage State remain distinct;
+- abort preserves work and provenance;
+- Author-facing language uses Editorial Guidance;
+- runtime tests pass;
+- documentation tests pass;
+- and repository validation passes.
+
+<!-- CAPABILITY_008_DEFINITION_OF_DONE_END -->

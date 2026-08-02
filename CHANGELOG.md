@@ -256,3 +256,36 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - CI must pass before merge
 
 <!-- CAPABILITY_DELIVERY_CHANGELOG_END -->
+
+<!-- CAPABILITY_008_CHANGELOG_START -->
+
+## Capability 008 - Editorial Discernment
+
+### Added
+
+- Editorial Discernment Engine
+- Editorial Guidance
+- Editorial Intent
+- Intent Alignment
+- Editorial Coherence Guard
+- No Silent Scope Expansion
+- Editorial Never Events
+- Workspace lifecycle
+- Stage lifecycle
+- Pause, resume, cancel, abort, complete, and archive behaviour
+- Approved-component protection
+- One-question clarification
+- ADR-009
+- Architecture Baseline 2026.08.01v05
+- Capability 008 demo
+- Runtime, guidance, and documentation tests
+
+### Changed
+
+- Capability 008 now explicitly separates Editorial Discernment from
+  Evidence Validation
+- Separate publication objectives are no longer silently merged
+- Workspace State and Stage State are now distinct
+- Aborted sessions preserve work, provenance, and approvals
+
+<!-- CAPABILITY_008_CHANGELOG_END -->

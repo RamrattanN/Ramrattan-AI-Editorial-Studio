@@ -79,3 +79,22 @@ Canonical Editorial Session is complete and demonstrable.
 | Return-to-develop verification | Complete | Delivery workflow |
 
 <!-- CAPABILITY_DELIVERY_SCORECARD_END -->
+
+<!-- CAPABILITY_008_SCORECARD_START -->
+
+## Capability 008 Progress
+
+| Area | Status | Evidence |
+|---|---|---|
+| Editorial Intent | Complete | Runtime tests |
+| Editorial Discernment | Complete | `studio/editorial_discernment.py` |
+| Editorial Guidance | Complete | `studio/editorial_guidance.py` |
+| Editorial Coherence Guard | Complete | Runtime tests |
+| No Silent Scope Expansion | Complete | Runtime and constitutional tests |
+| Workspace lifecycle | Complete | Runtime tests |
+| Approved-component protection | Complete | Runtime tests |
+| One-question clarification | Complete | Runtime tests |
+| Evidence Validation | Next increment | Capability 008 continuation |
+| LMHS Editorial Risk | Next increment | Capability 008 continuation |
+
+<!-- CAPABILITY_008_SCORECARD_END -->

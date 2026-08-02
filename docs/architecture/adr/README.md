@@ -46,3 +46,11 @@ Each ADR explains:
 - [ADR-015 - Article Engine and Publication Package](ADR-015-article-engine-publication-package.md)
 
 <!-- CAPABILITY_009_ADR_INDEX_END -->
+
+<!-- CAPABILITY_010_ADR_INDEX_START -->
+
+## Capability 010 Decision
+
+- [ADR-016 - Hero Visual System](ADR-016-hero-visual-system.md)
+
+<!-- CAPABILITY_010_ADR_INDEX_END -->

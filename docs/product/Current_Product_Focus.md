@@ -343,3 +343,21 @@ Version 1 is not release-ready until the remaining Hero Visual, Portable
 Project, and end-to-end release-readiness work is complete.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
+
+<!-- CAPABILITY_010_CURRENT_FOCUS_START -->
+
+## Capability 010 Active Focus
+
+Capability 010 implements the provider-independent Hero Visual System for the
+existing Capability 009 Publication Package. It consumes the approved prompt,
+preserves visual intent, validates a 720 × 425 PNG and its provenance, and
+returns explicit safe failure states when generation cannot be trusted.
+
+The Publication Package integration attaches one existing result without
+regenerating approved article content. Capability 011 remains Todo and
+unstarted. B002 remains deferred, Low Priority, Post-RC1, and non-blocking.
+
+No Portable Project, workspace, collaboration, orchestration, UI, publishing
+automation, release packaging, or Version 2 behavior is part of this focus.
+
+<!-- CAPABILITY_010_CURRENT_FOCUS_END -->

@@ -297,3 +297,18 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - Capability 009 behavioral, documentation, and demo coverage
 
 <!-- CAPABILITY_009_CHANGELOG_END -->
+
+<!-- CAPABILITY_010_CHANGELOG_START -->
+
+### Added - Capability 010
+
+- Provider-independent Hero Visual System
+- Validated 720 × 425 PNG output contract
+- Offline deterministic Hero Visual provider
+- Explicit generation, validation, provider, request, and policy states
+- Narrow Publication Package Hero Visual attachment boundary
+- Approved prompt and textual-component preservation
+- ADR-016 and proposed Architecture Baseline 2026.08.02v12
+- Capability 010 behavioral, documentation, and demo coverage
+
+<!-- CAPABILITY_010_CHANGELOG_END -->

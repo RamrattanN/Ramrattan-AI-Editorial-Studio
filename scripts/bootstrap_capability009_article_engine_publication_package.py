@@ -981,6 +981,13 @@ FILES = {
     ),
 }
 
+# CAPABILITY_010_HERO_VISUAL_OWNER_SYNC_START
+from bootstrap_capability010_hero_visual_system import (
+    PUBLICATION_PACKAGE as _capability010_publication_package,
+)
+
+FILES["studio/publication_package.py"] = _capability010_publication_package
+# CAPABILITY_010_HERO_VISUAL_OWNER_SYNC_END
 
 MANAGED = {
     "docs/architecture/adr/README.md": (

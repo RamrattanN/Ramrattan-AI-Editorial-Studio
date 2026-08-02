@@ -117,3 +117,22 @@ runtime records both as deferred and must not report the complete
 Version 1.0 package while they are absent.
 
 <!-- CAPABILITY_009_PUBLICATION_PACKAGE_CONTRACT_END -->
+
+<!-- CAPABILITY_010_PUBLICATION_PACKAGE_CONTRACT_START -->
+
+## Capability 010 Hero Visual Boundary
+
+The Hero Visual System consumes the approved Hero Visual prompt and returns a
+validated 720 × 425 PNG or an explicit generation, validation, provider,
+request, or policy failure.
+
+The Publication Package begins with a pending Hero Visual state and may attach
+one existing result whose prompt matches the approved package prompt. Attachment
+does not invoke generation, modify textual components, or silently replace an
+already attached result. Ready, failed, and blocked states remain distinct.
+
+Portable Editorial Project serialization, resume, and export remain Capability
+011. The complete Version 1.0 package remains incomplete until that capability
+and release-readiness evidence are delivered.
+
+<!-- CAPABILITY_010_PUBLICATION_PACKAGE_CONTRACT_END -->

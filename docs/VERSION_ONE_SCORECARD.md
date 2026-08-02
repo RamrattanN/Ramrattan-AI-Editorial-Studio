@@ -215,3 +215,25 @@ not release-ready until the remaining Hero Visual, Portable Project, and
 end-to-end evidence is complete.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
+
+<!-- CAPABILITY_010_SCORECARD_START -->
+
+## Capability 010 Progress
+
+| Area | Status | Evidence |
+|---|---|---|
+| Capability 009 | Complete | Article Engine and textual Publication Package |
+| Hero Visual provider boundary | Complete locally | `studio/hero_visual.py` |
+| 720 × 425 output validation | Complete locally | Behavioral tests |
+| Deterministic offline provider | Complete locally | Repeatability tests |
+| Explicit failure states | Complete locally | Generation and validation tests |
+| Publication Package integration | Complete locally | Pending/ready/failed/blocked tests |
+| Capability 011 | Todo and unstarted | Issue #17 |
+| B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
+| Current delivered baseline | Complete | `2026.08.02v11` |
+| Proposed Capability 010 baseline | Pending delivery | `2026.08.02v12` |
+
+Version 1 remains incomplete until Capability 011 and end-to-end release
+readiness are delivered.
+
+<!-- CAPABILITY_010_SCORECARD_END -->

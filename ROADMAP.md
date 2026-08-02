@@ -514,3 +514,28 @@ status sections are historical delivery records; this section is authoritative
 for the current checkpoint increment.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
+
+<!-- CAPABILITY_010_ROADMAP_START -->
+
+## Capability 010 - Hero Visual System
+
+Status: **In Progress**
+
+Approved scope:
+
+- [x] Provider-independent Hero Visual boundary
+- [x] Validated 720 × 425 PNG contract
+- [x] Deterministic offline validation provider
+- [x] Explicit generation, validation, provider, request, and policy states
+- [x] Narrow Publication Package attachment boundary
+- [x] Approved prompt and textual-content preservation
+
+Capability 011 remains Todo and unstarted. B002 remains Todo, Low Priority,
+Post-RC1, and non-blocking. Architecture Baseline `2026.08.02v11` remains the
+current delivered baseline while proposed baseline `2026.08.02v12` records this
+increment.
+
+No Portable Project, workspace, collaboration, orchestration, UI, publishing
+automation, release packaging, or Version 2 behavior is included.
+
+<!-- CAPABILITY_010_ROADMAP_END -->

@@ -34,7 +34,7 @@ class RC1CheckpointTests(unittest.TestCase):
 
     def test_editorial_runtime_is_unchanged(self):
         self.assertEqual(self.digest("studio/article_engine.py"), "653db77e8881aa6532906fa1b17a8c771152cfe14ef1266383daba423d596868")
-        self.assertEqual(self.digest("studio/publication_package.py"), "ba3e4bf6e0d92ff088279e8a6a8bf5e74b33845ca8056bd82cf4e1c1eb136500")
+        self.assertEqual(self.digest("studio/publication_package.py"), "1e6cc91dda667f9b87eee248f563771f2cb99f0954346f3aef6f0e0bcb62d64b")
 
     def test_current_status_records_are_reconciled(self):
         for relative in ("ROADMAP.md", "docs/VERSION_ONE_SCORECARD.md", "docs/product/Current_Product_Focus.md", "docs/product/Release_v1.0.md"):
@@ -46,7 +46,7 @@ class RC1CheckpointTests(unittest.TestCase):
             self.assertIn("unstarted", content)
             self.assertIn("2026.08.02v10", content)
         release = self.text("docs/product/Release_v1.0.md")
-        self.assertIn("Architecture baseline:\n\n```text\n2026.08.02v10\n```", release)
+        self.assertIn("Architecture baseline:\n\n```text\n2026.08.02v11\n```", release)
 
     def test_adr015_is_indexed_and_baseline_v11_is_proposed(self):
         self.assertIn("ADR-015", self.text("docs/architecture/adr/README.md"))

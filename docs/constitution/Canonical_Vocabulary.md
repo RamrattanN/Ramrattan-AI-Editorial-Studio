@@ -212,3 +212,33 @@ Lifecycle of one Editorial Integrity stage.
 Workspace State and Stage State are not synonyms.
 
 <!-- CAPABILITY_008_CANONICAL_VOCABULARY_END -->
+
+<!-- CAPABILITY_008_EVIDENCE_VOCABULARY_START -->
+
+## Capability 008 Evidence Vocabulary
+
+### Claim Classification
+
+The editorial meaning assigned to a publication claim:
+
+- Verified Fact
+- Source Assertion
+- Author Experience
+- Reasonable Inference
+- Opinion
+- Forecast
+- Unresolved Uncertainty
+
+### Evidence Validation
+
+The process of determining whether material claims are supported,
+contradicted, current, and responsibly attributable.
+
+### Temporal Integrity
+
+Review of time-sensitive evidence for continued publication validity.
+
+Editorial Confidence remains the primary Author-facing conclusion. LMHS
+Editorial Risk remains the internal assessment.
+
+<!-- CAPABILITY_008_EVIDENCE_VOCABULARY_END -->

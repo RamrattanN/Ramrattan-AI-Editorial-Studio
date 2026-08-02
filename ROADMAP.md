@@ -299,3 +299,34 @@ Capability 008 continues with evidence validation and LMHS
 Editorial Risk.
 
 <!-- CAPABILITY_007_ROADMAP_END -->
+
+<!-- CAPABILITY_DELIVERY_ROADMAP_START -->
+
+## Engineering Enablement - Capability Delivery Workflow
+
+Status:
+
+```text
+Complete when merged
+```
+
+Deliverables:
+
+- [x] Capability Delivery Workflow
+- [x] State-aware delivery helper
+- [x] Exact command resolution
+- [x] Existing-branch detection
+- [x] Partial-apply recovery standard
+- [x] Duplicate issue prevention standard
+- [x] Project propagation retry standard
+- [x] Pull-request discovery
+- [x] CI gating
+- [x] Merge cleanup
+- [x] Return-to-develop verification
+- [x] Automated tests
+- [x] Engineering ADR
+- [x] Architecture Baseline 2026.08.01v04
+
+Capability 008 must use this workflow.
+
+<!-- CAPABILITY_DELIVERY_ROADMAP_END -->

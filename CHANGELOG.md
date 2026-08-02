@@ -226,3 +226,33 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - Added canonical vocabulary governance
 
 <!-- CAPABILITY_007_CHANGELOG_END -->
+
+<!-- CAPABILITY_DELIVERY_CHANGELOG_START -->
+
+## Engineering - Capability Delivery Workflow
+
+### Added
+
+- Capability Delivery Workflow documentation
+- State-aware capability delivery helper
+- Existing-branch detection
+- Exact command resolution
+- Pull-request discovery
+- CI-state inspection
+- Resolved merge command generation
+- Return-to-`develop` completion standard
+- Capability delivery tests
+- ADR-008
+- Architecture Baseline 2026.08.01v04
+- Capability delivery demo
+
+### Changed
+
+- Capability completion now requires a clean, current `develop`
+  baseline after merge
+- Known values must replace command placeholders
+- Bootstrap recovery must permit expected partial-apply changes
+- GitHub issue and Project synchronization must be idempotent
+- CI must pass before merge
+
+<!-- CAPABILITY_DELIVERY_CHANGELOG_END -->

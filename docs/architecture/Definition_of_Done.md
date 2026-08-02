@@ -246,3 +246,29 @@ Before Capability 007 is Done, confirm:
 - Runtime and documentation tests pass.
 
 <!-- CAPABILITY_007_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_DELIVERY_DEFINITION_OF_DONE_START -->
+
+## Delivery Workflow Completion
+
+A capability is not Done until:
+
+- local validation passes;
+- GitHub planning is synchronized;
+- all intended files are staged;
+- the capability commit exists;
+- the feature branch is pushed;
+- the pull request exists;
+- CI passes;
+- the pull request is merged;
+- the local feature branch is deleted;
+- the remote feature branch is deleted;
+- the repository is on `develop`;
+- local `develop` matches `origin/develop`;
+- the working tree is clean;
+- and the merge commit is visible.
+
+Use `docs/engineering/Capability_Delivery_Workflow.md` as the
+governing procedure.
+
+<!-- CAPABILITY_DELIVERY_DEFINITION_OF_DONE_END -->

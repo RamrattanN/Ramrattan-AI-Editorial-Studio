@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import json
 import sys
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
@@ -499,6 +501,61 @@ class PostMergeRecoveryTests(unittest.TestCase):
         self.assertEqual(result.state, delivery.DeliveryState.UNKNOWN)
 
 
+class DelegatedApprovalProfileTests(unittest.TestCase):
+    def render(self, result, profile):
+        stream = io.StringIO()
+        with redirect_stdout(stream):
+            delivery.print_recommendation(result, approval_profile=profile)
+        return stream.getvalue()
+
+    def test_start_boundary_covers_exact_staging_transition(self) -> None:
+        result = delivery.DeliveryRecommendation(
+            state=delivery.DeliveryState.READY_TO_STAGE,
+            summary="Review and stage.",
+            command="git add AGENTS.md",
+        )
+        self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.START)
+        self.assertIn("conditionally covered", self.render(result, delivery.ApprovalProfile.START))
+
+    def test_publish_boundary_does_not_accept_start_authorization(self) -> None:
+        result = delivery.DeliveryRecommendation(
+            state=delivery.DeliveryState.READY_TO_COMMIT,
+            summary="Commit reviewed scope.",
+            command="git commit -m test",
+        )
+        self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.PUBLISH)
+        self.assertIn("does not authorize this transition. Stop.", self.render(result, delivery.ApprovalProfile.START))
+
+    def test_complete_boundary_is_distinct_from_publish(self) -> None:
+        result = delivery.DeliveryRecommendation(
+            state=delivery.DeliveryState.READY_TO_MERGE,
+            summary="Ready.",
+            command="gh pr merge 42 --merge --delete-branch",
+        )
+        self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.COMPLETE)
+        self.assertIn("does not authorize this transition. Stop.", self.render(result, delivery.ApprovalProfile.PUBLISH))
+
+    def test_conservative_requires_specific_mutation_approval(self) -> None:
+        result = delivery.DeliveryRecommendation(
+            state=delivery.DeliveryState.READY_FOR_PR,
+            summary="Create PR.",
+            command="gh pr create",
+        )
+        self.assertIn("explicit approval is required", self.render(result, delivery.ApprovalProfile.CONSERVATIVE))
+
+    def test_read_only_ci_monitoring_needs_no_separate_approval(self) -> None:
+        result = recommendation(
+            snapshot(),
+            discovery(pull_request(review=delivery.ReviewState.READY_FOR_REVIEW, checks=delivery.CheckState.PENDING)),
+        )
+        self.assertTrue(result.read_only)
+        self.assertIn("read-only observation; no separate approval required", self.render(result, delivery.ApprovalProfile.CONSERVATIVE))
+
+    def test_unknown_state_reports_stop_boundary(self) -> None:
+        result = delivery.DeliveryRecommendation(state=delivery.DeliveryState.UNKNOWN, summary="Unknown.")
+        self.assertEqual(result.next_profile_boundary, delivery.ProfileBoundary.STOP)
+
+
 class DocumentationContractTests(unittest.TestCase):
     def test_documentation_exists(self) -> None:
         self.assertTrue((ROOT / "docs/engineering/Capability_Delivery_Workflow.md").is_file())
@@ -517,6 +574,52 @@ class DocumentationContractTests(unittest.TestCase):
         self.assertIn("Return to Baseline", content)
         self.assertIn("branch is `develop`", content)
 
+
+    def test_workflow_defines_profiles_and_consolidation_contract(self) -> None:
+        workflow = (ROOT / "docs/engineering/Capability_Delivery_Workflow.md").read_text(
+            encoding="utf-8"
+        )
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        for phrase in (
+            "### Start Profile",
+            "### Publish Profile",
+            "### Complete Profile",
+            "### Conservative Profile",
+            "### Change Consolidation",
+        ):
+            self.assertIn(phrase, workflow)
+        self.assertIn("## Delegated Approval Profiles", agents)
+        self.assertIn("## Change Consolidation", agents)
+        self.assertIn("Approval for one", workflow)
+        self.assertIn("profile never authorizes a later profile", workflow)
+
+    def test_role_authority_and_architecture_records_are_synchronized(self) -> None:
+        governed = (
+            "AGENTS.md",
+            "CONTRIBUTING.md",
+            "docs/engineering/Capability_Delivery_Workflow.md",
+            "scripts/capability_delivery.py",
+            "docs/architecture/adr/ADR-011-governance-authority.md",
+            "docs/architecture/adr/ADR-012-delivery-hardening.md",
+        )
+        for relative in governed:
+            self.assertNotIn("Nilesh", (ROOT / relative).read_text(encoding="utf-8"))
+        adr = (ROOT / "docs/architecture/adr/ADR-014-delegated-delivery-governance.md").read_text(encoding="utf-8")
+        baseline = (ROOT / "docs/architecture/baselines/Architecture_Baseline_2026.08.01v09.md").read_text(encoding="utf-8")
+        self.assertIn("ADR-014 - Delegated Delivery Governance", adr)
+        self.assertIn("2026.08.01v09", baseline)
+        self.assertIn("Product Runtime Impact\n\nNone", baseline)
+
+    def test_owning_delivery_bootstraps_expose_refined_templates(self) -> None:
+        scripts = str(ROOT / "scripts")
+        if scripts not in sys.path:
+            sys.path.insert(0, scripts)
+        import bootstrap_capability008a2_delivery_hardening as hardened
+        import bootstrap_capability_delivery_workflow as original
+
+        self.assertEqual(hardened.CAPABILITY_DELIVERY_HELPER, original.CAPABILITY_DELIVERY_HELPER)
+        self.assertIn("class ApprovalProfile", hardened.CAPABILITY_DELIVERY_HELPER)
+        self.assertIn("Delegated Approval Profiles", hardened.CAPABILITY_DELIVERY_WORKFLOW)
 
 if __name__ == "__main__":
     unittest.main()

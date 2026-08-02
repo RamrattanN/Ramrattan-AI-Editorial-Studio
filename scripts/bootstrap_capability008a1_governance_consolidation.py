@@ -85,7 +85,8 @@ ADR_011 = clean(
     Adopt an explicit governance authority model with one authoritative owner
     for every concept.
 
-    Nilesh's current request defines maximum task scope and authorization.
+    The Repository Author's or an explicitly authorized Repository Maintainer's
+    current request defines maximum task scope and authorization.
     Within that scope, repository authority is applied in this order:
 
     1. Verified repository and external-system state for factual questions
@@ -138,7 +139,8 @@ ADR_011 = clean(
     Governance consolidation does not weaken approval boundaries. Staging,
     commit, push, pull-request mutations, merge, branch deletion, issue
     mutations, Project mutations, publication, and destructive operations
-    remain protected unless Nilesh explicitly authorizes them.
+    remain protected unless the Repository Author or an explicitly authorized
+    Repository Maintainer authorizes them in the current task or conversation.
 
     ## ADR-002 Reference Integrity
 
@@ -240,7 +242,8 @@ GOVERNANCE_TESTS = clean(
 
         def test_contributing_defers_to_governing_authorities(self) -> None:
             content = self.content("CONTRIBUTING.md")
-            self.assertIn("Nilesh's current request defines the maximum scope", content)
+            self.assertIn("Repository Maintainer's", content)
+            self.assertIn("current request defines the maximum scope", content)
             self.assertIn("staging changes with `git add`", content)
             self.assertIn("scripts/capability_delivery.py", content)
             self.assertIn("python3 -m compileall -q studio scripts tests", content)
@@ -349,8 +352,9 @@ CONTRIBUTING = clean(
 
     ## Authority and Required Reading
 
-    Nilesh's current request defines the maximum scope and authorization for a
-    task. Repository governance defines how authorized work is performed.
+    The Repository Author's or an explicitly authorized Repository Maintainer's
+    current request defines the maximum scope and authorization for a task.
+    Repository governance defines how authorized work is performed.
 
     Before capability work, read:
 
@@ -373,7 +377,7 @@ CONTRIBUTING = clean(
     - Feature and documentation branches contain one focused increment.
 
     Verify a clean, synchronized `develop` before branch creation. Treat
-    pre-existing changes as Nilesh's work and never discard, overwrite, stage,
+    pre-existing changes as human-owned work and never discard, overwrite, stage,
     or relocate them without explicit authorization.
 
     Recommended branch names:
@@ -413,13 +417,14 @@ CONTRIBUTING = clean(
     Resume from the helper's verified state. Recover a partial transition
     instead of restarting it.
 
-    ## Autonomous Work and Approval Boundaries
+    ## Autonomous Work and Approval Profiles
 
     Inspection, in-scope editing, bootstrap preview and apply, validation,
     non-destructive repair, and diff review may proceed autonomously once the
     phase is authorized.
 
-    Explicit Nilesh approval is required before:
+    Explicit approval from the Repository Author or an explicitly authorized
+    Repository Maintainer is required before:
 
     - staging changes with `git add`;
     - commit;
@@ -434,8 +439,23 @@ CONTRIBUTING = clean(
     - dependency installation; or
     - destructive or difficult-to-recover operations.
 
-    An approval applies only to the described action, targets, and verified
-    state.
+    An approval applies only to the described action, targets, and verified state.
+    The Standard delegated delivery profile groups conditional authorization into
+    Start, Publish, and Complete. Start ends before publication, Publish ends
+    before merge, and Complete ends after verified cleanup and planning
+    synchronization. Each prerequisite must be verified before advancing, and one
+    profile never authorizes a later profile. Use the Conservative profile when
+    approval is required at each mutation boundary. Read-only CI monitoring does
+    not require a separate approval.
+
+    ## Change Consolidation
+
+    Before editing, inspect for other approved pending changes to the same files or
+    tightly coupled concern. Consolidate them when scope, risk profile, and
+    delivery timing agree. Separate them only for materially different scope,
+    different risk or approval authority, safer rollback or recovery, conflicting
+    delivery timing, or an explicit repository constraint. Do not split work merely
+    to demonstrate incremental progress.
 
     ## Validation
 
@@ -499,7 +519,7 @@ CONTRIBUTING = clean(
     ## Stopping Conditions
 
     Stop when the requested phase is complete, the next action is protected, a
-    conflict requires Nilesh's judgment, unrelated work makes continuation
+    conflict requires the Repository Author's judgment, unrelated work makes continuation
     unsafe, validation cannot be repaired within scope, or the task would
     materially exceed its approved budget.
 
@@ -1118,6 +1138,8 @@ def validate_governance(root: Path) -> None:
         "CONTRIBUTING.md": (
             "staging changes with `git add`",
             "Never repair only a generated artifact",
+            "The Standard delegated delivery profile",
+            "## Change Consolidation",
         ),
         "docs/architecture/adr/ADR-011-governance-authority.md": (
             "Governance Authority",

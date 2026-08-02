@@ -2187,6 +2187,7 @@ from bootstrap_capability008a2_delivery_hardening import (
 CAPABILITY_DELIVERY_HELPER = CAPABILITY_DELIVERY_HELPER_008A2
 CAPABILITY_DELIVERY_WORKFLOW = CAPABILITY_DELIVERY_WORKFLOW_008A2
 WORKFLOW_TESTS = WORKFLOW_TESTS_008A2
+# Delegated templates include ADR-014 approval profiles and consolidation.
 # CAPABILITY_008A2_DELIVERY_HARDENING_OVERRIDE_END
 
 NEW_FILES = {
@@ -2574,6 +2575,8 @@ def validate_product_language(root: Path) -> None:
         ): (
             "State Before Action",
             "Exact Commands",
+            "Delegated Approval Profiles",
+            "Change Consolidation",
             "Partial-Apply Recovery",
             "Return to Baseline",
             "gh pr checks 24",
@@ -2583,6 +2586,8 @@ def validate_product_language(root: Path) -> None:
 
         "scripts/capability_delivery.py": (
             "class DeliveryState",
+            "class ApprovalProfile",
+            "Next profile boundary",
             "discover_pull_request",
             "git switch -c",
             "gh pr checks",

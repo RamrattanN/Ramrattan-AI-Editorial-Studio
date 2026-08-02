@@ -39,12 +39,14 @@ Correct:
 gh pr checks 24
 ```
 
-### One Transition at a Time
+### Verified Transitions Within an Authorized Profile
 
-Provide one safe next action after verifying the previous action.
+Provide one safe next action after verifying the previous action. A delegated
+profile may authorize a conditional sequence, but every prerequisite must be
+verified before the next transition.
 
-Do not issue a long sequence that assumes every intermediate step
-will succeed.
+Stop immediately when any state is unknown, unavailable, mismatched, or failed.
+Do not issue or execute a sequence that assumes intermediate success.
 
 ### Recover Rather Than Restart
 
@@ -91,9 +93,58 @@ Inspection, validation, and CI monitoring are read-only and may proceed
 automatically inside an authorized delivery phase.
 
 Staging, commit, push, pull-request mutation, merge, branch deletion, issue
-mutation, and Project mutation retain explicit Nilesh approval boundaries.
-Recommendations must identify that boundary and must never execute the
-protected command automatically.
+mutation, and Project mutation require explicit role-based authority through
+the applicable delegated profile or the Conservative profile. Recommendations
+must identify both workflow state and the next profile boundary and must never
+execute a protected command automatically.
+
+### Change Consolidation
+
+Before editing, inspect whether other approved pending changes affect the same
+files or tightly coupled concern. Consolidate them into one coherent change set
+when scope, risk profile, and delivery timing agree. Do not split work merely
+to demonstrate incremental progress.
+
+Separate changes only for materially different scope, different risk or
+approval authority, safer rollback or recovery, conflicting delivery timing,
+or an explicit repository constraint. Consolidation never expands authority.
+
+## Delegated Approval Profiles
+
+The Standard delivery profile consists of three separately authorized phases.
+Authority must come from the current task or conversation. Approval for one
+profile never authorizes a later profile.
+
+### Start Profile
+
+Start may conditionally authorize planning synchronization to `In Progress`,
+branch creation or resumption, implementation, bootstrap preview and apply,
+diagnosis and repair, regeneration, testing and validation, complete diff
+review, and staging of the exact reviewed scope. Stop before publication unless
+Publish was explicitly included.
+
+### Publish Profile
+
+Publish may conditionally authorize commit of the approved staged diff, commit
+hash verification, push, pull-request creation or reuse, automatic read-only CI
+monitoring, and marking the pull request ready for review when all required
+conditions pass. Stop before merge.
+
+### Complete Profile
+
+Complete may conditionally authorize merge, local and remote branch cleanup,
+return to clean synchronized `develop`, completion planning synchronization,
+Project item `Done`, Project summary update, issue closure, and the Capability
+Delivery Receipt. Stop immediately if any verification condition fails.
+
+### Conservative Profile
+
+Use Conservative delivery for exceptional high-risk work or when a delegated
+profile was not explicitly authorized. Approval is then required at each Git or
+GitHub mutation boundary.
+
+No Git or GitHub mutation may occur outside the explicitly authorized profile.
+Automatic CI monitoring is read-only and does not require separate approval.
 
 ### Finish Where We Started
 
@@ -359,8 +410,8 @@ Interpret discovery explicitly:
   `UNAVAILABLE` and blocks advancement.
 
 An existing draft pull request must be reported as draft. It is never ready to
-merge, even when its checks are green. Marking it ready requires explicit
-Nilesh approval.
+merge, even when its checks are green. Marking it ready requires Publish
+authorization or explicit Conservative approval.
 
 A ready-for-review pull request is distinct from an approved pull request.
 `REVIEW_REQUIRED` and `CHANGES_REQUESTED` block merge. An empty review decision
@@ -420,7 +471,8 @@ Merge is recommended only when all of the following are verified:
 Conflict, `BLOCKED`, `UNKNOWN`, missing mergeability, or malformed mergeability
 evidence fails closed.
 
-When every condition passes and Nilesh explicitly approves merge:
+When every condition passes and Complete authorization or explicit
+Conservative merge approval is present:
 
 ```bash
 gh pr merge 24 --merge --delete-branch

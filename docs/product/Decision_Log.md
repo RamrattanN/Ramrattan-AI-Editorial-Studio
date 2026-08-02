@@ -72,3 +72,40 @@ The durable value of a source is its evidence, metadata,
 interpretation, and editorial significance, not merely its URL.
 
 <!-- CAPABILITY_005_DECISION_LOG_END -->
+
+<!-- CAPABILITY_006_DECISION_LOG_START -->
+
+## Capability 006 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-01 | D5 | Define Version 1.0 explicitly | Future backlog decisions require a stable release boundary. |
+| 2026-08-01 | D4 | Adopt the Editorial Integrity Pipeline | The Studio must assess sources and evidence before publication recommendation. |
+| 2026-08-01 | D3 | Display five visible processing stages | The Author should understand and appreciate the work being performed. |
+| 2026-08-01 | D3 | Adopt LMHS Editorial Risk | Low, Moderate, High, and Severe communicate risk without false precision. |
+| 2026-08-01 | D4 | Prohibit knowing dissemination of materially false information | Truthfulness and Author reputation are non-negotiable. |
+| 2026-08-01 | D3 | Use proportionate challenge, rebuild, redirection, and refusal | Refusal is reserved for scenarios where responsible recovery is not possible. |
+| 2026-08-01 | D3 | Offer three curated alternatives | Three options reduce blank-page effort without overwhelming the Author. |
+| 2026-08-01 | D3 | Place recommendation after all options | Editorial advice should not bias evaluation before the Author sees the alternatives. |
+| 2026-08-01 | D3 | Always allow an Author-provided option | The Studio reduces effort without reducing control. |
+| 2026-08-01 | D3 | Use intelligent dependency management | Requested components change first; related updates require Author approval. |
+| 2026-08-01 | D3 | Place Export first at completion | Export is the Author's primary fast path after successful generation. |
+| 2026-08-01 | D3 | Support host-compatible audio and video intake | The Product should meet the Author where their ideas naturally exist. |
+| 2026-08-01 | D3 | Use host context only when reliably available | Personalization is optional and must never become a correctness dependency. |
+| 2026-08-01 | D4 | Version architecture baselines using VCM | Architecture history should follow the established YYYY.MM.DDvNN convention. |
+
+## Active Architecture Baseline
+
+```text
+2026.08.01v01
+```
+
+## Capability 006 Learning
+
+Editorial Integrity is not a hidden back-end check.
+
+It is a visible Author experience that demonstrates how the Product
+protects factual quality, publication readiness, and professional
+reputation.
+
+<!-- CAPABILITY_006_DECISION_LOG_END -->

@@ -178,3 +178,21 @@ Every capability should record:
 > What did we learn that changed our understanding of the product?
 
 A capability is not complete until this question has been answered.
+
+<!-- CAPABILITY_006_DEFINITION_OF_DONE_START -->
+
+## Capability 006 Completion Additions
+
+Before a Version 1.0 capability is Done, confirm:
+
+- Editorial Integrity implications are documented.
+- LMHS Editorial Risk behaviour is tested where applicable.
+- The capability does not knowingly disseminate false information.
+- Author-facing interactions are concise.
+- Related components are not silently regenerated.
+- Export remains the completion fast path.
+- Version 1.0 scope is not expanded accidentally.
+- The Capability Demo is current.
+- The GitHub Project and backlog are current.
+
+<!-- CAPABILITY_006_DEFINITION_OF_DONE_END -->

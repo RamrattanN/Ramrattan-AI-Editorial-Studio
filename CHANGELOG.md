@@ -113,3 +113,40 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - Established Capability Demos as part of completion
 
 <!-- CAPABILITY_005_CHANGELOG_END -->
+
+<!-- CAPABILITY_006_CHANGELOG_START -->
+
+### Added - Capability 006
+
+- Editorial Integrity Pipeline
+- Editorial Judgment Framework
+- Editorial Collaboration Model
+- Publication Package Contract
+- Editorial Philosophy
+- Product Vision
+- Version 1.0 Product Release Definition
+- PRD v1.3
+- ADR-005
+- LMHS Editorial Risk
+- Five visible processing stages
+- Progressive Recovery
+- Temporal Integrity
+- Curated three-option interaction contract
+- Intelligent dependency management
+- Export-first completion UX
+- Architecture Baseline 2026.08.01v01
+- Capability 006 demo
+- Capability 006 validation tests
+
+### Changed - Capability 006
+
+- Defined Version 1.0 scope and exclusions
+- Made fact and evidence review mandatory before publication
+  recommendation
+- Added host-compatible document, audio, and video intake
+- Made Export the primary completion action
+- Required Author approval before related component regeneration
+- Required concise, consolidated editorial observations
+- Added VCM versioning for architecture baselines
+
+<!-- CAPABILITY_006_CHANGELOG_END -->

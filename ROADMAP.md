@@ -175,3 +175,59 @@ The project should improve:
 - [ ] External file-path management
 
 <!-- CAPABILITY_005_ROADMAP_END -->
+
+<!-- CAPABILITY_006_ROADMAP_START -->
+
+## Version 1.0 Capability Roadmap
+
+### Completed Foundations
+
+- [x] Capability 001 - Repository Foundation
+- [x] Capability 002 - Editorial Workflow Prototype
+- [x] Capability 003 - Adaptive Product Foundation
+- [x] Capability 004 - Article-First Alignment
+- [x] Capability 005 - Adaptive Editorial Context Architecture
+- [x] Capability 006 - Editorial Integrity and V1.0 Baseline
+
+### Version 1.0 Implementation Backlog
+
+- [ ] Implement Editorial Intake
+- [ ] Implement host-compatible document intake
+- [ ] Implement host-compatible audio and video intake
+- [ ] Implement source assessment
+- [ ] Implement evidence verification
+- [ ] Implement LMHS Editorial Risk
+- [ ] Implement Editorial Judgment responses
+- [ ] Implement Adaptive Editorial Context runtime
+- [ ] Implement Article Engine
+- [ ] Implement Publication Package Contract
+- [ ] Implement three-option editorial interaction
+- [ ] Implement intelligent dependency management
+- [ ] Implement 720 × 425 Hero Visual System
+- [ ] Implement Portable Editorial Project serialization
+- [ ] Implement Resume Existing Project
+- [ ] Implement VCM export naming
+- [ ] Implement ZIP export
+- [ ] Implement temporal-integrity review
+- [ ] Complete Version 1.0 end-to-end demo
+- [ ] Complete Version 1.0 release readiness review
+
+### Post-Version 1.0 Backlog
+
+- [ ] Optional Portable Project Index
+- [ ] Hosted Project Synchronization
+- [ ] Product-managed Author preferences
+- [ ] Direct publishing integrations
+- [ ] Editorial analytics
+- [ ] Collaboration workspaces
+- [ ] Subscription and billing
+- [ ] Additional publication formats
+
+### Explicitly Excluded from Version 1.0
+
+- [ ] Carousel generation
+- [ ] Multi-tenant hosted storage
+- [ ] Team collaboration
+- [ ] Automatic direct publishing
+
+<!-- CAPABILITY_006_ROADMAP_END -->

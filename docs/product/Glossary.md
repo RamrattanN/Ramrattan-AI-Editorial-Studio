@@ -171,3 +171,64 @@ demonstrates Author value, records acceptance criteria, and captures
 learning.
 
 <!-- CAPABILITY_005_GLOSSARY_END -->
+
+<!-- CAPABILITY_006_GLOSSARY_START -->
+
+## Editorial Integrity Pipeline
+
+The five-stage process that understands input, assesses sources,
+verifies evidence, reviews Editorial Risk, and creates the
+publication package.
+
+## LMHS Editorial Risk
+
+The four-level editorial risk model:
+
+- Low
+- Moderate
+- High
+- Severe
+
+## Editorial Judgment
+
+The Studio's proportionate decision to proceed, challenge, educate,
+rebuild, redirect, or decline.
+
+## Progressive Recovery
+
+Continuing responsibly with reliable context already available
+before asking the Author to provide more information.
+
+## Temporal Integrity
+
+Reassessing time-sensitive evidence when a saved project is resumed
+or republished.
+
+## Publication Package Contract
+
+The required Version 1.0 set of article, Hero Visual, attribution,
+distribution, and portable-project components.
+
+## Fast Path
+
+The Author's most likely immediate action. At publication
+completion, the fast path is Export the publication package.
+
+## Preference Cascade
+
+The precedence of current project instructions, Portable Editorial
+Project settings, available host-platform preferences, and Studio
+defaults.
+
+## Editorial Intake
+
+The interpretation of any compatible Author starting material,
+including URLs, text, documents, audio, video, and portable project
+files.
+
+## Architecture Baseline
+
+A VCM-versioned checkpoint describing the coherent product and
+system architecture at a particular time.
+
+<!-- CAPABILITY_006_GLOSSARY_END -->

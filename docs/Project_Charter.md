@@ -77,3 +77,25 @@ The project uses:
 - Changelogs
 - Reversible changes
 - Explicit scope boundaries
+
+<!-- CAPABILITY_006_PROJECT_CHARTER_START -->
+
+## Version 1.0 Charter Alignment
+
+The target Version 1.0 release is an article-first editorial
+operating system.
+
+It combines:
+
+- Editorial Integrity,
+- Adaptive Editorial Context,
+- article creation,
+- 720 × 425 Hero Visual creation,
+- focused editorial revision,
+- Portable Editorial Projects,
+- and export-first completion.
+
+Hosted storage, collaboration, direct publishing, analytics, and
+carousel generation are outside the Version 1.0 charter.
+
+<!-- CAPABILITY_006_PROJECT_CHARTER_END -->

@@ -165,3 +165,28 @@ URLs expire or paywalled material becomes inaccessible.
 Editorial Integrity is a first-class component.
 
 <!-- CAPABILITY_005_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_006_CURRENT_FOCUS_START -->
+
+## Capability 006 and Version 1.0 Focus
+
+The current product priority is implementing the complete Version
+1.0 Author journey.
+
+The active foundations are:
+
+- Editorial Integrity Pipeline
+- Adaptive Editorial Context
+- Article Engine
+- Hero Visual System
+- Publication Package Contract
+- Portable Editorial Projects
+- Resume Existing Project
+- Export Publication Package
+
+Version 1.0 is article-first.
+
+Carousels, hosted storage, team collaboration, direct publishing,
+and analytics remain outside the Version 1.0 scope.
+
+<!-- CAPABILITY_006_CURRENT_FOCUS_END -->

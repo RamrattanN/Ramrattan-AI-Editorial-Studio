@@ -277,3 +277,51 @@ The Studio evaluates:
 - and publication blockers.
 
 <!-- CAPABILITY_005_README_END -->
+
+<!-- CAPABILITY_006_README_START -->
+
+## Capability 006 - Editorial Integrity
+
+Every publication project passes through five visible stages:
+
+1. Understanding your input
+2. Assessing your sources
+3. Verifying the evidence
+4. Reviewing editorial risks
+5. Creating your publication package
+
+Editorial Risk uses:
+
+- Low
+- Moderate
+- High
+- Severe
+
+The Studio does not knowingly disseminate materially false,
+fabricated, deceptive, or dangerously misleading information.
+
+## Version 1.0 Target
+
+Version 1.0 delivers:
+
+- article-first editorial intake,
+- fact and evidence validation,
+- Adaptive Editorial Context,
+- 720 × 425 Hero Visual,
+- complete Publication Package,
+- focused component revision,
+- Portable Editorial Projects,
+- Resume Existing Project,
+- and export-first completion.
+
+Carousel generation is not part of Version 1.0.
+
+See:
+
+- `docs/product/Product_Vision.md`
+- `docs/product/Release_v1.0.md`
+- `docs/product/PRD_v1.3.md`
+- `docs/architecture/Editorial_Integrity_Pipeline.md`
+- `docs/architecture/Publication_Package_Contract.md`
+
+<!-- CAPABILITY_006_README_END -->

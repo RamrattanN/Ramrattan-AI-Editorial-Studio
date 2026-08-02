@@ -134,3 +134,55 @@ A capability is not complete until its Author value and behaviour
 have been demonstrated and documented.
 
 <!-- CAPABILITY_005_PRODUCT_PRINCIPLES_END -->
+
+<!-- CAPABILITY_006_PRODUCT_PRINCIPLES_START -->
+
+## Capability 006 Principles
+
+### Truth Before Fluency
+
+The Studio must not turn unsupported or false material into polished
+misinformation.
+
+### Protect the Author's Reputation
+
+Editorial risk is a product concern, not merely a disclaimer.
+
+### Challenge Constructively
+
+When evidence does not support a premise, explain the evidence and
+offer a defensible alternative.
+
+### Never Pretend to Know
+
+Do not imply memory, verification, certainty, identity, or context
+that is not reliably available.
+
+### Complete the Review Before Interrupting
+
+Consolidate and prioritize material observations where practical.
+
+### Proactively Helpful, but Concise
+
+Offer material improvements without creating an endless revision
+loop.
+
+### Optimize for the Author's Next Likely Action
+
+Export is the completion fast path.
+
+### Preserve Approved Work
+
+Change only what the Author requests unless they approve related
+dependency updates.
+
+### Progressive Recovery
+
+Maximize responsible forward progress before requesting more effort.
+
+### Temporal Integrity
+
+Revalidate time-sensitive evidence when a project is resumed or
+republished.
+
+<!-- CAPABILITY_006_PRODUCT_PRINCIPLES_END -->

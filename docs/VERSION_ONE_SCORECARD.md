@@ -126,3 +126,27 @@ Capability 008A.1 changes governance and status integrity only. It does not
 advance product-runtime release readiness.
 
 <!-- CAPABILITY_008A1_SCORECARD_END -->
+
+<!-- CAPABILITY_008A2_SCORECARD_START -->
+
+## Capability 008A Delivery Hardening Status
+
+- Capability 008A.1 - Complete
+- Capability 008A.2 - In Progress
+- Capability 008A.3 - Todo
+- Capability 009 - Todo
+
+| Delivery area | Status | Evidence |
+|---|---|---|
+| Fail-closed discovery | Complete | Helper and high-risk workflow tests |
+| Remote freshness | Complete | Direct remote observation tests |
+| Draft and review readiness | Complete | PR #30, #31, and #33 regressions |
+| Mergeability gating | Complete | Conflict, blocked, and unknown tests |
+| CI outcome gating | Complete | All check-state tests and CI workflow |
+| Post-merge recovery | Complete | Cleanup state tests |
+| Delivery architecture | Complete | ADR-012 and baseline v07 |
+
+Capability 008A.2 changes engineering delivery safety only. Version 1.0
+product-runtime readiness remains unchanged.
+
+<!-- CAPABILITY_008A2_SCORECARD_END -->

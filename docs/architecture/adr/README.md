@@ -35,3 +35,4 @@ Each ADR explains:
 - [ADR-009 - Adopt Editorial Discernment and Intent Preservation](ADR-009-adopt-editorial-discernment-and-intent-preservation.md)
 - [ADR-010 - Implement Evidence Validation and Editorial Risk](ADR-010-implement-evidence-validation-and-editorial-risk.md)
 - [ADR-011 - Governance Authority](ADR-011-governance-authority.md)
+- [ADR-012 - Delivery Hardening](ADR-012-delivery-hardening.md)

@@ -68,6 +68,33 @@ Use:
 
 Do not infer repository state when it can be verified.
 
+### Fail Closed on Incomplete Evidence
+
+Delivery observations use explicit results:
+
+- `FOUND` means one complete matching artifact was verified;
+- `NOT_FOUND` means a successful query confirmed zero matches;
+- `UNAVAILABLE` means authentication, network, API, parsing, or required-field
+  evidence failed; and
+- `AMBIGUOUS` means more than one matching artifact was observed.
+
+`UNAVAILABLE` and `AMBIGUOUS` are blocking states. Neither may be treated as
+absence, success, or permission to advance.
+
+Remote-dependent recommendations require a successful direct observation of
+`origin/develop` and the feature branch. Cached remote-tracking references do
+not independently prove freshness.
+
+### Protected Mutations and Read-Only Automation
+
+Inspection, validation, and CI monitoring are read-only and may proceed
+automatically inside an authorized delivery phase.
+
+Staging, commit, push, pull-request mutation, merge, branch deletion, issue
+mutation, and Project mutation retain explicit Nilesh approval boundaries.
+Recommendations must identify that boundary and must never execute the
+protected command automatically.
+
 ### Finish Where We Started
 
 A capability is not complete until:
@@ -99,6 +126,15 @@ Required state:
 - working tree is clean,
 - local `develop` matches `origin/develop`,
 - latest expected merge is present.
+
+Before relying on remote state, observe it directly:
+
+```bash
+git ls-remote origin refs/heads/develop refs/heads/<feature-branch>
+```
+
+Failure, malformed output, or a missing `develop` reference makes remote state
+unavailable and blocks the transition.
 
 If `develop` is behind:
 
@@ -310,9 +346,26 @@ If a pull request may already exist, resolve it first:
 gh pr list \
   --head <resolved-branch-name> \
   --base develop \
-  --state open \
-  --json number,title,url
+  --state all \
+  --json number,url,state,isDraft,reviewDecision,mergeable,mergeStateStatus,statusCheckRollup,headRefOid
 ```
+
+Interpret discovery explicitly:
+
+- zero matches after a successful query is `NOT_FOUND`;
+- one complete match is `FOUND`;
+- more than one match is `AMBIGUOUS` and blocks selection;
+- authentication, API, command, JSON, or required-field failure is
+  `UNAVAILABLE` and blocks advancement.
+
+An existing draft pull request must be reported as draft. It is never ready to
+merge, even when its checks are green. Marking it ready requires explicit
+Nilesh approval.
+
+A ready-for-review pull request is distinct from an approved pull request.
+`REVIEW_REQUIRED` and `CHANGES_REQUESTED` block merge. An empty review decision
+permits merge only when GitHub independently reports clean mergeability and no
+required review gate remains.
 
 ### Phase 13 - Check CI
 
@@ -331,9 +384,43 @@ Do not merge while checks are:
 - cancelled,
 - or unavailable.
 
+Zero reported checks are unavailable unless repository policy independently
+proves that no checks are required. This repository requires the `validate`
+job, so an empty check rollup blocks merge.
+
+Normalize and handle these check outcomes explicitly:
+
+- unavailable;
+- pending;
+- failed;
+- cancelled;
+- timed out;
+- action required; and
+- successful.
+
+Pending checks may be monitored automatically with the read-only command:
+
+```bash
+gh pr checks 24 --watch
+```
+
+Monitoring does not authorize pull-request mutation or merge.
+
 ### Phase 14 - Merge and Delete the Branch
 
-When CI passes:
+Merge is recommended only when all of the following are verified:
+
+- the pull request is open and not a draft;
+- required review state is satisfied;
+- the remote feature head matches the pull-request head;
+- checks are present and successful;
+- mergeability is known and clean; and
+- no conflict, block, or requested change exists.
+
+Conflict, `BLOCKED`, `UNKNOWN`, missing mergeability, or malformed mergeability
+evidence fails closed.
+
+When every condition passes and Nilesh explicitly approves merge:
 
 ```bash
 gh pr merge 24 --merge --delete-branch
@@ -345,6 +432,17 @@ This should:
 - delete the remote feature branch,
 - delete the local feature branch,
 - and switch the repository to `develop`.
+
+Do not assume all cleanup completed because the merge command returned
+success. Rerun the helper and recover one verified step at a time:
+
+1. If still on the merged feature branch, switch to `develop`.
+2. Synchronize `develop` with `origin/develop` using `--ff-only`.
+3. If the merged local branch remains, request approval and delete it.
+4. If the merged remote branch remains, request approval and delete it.
+5. Verify merge ancestry, clean working tree, and synchronized `develop`.
+
+Never repeat the merge when GitHub already reports it merged.
 
 ### Phase 15 - Return to Baseline
 
@@ -385,6 +483,21 @@ Confirm:
 | PR already exists | Discover and reuse it |
 | CI pending | Wait and recheck |
 | CI failing | Stop and diagnose |
+| Remote verification failed | Stop; do not use cached state as fresh evidence |
+| GitHub authentication or API failed | Report `UNAVAILABLE`; do not infer absence |
+| Malformed GitHub response | Report `UNAVAILABLE`; do not advance |
+| Zero matching pull requests | Continue only after a successful query confirms `NOT_FOUND` |
+| Multiple matching pull requests | Report `AMBIGUOUS`; do not select one |
+| Pull request is draft | Stop before ready-for-review approval |
+| Review required | Wait for required review |
+| Changes requested | Inspect and resolve feedback |
+| Merge conflict | Stop and repair on the feature branch |
+| Mergeability blocked or unknown | Stop until GitHub reports clean mergeability |
+| Checks unavailable or empty | Stop; do not treat as success |
+| Checks cancelled, timed out, or action required | Stop and diagnose |
+| Merge completed but checkout did not | Switch to `develop`, then rerun the helper |
+| Local branch remains after merge | Delete only with explicit approval |
+| Remote branch remains after merge | Delete only with explicit approval |
 | Push output pasted into shell | Ignore harmless shell errors and verify push |
 | Pager shows `(END)` | Exit with `q` |
 | Develop is dirty after merge | Stop and investigate |
@@ -397,6 +510,12 @@ The workflow must never:
 - create a branch from an unverified baseline;
 - use unresolved placeholders when values are known;
 - merge before CI passes;
+- treat remote or GitHub failure as confirmed absence;
+- treat zero checks as successful CI;
+- report a draft pull request ready to merge;
+- select arbitrarily among multiple matching pull requests;
+- merge with review required, changes requested, conflicts, or unknown
+  mergeability;
 - silently ignore unrelated working-tree changes;
 - create duplicate GitHub issues unnecessarily;
 - assume Project items appear immediately;
@@ -404,6 +523,19 @@ The workflow must never:
 - declare a capability complete while still on a feature branch;
 - leave the repository in a dirty or ambiguous state;
 - or skip the return-to-`develop` verification.
+
+## CI Validation Contract
+
+Pull-request and protected-branch CI must run the same canonical suite required
+before commit:
+
+```bash
+python3 -m compileall -q studio scripts tests
+python3 -m unittest discover -s tests -v
+python3 studio.py validate
+```
+
+Local and CI validation are complementary. Neither substitutes for the other.
 
 ## Completion Standard
 

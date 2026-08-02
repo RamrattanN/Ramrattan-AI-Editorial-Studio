@@ -401,3 +401,27 @@ Earlier capability-specific status sections in this roadmap are historical
 delivery records. This section is authoritative for the active increment.
 
 <!-- CAPABILITY_008A1_ROADMAP_END -->
+
+<!-- CAPABILITY_008A2_ROADMAP_START -->
+
+## Capability 008A.2 - Delivery Hardening
+
+Status: **In Progress**
+
+Current authoritative sequence:
+
+- Capability 008 - Complete
+- Capability 008A.1 - Governance Consolidation - Complete
+- Capability 008A.2 - Delivery Hardening - In Progress
+- Capability 008A.3 - Editorial Integrity Hardening - Todo
+- Capability 009 - Todo
+
+Capability 008A.2 makes delivery observation fail closed, distinguishes
+unavailable state from confirmed absence, hardens PR and CI gates, and adds
+deterministic post-merge recovery. Product runtime does not change.
+
+ADR-012 records Delivery Hardening. Architecture Baseline `2026.08.01v07`
+records the resulting engineering architecture. Earlier status sections are
+historical delivery records; this section owns the active increment.
+
+<!-- CAPABILITY_008A2_ROADMAP_END -->

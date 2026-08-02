@@ -160,3 +160,22 @@ We will leave the Studio more trustworthy than we found it.
 ## Motto
 
 > Trust earned. Confidence shared. Conversations inspired.
+
+<!-- CAPABILITY_007_CONSTITUTION_START -->
+
+## Language Shapes Behaviour
+
+Language shapes behaviour.
+
+Consistent language produces consistent decisions, consistent
+implementation, and a consistent experience for every Author,
+Editor, and Reader.
+
+Active documentation and runtime behaviour must follow the
+Canonical Vocabulary.
+
+Governing rule:
+
+> One concept. One canonical name.
+
+<!-- CAPABILITY_007_CONSTITUTION_END -->

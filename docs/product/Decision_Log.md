@@ -132,3 +132,21 @@ reputation.
 | 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v02 | The same-day VCM revision records the Constitutional Freeze. |
 
 <!-- CAPABILITY_006A_DECISION_LOG_END -->
+
+<!-- CAPABILITY_007_DECISION_LOG_START -->
+
+## Capability 007 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-01 | D4 | Adopt Canonical Vocabulary | One concept should have one active name. |
+| 2026-08-01 | D4 | Establish Editorial Workspace | The Author needs one coherent environment across the Canonical Editorial Session. |
+| 2026-08-01 | D4 | Define Editorial Intake as the first Workspace capability | Intake is a capability, not the complete experience. |
+| 2026-08-01 | D3 | Infer input type before asking | The Author should not manage technical classification. |
+| 2026-08-01 | D4 | Support optional logo and headshot assets | Authors may personalise Hero Visuals without changing the default path. |
+| 2026-08-01 | D4 | Require identity-asset rights confirmation | The Studio should not use assets without Author authority. |
+| 2026-08-01 | D4 | Preserve brand-neutral as the default | Identity assets are enhancements, not requirements. |
+| 2026-08-01 | D4 | Permit resume without original identity assets | Portable projects must not depend on separately stored binary assets. |
+| 2026-08-01 | D4 | Create Architecture Baseline 2026.08.01v03 | Version 1.0 runtime implementation begins. |
+
+<!-- CAPABILITY_007_DECISION_LOG_END -->

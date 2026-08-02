@@ -218,3 +218,35 @@ conclusion.
 LMHS Editorial Risk remains the internal assessment model.
 
 <!-- CAPABILITY_006A_PRD_END -->
+
+<!-- CAPABILITY_007_PRD_START -->
+
+## Capability 007 Runtime Requirements
+
+Version 1.0 shall provide an Editorial Workspace that:
+
+- explains supported input formats,
+- recognises natural Author input,
+- completes Understanding your input,
+- completes Assessing your sources,
+- keeps later stages visible but pending,
+- and does not falsely imply evidence verification.
+
+## Optional Hero Visual Identity Assets
+
+The Author may optionally provide:
+
+- logo,
+- headshot,
+- or both.
+
+Requirements:
+
+- brand-neutral remains the default,
+- rights confirmation is required,
+- headshot recognisability should be preserved,
+- assets remain Author-controlled,
+- no storage path is required,
+- and resume remains possible without the original asset.
+
+<!-- CAPABILITY_007_PRD_END -->

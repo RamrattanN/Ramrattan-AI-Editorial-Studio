@@ -208,3 +208,25 @@ Product implementation must preserve:
 - and naturally varied editorial language.
 
 <!-- CAPABILITY_006A_PRODUCT_PRINCIPLES_END -->
+
+<!-- CAPABILITY_007_PRODUCT_PRINCIPLES_START -->
+
+## Canonical Language
+
+Use one canonical name for each active concept.
+
+Editorial Workspace and Editorial Intake are related but distinct:
+
+- Editorial Workspace - complete Author-facing environment
+- Editorial Intake - first capability inside the Workspace
+
+## Optional Identity Assets
+
+Logo and headshot assets:
+
+- remain optional,
+- require rights confirmation,
+- never replace the brand-neutral default,
+- and never create a hosted-storage requirement.
+
+<!-- CAPABILITY_007_PRODUCT_PRINCIPLES_END -->

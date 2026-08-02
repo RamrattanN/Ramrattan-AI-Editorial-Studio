@@ -269,3 +269,33 @@ No new foundational philosophy should be introduced unless
 implementation evidence demonstrates a genuine requirement.
 
 <!-- CAPABILITY_006A_ROADMAP_END -->
+
+<!-- CAPABILITY_007_ROADMAP_START -->
+
+## Capability 007 - Editorial Intake and Source Assessment
+
+Status:
+
+```text
+In implementation
+```
+
+Runtime scope:
+
+- [x] Canonical Vocabulary
+- [x] Editorial Workspace definition
+- [x] Natural input recognition
+- [x] Stage 1 - Understanding your input
+- [x] Stage 2 - Assessing your sources
+- [x] Optional logo intake
+- [x] Optional headshot intake
+- [x] Rights confirmation
+- [x] Brand-neutral default
+- [x] Resume without missing identity assets
+- [x] Runtime tests
+- [x] Capability demo
+
+Capability 008 continues with evidence validation and LMHS
+Editorial Risk.
+
+<!-- CAPABILITY_007_ROADMAP_END -->

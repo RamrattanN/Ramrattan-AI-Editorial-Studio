@@ -226,3 +226,23 @@ Version 1.0 implementation should not expand foundational philosophy
 without implementation evidence.
 
 <!-- CAPABILITY_006A_DEFINITION_OF_DONE_END -->
+
+<!-- CAPABILITY_007_DEFINITION_OF_DONE_START -->
+
+## Capability 007 Completion Additions
+
+Before Capability 007 is Done, confirm:
+
+- Editorial Workspace terminology is canonical.
+- Editorial Intake is not presented as the complete Workspace.
+- Supported inputs are described honestly.
+- Stage 1 and Stage 2 are executable.
+- Stages 3 through 5 remain pending.
+- Source assessment does not claim verification.
+- Identity assets remain optional.
+- Rights confirmation is enforced.
+- Brand-neutral remains the default.
+- Missing identity assets do not block resume.
+- Runtime and documentation tests pass.
+
+<!-- CAPABILITY_007_DEFINITION_OF_DONE_END -->

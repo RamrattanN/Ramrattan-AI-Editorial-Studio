@@ -192,3 +192,37 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 > Trust earned. Confidence shared. Conversations inspired.
 
 <!-- CAPABILITY_006A_CHANGELOG_END -->
+
+<!-- CAPABILITY_007_CHANGELOG_START -->
+
+## Capability 007 - Editorial Workspace Runtime
+
+### Added
+
+- Canonical Vocabulary
+- Editorial Workspace runtime
+- Editorial Intake runtime
+- Natural input recognition
+- Initial source assessment
+- Stage 1 - Understanding your input
+- Stage 2 - Assessing your sources
+- Optional logo identity asset
+- Optional headshot identity asset
+- Identity-asset rights confirmation
+- Resume guidance for missing identity assets
+- ADR-007
+- Architecture Baseline 2026.08.01v03
+- Runtime tests
+- Capability 007 demo
+
+### Changed
+
+- Established Editorial Workspace as the complete Author-facing
+  environment
+- Established Editorial Intake as the first Workspace capability
+- Preserved brand-neutral Hero Visual creation as the default
+- Clarified that source assessment does not equal evidence
+  verification
+- Added canonical vocabulary governance
+
+<!-- CAPABILITY_007_CHANGELOG_END -->

@@ -212,3 +212,23 @@ The current governing documents define:
 After this freeze, Capabilities 007-011 focus on implementation.
 
 <!-- CAPABILITY_006A_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_007_CURRENT_FOCUS_START -->
+
+## Capability 007 Active Focus
+
+The current implementation focus is the beginning of the Canonical
+Editorial Session:
+
+- Editorial Workspace welcome experience
+- Natural Editorial Intake
+- Understanding your input
+- Assessing your sources
+- Optional identity assets
+- Rights confirmation
+- Brand-neutral defaults
+- Resume without missing assets
+
+Full evidence verification remains Capability 008.
+
+<!-- CAPABILITY_007_CURRENT_FOCUS_END -->

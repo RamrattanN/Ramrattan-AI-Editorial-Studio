@@ -218,3 +218,19 @@ ADR-011 records the durable governance decision.
 | 2026-08-02 | D4 | Create Architecture Baseline 2026.08.01v07 | Delivery observation and recovery are durable engineering architecture. |
 
 <!-- CAPABILITY_008A2_DECISION_LOG_END -->
+
+<!-- CAPABILITY_009_DECISION_LOG_START -->
+
+## Capability 009 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-02 | D4 | Limit Capability 009 to Article Engine and Publication Package | Issue #15, ROADMAP, scorecard, and Project planning define one coherent capability. |
+| 2026-08-02 | D4 | Require a provider-independent draft boundary | Editorial invariants must not depend on one generation provider. |
+| 2026-08-02 | D4 | Apply Evidence Validation before generation | High and Severe risk must not become polished publication content. |
+| 2026-08-02 | D4 | Represent Capability 010 and 011 outputs as deferred | Partial product state must not be presented as the complete Version 1.0 package. |
+
+ADR-015 and Architecture Baseline `2026.08.02v10` record the durable
+architecture.
+
+<!-- CAPABILITY_009_DECISION_LOG_END -->

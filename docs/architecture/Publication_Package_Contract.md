@@ -100,3 +100,20 @@ A suitable completion message is:
 
 The Product should then present the export fast path and the
 secondary actions.
+
+<!-- CAPABILITY_009_PUBLICATION_PACKAGE_CONTRACT_START -->
+
+## Capability 009 Implementation Boundary
+
+Capability 009 implements the Article Engine and the textual
+Publication Package: Hero Visual prompt, headline, hook, one or two
+insights, practical takeaway, CTA, source and attribution, hashtags,
+LinkedIn Description, article Markdown, Editorial Confidence, and
+LMHS Editorial Risk.
+
+A rendered Hero Visual remains Capability 010. Portable Editorial
+Project serialization remains Capability 011. The Capability 009
+runtime records both as deferred and must not report the complete
+Version 1.0 package while they are absent.
+
+<!-- CAPABILITY_009_PUBLICATION_PACKAGE_CONTRACT_END -->

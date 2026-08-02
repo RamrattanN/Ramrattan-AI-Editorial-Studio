@@ -470,3 +470,28 @@ refinement and does not block Capability 009. Capability 009 remains Todo and
 has not started.
 
 <!-- INITIATIVE_B001_BRAND_IDENTITY_END -->
+
+<!-- CAPABILITY_009_ROADMAP_START -->
+
+## Capability 009 Scope Clarification
+
+Status: **In Progress**
+
+Approved scope:
+
+- [x] Article Engine runtime
+- [x] Textual Publication Package assembly
+- [x] Evidence and attribution gate
+- [x] Editorial Intent preservation
+- [x] High and Severe publication blocking
+- [x] Explicit Capability 010 and Capability 011 deferral
+
+Integrated Editorial Workspace, Adaptive Editorial Context runtime,
+Component Collaboration, stable Author-facing orchestration API, and
+final integrated Editorial Confidence presentation are not independent
+Capability 009 scope.
+
+Capability 010 and Capability 011 remain Todo and unstarted. B002
+remains Todo, Low Priority, Post-RC1, and non-blocking.
+
+<!-- CAPABILITY_009_ROADMAP_END -->

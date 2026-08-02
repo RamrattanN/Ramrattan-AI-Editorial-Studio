@@ -282,3 +282,18 @@ All notable changes to Ramrattan AI Editorial Studio are documented here.
 - High and Severe Editorial Risk now block publication recommendation
 
 <!-- CAPABILITY_008_CHANGELOG_END -->
+
+<!-- CAPABILITY_009_CHANGELOG_START -->
+
+### Added - Capability 009
+
+- Provider-independent Article Engine
+- Evidence and attribution validation before generation
+- Editorial Intent preservation
+- High and Severe publication blocking
+- Textual Publication Package assembly
+- Explicit Capability 010 and Capability 011 deferrals
+- ADR-015 and Architecture Baseline 2026.08.02v10
+- Capability 009 behavioral, documentation, and demo coverage
+
+<!-- CAPABILITY_009_CHANGELOG_END -->

@@ -309,3 +309,23 @@ ADR-013 records the durable decision. Architecture Baseline
 `2026.08.01v07` remains the merged baseline during implementation.
 
 <!-- CAPABILITY_008A3_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_009_CURRENT_FOCUS_START -->
+
+## Capability 009 Scope Clarification
+
+Capability 009 is the active product capability and implements only
+the Article Engine and textual Publication Package.
+
+The Article Engine consumes explicit Author-owned inputs and completed
+Editorial Integrity results. The package includes the article and its
+required textual publication components while preserving Editorial
+Confidence and publication blocking.
+
+Integrated Editorial Workspace, Adaptive Editorial Context runtime,
+Component Collaboration, stable Author-facing orchestration API, and
+final integrated Editorial Confidence presentation remain deferred.
+Rendered Hero Visual remains Capability 010. Portable Editorial Project
+behavior remains Capability 011.
+
+<!-- CAPABILITY_009_CURRENT_FOCUS_END -->

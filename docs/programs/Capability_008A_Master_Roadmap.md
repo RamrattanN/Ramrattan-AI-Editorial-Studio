@@ -665,3 +665,21 @@ in order and:
 - GitHub planning is synchronized.
 - Capability 008A is marked complete.
 - Capability 009 becomes the active next capability.
+
+<!-- CAPABILITY_009_SCOPE_CLARIFICATION_START -->
+
+## Capability 009 Scope Clarification
+
+The Repository Author resolved the post-008A Capability 009 scope in
+favor of issue #15, ROADMAP, the Version 1 Scorecard, the Capability
+008 demo, and the GitHub Project summary.
+
+Capability 009 implements only the Article Engine and Publication
+Package. Integrated Editorial Workspace, Adaptive Editorial Context
+runtime, Component Collaboration, stable Author-facing orchestration
+API, and final integrated Editorial Confidence presentation remain
+deferred and may appear only as minimal internal support strictly
+necessary for the approved scope. They must not create new product
+surface or independent runtime subsystems.
+
+<!-- CAPABILITY_009_SCOPE_CLARIFICATION_END -->

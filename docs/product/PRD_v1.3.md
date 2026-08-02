@@ -258,19 +258,24 @@ Requirements:
 The Product shall:
 
 - maintain one Editorial Intent per Editorial Session;
-- classify new material as Aligned, Related, Diverging, Separate
-  Intent, or Ambiguous;
-- recommend a new Editorial Session for separate publication
-  objectives;
-- never silently merge unrelated sources;
-- never silently expand scope;
-- ask one concise clarification question when ambiguity blocks safe
-  progress;
+- classify new material as Aligned, Related, Diverging, Separate Intent,
+  or Ambiguous;
+- recommend a new Editorial Session for separate publication objectives;
+- never silently merge unrelated sources or expand scope;
+- ask one concise clarification question when ambiguity blocks progress;
 - preserve approved Publication Package components;
 - distinguish Workspace State from Stage State;
 - support pause, resume, cancel, abort, complete, and archive;
 - preserve work and provenance after abort;
-- and present Editorial Guidance rather than internal engine language
-  to the Author.
+- present Editorial Guidance rather than internal engine language;
+
+- classify claims using the Canonical Vocabulary;
+- require attributable, credible, independent support before Verified;
+- preserve credible contradiction and unresolved uncertainty;
+- review time-sensitive claims for Temporal Integrity;
+- derive Low, Moderate, High, or Severe Editorial Risk without percentages;
+- use Editorial Confidence as the primary Author-facing conclusion;
+- explain significant findings with a recommended next action; and
+- prevent High or Severe risk from receiving a publication recommendation.
 
 <!-- CAPABILITY_008_PRD_END -->

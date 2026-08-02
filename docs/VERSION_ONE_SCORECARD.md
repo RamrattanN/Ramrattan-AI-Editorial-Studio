@@ -94,7 +94,11 @@ Canonical Editorial Session is complete and demonstrable.
 | Workspace lifecycle | Complete | Runtime tests |
 | Approved-component protection | Complete | Runtime tests |
 | One-question clarification | Complete | Runtime tests |
-| Evidence Validation | Next increment | Capability 008 continuation |
-| LMHS Editorial Risk | Next increment | Capability 008 continuation |
+| Evidence Validation | Complete | `studio/evidence_validation.py` |
+| Claim Classification | Complete | Runtime tests |
+| Corroboration | Complete | Independence tests |
+| Temporal Integrity | Complete | Time-sensitive evidence tests |
+| LMHS Editorial Risk | Complete | All-level risk tests |
+| Editorial Confidence Translation | Complete | Publication-gate tests |
 
 <!-- CAPABILITY_008_SCORECARD_END -->

@@ -333,15 +333,13 @@ Capability 008 must use this workflow.
 
 <!-- CAPABILITY_008_ROADMAP_START -->
 
-## Capability 008 - Editorial Discernment
+## Capability 008 - Editorial Discernment and Evidence Validation
 
 Status:
 
-```text
-In implementation
-```
+`Implemented locally; pending delivery workflow completion`
 
-Delivered in this increment:
+Delivered:
 
 - [x] Editorial Intent
 - [x] Editorial Discernment Engine
@@ -351,24 +349,18 @@ Delivered in this increment:
 - [x] No Silent Scope Expansion
 - [x] Workspace lifecycle
 - [x] Stage lifecycle
-- [x] Pause
-- [x] Resume
-- [x] Cancel
-- [x] Abort
-- [x] Complete
-- [x] Archive
+- [x] Pause, resume, cancel, abort, complete, and archive
 - [x] Approved-component protection
 - [x] One-question clarification
-- [x] Runtime tests
-- [x] Capability demo
+- [x] Evidence Validation
+- [x] Claim Classification
+- [x] Independent corroboration and source comparison
+- [x] Temporal Integrity
+- [x] LMHS Editorial Risk
+- [x] Author-facing Editorial Confidence translation
+- [x] Runtime and documentation tests
 
-Next Capability 008 increment:
-
-- Evidence Validation
-- Claim classification
-- Corroboration
-- Temporal Integrity
-- LMHS Editorial Risk
-- Editorial Confidence translation
+Next capability after delivery: Capability 009 - Article Engine and
+Publication Package.
 
 <!-- CAPABILITY_008_ROADMAP_END -->

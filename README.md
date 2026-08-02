@@ -408,18 +408,19 @@ the next command.
 
 <!-- CAPABILITY_008_README_START -->
 
-## Capability 008 - Editorial Discernment
+## Capability 008 - Editorial Discernment and Evidence Validation
 
-Capability 008 adds:
+Capability 008 includes:
 
-- Editorial Discernment Engine
+- Editorial Intent and Editorial Discernment Engine
 - Author-facing Editorial Guidance
-- Editorial Intent
-- Editorial Coherence Guard
-- No Silent Scope Expansion
-- Workspace lifecycle
-- Pause, resume, cancel, abort, complete, and archive behaviour
-- Approved-component protection
-- One-question clarification
+- Editorial Coherence Guard and No Silent Scope Expansion
+- Workspace and Stage lifecycle
+- pause, resume, cancel, abort, complete, and archive behaviour
+- approved-component protection and one-question clarification
+- Claim Classification and independent evidence corroboration
+- contradiction visibility and Temporal Integrity
+- internal LMHS Editorial Risk
+- Author-facing Editorial Confidence translation
 
 <!-- CAPABILITY_008_README_END -->

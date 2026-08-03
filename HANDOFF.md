@@ -37,7 +37,7 @@ Ramrattan AI Editorial Studio
 
 **Repository State**
 
-- Working tree expected clean
+- Working tree clean
 - `develop` synchronized with `origin/develop`
 - Deterministic bootstraps operational
 - Repository validation expected to pass
@@ -70,13 +70,15 @@ Ramrattan AI Editorial Studio
 
 - Delegated Delivery Workflow
 - RC1 Documentation Reconciliation
+- Issue #18 - Version 1 End-to-End Demo and RC1 Release Readiness
+- Version 1 RC1 Release Readiness
 - Claude Code Integration
 
 Current validation baseline:
 
 - Compileall PASS
 - Repository Validation PASS
-- 323 Tests PASS
+- 324 Tests PASS
 
 ---
 
@@ -84,13 +86,21 @@ Current validation baseline:
 
 ## Active Objective
 
-**Issue #18**
+**Manual Version 1 Release**
 
-Version 1 End-to-End Release Readiness
+Issue #18 and Version 1 RC1 Release Readiness are Complete. The remaining
+release actions require explicit Repository Author approval:
 
-This is the only active engineering objective.
+- Repository Author release approval
+- `develop`-to-`main` release promotion
+- Creation of tag `v1.0.0`
+- GitHub Release publication
+- Release-note publication
+- External announcement, if approved
+- Post-release verification
 
-No additional feature work should begin unless explicitly approved by the Repository Author.
+No release action or additional feature work should begin unless explicitly
+approved by the Repository Author.
 
 ---
 
@@ -205,12 +215,13 @@ Guidelines
 
 # Current Priorities
 
-1. Complete Issue #18.
-2. RC1 Approval.
-3. Version 1 Release.
-4. Post-RC1 Improvements.
-5. B002 Brand Refinement.
-6. Version 1.1 Planning.
+1. Repository Author release approval.
+2. Promote `develop` to `main` for the Version 1 release.
+3. Create tag `v1.0.0` and publish the GitHub Release and release notes.
+4. Publish an external announcement, if approved, and verify the release.
+5. Post-RC1 Improvements.
+6. B002 Brand Refinement.
+7. Version 1.1 Planning.
 
 ---
 
@@ -286,7 +297,7 @@ Recent engineering milestones
 - RC1 Documentation Reconciliation completed.
 - Claude Code adopted as the independent engineering reviewer.
 - Architecture Baseline advanced to `2026.08.02v13`.
-- Current engineering objective is **Issue #18 - RC1 Release Readiness**.
+- Issue #18 and Version 1 RC1 Release Readiness completed.
 
 ---
 
@@ -316,7 +327,7 @@ Capabilities
 
 Current Objective
 
-**Issue #18 - RC1 Release Readiness**
+**Manual Version 1 Release**
 
 Deferred
 
@@ -326,7 +337,7 @@ Validation
 
 - Compileall PASS
 - Repository Validation PASS
-- 323 Tests PASS
+- 324 Tests PASS
 
 Repository
 
@@ -348,4 +359,4 @@ Last Updated
 
 Current Phase
 
-**RC1 Release Readiness**
+**Manual Version 1 Release**

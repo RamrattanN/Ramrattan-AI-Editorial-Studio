@@ -2,8 +2,8 @@
 
 ## Status
 
-Proposed during Capability 011. Becomes current only when Capability 011 is
-delivered.
+Current delivered architecture baseline. Delivered by Capability 011 in PR #50
+and merge commit `7962d140eabf28e492a3aca935f1e622e9ebc21a`.
 
 ## Baseline ID
 

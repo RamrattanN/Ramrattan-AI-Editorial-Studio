@@ -989,6 +989,14 @@ from bootstrap_capability010_hero_visual_system import (
 FILES["studio/publication_package.py"] = _capability010_publication_package
 # CAPABILITY_010_HERO_VISUAL_OWNER_SYNC_END
 
+# CAPABILITY_011_PORTABLE_PROJECT_OWNER_SYNC_START
+from bootstrap_capability011_portable_editorial_project import (
+    PUBLICATION_PACKAGE as _capability011_publication_package,
+)
+
+FILES["studio/publication_package.py"] = _capability011_publication_package
+# CAPABILITY_011_PORTABLE_PROJECT_OWNER_SYNC_END
+
 MANAGED = {
     "docs/architecture/adr/README.md": (
         "CAPABILITY_009_ADR_INDEX",
@@ -1308,8 +1316,6 @@ def validate_generated(root: Path) -> None:
         "studio/adaptive_editorial_context.py",
         "studio/component_collaboration.py",
         "studio/editorial_orchestrator.py",
-        "studio/hero_visual.py",
-        "studio/portable_editorial_project.py",
     )
     if any((root / relative).exists() for relative in forbidden):
         raise CapabilityError("A deferred runtime subsystem was introduced.")

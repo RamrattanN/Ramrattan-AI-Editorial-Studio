@@ -84,14 +84,10 @@ class RC1CheckpointTests(unittest.TestCase):
             "ae56f16f3e4b3a2bfbf5cefbf6ee807482cd8814e30b7496a917b9eae3a5ba72",
         )
 
-    def test_editorial_runtime_is_unchanged(self):
+    def test_protected_editorial_runtime_is_unchanged(self):
         self.assertEqual(
             self.digest("studio/article_engine.py"),
             "653db77e8881aa6532906fa1b17a8c771152cfe14ef1266383daba423d596868",
-        )
-        self.assertEqual(
-            self.digest("studio/publication_package.py"),
-            "1e6cc91dda667f9b87eee248f563771f2cb99f0954346f3aef6f0e0bcb62d64b",
         )
 
     def test_current_status_documents_agree(self):
@@ -106,8 +102,8 @@ class RC1CheckpointTests(unittest.TestCase):
             )
             assert_capability010_complete(section)
             self.assertIn("2026.08.02v12", section, relative)
-            self.assertRegex(section, r"Capability 011[^\n]*(?:Next|next)")
-            self.assertIn("unstarted", section, relative)
+            self.assertRegex(section, r"Capability 011[^\n]*In Progress")
+            self.assertRegex(section, r"[Ii]ssue #17")
             self.assertIn("B002", section, relative)
 
     def test_capability010_completion_records_are_current(self):

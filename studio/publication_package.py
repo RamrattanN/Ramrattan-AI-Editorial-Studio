@@ -1,8 +1,4 @@
-"""Textual Publication Package assembly for Capability 009.
-
-Rendered Hero Visual generation remains Capability 010. Portable
-Editorial Project serialization remains Capability 011.
-"""
+"""Publication Package assembly and narrow attachment boundaries."""
 
 from __future__ import annotations
 
@@ -16,6 +12,7 @@ from .evidence_validation import (
     EvidenceValidationReport,
 )
 from .hero_visual import HeroVisualResult, HeroVisualStatus
+from .portable_editorial_project import PortableEditorialProject
 
 
 class PackageReadiness(str, Enum):
@@ -54,7 +51,7 @@ class PublicationPackage:
     review_findings: tuple[str, ...]
     hero_visual_state: HeroVisualPackageState = HeroVisualPackageState.PENDING
     rendered_hero_visual: HeroVisualResult | None = None
-    portable_editorial_project: None = None
+    portable_editorial_project: PortableEditorialProject | None = None
     deferred_components: tuple[str, ...] = (
         "Rendered Hero Visual - Capability 010",
         "Portable Editorial Project - Capability 011",
@@ -155,4 +152,27 @@ class PublicationPackageBuilder:
             hero_visual_state=state,
             rendered_hero_visual=result,
             deferred_components=deferred,
+        )
+
+    def attach_portable_editorial_project(
+        self,
+        package: PublicationPackage,
+        project: PortableEditorialProject,
+    ) -> PublicationPackage:
+        """Attach one validated project without changing article or visual output."""
+        if package.portable_editorial_project is not None:
+            raise ValueError("The Publication Package already has a Portable Editorial Project.")
+        if project.article_markdown != package.article_markdown:
+            raise ValueError("The Portable Editorial Project must preserve the approved article.")
+        if project.hero_visual_prompt != package.hero_visual_prompt:
+            raise ValueError("The Portable Editorial Project must preserve the approved Hero Visual prompt.")
+        deferred = tuple(
+            item for item in package.deferred_components
+            if item != "Portable Editorial Project - Capability 011"
+        )
+        return replace(
+            package,
+            portable_editorial_project=project,
+            deferred_components=deferred,
+            version_one_complete=not deferred,
         )

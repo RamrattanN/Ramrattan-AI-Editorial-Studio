@@ -2,7 +2,8 @@
 
 ## Status
 
-Active architecture baseline for Capability 5.
+Active architecture contract. The RC1 executable subset is defined below by
+Capability 011 and ADR-017.
 
 ## Purpose
 
@@ -279,6 +280,41 @@ history:
 
 The final format may use structured front matter plus readable
 Markdown sections.
+
+## RC1 Executable Schema - Capability 011
+
+The earlier suggested structure is a product-direction inventory, not a license
+to fabricate data. For RC1, the Portable Editorial Project schema is narrowed
+to state supplied reliably by the current Article Engine, Hero Visual System,
+Publication Package, and Editorial Session:
+
+- schema version and product identity;
+- permanent project ID, title, safe slug, daily document version, optional
+  previous version, and saved date;
+- complete approved article Markdown;
+- approved Hero Visual prompt, attachment status, and validated artifact hash
+  when one exists;
+- Editorial Confidence, Editorial Risk, package readiness, review findings,
+  and explicit integrity blockers.
+
+The Markdown document contains one deterministic JSON data block followed by a
+readable article section. Deserialization accepts exactly the RC1 fields and
+schema version. Unknown fields, unsupported versions, malformed structures,
+invalid identities, and unresolved blockers fail closed.
+
+The following legacy fields are unsupported by current runtime objects and are
+therefore deferred rather than synthesized: Author perspective profiles,
+Adaptive Editorial Context, audience/tone/constraint models, editorial
+decision history, open questions and next actions, rich source records and
+retained excerpts, publication URLs and timestamps, approval histories, and
+embedded identity assets. A future schema version requires a separate decision
+and migration contract.
+
+Resume invokes `EditorialSession.resume()` only after validation and always
+requires a Temporal Integrity review. A saved date before the supplied current
+date is reported explicitly as stale. The RC1 runtime adds no workspace,
+collaboration, orchestration, UI, hosted storage, publishing automation,
+release packaging, or Version 2 behavior.
 
 ## Article Content
 

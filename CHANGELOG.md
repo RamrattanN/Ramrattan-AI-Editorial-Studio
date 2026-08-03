@@ -1,5 +1,18 @@
 # Changelog
 
+<!-- CAPABILITY_011_CHANGELOG_START -->
+
+### Added - Capability 011 (In Progress)
+
+- Narrow RC1 Portable Editorial Project schema and Markdown round trip
+- Versioned Configuration Management filenames with bounded safe slugs
+- Validated resume with mandatory Temporal Integrity review
+- Article, Hero Visual, project, and deterministic optional ZIP downloads
+- Narrow Publication Package project attachment
+- ADR-017 and proposed Architecture Baseline 2026.08.02v13
+
+<!-- CAPABILITY_011_CHANGELOG_END -->
+
 All notable changes to Ramrattan AI Editorial Studio are documented here.
 
 ## [Unreleased]

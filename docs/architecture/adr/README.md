@@ -54,3 +54,11 @@ Each ADR explains:
 - [ADR-016 - Hero Visual System](ADR-016-hero-visual-system.md)
 
 <!-- CAPABILITY_010_ADR_INDEX_END -->
+
+<!-- CAPABILITY_011_ADR_INDEX_START -->
+
+## Capability 011 Decision
+
+- [ADR-017 - Portable Editorial Project Resume and Export](ADR-017-portable-editorial-project-resume-export.md)
+
+<!-- CAPABILITY_011_ADR_INDEX_END -->

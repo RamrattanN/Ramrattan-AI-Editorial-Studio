@@ -327,4 +327,24 @@ Capability 011 retains Portable Editorial Project serialization, resume, and
 export. Capability 010 adds no workspace, collaboration, orchestration, UI,
 publishing automation, release packaging, or Version 2 product surface.
 
+<!-- CAPABILITY_011_PRD_SCOPE_START -->
+
+## Capability 011 - RC1 Portable Editorial Project Scope
+
+Capability 011 implements Versioned Configuration Management naming, daily
+sequential `YYYY.MM.DDvNN` versions, safe bounded filenames, deterministic
+Markdown serialization, strict deserialization, Resume Existing Project,
+Temporal Integrity review, article/Hero Visual/project downloads, optional ZIP
+export, and the narrow Publication Package attachment.
+
+RC1 stores only state reliably supplied by current runtime objects: project and
+schema identity, title/slug/version/date, approved article Markdown, approved
+Hero Visual prompt/status/hash, package confidence/risk/readiness, review
+findings, and explicit blockers. It does not fabricate the richer legacy Author,
+Adaptive Editorial Context, source archive, publication history, decision
+history, asset, collaboration, workspace, orchestration, UI, or Version 2
+fields. ADR-017 owns this narrowing decision.
+
+<!-- CAPABILITY_011_PRD_SCOPE_END -->
+
 <!-- CAPABILITY_010_PRD_END -->

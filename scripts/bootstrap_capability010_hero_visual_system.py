@@ -97,6 +97,19 @@ FILES.update(_rc1_capability010_files)
 MANAGED.update(_rc1_capability010_managed)
 # RC1_CAPABILITY010_RECONCILIATION_OWNER_SYNC_END
 
+# CAPABILITY_011_PORTABLE_PROJECT_OWNER_SYNC_START
+from bootstrap_capability011_portable_editorial_project import (
+    FILES as _capability011_files,
+    PUBLICATION_PACKAGE as _capability011_publication_package,
+)
+
+FILES["studio/publication_package.py"] = _capability011_publication_package
+FILES["tests/test_capability010_documentation.py"] = _capability011_files[
+    "tests/test_capability010_documentation.py"
+]
+PUBLICATION_PACKAGE = _capability011_publication_package
+# CAPABILITY_011_PORTABLE_PROJECT_OWNER_SYNC_END
+
 OWNER_SYNC = clean("""
 # CAPABILITY_010_HERO_VISUAL_OWNER_SYNC_START
 from bootstrap_capability010_hero_visual_system import (
@@ -272,7 +285,6 @@ def validate_generated(root: Path) -> None:
     if digest(root / "assets/brand/logo/master/editorial-compass-lockup-master.png") != LOCKUP_HASH:
         raise CapabilityError("Approved brand lockup master changed.")
     forbidden = (
-        "studio/portable_editorial_project.py",
         "studio/component_collaboration.py",
         "studio/editorial_orchestrator.py",
         "studio/hero_visual_ui.py",

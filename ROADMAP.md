@@ -503,13 +503,13 @@ remains Todo, Low Priority, Post-RC1, and non-blocking.
 - Capability 009 - Complete
 - Capability 010 - Complete (PR #46; issue #16 closed)
 - Initiative B001 - Complete
-- RC1 Documentation Reconciliation after Capability 010 - In Progress
-- Capability 011 - Next, Todo, and unstarted
+- RC1 Documentation Reconciliation after Capability 010 - Complete
+- Capability 011 - In Progress (issue #17)
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
 - Current delivered architecture baseline - `2026.08.02v12`
 
-Version 1 is not release-ready. Capability 011 and the end-to-end
-release-readiness evidence in issue #18 remain outstanding. Earlier capability
+Version 1 is not release-ready. Capability 011 is active and the end-to-end
+release-readiness evidence in issue #18 remains outstanding. Earlier capability
 status sections are historical delivery records; this section is authoritative
 for the current checkpoint increment.
 
@@ -538,3 +538,25 @@ No Portable Project, workspace, collaboration, orchestration, UI, publishing
 automation, release packaging, or Version 2 behavior is included.
 
 <!-- CAPABILITY_010_ROADMAP_END -->
+
+<!-- CAPABILITY_011_ROADMAP_START -->
+
+## Capability 011 - Portable Editorial Project Resume and Export
+
+Status: **In Progress**
+
+Approved RC1 scope:
+
+- [ ] Versioned Configuration Management filenames and collision handling
+- [ ] deterministic Markdown serialization and strict deserialization
+- [ ] Resume Existing Project with Temporal Integrity review
+- [ ] article, Hero Visual, and Portable Editorial Project downloads
+- [ ] deterministic optional ZIP export
+- [ ] narrow Publication Package attachment
+- [ ] offline behavioral, documentation, bootstrap, and regeneration proofs
+
+Issue #17 and its existing Project item are In Progress. Proposed ADR-017 and
+Architecture Baseline `2026.08.02v13` define the narrow runtime-supported
+schema. Issue #18 and B002 remain unchanged.
+
+<!-- CAPABILITY_011_ROADMAP_END -->

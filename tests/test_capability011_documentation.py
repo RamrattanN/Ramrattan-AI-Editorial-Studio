@@ -85,7 +85,7 @@ class Capability011DocumentationTests(unittest.TestCase):
         self.assertEqual(cap010.FILES["studio/publication_package.py"], live)
         self.assertEqual(cap011.FILES["studio/publication_package.py"], live)
 
-    def test_current_records_keep_capability_011_active(self):
+    def test_current_records_mark_capability_011_complete(self):
         for relative in (
             "ROADMAP.md",
             "docs/VERSION_ONE_SCORECARD.md",
@@ -94,6 +94,7 @@ class Capability011DocumentationTests(unittest.TestCase):
         ):
             content = self.content(relative)
             self.assertIn("Capability 011", content)
+            self.assertIn("Complete", content)
             self.assertIn("In Progress", content)
             self.assertIn("2026.08.02v13", content)
 

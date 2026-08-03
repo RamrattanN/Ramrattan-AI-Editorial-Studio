@@ -37,7 +37,7 @@ Canonical Editorial Session.
 | Component Collaboration | Not separately delivered | Deferred product surface |
 | Portable Project Export | Planned | Capability 011 |
 | Resume Existing Project | Planned | Capability 011 |
-| End-to-End Demo | Planned | Version 1.0 Release Readiness |
+| End-to-End Demo | In Progress | `tests/test_version_one_end_to_end.py` and Issue #18 |
 
 ## Release Rule
 
@@ -205,10 +205,11 @@ Capabilities 010 and 011 deliver their assigned outputs.
 | Capability 009 | Complete | PR #43 and ADR-015 |
 | Initiative B001 | Complete | PR #42 and approved master hashes |
 | Capability 010 | Complete | PR #46, closed issue #16, and ADR-016 |
-| Capability 011 | In Progress | Issue #17 and Capability 011 tests |
+| Capability 011 | Complete | PR #50, ADR-017, and Capability 011 tests |
 | B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
-| Current delivered baseline | Complete | `2026.08.02v12` |
-| Complete RC1 readiness | Blocked | Capability 011 and issue #18 |
+| Current delivered baseline | Complete | `2026.08.02v13` |
+| End-to-End Demo | Complete locally | `tests/test_version_one_end_to_end.py` |
+| Complete RC1 readiness | In Progress | Issue #18 |
 
 The Article Engine, Publication Package, and Hero Visual System are delivered.
 Version 1 is not release-ready until the Portable Project and end-to-end
@@ -246,17 +247,33 @@ readiness are delivered.
 | Area | Status | Evidence |
 |---|---|---|
 | Capability 010 | Complete | PR #46 and ADR-016 |
-| Capability 011 | In Progress | Issue #17 |
-| Narrow schema decision | In Progress | ADR-017 and PRD scope |
-| VCM filenames and collision safety | In Progress | Behavioral tests |
-| Markdown round trip and strict loading | In Progress | Behavioral tests |
-| Resume and Temporal Integrity | In Progress | Editorial Session tests |
-| Deterministic downloads and ZIP | In Progress | Offline export tests |
-| Proposed runtime baseline | In Progress | `2026.08.02v13` |
-| Issue #18 | Todo | End-to-end release readiness |
+| Capability 011 | Complete | PR #50 and closed issue #17 |
+| Narrow schema decision | Complete | Accepted ADR-017 and PRD scope |
+| VCM filenames and collision safety | Complete | Behavioral tests |
+| Markdown round trip and strict loading | Complete | Behavioral tests |
+| Resume and Temporal Integrity | Complete | Editorial Session tests |
+| Deterministic downloads and ZIP | Complete | Offline export tests |
+| Current runtime baseline | Complete | `2026.08.02v13` |
+| Issue #18 | In Progress | End-to-end integration test and demo |
 | B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
 
-Version 1 remains incomplete until Capability 011 is delivered and issue #18
-provides end-to-end release-readiness evidence.
+Capability 011 is complete. Version 1 release-readiness evidence remains In
+Progress until Issue #18 is reviewed and delivered.
 
 <!-- CAPABILITY_011_SCORECARD_END -->
+
+<!-- ISSUE_018_SCORECARD_START -->
+
+## Issue #18 End-to-End Release Evidence
+
+| Evidence | Status | Source |
+|---|---|---|
+| Connected Author journey | Complete locally | `tests/test_version_one_end_to_end.py` |
+| Focused revision protection | Complete locally | CTA-only integration assertion |
+| Complete outputs and resume | Complete locally | Article, Hero Visual, project, and ZIP assertions |
+| Consolidated demo | Complete locally | `docs/demos/Version-1-End-to-End-Demo.md` |
+| Issue #18 delivery | In Progress | GitHub issue #18 |
+
+Release readiness is not claimed until this increment is delivered.
+
+<!-- ISSUE_018_SCORECARD_END -->

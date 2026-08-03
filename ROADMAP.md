@@ -504,12 +504,13 @@ remains Todo, Low Priority, Post-RC1, and non-blocking.
 - Capability 010 - Complete (PR #46; issue #16 closed)
 - Initiative B001 - Complete
 - RC1 Documentation Reconciliation after Capability 010 - Complete
-- Capability 011 - In Progress (issue #17)
+- Capability 011 - Complete (PR #50; issue #17 closed)
+- Issue #18 - End-to-End Demo and RC1 Release Readiness - In Progress
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
-- Current delivered architecture baseline - `2026.08.02v12`
+- Current delivered architecture baseline - `2026.08.02v13`
 
-Version 1 is not release-ready. Capability 011 is active and the end-to-end
-release-readiness evidence in issue #18 remains outstanding. Earlier capability
+Version 1 is not release-ready. Capability 011 is delivered; end-to-end
+release-readiness evidence in issue #18 is In Progress. Earlier capability
 status sections are historical delivery records; this section is authoritative
 for the current checkpoint increment.
 
@@ -543,20 +544,38 @@ automation, release packaging, or Version 2 behavior is included.
 
 ## Capability 011 - Portable Editorial Project Resume and Export
 
-Status: **In Progress**
+Status: **Complete**
 
 Approved RC1 scope:
 
-- [ ] Versioned Configuration Management filenames and collision handling
-- [ ] deterministic Markdown serialization and strict deserialization
-- [ ] Resume Existing Project with Temporal Integrity review
-- [ ] article, Hero Visual, and Portable Editorial Project downloads
-- [ ] deterministic optional ZIP export
-- [ ] narrow Publication Package attachment
-- [ ] offline behavioral, documentation, bootstrap, and regeneration proofs
+- [x] Versioned Configuration Management filenames and collision handling
+- [x] deterministic Markdown serialization and strict deserialization
+- [x] Resume Existing Project with Temporal Integrity review
+- [x] article, Hero Visual, and Portable Editorial Project downloads
+- [x] deterministic optional ZIP export
+- [x] narrow Publication Package attachment
+- [x] offline behavioral, documentation, bootstrap, and regeneration proofs
 
-Issue #17 and its existing Project item are In Progress. Proposed ADR-017 and
-Architecture Baseline `2026.08.02v13` define the narrow runtime-supported
-schema. Issue #18 and B002 remain unchanged.
+Capability 011 was delivered through PR #50; issue #17 is closed, ADR-017 is
+Accepted, and Architecture Baseline `2026.08.02v13` is current. Issue #18 is In
+Progress. B002 remains unchanged.
 
 <!-- CAPABILITY_011_ROADMAP_END -->
+
+<!-- ISSUE_018_RELEASE_READINESS_START -->
+
+## Issue #18 - Version 1 End-to-End Demo and RC1 Release Readiness
+
+Status: **In Progress**
+
+- [x] Connected real-runtime Author journey test
+- [x] High/Severe Editorial Risk publication block
+- [x] Complete Publication Package, 720 × 425 Hero Visual, resume, and exports
+- [x] Focused revision protection
+- [x] Consolidated evidence demo and evidence-backed release checklist
+- [ ] Deliver Issue #18 evidence through review and merge
+
+No release tag, published release, external-service claim, B002 work, or
+Version 2 behavior is included.
+
+<!-- ISSUE_018_RELEASE_READINESS_END -->

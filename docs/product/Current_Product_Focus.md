@@ -338,12 +338,12 @@ Capability 009 is complete.
 
 Capability 010 is complete. The Article Engine, Publication Package, and Hero
 Visual System are delivered under ADR-015, ADR-016, and baseline
-`2026.08.02v12`.
+`2026.08.02v13`.
 
-Capability 011 is active and In Progress under issue #17. B002 remains
-deferred, Low Priority, Post-RC1, and non-blocking. Version 1 is not
-release-ready until the Portable Project and end-to-end release-readiness work
-in issue #18 is complete.
+Capability 011 is Complete through PR #50 and issue #17 is closed. Issue #18
+end-to-end RC1 release-readiness evidence is active and In Progress. B002
+remains deferred, Low Priority, Post-RC1, and non-blocking. Version 1 release
+readiness is not claimed until Issue #18 is delivered.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
 
@@ -369,16 +369,27 @@ automation, release packaging, or Version 2 behavior is part of this focus.
 
 <!-- CAPABILITY_011_CURRENT_FOCUS_START -->
 
-## Capability 011 Active State
+## Capability 011 Delivered State
 
-Capability 011 implements the narrow RC1 Portable Editorial Project using only
+Capability 011 delivered the narrow RC1 Portable Editorial Project using only
 state supplied by the current Article Engine, Hero Visual, Publication Package,
-and Editorial Session runtimes. ADR-017 and proposed baseline
-`2026.08.02v13` govern the implementation.
+and Editorial Session runtimes. ADR-017 is Accepted and baseline
+`2026.08.02v13` is current.
 
 The richer legacy schema remains documentation of future product direction;
 unsupported Author profiles, Adaptive Editorial Context, rich sources,
 publication history, collaboration, workspace, orchestration, UI, and Version
-2 state are not fabricated. Issue #18 and B002 remain unchanged.
+2 state are not fabricated. Issue #18 is In Progress; B002 remains unchanged.
 
 <!-- CAPABILITY_011_CURRENT_FOCUS_END -->
+
+<!-- ISSUE_018_CURRENT_FOCUS_START -->
+
+## Active Focus - Issue #18 RC1 Release Readiness
+
+The active work proves the connected Version 1 Author journey using existing
+deterministic runtime components, records automated and manual evidence
+honestly, and reconciles current status. It adds no runtime behavior, release
+tag, published release, external-service claim, B002 work, or Version 2 scope.
+
+<!-- ISSUE_018_CURRENT_FOCUS_END -->

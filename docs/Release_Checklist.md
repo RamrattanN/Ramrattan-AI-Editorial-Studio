@@ -2,20 +2,20 @@
 
 ## Preparation
 
-- [ ] Version selected
-- [ ] Release scope agreed
+- [x] Version selected - Version 1.0 RC1
+- [x] Release scope agreed - Issue #18
 - [ ] Acceptance criteria met
-- [ ] Changelog updated
-- [ ] Documentation updated
-- [ ] ADRs accepted where required
-- [ ] Known limitations documented
+- [x] Changelog updated
+- [x] Documentation updated
+- [x] ADRs accepted where required
+- [x] Known limitations documented in the Version 1 end-to-end demo
 
 ## Validation
 
-- [ ] `python3 studio.py validate` passes
+- [x] `python3 studio.py validate` passes
 - [ ] Prompt files reviewed
 - [ ] Examples reviewed
-- [ ] Regression tests pass
+- [x] Regression tests pass
 - [ ] No secrets or private data are present
 
 ## Git
@@ -29,6 +29,12 @@
 ## Post-Release
 
 - [ ] Repository release verified
-- [ ] Roadmap updated
+- [x] Roadmap updated
 - [ ] Follow-up issues created
 - [ ] Rollback target confirmed
+
+## Evidence Boundary
+
+Unchecked items require manual review, human sign-off, Git delivery, external
+publication, tagging, or post-release evidence. This checklist does not infer
+those outcomes from local automated tests.

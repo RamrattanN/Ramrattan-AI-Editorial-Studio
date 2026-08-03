@@ -45,7 +45,6 @@ class Capability010DocumentationTests(unittest.TestCase):
 
     def test_no_deferred_runtime_subsystems_were_added(self):
         forbidden = (
-            "studio/portable_editorial_project.py",
             "studio/component_collaboration.py",
             "studio/editorial_orchestrator.py",
             "studio/hero_visual_ui.py",

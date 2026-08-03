@@ -222,7 +222,7 @@ handoff criteria are satisfied.
 
 - Capability 009 - Complete
 - Capability 010 - Complete (PR #46; issue #16 closed)
-- Capability 011 - Next, Todo, and unstarted
+- Capability 011 - In Progress (issue #17)
 - B001 - Complete
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
 - Current delivered architecture baseline - `2026.08.02v12`
@@ -248,3 +248,19 @@ and export and issue #18 end-to-end release-readiness evidence remain
 outstanding. B002 remains non-blocking Post-RC1 work.
 
 <!-- CAPABILITY_010_RELEASE_STATUS_END -->
+
+<!-- CAPABILITY_011_RELEASE_STATUS_START -->
+
+## Capability 011 Release Contribution
+
+Capability 011 is In Progress and adds narrow Author-owned Portable Editorial
+Project serialization, validated resume with Temporal Integrity review, safe
+VCM downloads, deterministic optional ZIP export, and the Publication Package
+attachment boundary.
+
+ADR-017 and Architecture Baseline `2026.08.02v13` are proposed during delivery.
+Version 1 remains incomplete until Capability 011 is delivered and issue #18
+provides end-to-end release-readiness evidence. B002 remains non-blocking
+Post-RC1 work.
+
+<!-- CAPABILITY_011_RELEASE_STATUS_END -->

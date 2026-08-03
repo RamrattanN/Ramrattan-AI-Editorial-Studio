@@ -340,9 +340,10 @@ Capability 010 is complete. The Article Engine, Publication Package, and Hero
 Visual System are delivered under ADR-015, ADR-016, and baseline
 `2026.08.02v12`.
 
-Capability 011 is Next, Todo, and unstarted. B002 remains deferred, Low
-Priority, Post-RC1, and non-blocking. Version 1 is not release-ready until the
-Portable Project and end-to-end release-readiness work in issue #18 is complete.
+Capability 011 is active and In Progress under issue #17. B002 remains
+deferred, Low Priority, Post-RC1, and non-blocking. Version 1 is not
+release-ready until the Portable Project and end-to-end release-readiness work
+in issue #18 is complete.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
 
@@ -365,3 +366,19 @@ No Portable Project, workspace, collaboration, orchestration, UI, publishing
 automation, release packaging, or Version 2 behavior is part of this focus.
 
 <!-- CAPABILITY_010_CURRENT_FOCUS_END -->
+
+<!-- CAPABILITY_011_CURRENT_FOCUS_START -->
+
+## Capability 011 Active State
+
+Capability 011 implements the narrow RC1 Portable Editorial Project using only
+state supplied by the current Article Engine, Hero Visual, Publication Package,
+and Editorial Session runtimes. ADR-017 and proposed baseline
+`2026.08.02v13` govern the implementation.
+
+The richer legacy schema remains documentation of future product direction;
+unsupported Author profiles, Adaptive Editorial Context, rich sources,
+publication history, collaboration, workspace, orchestration, UI, and Version
+2 state are not fabricated. Issue #18 and B002 remain unchanged.
+
+<!-- CAPABILITY_011_CURRENT_FOCUS_END -->

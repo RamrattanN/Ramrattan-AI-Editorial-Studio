@@ -205,7 +205,7 @@ Capabilities 010 and 011 deliver their assigned outputs.
 | Capability 009 | Complete | PR #43 and ADR-015 |
 | Initiative B001 | Complete | PR #42 and approved master hashes |
 | Capability 010 | Complete | PR #46, closed issue #16, and ADR-016 |
-| Capability 011 | Next, Todo, and unstarted | Issue #17 |
+| Capability 011 | In Progress | Issue #17 and Capability 011 tests |
 | B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
 | Current delivered baseline | Complete | `2026.08.02v12` |
 | Complete RC1 readiness | Blocked | Capability 011 and issue #18 |
@@ -238,3 +238,25 @@ Version 1 remains incomplete until Capability 011 and end-to-end release
 readiness are delivered.
 
 <!-- CAPABILITY_010_SCORECARD_END -->
+
+<!-- CAPABILITY_011_SCORECARD_START -->
+
+## Capability 011 Progress
+
+| Area | Status | Evidence |
+|---|---|---|
+| Capability 010 | Complete | PR #46 and ADR-016 |
+| Capability 011 | In Progress | Issue #17 |
+| Narrow schema decision | In Progress | ADR-017 and PRD scope |
+| VCM filenames and collision safety | In Progress | Behavioral tests |
+| Markdown round trip and strict loading | In Progress | Behavioral tests |
+| Resume and Temporal Integrity | In Progress | Editorial Session tests |
+| Deterministic downloads and ZIP | In Progress | Offline export tests |
+| Proposed runtime baseline | In Progress | `2026.08.02v13` |
+| Issue #18 | Todo | End-to-end release readiness |
+| B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
+
+Version 1 remains incomplete until Capability 011 is delivered and issue #18
+provides end-to-end release-readiness evidence.
+
+<!-- CAPABILITY_011_SCORECARD_END -->

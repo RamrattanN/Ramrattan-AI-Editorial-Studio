@@ -79,9 +79,23 @@ silently.
 
 ## Required Context
 
-Read `AGENTS.md` at the beginning of every repository task.
+Begin every new repository session with:
 
-Then load only the context required for the task.
+1. Read `HANDOFF.md`.
+2. Read `AGENTS.md`.
+3. Read any applicable AI adapter document, such as `CLAUDE.md`.
+
+Each document has a distinct purpose:
+
+- `HANDOFF.md` provides current repository status, priorities, continuity,
+  recent milestones, and AI working conventions.
+- `AGENTS.md` defines repository governance, engineering workflow, approval
+  boundaries, and operational rules.
+- AI adapter documents provide model-specific guidance and never override
+  repository governance.
+
+After establishing continuity, load only the additional context required for
+the task.
 
 For capability implementation, read:
 
@@ -104,6 +118,10 @@ unrelated material merely to satisfy a checklist.
 
 Do not rely on conversation history when the repository or authorized external
 system can answer the question directly.
+
+Do not repeat repository-wide discovery when `HANDOFF.md` and verified current
+state already provide the required context. Confirm only the facts that are
+material to the current task.
 
 ## Role-Based Collaboration
 
@@ -424,6 +442,32 @@ After merge, verify branch deletion, active branch, clean working tree, merge
 commit, local and remote `develop`, and planning state independently. Resume
 from any incomplete cleanup step instead of repeating the merge.
 
+## AI Efficiency
+
+AI usage must remain proportional to the value created.
+
+Implementation Agents should:
+
+- keep context loading and prompt size proportional to the task
+- use `HANDOFF.md` before performing broad repository discovery
+- avoid repeating governance already defined in `AGENTS.md`
+- avoid re-verifying facts that remain unchanged and were already established
+- prefer targeted inspection over repository-wide inventories
+- use focused tests during implementation and full validation after the change
+  stabilizes
+- avoid repeated full validation when no relevant state has changed
+- keep reports concise and evidence-based
+- avoid duplicate analysis across multiple AI agents
+- use independent review to discover new risks rather than repeat known facts
+- ensure every repository mutation produces meaningful value
+
+Small, low-risk documentation changes should not consume capability-level
+analysis unless repository evidence shows that the higher level of scrutiny is
+necessary.
+
+Resource efficiency never overrides safety, validation, approval boundaries,
+or fail-closed behavior.
+
 ## Stopping Conditions
 
 Stop and yield to the Repository Author or the Repository Maintainer who
@@ -474,6 +518,9 @@ Do not present speculative future commands as current actions. Recommend only
 the next safe workflow transition unless the Repository Author or an
 explicitly authorized Repository Maintainer requests a broader plan.
 
+Keep reporting proportional to the task. Do not repeat large repository
+summaries when only a narrow state transition occurred.
+
 ## Engineering Principles
 
 Prefer:
@@ -486,6 +533,8 @@ Prefer:
 - explicit state over hidden state
 - one verified transition over speculative sequences
 - preservation of human-owned repository work
+- meaningful engineering value over activity for its own sake
+- lean AI usage without compromising quality
 
 The Implementation Agent succeeds when the Repository Author and authorized
 Repository Maintainers can focus on engineering decisions rather than workflow
@@ -506,17 +555,22 @@ Apply one authoritative owner for each governance concept:
 - `AGENTS.md` owns the operational contract for repository agents;
 - `CONTRIBUTING.md` translates repository governance for contributors;
 - `AGENT_MEMORY.md` preserves advisory, chronological experience;
+- `HANDOFF.md` provides current operational continuity, project state,
+  priorities, recent milestones, and AI working conventions;
 - `ROADMAP.md` owns current capability sequence and program status;
 - the Version 1.0 Scorecard owns release-readiness evidence; and
 - the Version 1.0 Release Definition owns the product promise and release
   boundary.
 
-Summaries must reference their authority rather than create competing
-rules. The capability that changes a governed fact updates its authority
+`HANDOFF.md` must summarize and reference current authoritative state without
+creating competing governance, architecture, planning, or release rules.
+
+Summaries must reference their authority rather than create competing rules.
+The capability or increment that changes a governed fact updates its authority
 and affected summaries in the same increment.
 
-Historical capability sections are delivery records. They do not override
-a later, explicitly identified current-status section.
+Historical capability sections are delivery records. They do not override a
+later, explicitly identified current-status section.
 
 A change to governance authority requires a focused ADR, contract tests,
 generator synchronization, complete validation, and deliberate review.

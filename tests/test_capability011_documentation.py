@@ -29,6 +29,20 @@ class Capability011DocumentationTests(unittest.TestCase):
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
 
+    def test_delivery_status_is_current(self):
+        adr = self.content(
+            "docs/architecture/adr/ADR-017-portable-editorial-project-resume-export.md"
+        )
+        baseline = self.content(
+            "docs/architecture/baselines/Architecture_Baseline_2026.08.02v13.md"
+        )
+        for content in (adr, baseline):
+            self.assertIn("7962d140eabf28e492a3aca935f1e622e9ebc21a", content)
+            self.assertIn("PR #50", content)
+            self.assertNotIn("Proposed during Capability 011", content)
+        self.assertIn("Accepted", adr)
+        self.assertIn("Current delivered architecture baseline", baseline)
+
     def test_prd_and_architecture_narrow_the_legacy_schema(self):
         for relative in (
             "docs/product/PRD_v1.3.md",

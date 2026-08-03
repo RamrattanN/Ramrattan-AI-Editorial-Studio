@@ -1,5 +1,15 @@
 # Changelog
 
+<!-- ISSUE_018_RELEASE_READINESS_CHANGELOG_START -->
+
+### Added - Issue #18 RC1 Release Readiness (In Progress)
+
+- Real-runtime Version 1 end-to-end Author journey test
+- Consolidated automated/manual evidence demo
+- Evidence-backed release checklist and current-status reconciliation
+
+<!-- ISSUE_018_RELEASE_READINESS_CHANGELOG_END -->
+
 <!-- CAPABILITY_011_CHANGELOG_START -->
 
 ### Added - Capability 011 (In Progress)

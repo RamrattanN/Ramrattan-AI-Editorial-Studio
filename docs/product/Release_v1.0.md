@@ -222,13 +222,14 @@ handoff criteria are satisfied.
 
 - Capability 009 - Complete
 - Capability 010 - Complete (PR #46; issue #16 closed)
-- Capability 011 - In Progress (issue #17)
+- Capability 011 - Complete (PR #50; issue #17 closed)
+- Issue #18 - End-to-End Demo and RC1 Release Readiness - In Progress
 - B001 - Complete
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
-- Current delivered architecture baseline - `2026.08.02v12`
+- Current delivered architecture baseline - `2026.08.02v13`
 
-Version 1 is not release-ready. The Portable Editorial Project resume/export
-path and end-to-end release-readiness evidence in issue #18 remain outstanding.
+Version 1 release readiness is not yet claimed. Capability 011 is delivered;
+Issue #18 end-to-end evidence is In Progress.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
 
@@ -253,14 +254,25 @@ outstanding. B002 remains non-blocking Post-RC1 work.
 
 ## Capability 011 Release Contribution
 
-Capability 011 is In Progress and adds narrow Author-owned Portable Editorial
+Capability 011 is Complete and delivers narrow Author-owned Portable Editorial
 Project serialization, validated resume with Temporal Integrity review, safe
 VCM downloads, deterministic optional ZIP export, and the Publication Package
 attachment boundary.
 
-ADR-017 and Architecture Baseline `2026.08.02v13` are proposed during delivery.
-Version 1 remains incomplete until Capability 011 is delivered and issue #18
-provides end-to-end release-readiness evidence. B002 remains non-blocking
+ADR-017 is Accepted and Architecture Baseline `2026.08.02v13` is current.
+Issue #18 release-readiness evidence is In Progress. B002 remains non-blocking
 Post-RC1 work.
 
 <!-- CAPABILITY_011_RELEASE_STATUS_END -->
+
+<!-- ISSUE_018_RELEASE_STATUS_START -->
+
+## Issue #18 RC1 Release-Readiness Evidence
+
+The connected Author journey, focused revision protection, complete output
+availability, demo, and evidence-backed checklist are complete locally. Release
+readiness is not claimed until this increment is reviewed and delivered. Manual
+approval, external publication, tagging, and post-release verification remain
+outside this increment.
+
+<!-- ISSUE_018_RELEASE_STATUS_END -->

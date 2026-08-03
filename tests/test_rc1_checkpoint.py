@@ -101,9 +101,10 @@ class RC1CheckpointTests(unittest.TestCase):
                 self.text(relative), "RC1_CHECKPOINT_CURRENT_STATUS"
             )
             assert_capability010_complete(section)
-            self.assertIn("2026.08.02v12", section, relative)
-            self.assertRegex(section, r"Capability 011[^\n]*In Progress")
-            self.assertRegex(section, r"[Ii]ssue #17")
+            self.assertIn("2026.08.02v13", section, relative)
+            self.assertRegex(section, r"Capability 011[^\n]*Complete")
+            self.assertIn("Issue #18", section)
+            self.assertIn("In Progress", section)
             self.assertIn("B002", section, relative)
 
     def test_capability010_completion_records_are_current(self):

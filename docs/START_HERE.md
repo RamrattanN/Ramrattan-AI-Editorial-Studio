@@ -124,8 +124,13 @@ Governing rule:
 
 The current evidence-based engineering and release checkpoint is:
 
+- `product/checkpoints/RC1_Checkpoint_2026.08.02v02.md`
+
+The prior checkpoint remains historical evidence:
+
 - `product/checkpoints/RC1_Checkpoint_2026.08.02.md`
 
-It distinguishes validated engineering readiness from complete RC1 readiness.
+The current checkpoint distinguishes validated engineering readiness from
+complete RC1 readiness after Capability 010 delivery.
 
 <!-- RC1_CHECKPOINT_DISCOVERY_END -->

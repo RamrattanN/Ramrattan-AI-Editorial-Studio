@@ -160,12 +160,12 @@ architecture replaces the prototype.
 Begin here:
 
 1. [Current Product Focus](docs/product/Current_Product_Focus.md)
-2. [PRD v1.1](docs/product/PRD_v1.1.md)
-3. [Product Constitution](docs/product/Constitution.md)
+2. [PRD v1.3](docs/product/PRD_v1.3.md)
+3. [Product Constitution](docs/constitution/Constitution.md)
 4. [Product Principles](docs/product/Product_Principles.md)
 5. [Studio Contract](docs/product/Studio_Contract.md)
-6. [Adaptive Editorial Model](docs/product/Adaptive_Editorial_Model.md)
-7. [Author Journey](docs/product/Author_Journey.md)
+6. [Adaptive Editorial Context Model](docs/architecture/Editorial_Context_Model.md)
+7. [Author Journey](docs/constitution/Author_Journey.md)
 8. [Product Glossary](docs/product/Glossary.md)
 9. [Product Decision Log](docs/product/Decision_Log.md)
 

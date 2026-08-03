@@ -841,6 +841,17 @@ NEW_FILES = {
     "tests/test_rc1_checkpoint.py": CHECKPOINT_TESTS,
 }
 
+# RC1_CAPABILITY010_RECONCILIATION_OWNER_SYNC_START
+from bootstrap_rc1_capability010_reconciliation import (
+    CHECKPOINT_TESTS as _rc1_capability010_checkpoint_tests,
+    RC1_MANAGED as _rc1_capability010_managed,
+)
+
+CHECKPOINT_TESTS = _rc1_capability010_checkpoint_tests
+NEW_FILES["tests/test_rc1_checkpoint.py"] = CHECKPOINT_TESTS
+MANAGED.update(_rc1_capability010_managed)
+# RC1_CAPABILITY010_RECONCILIATION_OWNER_SYNC_END
+
 
 OWNER_IMPORT = clean('''
 # RC1_CHECKPOINT_AUTHORIZATION_HARDENING_OWNER_SYNC_START

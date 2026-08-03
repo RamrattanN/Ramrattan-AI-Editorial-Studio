@@ -15,7 +15,7 @@ v1.0
 Architecture baseline:
 
 ```text
-2026.08.02v11
+2026.08.02v12
 ```
 
 ## Version 1.0 Promise
@@ -221,15 +221,14 @@ handoff criteria are satisfied.
 ## RC1 Checkpoint - Current Release Status
 
 - Capability 009 - Complete
-- Capability 010 - Next, Todo, and unstarted
-- Capability 011 - Todo and unstarted
+- Capability 010 - Complete (PR #46; issue #16 closed)
+- Capability 011 - Next, Todo, and unstarted
 - B001 - Complete
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
-- Current delivered architecture baseline - `2026.08.02v10`
+- Current delivered architecture baseline - `2026.08.02v12`
 
-Version 1 is not release-ready. The 720 x 425 Hero Visual, Portable Editorial
-Project resume/export path, and end-to-end release-readiness evidence remain
-outstanding.
+Version 1 is not release-ready. The Portable Editorial Project resume/export
+path and end-to-end release-readiness evidence in issue #18 remain outstanding.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
 
@@ -237,12 +236,12 @@ outstanding.
 
 ## Capability 010 Release Contribution
 
-Capability 010 is In Progress and adds the provider-independent 720 × 425 Hero
+Capability 010 is Complete and delivers the provider-independent 720 × 425 Hero
 Visual System, deterministic validation provider, explicit failure states, and
 the narrow Publication Package attachment boundary.
 
-The current delivered architecture baseline is `2026.08.02v11`. Proposed
-baseline `2026.08.02v12` becomes current only when Capability 010 is delivered.
+PR #46 is merged, issue #16 is closed, ADR-016 is Accepted, and Architecture
+Baseline `2026.08.02v12` is current.
 
 Version 1 remains incomplete. Capability 011 Portable Editorial Project resume
 and export and issue #18 end-to-end release-readiness evidence remain

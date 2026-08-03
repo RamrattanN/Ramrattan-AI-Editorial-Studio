@@ -31,10 +31,10 @@ Canonical Editorial Session.
 | Evidence Validation | Complete | Capability 008 runtime |
 | LMHS Editorial Risk | Complete | Capability 008 runtime |
 | Editorial Confidence Translation | Complete | Capability 008 runtime |
-| Article Engine | Planned | Capability 009 |
-| Publication Package | Planned | Capability 009 |
-| Hero Visual System | Planned | Capability 010 |
-| Component Collaboration | Planned | Capabilities 009-010 |
+| Article Engine | Complete | Capability 009 runtime |
+| Publication Package | Complete | Capabilities 009-010 runtime |
+| Hero Visual System | Complete | Capability 010 runtime |
+| Component Collaboration | Not separately delivered | Deferred product surface |
 | Portable Project Export | Planned | Capability 011 |
 | Resume Existing Project | Planned | Capability 011 |
 | End-to-End Demo | Planned | Version 1.0 Release Readiness |
@@ -204,15 +204,15 @@ Capabilities 010 and 011 deliver their assigned outputs.
 |---|---|---|
 | Capability 009 | Complete | PR #43 and ADR-015 |
 | Initiative B001 | Complete | PR #42 and approved master hashes |
-| Capability 010 | Todo and unstarted | Issue #16 |
-| Capability 011 | Todo and unstarted | Issue #17 |
+| Capability 010 | Complete | PR #46, closed issue #16, and ADR-016 |
+| Capability 011 | Next, Todo, and unstarted | Issue #17 |
 | B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
-| Current delivered baseline | Complete | `2026.08.02v10` |
-| Complete RC1 readiness | Blocked | Capabilities 010, 011, and issue #18 |
+| Current delivered baseline | Complete | `2026.08.02v12` |
+| Complete RC1 readiness | Blocked | Capability 011 and issue #18 |
 
-The Article Engine and textual Publication Package are delivered. Version 1 is
-not release-ready until the remaining Hero Visual, Portable Project, and
-end-to-end evidence is complete.
+The Article Engine, Publication Package, and Hero Visual System are delivered.
+Version 1 is not release-ready until the Portable Project and end-to-end
+release-readiness evidence are complete.
 
 <!-- RC1_CHECKPOINT_CURRENT_STATUS_END -->
 
@@ -223,15 +223,16 @@ end-to-end evidence is complete.
 | Area | Status | Evidence |
 |---|---|---|
 | Capability 009 | Complete | Article Engine and textual Publication Package |
-| Hero Visual provider boundary | Complete locally | `studio/hero_visual.py` |
-| 720 × 425 output validation | Complete locally | Behavioral tests |
-| Deterministic offline provider | Complete locally | Repeatability tests |
-| Explicit failure states | Complete locally | Generation and validation tests |
-| Publication Package integration | Complete locally | Pending/ready/failed/blocked tests |
-| Capability 011 | Todo and unstarted | Issue #17 |
+| Capability 010 | Complete | PR #46 and closed issue #16 |
+| Hero Visual provider boundary | Complete | `studio/hero_visual.py` |
+| 720 × 425 output validation | Complete | Behavioral tests |
+| Deterministic offline provider | Complete | Repeatability tests |
+| Explicit failure states | Complete | Generation and validation tests |
+| Publication Package integration | Complete | Pending/ready/failed/blocked tests |
+| ADR-016 | Accepted | Hero Visual System decision |
+| Capability 011 | Next, Todo, and unstarted | Issue #17 |
 | B002 | Todo, Low Priority, Post-RC1, non-blocking | Issue #41 |
-| Current delivered baseline | Complete | `2026.08.02v11` |
-| Proposed Capability 010 baseline | Pending delivery | `2026.08.02v12` |
+| Current delivered baseline | Complete | `2026.08.02v12` |
 
 Version 1 remains incomplete until Capability 011 and end-to-end release
 readiness are delivered.

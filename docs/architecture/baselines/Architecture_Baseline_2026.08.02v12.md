@@ -2,8 +2,8 @@
 
 ## Status
 
-Proposed during Capability 010. Becomes current only when Capability 010 is
-delivered.
+Current delivered architecture baseline. Capability 010 was delivered by PR
+#46.
 
 ## Baseline ID
 

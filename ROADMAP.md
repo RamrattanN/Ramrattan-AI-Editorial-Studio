@@ -501,15 +501,15 @@ remains Todo, Low Priority, Post-RC1, and non-blocking.
 ## RC1 Checkpoint - Current Status
 
 - Capability 009 - Complete
+- Capability 010 - Complete (PR #46; issue #16 closed)
 - Initiative B001 - Complete
-- RC1 Checkpoint and Delegated Authorization Hardening - In Progress
-- Capability 010 - Next, Todo, and unstarted
-- Capability 011 - Todo and unstarted
+- RC1 Documentation Reconciliation after Capability 010 - In Progress
+- Capability 011 - Next, Todo, and unstarted
 - B002 - Todo, Low Priority, Post-RC1, and non-blocking
-- Current delivered architecture baseline - `2026.08.02v10`
+- Current delivered architecture baseline - `2026.08.02v12`
 
-Version 1 is not release-ready. Capability 010, Capability 011, and the
-end-to-end release-readiness evidence remain outstanding. Earlier capability
+Version 1 is not release-ready. Capability 011 and the end-to-end
+release-readiness evidence in issue #18 remain outstanding. Earlier capability
 status sections are historical delivery records; this section is authoritative
 for the current checkpoint increment.
 
@@ -519,7 +519,7 @@ for the current checkpoint increment.
 
 ## Capability 010 - Hero Visual System
 
-Status: **In Progress**
+Status: **Complete**
 
 Approved scope:
 
@@ -530,10 +530,9 @@ Approved scope:
 - [x] Narrow Publication Package attachment boundary
 - [x] Approved prompt and textual-content preservation
 
-Capability 011 remains Todo and unstarted. B002 remains Todo, Low Priority,
-Post-RC1, and non-blocking. Architecture Baseline `2026.08.02v11` remains the
-current delivered baseline while proposed baseline `2026.08.02v12` records this
-increment.
+Capability 010 was delivered by PR #46; issue #16 is closed. Capability 011 is
+Next, Todo, and unstarted. B002 remains Todo, Low Priority, Post-RC1, and
+non-blocking. Architecture Baseline `2026.08.02v12` is current.
 
 No Portable Project, workspace, collaboration, orchestration, UI, publishing
 automation, release packaging, or Version 2 behavior is included.

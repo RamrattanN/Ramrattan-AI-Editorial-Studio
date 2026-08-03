@@ -87,6 +87,16 @@ MANAGED = {
     "CHANGELOG.md": ("CAPABILITY_010_CHANGELOG", clean("### Added - Capability 010\n\n- Provider-independent Hero Visual System\n- Validated 720 × 425 PNG output contract\n- Offline deterministic Hero Visual provider\n- Explicit generation, validation, provider, request, and policy states\n- Narrow Publication Package Hero Visual attachment boundary\n- Approved prompt and textual-component preservation\n- ADR-016 and proposed Architecture Baseline 2026.08.02v12\n- Capability 010 behavioral, documentation, and demo coverage\n")),
 }
 
+# RC1_CAPABILITY010_RECONCILIATION_OWNER_SYNC_START
+from bootstrap_rc1_capability010_reconciliation import (
+    CAPABILITY010_FILES as _rc1_capability010_files,
+    CAPABILITY010_MANAGED as _rc1_capability010_managed,
+)
+
+FILES.update(_rc1_capability010_files)
+MANAGED.update(_rc1_capability010_managed)
+# RC1_CAPABILITY010_RECONCILIATION_OWNER_SYNC_END
+
 OWNER_SYNC = clean("""
 # CAPABILITY_010_HERO_VISUAL_OWNER_SYNC_START
 from bootstrap_capability010_hero_visual_system import (

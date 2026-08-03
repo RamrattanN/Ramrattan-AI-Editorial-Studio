@@ -2189,10 +2189,10 @@ VERSION_ONE_SCORECARD = clean(
     | Evidence Validation | Complete | Capability 008 runtime |
     | LMHS Editorial Risk | Complete | Capability 008 runtime |
     | Editorial Confidence Translation | Complete | Capability 008 runtime |
-    | Article Engine | Planned | Capability 009 |
-    | Publication Package | Planned | Capability 009 |
-    | Hero Visual System | Planned | Capability 010 |
-    | Component Collaboration | Planned | Capabilities 009-010 |
+    | Article Engine | Complete | Capability 009 runtime |
+    | Publication Package | Complete | Capabilities 009-010 runtime |
+    | Hero Visual System | Complete | Capability 010 runtime |
+    | Component Collaboration | Not separately delivered | Deferred product surface |
     | Portable Project Export | Planned | Capability 011 |
     | Resume Existing Project | Planned | Capability 011 |
     | End-to-End Demo | Planned | Version 1.0 Release Readiness |

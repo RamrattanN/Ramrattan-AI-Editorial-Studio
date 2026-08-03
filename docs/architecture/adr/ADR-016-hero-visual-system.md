@@ -2,8 +2,7 @@
 
 ## Status
 
-Proposed during Capability 010. Becomes Accepted when the capability is
-delivered.
+Accepted. Delivered by Capability 010 in PR #46.
 
 ## Date
 

@@ -62,3 +62,15 @@ Each ADR explains:
 - [ADR-017 - Portable Editorial Project Resume and Export](ADR-017-portable-editorial-project-resume-export.md)
 
 <!-- CAPABILITY_011_ADR_INDEX_END -->
+
+<!-- VERSION_1_1_ADR_INDEX_START -->
+
+## Version 1.1 Decisions
+
+- [ADR-018 - Author Ownership and Publication Studio](ADR-018-author-ownership-and-publication-studio.md) -
+  Proposed; Editorial Audit Gate decision resolved, pending delivery.
+- [ADR-019 - Studio Configuration and Author-Controlled Continuity](ADR-019-studio-configuration-and-author-controlled-continuity.md) -
+  Proposed; Resume Existing Project placement decision resolved, pending
+  delivery.
+
+<!-- VERSION_1_1_ADR_INDEX_END -->

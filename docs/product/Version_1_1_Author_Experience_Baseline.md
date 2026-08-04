@@ -336,13 +336,25 @@ anticipate or partially implement Capability 012's broader candidate schema.
 Any expansion of Configuration content beyond these two fields is a Version 2
 consideration, not a Version 1.1 one.
 
+### Configuration File Format
+
+JSON is the sole canonical Version 1.1 Ramrattan AI Configuration format.
+A Configuration file is:
+
+- human-readable;
+- schema-versioned; and
+- validated by the Studio when loaded.
+
+The Studio never stores a Configuration file; the Author holds and
+controls it entirely, exactly as Author-Controlled Continuity requires.
+Markdown configuration files are outside Version 1.1 scope.
+
 ### Loading a Configuration
 
 At the beginning of a session, immediately after Welcome, the Author may
-supply a previously generated configuration file. Supported formats are:
+supply a previously generated configuration file. The supported format is:
 
 ```text
-Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].md
 Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].json
 ```
 

@@ -67,13 +67,27 @@ hashtag strategy, and others) described as a Version 2 candidate in
 Configuration files use:
 
 ```text
-Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].md
 Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].json
 ```
 
 matching the versioning convention established for the Portable Editorial
 Project in ADR-004 and ADR-017. Configuration files do not expire because of
 age; validity is determined by schema compatibility, not elapsed time.
+
+### Serialization Format
+
+This ADR standardizes JSON as the Ramrattan AI Configuration's
+serialization format. It does not define concrete field names, the
+implementation-level schema, parser implementation, or future format
+extensions; the implementation owns the concrete JSON schema, and this
+architecture owns only the decision to serialize as JSON at all.
+
+JSON was selected over Markdown for deterministic, unambiguous parsing;
+explicit field names and value types; straightforward schema validation;
+reliable automated testing; and portability across future interaction
+surfaces, consistent with this repository's software-engineering
+discipline for AI-assisted products (ADR-000). Markdown configuration
+input is not supported in Version 1.1.
 
 ### Load and generate mechanics
 

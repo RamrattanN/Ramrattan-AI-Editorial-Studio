@@ -111,6 +111,15 @@ FILES = {
     "tests/test_v11_02_editorial_source_branding.py": decode(_TEST_BLOB),
 }
 
+# V11_03_EDITORIAL_DISCOVERY_PLAN_OWNER_SYNC_START
+from bootstrap_v11_03_editorial_discovery_plan import (
+    AUTHOR_JOURNEY as _v11_03_author_journey,
+)
+
+AUTHOR_JOURNEY = _v11_03_author_journey
+FILES["studio/author_journey.py"] = AUTHOR_JOURNEY
+# V11_03_EDITORIAL_DISCOVERY_PLAN_OWNER_SYNC_END
+
 PROTECTED_HASHES = {
     "studio/workflow/README.md": "2f98daa4f2f4760bd72c36867de1658a120bad5b06ab3348dad717f534eb3211",
     "studio/workflow/__init__.py": "9ac599af687b85520dcb0719fee72ed9d40f2cdc4e7e8dc825f8a7f1354a47e0",

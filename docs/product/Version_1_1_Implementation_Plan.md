@@ -790,7 +790,7 @@ matched/unmatched enforcement.
 `evidence_validation.py`'s existing pipeline against the currently displayed,
 Author-edited content), Editorial Drift assessment (new logic, measured
 against the approved Editorial Plan and the evidence confirmed at Editorial
-Discovery), Publication Readiness statement. Gate transitions: any edit sets
+Discovery), updated Editorial Confidence. Gate transitions: any edit sets
 `unmatched`; a completed audit sets `matched` for the audited content;
 High/Severe never disables the action, never rewrites, never regenerates.
 
@@ -1183,7 +1183,7 @@ slices.
   any Copy LinkedIn Publication output or any other export of Publication
   Content, under any circumstance.
 - **Editorial Audit.** Owns: an LMHS Assessment, an Editorial Drift
-  assessment, and a Publication Readiness statement, each computed fresh at
+  assessment, and an updated Editorial Confidence, each computed fresh at
   request time against currently displayed content. Must not own, and must
   never write to: Publication Content. Its only side effect on session state
   is setting the Copy-gate to matched for the content just audited.

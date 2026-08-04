@@ -338,9 +338,9 @@ Audit Before Publishing.
 
 **Entry:** From Author Editing, on request or whenever the Author attempts to
 use Copy LinkedIn Publication while the gate is unmatched.
-**Author sees:** An LMHS Assessment, an Editorial Drift assessment, and a
-Publication Readiness statement, evaluated against the current Author-edited
-publication. If the LMHS Assessment is High or Severe, Publication Readiness
+**Author sees:** An LMHS Assessment, an Editorial Drift assessment, and an
+updated Editorial Confidence, evaluated against the current Author-edited
+publication. If the LMHS Assessment is High or Severe, Editorial Confidence
 does not offer a positive recommendation and explains the risk; the Author's
 content is not altered as a result.
 **Exit condition:** Audit result is returned. Transition back to Author

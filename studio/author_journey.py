@@ -3,9 +3,10 @@
 V11-01 owns Welcome through Workflow Selection. V11-02 adds structurally
 independent Editorial Source and Branding intake. V11-03 adds the separate
 Editorial Discovery and Editorial Plan approval gates. V11-04 orchestrates
-the existing Version 1.0 generation contracts without changing them. The
-orchestrator wraps an optional Version 1.0 ``EditorialSession`` without
-changing that runtime.
+the existing Version 1.0 generation contracts without changing them. V11-05
+opens the Author-owned Publication Studio and stops at the Editorial Audit
+routing seam. The orchestrator wraps an optional Version 1.0
+``EditorialSession`` without changing that runtime.
 """
 
 from __future__ import annotations
@@ -31,6 +32,7 @@ from .evidence_validation import (
 )
 from .hero_visual import HeroVisualRequest, HeroVisualSystem
 from .publication_package import PublicationPackage, PublicationPackageBuilder
+from .publication_studio import PublicationContent, PublicationStudio
 
 if TYPE_CHECKING:
     from .editorial_discernment import EditorialSession
@@ -70,6 +72,7 @@ class AuthorJourneyState(StrEnum):
     EDITORIAL_PLAN = "editorial_plan"
     GENERATION = "generation"
     PUBLICATION_STUDIO = "publication_studio"
+    EDITORIAL_AUDIT = "editorial_audit"
 
 
 class GenerationStatus(StrEnum):
@@ -666,8 +669,49 @@ class AuthorJourney:
         )
         self._generation_completed = True
         self._generation_outcome = outcome
+        branding = self.branding_selection
+        understanding = self.editorial_understanding
+        if branding is None or understanding is None:
+            raise AuthorJourneyError(
+                "Publication Studio requires confirmed Discovery and Branding."
+            )
+        material_count = len(branding.materials)
+        branding_summary = (
+            f"{branding.mode.value.replace('_', ' ')}; "
+            f"{material_count} Author-supplied reference"
+            + ("s" if material_count != 1 else "")
+        )
+        self._publication_studio = PublicationStudio.from_generation(
+            completed,
+            branding_summary=branding_summary,
+            session_summary=understanding.desired_outcome,
+        )
         self.state = AuthorJourneyState.PUBLICATION_STUDIO
         return outcome
+
+    def edit_publication(self, **changes: object) -> PublicationContent:
+        """Apply an explicit Author edit without invoking Generation."""
+        self._require(
+            AuthorJourneyState.PUBLICATION_STUDIO,
+            "edit Publication Content",
+        )
+        studio = self.publication_studio
+        if studio is None:
+            raise AuthorJourneyError("Publication Studio is not available.")
+        return studio.author_edit(**changes)
+
+    def request_editorial_audit(self) -> PublicationContent:
+        """Enter the V11-06 Editorial Audit seam without performing an audit."""
+        self._require(
+            AuthorJourneyState.PUBLICATION_STUDIO,
+            "request Editorial Audit",
+        )
+        studio = self.publication_studio
+        if studio is None:
+            raise AuthorJourneyError("Publication Studio is not available.")
+        content = studio.editorial_audit_input()
+        self.state = AuthorJourneyState.EDITORIAL_AUDIT
+        return content
 
     def _validate_generation_request(self, request: GenerationRequest) -> None:
         plan = self.approved_editorial_plan
@@ -767,6 +811,10 @@ class AuthorJourney:
     @property
     def generation_outcome(self) -> GenerationOutcome | None:
         return getattr(self, "_generation_outcome", None)
+
+    @property
+    def publication_studio(self) -> PublicationStudio | None:
+        return getattr(self, "_publication_studio", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

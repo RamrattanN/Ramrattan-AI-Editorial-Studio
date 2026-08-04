@@ -2,9 +2,10 @@
 
 V11-01 owns Welcome through Workflow Selection. V11-02 adds structurally
 independent Editorial Source and Branding intake. V11-03 adds the separate
-Editorial Discovery and Editorial Plan approval gates plus the routing seam
-into Generation. The orchestrator wraps an optional Version 1.0
-``EditorialSession`` without changing that runtime.
+Editorial Discovery and Editorial Plan approval gates. V11-04 orchestrates
+the existing Version 1.0 generation contracts without changing them. The
+orchestrator wraps an optional Version 1.0 ``EditorialSession`` without
+changing that runtime.
 """
 
 from __future__ import annotations
@@ -12,8 +13,24 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass
+from datetime import date
 from enum import StrEnum
 from typing import TYPE_CHECKING, Final
+
+from .article_engine import (
+    ArticleEngine,
+    ArticleRequest,
+    PublicationBlockedError,
+)
+from .evidence_validation import (
+    Claim,
+    EditorialRisk,
+    EvidenceRecord,
+    EvidenceValidationReport,
+    validate_evidence,
+)
+from .hero_visual import HeroVisualRequest, HeroVisualSystem
+from .publication_package import PublicationPackage, PublicationPackageBuilder
 
 if TYPE_CHECKING:
     from .editorial_discernment import EditorialSession
@@ -52,6 +69,15 @@ class AuthorJourneyState(StrEnum):
     EDITORIAL_DISCOVERY = "editorial_discovery"
     EDITORIAL_PLAN = "editorial_plan"
     GENERATION = "generation"
+    PUBLICATION_STUDIO = "publication_studio"
+
+
+class GenerationStatus(StrEnum):
+    """The three explicit outcomes owned by V11-04."""
+
+    COMPLETE = "complete"
+    BLOCKED = "blocked"
+    FAILED = "failed"
 
 
 class EntryPath(StrEnum):
@@ -216,6 +242,48 @@ class EditorialPlan:
             raise AuthorJourneyError(
                 "Editorial Plan Key Insights must not be empty."
             )
+
+
+@dataclass(frozen=True, slots=True)
+class GenerationRequest:
+    """Existing Version 1.0 contracts bound to the approved journey data."""
+
+    article: ArticleRequest
+    claims: tuple[Claim, ...]
+    evidence: tuple[EvidenceRecord, ...]
+    hero_visual: HeroVisualRequest
+    current_on: date | None = None
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.article, ArticleRequest):
+            raise AuthorJourneyError("Generation requires an Article Request.")
+        if not isinstance(self.claims, tuple) or not all(
+            isinstance(item, Claim) for item in self.claims
+        ):
+            raise AuthorJourneyError("Generation claims are not supported.")
+        if not isinstance(self.evidence, tuple) or not all(
+            isinstance(item, EvidenceRecord) for item in self.evidence
+        ):
+            raise AuthorJourneyError("Generation evidence is not supported.")
+        if not isinstance(self.hero_visual, HeroVisualRequest):
+            raise AuthorJourneyError("Generation requires a Hero Visual Request.")
+
+
+@dataclass(frozen=True, slots=True)
+class GenerationOutcome:
+    """One complete publication or one explicit non-producing outcome."""
+
+    status: GenerationStatus
+    explanation: str
+    evidence_report: EvidenceValidationReport | None
+    publication_package: PublicationPackage | None = None
+
+    @property
+    def complete(self) -> bool:
+        return (
+            self.status is GenerationStatus.COMPLETE
+            and self.publication_package is not None
+        )
 
 
 def infer_editorial_source(material: EditorialSourceMaterial) -> EditorialInference:
@@ -535,6 +603,131 @@ class AuthorJourney:
         self.state = AuthorJourneyState.GENERATION
         return plan
 
+    def run_generation(self, request: GenerationRequest) -> GenerationOutcome:
+        """Run the approved Version 1.0 generation chain exactly once."""
+        self._require(AuthorJourneyState.GENERATION, "run Generation")
+        if getattr(self, "_generation_completed", False):
+            raise InvalidAuthorJourneyTransition(
+                "Generation has already completed for this session."
+            )
+        if not isinstance(request, GenerationRequest):
+            raise AuthorJourneyError("Generation request is not supported.")
+        self._validate_generation_request(request)
+
+        report: EvidenceValidationReport | None = None
+        try:
+            report = validate_evidence(
+                request.claims,
+                request.evidence,
+                current_on=request.current_on,
+            )
+            if report.publication_blocked or report.editorial_risk in {
+                EditorialRisk.HIGH,
+                EditorialRisk.SEVERE,
+            }:
+                return self._generation_did_not_complete(
+                    GenerationStatus.BLOCKED,
+                    "Generation was blocked by Editorial Risk: "
+                    + report.author_message,
+                    report,
+                )
+            draft = ArticleEngine().create_article(request.article, report)
+            builder = PublicationPackageBuilder()
+            package = builder.build(draft, report)
+            visual = HeroVisualSystem().generate(request.hero_visual)
+            if not visual.ready:
+                reason = visual.failure_reason or "Hero Visual generation failed."
+                return self._generation_did_not_complete(
+                    GenerationStatus.FAILED,
+                    "Generation failed independently of Editorial Risk: " + reason,
+                    report,
+                )
+            completed = builder.attach_hero_visual(package, visual)
+        except PublicationBlockedError as exc:
+            explanation = str(exc).strip() or "Editorial Risk blocked Generation."
+            return self._generation_did_not_complete(
+                GenerationStatus.BLOCKED,
+                "Generation was blocked by Editorial Risk: " + explanation,
+                report,
+            )
+        except Exception as exc:  # Generation providers fail closed here.
+            explanation = str(exc).strip() or "Generation validation failed."
+            return self._generation_did_not_complete(
+                GenerationStatus.FAILED,
+                "Generation failed independently of Editorial Risk: " + explanation,
+                report,
+            )
+
+        outcome = GenerationOutcome(
+            status=GenerationStatus.COMPLETE,
+            explanation="Generation completed and entered Publication Studio.",
+            evidence_report=report,
+            publication_package=completed,
+        )
+        self._generation_completed = True
+        self._generation_outcome = outcome
+        self.state = AuthorJourneyState.PUBLICATION_STUDIO
+        return outcome
+
+    def _validate_generation_request(self, request: GenerationRequest) -> None:
+        plan = self.approved_editorial_plan
+        understanding = self.editorial_understanding
+        branding = self.branding_selection
+        if plan is None or understanding is None or branding is None:
+            raise AuthorJourneyError(
+                "Generation requires an approved Plan and confirmed Discovery."
+            )
+        expected = (
+            (request.article.editorial_intent, understanding.intent, "intent"),
+            (request.article.audience, understanding.audience, "audience"),
+            (request.article.thesis, plan.headline, "headline"),
+            (request.article.author_perspective, plan.hook, "hook"),
+            (request.article.insights, plan.key_insights, "Key Insights"),
+            (
+                request.article.practical_takeaway,
+                plan.practical_takeaway,
+                "Practical Takeaway",
+            ),
+            (request.article.cta_question, plan.call_to_action, "Call to Action"),
+            (
+                request.hero_visual.prompt,
+                request.article.hero_visual_prompt,
+                "Hero Visual prompt",
+            ),
+        )
+        mismatches = [label for actual, approved, label in expected if actual != approved]
+        if mismatches:
+            raise AuthorJourneyError(
+                "Generation input differs from approved session data: "
+                + ", ".join(mismatches)
+                + "."
+            )
+        if (
+            branding.mode is BrandingMode.STUDIO_THEME
+            and request.hero_visual.brand_context is not None
+        ):
+            raise AuthorJourneyError(
+                "Studio Theme Generation cannot introduce Branding material."
+            )
+        if (
+            branding.mode is not BrandingMode.STUDIO_THEME
+            and not (request.hero_visual.brand_context or "").strip()
+        ):
+            raise AuthorJourneyError(
+                "Selected Branding must be present in the Generation request."
+            )
+
+    def _generation_did_not_complete(
+        self,
+        status: GenerationStatus,
+        explanation: str,
+        report: EvidenceValidationReport | None,
+    ) -> GenerationOutcome:
+        outcome = GenerationOutcome(status, explanation, report)
+        self._generation_outcome = outcome
+        self.state = AuthorJourneyState.EDITORIAL_PLAN
+        return outcome
+
     @property
     def editorial_source(self) -> EditorialSourceMaterial | None:
         return getattr(self, "_editorial_source", None)
@@ -554,6 +747,26 @@ class AuthorJourney:
     @property
     def approved_editorial_plan(self) -> EditorialPlan | None:
         return getattr(self, "_approved_editorial_plan", None)
+
+    @property
+    def editorial_understanding(self) -> EditorialUnderstanding | None:
+        if not getattr(self, "_discovery_approved", False):
+            return None
+        inference = self.editorial_inference
+        branding = self.branding_selection
+        if inference is None or branding is None:
+            return None
+        return EditorialUnderstanding(
+            intent=inference.intent,
+            audience=inference.audience,
+            platform=inference.platform,
+            desired_outcome=inference.desired_outcome,
+            branding=branding,
+        )
+
+    @property
+    def generation_outcome(self) -> GenerationOutcome | None:
+        return getattr(self, "_generation_outcome", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

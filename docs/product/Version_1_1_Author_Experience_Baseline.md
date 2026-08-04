@@ -614,8 +614,9 @@ anything. An Editorial Audit includes:
   evidence-supported claims established during Editorial Discovery. Drift is
   reported so the Author can see what changed, not to block or reverse the
   change.
-- **Publication Readiness** — a summary statement of whether the current,
-  Author-edited publication is ready to publish, and why.
+- **Editorial Confidence** — the Studio's recomputed publication-readiness
+  conclusion for the current, Author-edited publication, reflecting the LMHS
+  Assessment and Editorial Drift just produced.
 
 The Studio validates. It does not rewrite. An Author may request an Editorial
 Audit any number of times, return to editing after each one, and request
@@ -634,7 +635,7 @@ Author edits in the Publication Editor
         ↓
 Editorial Audit is required
         ↓
-LMHS Assessment, Editorial Drift, and Publication Readiness are shown
+LMHS Assessment, Editorial Drift, and Editorial Confidence are shown
         ↓
 Copy LinkedIn Publication is enabled
 ```
@@ -648,7 +649,7 @@ the Author copy a version of the publication it has not yet analysed.
 This is a gate on the analysis having occurred and been shown, not a gate on
 what the analysis found. If the audit reports High or Severe Editorial Risk:
 
-- Publication Readiness does not offer a positive recommendation;
+- Editorial Confidence does not offer a positive recommendation;
 - the risk is explained clearly and specifically;
 - the Author's edited content is left completely intact — the Studio does
   not rewrite, regenerate, overwrite, or silently correct anything in
@@ -769,8 +770,8 @@ Version 1.1 is successful when:
   session and load it at the beginning of a later session to restore
   publication preferences, without the Studio having stored the file itself;
 - an Author can request an Editorial Audit after editing and receive an LMHS
-  Assessment, an Editorial Drift assessment, and a Publication Readiness
-  statement, none of which alter the Author's edited content;
+  Assessment, an Editorial Drift assessment, and an updated Editorial
+  Confidence, none of which alter the Author's edited content;
 - a blocked or failed Generation returns the Author to Editorial Plan with an
   explicit explanation, without ever having entered Publication Studio;
 - under Express Workflow, Editorial Source and Branding are combined on one

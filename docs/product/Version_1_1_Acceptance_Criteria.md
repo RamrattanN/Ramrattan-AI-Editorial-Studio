@@ -324,7 +324,7 @@ have.
 point while in the Author Editing state.
 
 **AC-AUDIT-2.** An Editorial Audit MUST produce an LMHS Assessment, an
-Editorial Drift assessment, and a Publication Readiness statement.
+Editorial Drift assessment, and an updated Editorial Confidence.
 
 **AC-AUDIT-3.** An Editorial Audit MUST NOT modify Publication Content.
 
@@ -364,7 +364,7 @@ gate is matched. See AC-EDITOR-6.
 **AC-AUDIT-12.** A High or Severe LMHS Assessment MUST NOT set the gate to
 unmatched, disable Copy LinkedIn Publication, trigger a rewrite, trigger
 regeneration, or otherwise alter Publication Content. It MUST cause
-Publication Readiness to withhold a positive recommendation and explain the
+Editorial Confidence to withhold a positive recommendation and explain the
 risk.
 
 **AC-AUDIT-13.** The Studio MUST NOT auto-publish or transmit content to

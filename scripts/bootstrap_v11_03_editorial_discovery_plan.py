@@ -118,6 +118,15 @@ FILES = {
     "tests/test_v11_03_editorial_discovery_plan.py": decode(_TEST_BLOB),
 }
 
+# V11_04_GENERATION_ORCHESTRATION_OWNER_SYNC_START
+from bootstrap_v11_04_generation_orchestration import (
+    AUTHOR_JOURNEY as _v11_04_author_journey,
+)
+
+AUTHOR_JOURNEY = _v11_04_author_journey
+FILES["studio/author_journey.py"] = AUTHOR_JOURNEY
+# V11_04_GENERATION_ORCHESTRATION_OWNER_SYNC_END
+
 PROTECTED_HASHES = {
     "studio/workflow/README.md": "2f98daa4f2f4760bd72c36867de1658a120bad5b06ab3348dad717f534eb3211",
     "studio/workflow/__init__.py": "9ac599af687b85520dcb0719fee72ed9d40f2cdc4e7e8dc825f8a7f1354a47e0",

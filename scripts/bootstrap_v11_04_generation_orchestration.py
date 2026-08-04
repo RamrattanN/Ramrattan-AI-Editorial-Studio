@@ -32,6 +32,15 @@ FILES = {
     "tests/test_v11_04_generation_orchestration.py": decode(_TEST_BLOB),
 }
 
+# V11_05_PUBLICATION_STUDIO_OWNERSHIP_START
+from bootstrap_v11_05_publication_studio_workspace import (  # noqa: E402
+    AUTHOR_JOURNEY as V11_05_AUTHOR_JOURNEY,
+)
+
+AUTHOR_JOURNEY = V11_05_AUTHOR_JOURNEY
+FILES["studio/author_journey.py"] = AUTHOR_JOURNEY
+# V11_05_PUBLICATION_STUDIO_OWNERSHIP_END
+
 PROTECTED_HASHES = {
     "studio/workflow/README.md": "2f98daa4f2f4760bd72c36867de1658a120bad5b06ab3348dad717f534eb3211",
     "studio/workflow/__init__.py": "9ac599af687b85520dcb0719fee72ed9d40f2cdc4e7e8dc825f8a7f1354a47e0",

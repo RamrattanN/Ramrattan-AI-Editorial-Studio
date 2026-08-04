@@ -1,8 +1,9 @@
 """Early-session orchestration for the Version 1.1 Author Journey.
 
 V11-01 owns Welcome through Workflow Selection. V11-02 adds structurally
-independent Editorial Source and Branding intake plus the routing seam into
-Editorial Discovery. The orchestrator wraps an optional Version 1.0
+independent Editorial Source and Branding intake. V11-03 adds the separate
+Editorial Discovery and Editorial Plan approval gates plus the routing seam
+into Generation. The orchestrator wraps an optional Version 1.0
 ``EditorialSession`` without changing that runtime.
 """
 
@@ -49,6 +50,8 @@ class AuthorJourneyState(StrEnum):
     EDITORIAL_SOURCE = "editorial_source"
     BRANDING = "branding"
     EDITORIAL_DISCOVERY = "editorial_discovery"
+    EDITORIAL_PLAN = "editorial_plan"
+    GENERATION = "generation"
 
 
 class EntryPath(StrEnum):
@@ -166,6 +169,53 @@ class BrandingPrompt:
     choices: tuple[BrandingMode, ...]
     material_kinds: tuple[BrandingMaterialKind, ...]
     carried_preference_to_confirm: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class EditorialUnderstanding:
+    """The complete intake understanding presented at Discovery."""
+
+    intent: str
+    audience: str
+    platform: str
+    desired_outcome: str
+    branding: BrandingSelection
+
+
+@dataclass(frozen=True, slots=True)
+class EditorialPlan:
+    """The complete proposal that must be approved before Generation."""
+
+    headline: str
+    hook: str
+    key_insights: tuple[str, ...]
+    practical_takeaway: str
+    call_to_action: str
+
+    def __post_init__(self) -> None:
+        text_fields = (
+            "headline",
+            "hook",
+            "practical_takeaway",
+            "call_to_action",
+        )
+        for field_name in text_fields:
+            value = getattr(self, field_name)
+            if not isinstance(value, str) or not value.strip():
+                raise AuthorJourneyError(
+                    f"Editorial Plan {field_name} must not be empty."
+                )
+        if not isinstance(self.key_insights, tuple) or not self.key_insights:
+            raise AuthorJourneyError(
+                "Editorial Plan requires at least one Key Insight."
+            )
+        if not all(
+            isinstance(insight, str) and insight.strip()
+            for insight in self.key_insights
+        ):
+            raise AuthorJourneyError(
+                "Editorial Plan Key Insights must not be empty."
+            )
 
 
 def infer_editorial_source(material: EditorialSourceMaterial) -> EditorialInference:
@@ -406,6 +456,85 @@ class AuthorJourney:
         self.state = AuthorJourneyState.EDITORIAL_DISCOVERY
         return selection
 
+    def review_discovery(self) -> EditorialUnderstanding:
+        """Present the complete Source inference and Branding decision."""
+        self._require(
+            AuthorJourneyState.EDITORIAL_DISCOVERY,
+            "review Editorial Discovery",
+        )
+        inference = self.editorial_inference
+        branding = self.branding_selection
+        if inference is None or branding is None:
+            raise AuthorJourneyError(
+                "Editorial Discovery requires Source inference and Branding."
+            )
+        return EditorialUnderstanding(
+            intent=inference.intent,
+            audience=inference.audience,
+            platform=inference.platform,
+            desired_outcome=inference.desired_outcome,
+            branding=branding,
+        )
+
+    def approve_discovery(self) -> None:
+        """Confirm the complete understanding and enter Editorial Plan."""
+        self.review_discovery()
+        self._discovery_approved = True
+        self.state = AuthorJourneyState.EDITORIAL_PLAN
+
+    def refine_editorial_source(self) -> None:
+        """Return to Source without discarding the Branding selection."""
+        self._require(
+            AuthorJourneyState.EDITORIAL_DISCOVERY,
+            "request Editorial Source refinement",
+        )
+        self.state = AuthorJourneyState.EDITORIAL_SOURCE
+
+    def refine_branding(self) -> None:
+        """Return to Branding without discarding Source or its inference."""
+        self._require(
+            AuthorJourneyState.EDITORIAL_DISCOVERY,
+            "request Branding refinement",
+        )
+        self.state = AuthorJourneyState.BRANDING
+
+    def propose_plan(self, plan: EditorialPlan) -> EditorialPlan:
+        """Present a complete plan only after Discovery approval."""
+        self._require(AuthorJourneyState.EDITORIAL_PLAN, "propose Editorial Plan")
+        if not getattr(self, "_discovery_approved", False):
+            raise AuthorJourneyError(
+                "Editorial Discovery must be approved before planning."
+            )
+        if not isinstance(plan, EditorialPlan):
+            raise AuthorJourneyError("Editorial Plan proposal is not supported.")
+        self._editorial_plan = plan
+        return plan
+
+    def review_plan(self) -> EditorialPlan:
+        """Return the current proposal for focused Author review."""
+        self._require(AuthorJourneyState.EDITORIAL_PLAN, "review Editorial Plan")
+        plan = self.editorial_plan
+        if plan is None:
+            raise AuthorJourneyError(
+                "An Editorial Plan must be proposed before review."
+            )
+        return plan
+
+    def revise_plan(self, plan: EditorialPlan) -> EditorialPlan:
+        """Replace the proposal while remaining inside the Plan gate."""
+        self.review_plan()
+        if not isinstance(plan, EditorialPlan):
+            raise AuthorJourneyError("Editorial Plan revision is not supported.")
+        self._editorial_plan = plan
+        return plan
+
+    def approve_plan(self) -> EditorialPlan:
+        """Approve the current plan and enter the Generation routing seam."""
+        plan = self.review_plan()
+        self._approved_editorial_plan = plan
+        self.state = AuthorJourneyState.GENERATION
+        return plan
+
     @property
     def editorial_source(self) -> EditorialSourceMaterial | None:
         return getattr(self, "_editorial_source", None)
@@ -417,6 +546,14 @@ class AuthorJourney:
     @property
     def branding_selection(self) -> BrandingSelection | None:
         return getattr(self, "_branding_selection", None)
+
+    @property
+    def editorial_plan(self) -> EditorialPlan | None:
+        return getattr(self, "_editorial_plan", None)
+
+    @property
+    def approved_editorial_plan(self) -> EditorialPlan | None:
+        return getattr(self, "_approved_editorial_plan", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

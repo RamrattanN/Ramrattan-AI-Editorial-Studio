@@ -1,8 +1,9 @@
-"""V11-01 early-session orchestration for the Version 1.1 Author Journey.
+"""Early-session orchestration for the Version 1.1 Author Journey.
 
-The orchestrator owns only Welcome, Entry Path, Configuration Load, Workflow
-Selection, and the routing seams into later slices. It wraps an optional
-Version 1.0 ``EditorialSession`` without changing that runtime.
+V11-01 owns Welcome through Workflow Selection. V11-02 adds structurally
+independent Editorial Source and Branding intake plus the routing seam into
+Editorial Discovery. The orchestrator wraps an optional Version 1.0
+``EditorialSession`` without changing that runtime.
 """
 
 from __future__ import annotations
@@ -38,7 +39,7 @@ class ConfigurationValidationError(AuthorJourneyError):
 
 
 class AuthorJourneyState(StrEnum):
-    """V11-01-owned states and its two stable downstream routing seams."""
+    """Implemented early states and stable downstream routing seams."""
 
     WELCOME = "welcome"
     ENTRY_PATH = "entry_path"
@@ -46,6 +47,8 @@ class AuthorJourneyState(StrEnum):
     RESUME_VALIDATION = "resume_validation"
     WORKFLOW_SELECTION = "workflow_selection"
     EDITORIAL_SOURCE = "editorial_source"
+    BRANDING = "branding"
+    EDITORIAL_DISCOVERY = "editorial_discovery"
 
 
 class EntryPath(StrEnum):
@@ -60,6 +63,122 @@ class WorkflowMode(StrEnum):
 
     GUIDED = "guided"
     EXPRESS = "express"
+
+
+class EditorialSourceKind(StrEnum):
+    """The approved forms of Editorial Source material."""
+
+    URL = "url"
+    ARTICLE = "article"
+    DOCUMENT = "document"
+    RESEARCH_MATERIAL = "research_material"
+    TOPIC = "topic"
+    NOTES = "notes"
+
+
+class BrandingMode(StrEnum):
+    """Author-controlled branding choices and the material-free fallback."""
+
+    PERSONAL = "personal"
+    BUSINESS = "business"
+    STUDIO_THEME = "studio_theme"
+
+
+class BrandingMaterialKind(StrEnum):
+    """The approved forms of optional Branding material."""
+
+    WEBSITE = "website"
+    LOGO = "logo"
+    PROFESSIONAL_HEADSHOT = "professional_headshot"
+    BRAND_COLOURS = "brand_colours"
+    BRAND_GUIDE = "brand_guide"
+    PRESENTATION = "presentation"
+    PREVIOUS_HERO_VISUAL = "previous_hero_visual"
+    OTHER_VISUAL_REFERENCE = "other_visual_reference"
+
+
+@dataclass(frozen=True, slots=True)
+class EditorialSourceMaterial:
+    """One explicit source contribution supplied by the Author."""
+
+    kind: EditorialSourceKind
+    content: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.kind, EditorialSourceKind):
+            raise AuthorJourneyError("Editorial Source kind is not supported.")
+        if not isinstance(self.content, str) or not self.content.strip():
+            raise AuthorJourneyError("Editorial Source content must not be empty.")
+
+
+@dataclass(frozen=True, slots=True)
+class EditorialInference:
+    """The four Editorial Source inferences required before Branding."""
+
+    intent: str
+    audience: str
+    platform: str
+    desired_outcome: str
+
+    def __post_init__(self) -> None:
+        for field_name in ("intent", "audience", "platform", "desired_outcome"):
+            value = getattr(self, field_name)
+            if not isinstance(value, str) or not value.strip():
+                raise AuthorJourneyError(
+                    f"Editorial inference {field_name} must not be empty."
+                )
+
+
+@dataclass(frozen=True, slots=True)
+class BrandingMaterial:
+    """One optional visual Branding reference, kept separate from Source."""
+
+    kind: BrandingMaterialKind
+    reference: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.kind, BrandingMaterialKind):
+            raise AuthorJourneyError("Branding material kind is not supported.")
+        if not isinstance(self.reference, str) or not self.reference.strip():
+            raise AuthorJourneyError("Branding material reference must not be empty.")
+
+
+@dataclass(frozen=True, slots=True)
+class BrandingSelection:
+    """An explicit Branding choice made during this session."""
+
+    mode: BrandingMode
+    materials: tuple[BrandingMaterial, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class IntakePresentation:
+    """Presentation data over the single Author Journey state machine."""
+
+    visible_states: tuple[AuthorJourneyState, ...]
+    carried_branding_preference: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class BrandingPrompt:
+    """Branding choices, including any Configuration-carried preference."""
+
+    choices: tuple[BrandingMode, ...]
+    material_kinds: tuple[BrandingMaterialKind, ...]
+    carried_preference_to_confirm: str | None
+
+
+def infer_editorial_source(material: EditorialSourceMaterial) -> EditorialInference:
+    """Return deterministic, conservative inferences for one Source input."""
+    if not isinstance(material, EditorialSourceMaterial):
+        raise AuthorJourneyError("Editorial Source input is not supported.")
+    source_label = material.kind.value.replace("_", " ")
+    return EditorialInference(
+        intent=f"Develop a publication from the supplied {source_label}.",
+        audience="Professional readers",
+        platform="LinkedIn",
+        desired_outcome="A clear, evidence-aware professional publication.",
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -156,6 +275,8 @@ class AuthorJourney:
 
     ENTRY_PATH_CHOICES: Final = tuple(EntryPath)
     WORKFLOW_CHOICES: Final = tuple(WorkflowMode)
+    BRANDING_CHOICES: Final = (BrandingMode.PERSONAL, BrandingMode.BUSINESS)
+    BRANDING_MATERIAL_KINDS: Final = tuple(BrandingMaterialKind)
 
     def __init__(
         self, editorial_session: EditorialSession | None = None
@@ -215,6 +336,87 @@ class AuthorJourney:
             )
         self.workflow_mode = mode
         self.state = AuthorJourneyState.EDITORIAL_SOURCE
+
+    def intake_presentation(self) -> IntakePresentation:
+        """Describe Guided or Express intake without changing transitions."""
+        self._require(
+            AuthorJourneyState.EDITORIAL_SOURCE, "present Editorial Source intake"
+        )
+        visible_states = (AuthorJourneyState.EDITORIAL_SOURCE,)
+        carried_preference = None
+        if self.workflow_mode is WorkflowMode.EXPRESS:
+            visible_states += (AuthorJourneyState.BRANDING,)
+            carried_preference = self.branding_preference
+        return IntakePresentation(visible_states, carried_preference)
+
+    def submit_editorial_source(
+        self,
+        material: EditorialSourceMaterial,
+        *,
+        inference: EditorialInference | None = None,
+    ) -> EditorialInference:
+        """Accept Source, establish its four inferences, then enter Branding."""
+        self._require(
+            AuthorJourneyState.EDITORIAL_SOURCE, "submit Editorial Source"
+        )
+        if not isinstance(material, EditorialSourceMaterial):
+            raise AuthorJourneyError("Editorial Source input is not supported.")
+        resolved = infer_editorial_source(material) if inference is None else inference
+        if not isinstance(resolved, EditorialInference):
+            raise AuthorJourneyError("Editorial Source inference is not supported.")
+        self._editorial_source = material
+        self._editorial_inference = resolved
+        self.state = AuthorJourneyState.BRANDING
+        return resolved
+
+    def branding_prompt(self) -> BrandingPrompt:
+        """Present independent Branding input and carried preference data."""
+        self._require(AuthorJourneyState.BRANDING, "present Branding intake")
+        return BrandingPrompt(
+            choices=self.BRANDING_CHOICES,
+            material_kinds=self.BRANDING_MATERIAL_KINDS,
+            carried_preference_to_confirm=self.branding_preference,
+        )
+
+    def submit_branding(
+        self,
+        mode: BrandingMode | None,
+        materials: tuple[BrandingMaterial, ...] = (),
+    ) -> BrandingSelection:
+        """Accept an explicit Branding choice and enter the Discovery seam."""
+        self._require(AuthorJourneyState.BRANDING, "submit Branding")
+        if mode is not None and not isinstance(mode, BrandingMode):
+            raise AuthorJourneyError("Branding choice must be personal or business.")
+        if not isinstance(materials, tuple) or not all(
+            isinstance(item, BrandingMaterial) for item in materials
+        ):
+            raise AuthorJourneyError("Branding materials are not supported.")
+        if mode is BrandingMode.STUDIO_THEME and materials:
+            raise AuthorJourneyError(
+                "Studio Theme cannot be combined with supplied Branding material."
+            )
+        if not materials:
+            mode = BrandingMode.STUDIO_THEME
+        elif mode not in self.BRANDING_CHOICES:
+            raise AuthorJourneyError(
+                "Supplied Branding material requires personal or business branding."
+            )
+        selection = BrandingSelection(mode=mode, materials=materials)
+        self._branding_selection = selection
+        self.state = AuthorJourneyState.EDITORIAL_DISCOVERY
+        return selection
+
+    @property
+    def editorial_source(self) -> EditorialSourceMaterial | None:
+        return getattr(self, "_editorial_source", None)
+
+    @property
+    def editorial_inference(self) -> EditorialInference | None:
+        return getattr(self, "_editorial_inference", None)
+
+    @property
+    def branding_selection(self) -> BrandingSelection | None:
+        return getattr(self, "_branding_selection", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

@@ -298,12 +298,11 @@ listed below has begun implementation as of this Epic's creation.
 - **Governing Implementation Plan section.** Section 8, `V11-01`.
 - **Dependencies.** None (foundation slice).
 - **Required prerequisite decisions or reviews.** Issue #64 (Canonical
-  Studio Configuration Format), for the Configuration schema, serialization,
-  and load-time validation portion of this slice's scope specifically. See
-  Section 8.
+  Studio Configuration Format) - resolved, closed via merged PR #66 - governed
+  the Configuration schema, serialization, and load-time validation portion
+  of this slice's scope specifically. See Section 8.
 - **GitHub issue status.** Not created. See Section 9.
-- **Delivery status.** Blocked by Prerequisite (Issue #64, for
-  Configuration scope).
+- **Delivery status.** Not Activated.
 - **Expected evidence.** New tests for AC-ENTRY-1, 2, 3, 8 and AC-CONFIG-1
   through 8, 13 through 16 and AC-WORKFLOW-1, 2; full existing suite green;
   Configuration round-trip test passing.
@@ -495,28 +494,29 @@ listed below has begun implementation as of this Epic's creation.
 
 ### Issue #64 - Canonical Studio Configuration Format
 
-- **Current state (verified).** Open, unresolved, at
-  `https://github.com/RamrattanN/Ramrattan-AI-Editorial-Studio/issues/64`.
-  It proposes adopting JSON as the sole canonical Ramrattan AI
-  Configuration format, deprecating Markdown configuration input, and
-  clarifying `docs/product/Version_1_1_Author_Experience_Baseline.md` and
+- **Current state (verified).** Resolved and closed at
+  `https://github.com/RamrattanN/Ramrattan-AI-Editorial-Studio/issues/64`,
+  via PR #66, merged into `develop` as commit
+  `0078983e3fb24e97dd524c83ea3ac8090d15b94f`. The clarification adopted JSON
+  as the sole canonical Ramrattan AI Configuration format, deprecated
+  Markdown configuration input, and updated
+  `docs/product/Version_1_1_Author_Experience_Baseline.md` and
   `docs/architecture/adr/ADR-019-studio-configuration-and-author-controlled-continuity.md`
-  accordingly. As currently written, those two governing documents list
-  both `.md` and `.json` as supported Configuration filename patterns
-  without designating one as canonical - the exact ambiguity Issue #64
-  exists to resolve.
-- **Gating effect.** Must be resolved before implementation of
-  Configuration serialization or loading behavior begins. This affects the
-  Studio Configuration portion of `V11-01` specifically (Increment 1); it
-  does not affect Entry Path routing or Workflow Selection's non-
-  Configuration behavior.
-- **Boundary.** Does not authorize field-level schema expansion beyond the
-  two-field boundary ADR-019 already establishes (Workflow mode, Branding
-  preference reference). Must be delivered as a focused documentation
-  clarification to the two documents it names, not as a broader revision.
-- **Current format status.** JSON remains proposed, not yet canonical,
-  until Issue #64's clarification is merged into the governing documents.
-  This Epic does not treat Issue #64 as resolved.
+  accordingly. Both governing documents now designate JSON as the sole
+  canonical Configuration filename pattern; the ambiguity Issue #64 existed
+  to resolve no longer exists.
+- **Gating effect.** Was required to be resolved before implementation of
+  Configuration serialization or loading behavior begins. This precondition
+  is now satisfied for the Studio Configuration portion of `V11-01`
+  specifically (Increment 1); it never affected Entry Path routing or
+  Workflow Selection's non-Configuration behavior.
+- **Boundary.** Was delivered as a focused documentation clarification to
+  the two documents it named, not a broader revision; it did not authorize
+  field-level schema expansion beyond the two-field boundary ADR-019
+  already establishes (Workflow mode, Branding preference reference).
+- **Current format status.** JSON is now the canonical Ramrattan AI
+  Configuration format, per the merged clarification. This Epic treats
+  Issue #64 as resolved.
 
 ### Constitutional Impact Review for ADR-018
 
@@ -584,8 +584,9 @@ No issue, label, milestone, or Project item is created by this task.
   Labels, Linked pull requests, Milestone, Repository, Reviewers, Parent
   issue, Sub-issues progress, Created, Updated, Closed.
 - No existing Version 1.1 parent or epic-tracking issue was found by a
-  repository-wide issue search; Issue #64 is the only currently open
-  Version-1.1-related issue.
+  repository-wide issue search; Issue #64 was the only open
+  Version-1.1-related issue at that time. It has since been resolved and
+  closed via PR #66 (see Section 8).
 
 **Proposed decomposition:**
 
@@ -599,10 +600,10 @@ No issue, label, milestone, or Project item is created by this task.
   adjacent slices into one issue for a stated scope, risk, or timing
   reason, per the Implementation Plan's Change Consolidation guidance.
 - **Prerequisite references**, not new issues: Issue #64 is referenced
-  from the `V11-01` issue as a blocking dependency; the Constitutional
-  Impact Review is referenced from the `V11-06` issue the same way,
-  recorded as text since the repository has no dedicated review-tracking
-  issue type.
+  from the `V11-01` issue as a resolved prerequisite (closed via PR #66);
+  the Constitutional Impact Review is referenced from the `V11-06` issue as
+  a still-open blocking prerequisite, recorded as text since the
+  repository has no dedicated review-tracking issue type.
 - **Dependency notation** using the Project's existing "Parent issue" and
   "Sub-issues progress" fields for the Epic-to-slice relationship, and
   explicit "Depends on #N" text references between slice issues for
@@ -820,11 +821,11 @@ dependency. Both `V11-08` and `V11-09` converge the entire Epic before
 | GPT platform-capability mismatch | Major | A slice assumes an unverified GPT capability (Actions, memory, file handling) | Explicit prerequisite confirmation before Start, per Section 8 | Capability confirmed unavailable after a slice assumed it | Repository Author |
 | Protected-file/bootstrap coupling | Major | A slice needs to touch a hash-pinned or generated file without updating its owning test | Section 6 and Section 15 file inventory in the Implementation Plan | Hash-pin test failing after a change | Lead Implementation Engineer |
 | Version 1 regression | Major | A change to `article_engine.py`, `hero_visual.py`, `evidence_validation.py`, or `portable_editorial_project.py`'s existing public behavior | Full existing 324-test suite rerun after every slice | Any existing test failing | Lead Implementation Engineer |
-| Issue #64 unresolved past need | Major | `V11-01`'s Configuration scope begins before Issue #64 merges | Delivery status "Blocked by Prerequisite" enforced in Section 7 | Configuration work started while Issue #64 remains open | Repository Author |
+| Issue #64 unresolved past need | Major | `V11-01`'s Configuration scope begins before Issue #64 merges | Retired: Issue #64 resolved via merged PR #66 before any `V11-01` work began | N/A - risk did not materialize | Repository Author |
 | Issue/PR fragmentation | Moderate | Slices split into more issues or PRs than the Change Consolidation guidance supports | Section 9 and Section 10 default-to-one-per-slice rule | Issue count materially exceeds ten plus the parent Epic without a documented consolidation decision | Repository Author |
 | Parallel-work collision | Moderate | Two work orders active on overlapping scope without a consolidation decision | Sequential-work default; disjoint-scope requirement for parallel work (AI Engineering Standard Section 17) | Overlapping in-progress work discovered | Repository Author |
 | Token/resource inefficiency | Minor | Re-deriving already-established context for every slice's work order | This Epic and the Implementation Plan serving as the reusable per-slice reference | Repeated full-context re-reading without a material reason | Lead Implementation Engineer |
-| Governance becoming an implementation bottleneck | Moderate | The Constitutional Impact Review or Issue #64 stall without a scheduled resolution | Section 19's recommended ordering places both early, ahead of Increment 1/2 dependent work | Either gate open more than one increment past its dependents being otherwise ready | Repository Author |
+| Governance becoming an implementation bottleneck | Moderate | The Constitutional Impact Review stalls without a scheduled resolution (Issue #64 resolved via PR #66) | Section 19's recommended ordering places it early, ahead of Increment 2's dependent work | The Constitutional Impact Review open more than one increment past its dependents being otherwise ready | Repository Author |
 | Scope creep into Version 2 | Critical | A slice or its work order references Capability 012, Portable Author Context, or Publish to Platform as in-scope | Explicit Out of Scope list (Section 4) repeated at every slice's non-goals | Any Version 2 concept appearing as authorized scope in a work order or PR | Repository Author |
 
 ## 16. Epic Progress Model
@@ -912,15 +913,17 @@ or shortcut that governance.
 
 ## 19. Recommended Immediate Next Actions
 
-1. Deliver the Issue #64 documentation clarification as its own focused
-   delivery, updating exactly the two documents it names.
+1. Issue #64 documentation clarification - complete. Delivered via merged
+   PR #66, commit `0078983e3fb24e97dd524c83ea3ac8090d15b94f`, updating
+   exactly the two documents it named.
 2. Create or activate the parent Version 1.1 Epic issue in GitHub,
    referencing this document.
 3. Create the ten slice issues from the decomposition in Section 9, using
    only verified existing labels, the existing Project Status field, and
    the Parent issue / Sub-issues progress relationship.
-4. Begin Increment 1 with `V11-01`, once Issue #64 is resolved and its
-   Delivery status in Section 7 is updated from Blocked by Prerequisite.
+4. Begin Increment 1 with `V11-01`; Issue #64 is resolved and its Delivery
+   status in Section 7 now reads Not Activated rather than Blocked by
+   Prerequisite.
 5. Schedule the ADR-018 Constitutional Impact Review well before `V11-06`
    is reached, so it does not become the critical-path bottleneck Section
    15 identifies as a risk.
@@ -930,7 +933,7 @@ for separately authorized future work.
 
 ## 20. Implementation Readiness
 
-**Ready with prerequisites.**
+**Ready with one prerequisite.**
 
 The governing Implementation Plan is complete, delivered, and merged to
 `develop`; the AI Engineering Standard and Work Order Template needed to
@@ -938,21 +941,18 @@ delegate slice work are likewise delivered and merged. Every slice's
 scope, dependencies, and acceptance-criteria mapping are fully defined
 with no remaining ambiguity this Epic needed to resolve.
 
-Two prerequisites currently block the critical path's first slice and one
-downstream slice, both already identified by the Implementation Plan or
-discovered since:
+Of the two prerequisites identified by the Implementation Plan or
+discovered since, one is resolved and one remains open, blocking one
+downstream slice:
 
-1. Issue #64 (Canonical Studio Configuration Format) is open and
-   unresolved, blocking `V11-01`'s Configuration-serialization scope
-   specifically - and therefore, since every later slice depends on
-   `V11-01` transitively, blocking the practical start of Increment 1's
-   Configuration-bearing work.
+1. Issue #64 (Canonical Studio Configuration Format) is resolved - closed
+   via merged PR #66, commit `0078983e3fb24e97dd524c83ea3ac8090d15b94f` -
+   and no longer blocks `V11-01`'s Configuration-serialization scope.
 2. The Constitutional Impact Review for ADR-018 has not been performed,
    blocking `V11-06`'s Start specifically, within Increment 2.
 
-Neither prerequisite requires revisiting this Epic, the Implementation
-Plan, or any approved product decision. Both are governance acts this
-Epic tracks but does not perform. No slice is currently in a Ready for
-Activation state under the evidence-based Delivery status values recorded
-in Section 7; resolving Issue #64 is the single action that unblocks the
-Epic's actual starting point.
+The remaining prerequisite does not require revisiting this Epic, the
+Implementation Plan, or any approved product decision. It is a governance
+act this Epic tracks but does not perform. `V11-01`'s Delivery status in
+Section 7 now reads Not Activated; `V11-01` is the Epic's next unblocked
+starting point once a Start authorization is issued.

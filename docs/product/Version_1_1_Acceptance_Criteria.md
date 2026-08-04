@@ -69,11 +69,10 @@ configuration file when Configuration Load is reached, on the Start New
 Publication path only.
 
 **AC-CONFIG-2.** The Studio MUST accept a configuration file whose filename
-matches the pattern `Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].md` or
-`Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].json`.
+matches the pattern `Ramrattan-AI-Configuration-[YYYY.MM.DDvNN].json`.
 
 **AC-CONFIG-3.** The Studio MUST reject, with an explicit and specific
-message, a configuration file that does not match either supported filename
+message, a configuration file that does not match the supported filename
 pattern or supported content structure.
 
 **AC-CONFIG-4.** Loading a configuration file MUST restore publication

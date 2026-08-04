@@ -184,7 +184,7 @@ Responsibility. See
 
 **Entry:** From Entry Path, on Start New Publication.
 **Author sees:** An optional prompt to supply a Ramrattan AI Configuration
-file (`.md` or `.json`, filename pattern
+file (`.json`, filename pattern
 `Ramrattan-AI-Configuration-[YYYY.MM.DDvNN]`).
 **Exit condition:** The Author loads a file, or skips this state. Both paths
 lead to Workflow Selection.

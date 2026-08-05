@@ -44,6 +44,10 @@ from .portable_editorial_project import (
 )
 from .publication_package import PublicationPackage, PublicationPackageBuilder
 from .publication_studio import PublicationContent, PublicationStudio
+from .session_completion import (
+    SessionArtifacts,
+    build_session_artifacts,
+)
 
 if TYPE_CHECKING:
     from .editorial_discernment import EditorialSession
@@ -85,6 +89,7 @@ class AuthorJourneyState(StrEnum):
     PUBLICATION_STUDIO = "publication_studio"
     EDITORIAL_AUDIT = "editorial_audit"
     SESSION_COMPLETION = "session_completion"
+    COMPLETE = "complete"
 
 
 class GenerationStatus(StrEnum):
@@ -594,6 +599,7 @@ class AuthorJourney:
             )
         selection = BrandingSelection(mode=mode, materials=materials)
         self._branding_selection = selection
+        self.branding_preference = selection.mode.value
         self.state = AuthorJourneyState.EDITORIAL_DISCOVERY
         return selection
 
@@ -840,6 +846,51 @@ class AuthorJourney:
             AuthorJourneyState.PUBLICATION_STUDIO, "signal completion"
         )
         self.state = AuthorJourneyState.SESSION_COMPLETION
+
+    def completion_prompt(self) -> str:
+        """Present the one optional Configuration decision at completion."""
+        self._require(
+            AuthorJourneyState.SESSION_COMPLETION,
+            "present the Session Completion prompt",
+        )
+        return (
+            "Would you like to generate a Ramrattan AI Configuration from "
+            "today's session for future use?"
+        )
+
+    def complete_session(
+        self,
+        *,
+        generate_configuration: bool,
+        completed_on: date,
+        existing_project_names: tuple[str, ...] = (),
+        existing_configuration_names: tuple[str, ...] = (),
+    ) -> SessionArtifacts:
+        """Deliver final artifacts, enter Complete, and retain no session data."""
+        self._require(AuthorJourneyState.SESSION_COMPLETION, "complete the session")
+        if not isinstance(generate_configuration, bool):
+            raise AuthorJourneyError(
+                "Session Completion requires an explicit Configuration choice."
+            )
+        studio = self.publication_studio
+        if studio is None:
+            raise AuthorJourneyError(
+                "Session Completion requires an active Publication Studio."
+            )
+        artifacts = build_session_artifacts(
+            studio,
+            completed_on=completed_on,
+            generate_configuration=generate_configuration,
+            preferred_workflow=(
+                self.workflow_mode.value if self.workflow_mode is not None else None
+            ),
+            branding_preference=self.branding_preference,
+            existing_project_names=existing_project_names,
+            existing_configuration_names=existing_configuration_names,
+        )
+        self.__dict__.clear()
+        self.state = AuthorJourneyState.COMPLETE
+        return artifacts
 
     def _validate_generation_request(self, request: GenerationRequest) -> None:
         plan = self.approved_editorial_plan

@@ -35,6 +35,16 @@ FILES = {
     "tests/test_v11_07_resume_existing_project.py": decode(_TEST_BLOB),
 }
 
+# V11_08_SESSION_COMPLETION_ARTIFACTS_DELEGATION_START
+# The next slice owns the evolved Author Journey artifact.
+from bootstrap_v11_08_session_completion_artifacts import (
+    AUTHOR_JOURNEY as V11_08_AUTHOR_JOURNEY,
+)
+
+AUTHOR_JOURNEY = V11_08_AUTHOR_JOURNEY
+FILES["studio/author_journey.py"] = AUTHOR_JOURNEY
+# V11_08_SESSION_COMPLETION_ARTIFACTS_DELEGATION_END
+
 PROTECTED_HASHES = {
     "studio/workflow/README.md": "2f98daa4f2f4760bd72c36867de1658a120bad5b06ab3348dad717f534eb3211",
     "studio/workflow/__init__.py": "9ac599af687b85520dcb0719fee72ed9d40f2cdc4e7e8dc825f8a7f1354a47e0",

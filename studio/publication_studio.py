@@ -15,6 +15,10 @@ from typing import TYPE_CHECKING
 
 from .evidence_validation import EditorialConfidence, EditorialRisk
 from .hero_visual import HeroVisualResult
+from .portable_editorial_project import (
+    PortableEditorialProject,
+    ResumeResult,
+)
 from .publication_package import PublicationPackage
 
 if TYPE_CHECKING:
@@ -95,6 +99,41 @@ class PublicationContent:
             linkedin_description=package.linkedin_description or None,
         )
 
+    @classmethod
+    def from_resumed_project(
+        cls, project: PortableEditorialProject
+    ) -> PublicationContent:
+        """Restore the content carried by the existing project schema."""
+        article = project.article_markdown
+        sections = article.splitlines()
+        hook_lines: list[str] = []
+        cta_lines: list[str] = []
+        active = "before_hook"
+        for line in sections:
+            stripped = line.strip()
+            if stripped.startswith("# ") and active == "before_hook":
+                active = "hook"
+                continue
+            if stripped.startswith("## "):
+                active = (
+                    "cta"
+                    if stripped == "## Continue the Conversation"
+                    else "body"
+                )
+                continue
+            if active == "hook" and stripped:
+                hook_lines.append(stripped)
+            elif active == "cta" and stripped:
+                cta_lines.append(stripped)
+        nonempty = [line.strip() for line in sections if line.strip()]
+        fallback = nonempty[-1] if nonempty else project.title
+        return cls(
+            headline=project.title,
+            hook="\n".join(hook_lines) or fallback,
+            article=article,
+            cta="\n".join(cta_lines) or fallback,
+        )
+
     def rendered(self) -> str:
         """Return exactly displayed Publication Content, omitting absent fields."""
         sections = [
@@ -157,14 +196,31 @@ class PublicationEditor:
 
 
 @dataclass(frozen=True, slots=True)
+class ResumedHeroVisualReference:
+    """The Hero Visual reference carried by a Portable Editorial Project."""
+
+    prompt: str
+    status: str
+    artifact_sha256: str | None
+
+    @property
+    def ready(self) -> bool:
+        return self.status == "ready"
+
+
+@dataclass(frozen=True, slots=True)
 class HeroVisualWorkspace:
     """Display the generated visual with Author-controlled local actions."""
 
-    visual: HeroVisualResult
+    visual: HeroVisualResult | ResumedHeroVisualReference
     actions: tuple[HeroVisualAction, ...] = tuple(HeroVisualAction)
 
     def __post_init__(self) -> None:
-        if not isinstance(self.visual, HeroVisualResult) or not self.visual.ready:
+        if not isinstance(self.visual, (HeroVisualResult, ResumedHeroVisualReference)):
+            raise PublicationStudioError(
+                "Publication Studio requires a generated Hero Visual."
+            )
+        if isinstance(self.visual, HeroVisualResult) and not self.visual.ready:
             raise PublicationStudioError(
                 "Publication Studio requires a generated Hero Visual."
             )
@@ -199,12 +255,14 @@ class PublicationStudio:
 
     def __init__(
         self,
-        generated_package: PublicationPackage,
+        generated_package: PublicationPackage | None,
         hero_visual: HeroVisualWorkspace,
         editor: PublicationEditor,
         editorial_review: EditorialReview,
+        resumed_project: PortableEditorialProject | None = None,
     ) -> None:
         self.generated_package = generated_package
+        self.resumed_project = resumed_project
         self.hero_visual = hero_visual
         self.editor = editor
         self.editorial_review = editorial_review
@@ -239,6 +297,38 @@ class PublicationStudio:
                 suggested_mentions=suggested_mentions,
                 branding_summary=branding_summary,
                 session_summary=session_summary,
+            ),
+        )
+
+    @classmethod
+    def from_resume(cls, result: ResumeResult) -> PublicationStudio:
+        """Adapt an already validated Version 1.0 resume result."""
+        if not isinstance(result, ResumeResult):
+            raise PublicationStudioError(
+                "Publication Studio requires a validated Resume result."
+            )
+        project = result.project
+        visual = ResumedHeroVisualReference(
+            prompt=project.hero_visual_prompt,
+            status=project.hero_visual_status,
+            artifact_sha256=project.hero_visual_sha256,
+        )
+        return cls(
+            generated_package=None,
+            resumed_project=project,
+            hero_visual=HeroVisualWorkspace(visual),
+            editor=PublicationEditor(PublicationContent.from_resumed_project(project)),
+            editorial_review=EditorialReview(
+                editorial_confidence=EditorialConfidence(
+                    project.editorial_confidence
+                ),
+                editorial_risk=EditorialRisk(project.editorial_risk),
+                sources=(),
+                suggested_mentions=(),
+                branding_summary="Not stored in the Portable Editorial Project",
+                session_summary=" ".join(result.findings),
+                assessment_label="As of Resume Validation",
+                may_not_reflect_current_edits=True,
             ),
         )
 

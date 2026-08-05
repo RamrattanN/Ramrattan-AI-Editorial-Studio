@@ -2,11 +2,13 @@
 
 ## Status
 
-Proposed. Approved as part of the Version 1.1 product design in
+Accepted. Approved as part of the Version 1.1 product design in
 `docs/product/Version_1_1_Author_Experience_Baseline.md`, and further revised
 to record the Repository Author's resolution of the Resume Existing Project
-placement decision. Becomes Accepted when Version 1.1 is delivered against
-this decision.
+placement decision. Version 1.1 is delivered against this decision: V11-01
+through V11-10 (Issues #70-#79) are complete on `develop`, including Studio
+Configuration (V11-01, Issue #70) and Resume Existing Project integration
+(V11-07, Issue #76, PR #89) this ADR governs.
 
 ## Date
 

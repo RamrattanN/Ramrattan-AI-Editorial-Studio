@@ -68,9 +68,14 @@ Each ADR explains:
 ## Version 1.1 Decisions
 
 - [ADR-018 - Author Ownership and Publication Studio](ADR-018-author-ownership-and-publication-studio.md) -
-  Proposed; Editorial Audit Gate decision resolved, pending delivery.
+  Accepted; Editorial Audit Gate decision resolved and delivered (V11-06,
+  Issue #75, PR #88).
 - [ADR-019 - Studio Configuration and Author-Controlled Continuity](ADR-019-studio-configuration-and-author-controlled-continuity.md) -
-  Proposed; Resume Existing Project placement decision resolved, pending
-  delivery.
+  Accepted; Resume Existing Project placement decision resolved and
+  delivered (V11-01 and V11-07, Issues #70 and #76).
+
+Version 1.1 (V11-01 through V11-10, Issues #70-#79) is complete on
+`develop`. Architecture Baseline `2026.08.04v14` records the delivered
+runtime.
 
 <!-- VERSION_1_1_ADR_INDEX_END -->

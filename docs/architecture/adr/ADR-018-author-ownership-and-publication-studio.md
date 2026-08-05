@@ -2,10 +2,14 @@
 
 ## Status
 
-Proposed. Revised per Architecture Review Board findings dated 2026-08-03,
+Accepted. Revised per Architecture Review Board findings dated 2026-08-03,
 and further revised to record the Repository Author's resolution of the
-Editorial Audit Gate decision on the same date. Becomes Accepted when Version
-1.1 is delivered against this decision.
+Editorial Audit Gate decision on the same date. Version 1.1 is delivered
+against this decision: V11-01 through V11-10 (Issues #70-#79) are complete
+on `develop`, including the Editorial Audit and Copy LinkedIn Publication
+gate this ADR governs (V11-06, Issue #75, PR #88). The Constitutional
+Impact Review this ADR's Governance Question Resolved section requires is
+recorded in `docs/product/Decision_Log.md`.
 
 ## Date
 

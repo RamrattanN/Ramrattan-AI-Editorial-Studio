@@ -7,7 +7,9 @@ the existing Version 1.0 generation contracts without changing them. V11-05
 opens the Author-owned Publication Studio and stops at the Editorial Audit
 routing seam. V11-06 completes that seam with a real, read-only Editorial
 Audit and the Copy LinkedIn Publication gate, then stops at the Session
-Completion routing seam. The orchestrator wraps an optional Version 1.0
+Completion routing seam. V11-07 integrates the existing Portable Editorial
+Project resume mechanism as a separate path directly into Publication
+Studio. The orchestrator wraps an optional Version 1.0
 ``EditorialSession`` without changing that runtime.
 """
 
@@ -34,6 +36,12 @@ from .evidence_validation import (
     validate_evidence,
 )
 from .hero_visual import HeroVisualRequest, HeroVisualSystem
+from .portable_editorial_project import (
+    PortableProjectError,
+    ProjectState,
+    ResumeResult,
+    resume_project,
+)
 from .publication_package import PublicationPackage, PublicationPackageBuilder
 from .publication_studio import PublicationContent, PublicationStudio
 
@@ -293,6 +301,16 @@ class GenerationOutcome:
         )
 
 
+@dataclass(frozen=True, slots=True)
+class ResumeValidationOutcome:
+    """One explicit success or failure from Resume Validation."""
+
+    succeeded: bool
+    explanation: str
+    state: ProjectState | None = None
+    result: ResumeResult | None = None
+
+
 def infer_editorial_source(material: EditorialSourceMaterial) -> EditorialInference:
     """Return deterministic, conservative inferences for one Source input."""
     if not isinstance(material, EditorialSourceMaterial):
@@ -428,6 +446,54 @@ class AuthorJourney:
             self.state = AuthorJourneyState.CONFIGURATION_LOAD
             return
         self.state = AuthorJourneyState.RESUME_VALIDATION
+
+    def resume_existing_project(
+        self, markdown: str, *, current_on: date
+    ) -> ResumeValidationOutcome:
+        """Run the existing Version 1.0 resume path without Configuration."""
+        self._require(
+            AuthorJourneyState.RESUME_VALIDATION,
+            "resume an existing Portable Editorial Project",
+        )
+        if self.editorial_session is None:
+            outcome = ResumeValidationOutcome(
+                False,
+                "The project cannot be resumed without an Editorial Session.",
+            )
+            self._resume_validation_outcome = outcome
+            self.state = AuthorJourneyState.ENTRY_PATH
+            return outcome
+        try:
+            result = resume_project(
+                markdown,
+                self.editorial_session,
+                current_on=current_on,
+            )
+        except (PortableProjectError, ValueError) as exc:
+            project_state = (
+                exc.state if isinstance(exc, PortableProjectError) else None
+            )
+            detail = str(exc).strip() or "Portable Editorial Project validation failed."
+            outcome = ResumeValidationOutcome(
+                False,
+                "The project cannot be resumed: " + detail,
+                project_state,
+            )
+            self._resume_validation_outcome = outcome
+            self.state = AuthorJourneyState.ENTRY_PATH
+            return outcome
+
+        self._publication_studio = PublicationStudio.from_resume(result)
+        self._resume_result = result
+        outcome = ResumeValidationOutcome(
+            True,
+            "The Portable Editorial Project was restored in Publication Studio.",
+            result.state,
+            result,
+        )
+        self._resume_validation_outcome = outcome
+        self.state = AuthorJourneyState.PUBLICATION_STUDIO
+        return outcome
 
     def skip_configuration(self) -> None:
         """Continue with Studio defaults and no warning or error state."""
@@ -881,6 +947,10 @@ class AuthorJourney:
     @property
     def last_audit_result(self) -> EditorialAuditResult | None:
         return getattr(self, "_last_audit_result", None)
+
+    @property
+    def resume_validation_outcome(self) -> ResumeValidationOutcome | None:
+        return getattr(self, "_resume_validation_outcome", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

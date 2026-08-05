@@ -38,6 +38,19 @@ FILES = {
     "tests/test_v11_06_editorial_audit_copy_gate.py": decode(_TEST_BLOB),
 }
 
+# V11_07_RESUME_EXISTING_PROJECT_DELEGATION_START
+# The next slice owns the evolved Author Journey and Publication Studio files.
+from bootstrap_v11_07_resume_existing_project import (
+    AUTHOR_JOURNEY as V11_07_AUTHOR_JOURNEY,
+    PUBLICATION_STUDIO as V11_07_PUBLICATION_STUDIO,
+)
+
+AUTHOR_JOURNEY = V11_07_AUTHOR_JOURNEY
+PUBLICATION_STUDIO = V11_07_PUBLICATION_STUDIO
+FILES["studio/author_journey.py"] = AUTHOR_JOURNEY
+FILES["studio/publication_studio.py"] = PUBLICATION_STUDIO
+# V11_07_RESUME_EXISTING_PROJECT_DELEGATION_END
+
 PROTECTED_HASHES = {
     "studio/workflow/README.md": "2f98daa4f2f4760bd72c36867de1658a120bad5b06ab3348dad717f534eb3211",
     "studio/workflow/__init__.py": "9ac599af687b85520dcb0719fee72ed9d40f2cdc4e7e8dc825f8a7f1354a47e0",

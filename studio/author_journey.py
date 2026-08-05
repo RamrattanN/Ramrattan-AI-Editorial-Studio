@@ -5,7 +5,9 @@ independent Editorial Source and Branding intake. V11-03 adds the separate
 Editorial Discovery and Editorial Plan approval gates. V11-04 orchestrates
 the existing Version 1.0 generation contracts without changing them. V11-05
 opens the Author-owned Publication Studio and stops at the Editorial Audit
-routing seam. The orchestrator wraps an optional Version 1.0
+routing seam. V11-06 completes that seam with a real, read-only Editorial
+Audit and the Copy LinkedIn Publication gate, then stops at the Session
+Completion routing seam. The orchestrator wraps an optional Version 1.0
 ``EditorialSession`` without changing that runtime.
 """
 
@@ -23,6 +25,7 @@ from .article_engine import (
     ArticleRequest,
     PublicationBlockedError,
 )
+from .editorial_audit import EditorialAuditResult, perform_editorial_audit
 from .evidence_validation import (
     Claim,
     EditorialRisk,
@@ -73,6 +76,7 @@ class AuthorJourneyState(StrEnum):
     GENERATION = "generation"
     PUBLICATION_STUDIO = "publication_studio"
     EDITORIAL_AUDIT = "editorial_audit"
+    SESSION_COMPLETION = "session_completion"
 
 
 class GenerationStatus(StrEnum):
@@ -669,6 +673,8 @@ class AuthorJourney:
         )
         self._generation_completed = True
         self._generation_outcome = outcome
+        self._generation_claims = request.claims
+        self._generation_evidence = request.evidence
         branding = self.branding_selection
         understanding = self.editorial_understanding
         if branding is None or understanding is None:
@@ -701,7 +707,7 @@ class AuthorJourney:
         return studio.author_edit(**changes)
 
     def request_editorial_audit(self) -> PublicationContent:
-        """Enter the V11-06 Editorial Audit seam without performing an audit."""
+        """Enter Editorial Audit; the audit itself runs on completion."""
         self._require(
             AuthorJourneyState.PUBLICATION_STUDIO,
             "request Editorial Audit",
@@ -712,6 +718,62 @@ class AuthorJourney:
         content = studio.editorial_audit_input()
         self.state = AuthorJourneyState.EDITORIAL_AUDIT
         return content
+
+    def complete_editorial_audit(
+        self, *, current_on: date | None = None
+    ) -> EditorialAuditResult:
+        """Run the read-only Editorial Audit and return to Author Editing.
+
+        Re-invokes `evidence_validation.validate_evidence` against the same
+        claims and evidence established at Generation - the Editorial
+        Integrity Pipeline's internal risk-derivation logic is not altered
+        or duplicated here - and computes Editorial Drift against the
+        Generate Once baseline. The result never modifies Publication
+        Content; it only refreshes Editorial Review and the Copy LinkedIn
+        Publication gate.
+        """
+        self._require(
+            AuthorJourneyState.EDITORIAL_AUDIT, "complete Editorial Audit"
+        )
+        studio = self.publication_studio
+        claims = getattr(self, "_generation_claims", None)
+        evidence = getattr(self, "_generation_evidence", None)
+        if studio is None or claims is None or evidence is None:
+            raise AuthorJourneyError(
+                "Editorial Audit requires a completed Generation."
+            )
+        result = perform_editorial_audit(
+            claims,
+            evidence,
+            generated_content=studio.editor.generated_content,
+            current_content=studio.editor.current_content,
+            current_on=current_on,
+        )
+        studio.apply_editorial_audit(result)
+        self._last_audit_result = result
+        self.state = AuthorJourneyState.PUBLICATION_STUDIO
+        return result
+
+    def copy_linkedin_publication(self) -> str:
+        """Return the Author's current Publication Content when matched."""
+        self._require(
+            AuthorJourneyState.PUBLICATION_STUDIO, "copy LinkedIn Publication"
+        )
+        studio = self.publication_studio
+        if studio is None:
+            raise AuthorJourneyError("Publication Studio is not available.")
+        return studio.copy_linkedin_publication()
+
+    def signal_completion(self) -> None:
+        """Enter the V11-08 Session Completion routing seam.
+
+        No Editorial Audit is required to reach this seam (AC-AUDIT-7); the
+        gate governs Copy LinkedIn Publication only.
+        """
+        self._require(
+            AuthorJourneyState.PUBLICATION_STUDIO, "signal completion"
+        )
+        self.state = AuthorJourneyState.SESSION_COMPLETION
 
     def _validate_generation_request(self, request: GenerationRequest) -> None:
         plan = self.approved_editorial_plan
@@ -815,6 +877,10 @@ class AuthorJourney:
     @property
     def publication_studio(self) -> PublicationStudio | None:
         return getattr(self, "_publication_studio", None)
+
+    @property
+    def last_audit_result(self) -> EditorialAuditResult | None:
+        return getattr(self, "_last_audit_result", None)
 
     def _require(self, expected: AuthorJourneyState, action: str) -> None:
         if self.state is not expected:

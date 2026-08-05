@@ -33,7 +33,7 @@ Ramrattan AI Editorial Studio
 
 **Architecture Baseline**
 
-`2026.08.02v13`
+`2026.08.04v14`
 
 **Repository State**
 
@@ -74,11 +74,27 @@ Ramrattan AI Editorial Studio
 - Version 1 RC1 Release Readiness
 - Claude Code Integration
 
+### Version 1.1
+
+- V11-01 - Author Journey Foundation (Issue #70, PR #81)
+- V11-02 - Editorial Source and Branding Intake (Issue #71, PR #82)
+- V11-03 - Editorial Discovery and Editorial Plan Gates (Issue #72, PR #83)
+- V11-04 - Generation Orchestration and Blocked/Failed Handling (Issue #73, PR #84)
+- V11-05 - Publication Studio Workspace (Issue #74, PR #85)
+- V11-06 - Editorial Audit and the Copy LinkedIn Publication Gate (Issue #75, PR #88)
+- V11-07 - Resume Existing Project Integration (Issue #76, PR #89)
+- V11-08 - Session Completion, Configuration Generation, and Session Artifacts (Issue #77, PR #90)
+- V11-09 - End-to-End Author Acceptance Evidence (Issue #78, PR #91)
+- V11-10 - Documentation and Status Reconciliation (Issue #79)
+
+ADR-018 and ADR-019 are Accepted. Version 1.1 Epic completion does not
+authorize release; see Current Focus below.
+
 Current validation baseline:
 
 - Compileall PASS
 - Repository Validation PASS
-- 324 Tests PASS
+- 484 Tests PASS
 
 ---
 
@@ -86,14 +102,16 @@ Current validation baseline:
 
 ## Active Objective
 
-**Manual Version 1 Release**
+**Manual Version 1 and Version 1.1 Release Decisions**
 
-Issue #18 and Version 1 RC1 Release Readiness are Complete. The remaining
-release actions require explicit Repository Author approval:
+Issue #18 and Version 1 RC1 Release Readiness are Complete. Version 1.1
+(V11-01 through V11-10, Issue #69 Epic) is also now Complete on `develop`.
+Neither version has been promoted to `main`; both remaining release
+decisions require explicit Repository Author approval:
 
-- Repository Author release approval
+- Repository Author release approval, for Version 1.0, Version 1.1, or both
 - `develop`-to-`main` release promotion
-- Creation of tag `v1.0.0`
+- Creation of the applicable release tag(s)
 - GitHub Release publication
 - Release-note publication
 - External announcement, if approved
@@ -215,13 +233,12 @@ Guidelines
 
 # Current Priorities
 
-1. Repository Author release approval.
-2. Promote `develop` to `main` for the Version 1 release.
-3. Create tag `v1.0.0` and publish the GitHub Release and release notes.
+1. Repository Author release approval for Version 1.0, Version 1.1, or both.
+2. Promote `develop` to `main` for the approved release(s).
+3. Create the applicable release tag(s) and publish the GitHub Release and release notes.
 4. Publish an external announcement, if approved, and verify the release.
 5. Post-RC1 Improvements.
 6. B002 Brand Refinement.
-7. Version 1.1 Planning.
 
 ---
 
@@ -298,6 +315,10 @@ Recent engineering milestones
 - Claude Code adopted as the independent engineering reviewer.
 - Architecture Baseline advanced to `2026.08.02v13`.
 - Issue #18 and Version 1 RC1 Release Readiness completed.
+- Version 1.1 Engineering Epic (Issue #69) delivered: V11-01 through V11-10
+  (Issues #70-#79, PRs #81-#91) complete on `develop`.
+- ADR-018 and ADR-019 transitioned to Accepted.
+- Architecture Baseline advanced to `2026.08.04v14`.
 
 ---
 
@@ -319,15 +340,19 @@ This repository values
 
 Architecture Baseline
 
-`2026.08.02v13`
+`2026.08.04v14`
 
 Capabilities
 
 **001–011 Complete**
 
+Version 1.1
+
+**V11-01–V11-10 Complete**
+
 Current Objective
 
-**Manual Version 1 Release**
+**Manual Version 1 and Version 1.1 Release Decisions**
 
 Deferred
 
@@ -337,7 +362,7 @@ Validation
 
 - Compileall PASS
 - Repository Validation PASS
-- 324 Tests PASS
+- 484 Tests PASS
 
 Repository
 
@@ -355,8 +380,8 @@ Version
 
 Last Updated
 
-**2026-08-03**
+**2026-08-04**
 
 Current Phase
 
-**Manual Version 1 Release**
+**Manual Version 1 and Version 1.1 Release Decisions**

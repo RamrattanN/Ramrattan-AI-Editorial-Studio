@@ -1,13 +1,24 @@
-"""V11-05 Publication Studio workspace and Author Editing boundary."""
+"""Publication Studio workspace and Author Editing boundary.
+
+V11-05 owns the two-workspace layout, the Publication Editor, and the
+Editorial Review panel. V11-06 completes the Copy LinkedIn Publication
+gate's matched/unmatched enforcement, applying read-only Editorial Audit
+results from `editorial_audit.py` without ever writing to Publication
+Content.
+"""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, fields, replace
 from enum import StrEnum
+from typing import TYPE_CHECKING
 
 from .evidence_validation import EditorialConfidence, EditorialRisk
 from .hero_visual import HeroVisualResult
 from .publication_package import PublicationPackage
+
+if TYPE_CHECKING:
+    from .editorial_audit import EditorialAuditResult
 
 
 class PublicationStudioError(ValueError):
@@ -36,7 +47,7 @@ class PublicationEditorAction(StrEnum):
 
 
 class CopyGateState(StrEnum):
-    """Session-owned gate state introduced for later V11-06 enforcement."""
+    """Session-owned Editorial Audit Gate state, enforced by V11-06."""
 
     UNMATCHED = "unmatched"
     MATCHED = "matched"
@@ -239,19 +250,47 @@ class PublicationStudio:
             ),
             editorial_review_separate=True,
             editorial_review_collapsible=True,
-            copy_action_enabled=False,
+            copy_action_enabled=self.copy_gate_state is CopyGateState.MATCHED,
         )
 
     def author_edit(self, **changes: object) -> PublicationContent:
         updated = self.editor.author_edit(**changes)
         self.copy_gate_state = CopyGateState.UNMATCHED
+        base_label = self.editorial_review.assessment_label.split(";")[0]
         self.editorial_review = replace(
             self.editorial_review,
-            assessment_label="As of Generation; unaudited Author edits exist",
+            assessment_label=f"{base_label}; unaudited Author edits exist",
             may_not_reflect_current_edits=True,
         )
         return updated
 
     def editorial_audit_input(self) -> PublicationContent:
-        """Expose the current content to the V11-06 routing seam only."""
+        """Expose the current content to the V11-06 Editorial Audit."""
         return self.editor.current_content
+
+    def apply_editorial_audit(self, result: "EditorialAuditResult") -> None:
+        """Refresh Editorial Review and match the gate; never touches content.
+
+        The gate is procedural, not evaluative (ADR-018 rule 4): it is set
+        to matched because a completed audit now reflects the currently
+        displayed content, regardless of what that audit found. A High or
+        Severe result never keeps the gate unmatched or disables the copy
+        action; it only withholds a positive Editorial Confidence.
+        """
+        self.copy_gate_state = CopyGateState.MATCHED
+        self.editorial_review = replace(
+            self.editorial_review,
+            editorial_confidence=result.editorial_confidence,
+            editorial_risk=result.lmhs_report.editorial_risk,
+            assessment_label="As of most recent Editorial Audit",
+            may_not_reflect_current_edits=False,
+        )
+
+    def copy_linkedin_publication(self) -> str:
+        """Return exactly the displayed content once the gate is matched."""
+        if self.copy_gate_state is not CopyGateState.MATCHED:
+            raise PublicationStudioError(
+                "Copy LinkedIn Publication is disabled until a completed "
+                "Editorial Audit reflects the currently displayed content."
+            )
+        return self.editor.copy_payload()

@@ -83,7 +83,8 @@ Begin every new repository session with:
 
 1. Read `HANDOFF.md`.
 2. Read `AGENTS.md`.
-3. Read any applicable AI adapter document, such as `CLAUDE.md`.
+3. Read `docs/engineering/AI_Collaboration_Standard.md`.
+4. Read any applicable AI adapter document, such as `CLAUDE.md`.
 
 Each document has a distinct purpose:
 
@@ -91,6 +92,10 @@ Each document has a distinct purpose:
   recent milestones, and AI working conventions.
 - `AGENTS.md` defines repository governance, engineering workflow, approval
   boundaries, and operational rules.
+- `docs/engineering/AI_Collaboration_Standard.md` defines the required
+  working relationship between the Repository Author and AI agents.
+  Every agent follows it unless the Repository Author explicitly
+  overrides it for a specific task.
 - AI adapter documents provide model-specific guidance and never override
   repository governance.
 

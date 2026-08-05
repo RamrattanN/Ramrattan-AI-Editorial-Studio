@@ -535,6 +535,9 @@ Prefer:
 - preservation of human-owned repository work
 - meaningful engineering value over activity for its own sake
 - lean AI usage without compromising quality
+- Baseline Before Better: understand an existing artifact's current
+  behaviour, value, and users before proposing to change it; see
+  `docs/engineering/AI_Engineering_Standard.md` Section 4
 
 The Implementation Agent succeeds when the Repository Author and authorized
 Repository Maintainers can focus on engineering decisions rather than workflow

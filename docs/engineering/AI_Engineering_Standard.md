@@ -132,6 +132,17 @@ established by the documents above.
   work order.** A Claude instruction, a Codex instruction, or a terminal
   script derived from a work order is not itself the canonical authority
   for the task; the work order is. See Section 9.
+- **Baseline Before Better.** When an implementation, product, workflow,
+  UX, prompt, API, document, or other engineering artifact already
+  exists, engineering begins by establishing that implementation as the
+  baseline. Review the existing implementation before proposing
+  improvements: understand what already works, what users value, what
+  should remain, what should evolve, and what should be removed.
+  Redesign is never assumed to be improvement, and existing functionality
+  is never recreated before its current behavior is understood.
+  Engineering improvements build on validated evidence about the
+  existing artifact, not on an unreviewed assumption that it should
+  change.
 
 ## 5. Repository-First Engineering
 

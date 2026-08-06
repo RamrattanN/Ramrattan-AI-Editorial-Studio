@@ -21,6 +21,9 @@ the observation that motivated them.
 | [PV-002](#pv-002) | 2026-08-05 | Transition from approved article to Hero Visual preparation | Validated |
 | [PV-003](#pv-003) | 2026-08-05 | Source material in a language different from the intended publication language | Validated |
 | [PV-004](#pv-004) | 2026-08-05 | Editorial Audit requested on a generated first draft | Validated |
+| [PV-005](#pv-005) | 2026-08-05 | Editorial house style during LinkedIn article generation | Validated |
+| [PV-006](#pv-006) | 2026-08-05 | Conversational continuation after a completed response | Validated |
+| [PV-007](#pv-007) | 2026-08-05 | In-conversation choice presentation and interaction | Validated |
 
 ---
 
@@ -81,3 +84,48 @@ the observation that motivated them.
 | Analysis | The editorial reasoning engine is stronger than the drafting engine. |
 | Decision | Reuse the editorial reasoning process to improve first-draft quality. |
 | Status | Validated |
+
+---
+
+## PV-005
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-05 |
+| Validation Session | Private GPT Validation Session 2 |
+| Scenario | Editorial house style during LinkedIn article generation |
+| Observation | The GPT used long punctuation marks and single sentence spacing even though the Repository Author's ChatGPT preferences prohibit em dashes, en dashes, and long dashes, and require two spaces after a full stop and one space after a comma. |
+| Evidence | Generated LinkedIn article from the Volkswagen Emergency Assist source. |
+| Analysis | Custom GPT behavior must be self-contained. Account-level preferences cannot be assumed to govern the GPT deployment. |
+| Decision | Make the private deployment's editorial house style explicit in the GPT Instructions and validate it directly. |
+| Status | Validated and approved for RC5 |
+
+---
+
+## PV-006
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-05 |
+| Validation Session | Private GPT Validation Session 2 |
+| Scenario | Conversational continuation after a completed response |
+| Observation | The GPT completed a response but did not clearly state or execute the next step, leaving the Author uncertain how to continue. |
+| Evidence | The Author had to identify that the session had stopped and ask what to do next. |
+| Analysis | "Own the Transition" was present but insufficiently operational. A chat response necessarily ends, but the product must never end a non-terminal response without either performing the next safe action or requesting one precise Author decision. |
+| Decision | Require every non-terminal response to execute the next non-decision step in the same response or finish with one explicit, low-effort next action. |
+| Status | Validated and approved for RC5 |
+
+---
+
+## PV-007
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-05 |
+| Validation Session | Private GPT Validation Session 2 |
+| Scenario | In-conversation choice presentation and interaction |
+| Observation | Choices appeared as numbered text rather than clickable buttons. |
+| Evidence | The Author had to type a number manually. |
+| Analysis | The OpenAI Custom GPT surface provides opening-screen conversation starters but does not expose a supported builder control for custom in-conversation buttons. This is a deployment-platform constraint, not a content-generation defect. |
+| Decision | Do not promise clickable in-conversation buttons. Present short, standalone numbered choices designed for replies such as "1" or "1, 3". Preserve true clickable controls as a future web-product UX requirement. |
+| Status | Validated platform constraint and approved mitigation |

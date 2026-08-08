@@ -27,6 +27,11 @@ the observation that motivated them.
 | [PV-008](#pv-008) | 2026-08-08 | Sources missing from publication package | Validated |
 | [PV-009](#pv-009) | 2026-08-08 | Hashtags omitted from publication package | Validated |
 | [PV-010](#pv-010) | 2026-08-08 | Publication completeness not checked before Hero Visual | Validated |
+| [PV-011](#pv-011) | 2026-08-08 | URL intake became a questionnaire | Validated - RC6 failed |
+| [PV-012](#pv-012) | 2026-08-08 | Editorial angle selection was artificially single-select | Validated - RC6 failed |
+| [PV-013](#pv-013) | 2026-08-08 | End-to-end experience less polished than the original GPT | Validated - RC6 failed |
+| [PV-014](#pv-014) | 2026-08-08 | Hero Visual delivery failed the visible-output contract | Validated - RC6 failed |
+| [PV-015](#pv-015) | 2026-08-08 | Workflow remained over-procedural through final delivery | Validated - RC6 failed end-to-end |
 
 ---
 
@@ -177,3 +182,78 @@ the observation that motivated them.
 | Analysis | Publication preparation needs a deterministic completeness check before visual generation begins. |
 | Decision | Before Hero Visual preparation, verify the required publication-text components are present and surface any missing component for completion. |
 | Status | Validated and approved for RC6 |
+
+---
+
+## PV-011
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 4 (RC6 end-to-end) |
+| Scenario | URL intake became a questionnaire |
+| Observation | After the Author selected URL transformation and pasted a URL, the GPT analyzed it, then separately asked for angle, outcome, and audience as three distinct typed-numeric-response questions - re-requesting the URL in the process - instead of inferring these and proceeding. |
+| Evidence | Observed sequence: select URL transformation -> paste URL -> GPT analyzes -> three substantially duplicate choices presented -> Author selects -> GPT separately asks for angle -> Author selects -> GPT separately asks for outcome -> Author selects -> GPT asks for the URL again -> GPT continues requiring typed numeric responses. |
+| Analysis | The intake violates Infer Before Asking and creates unnecessary Author labor; it re-requests input already supplied. |
+| Decision | Consolidate intake into research plus one recommended Editorial Direction with exactly one Author decision; never re-request already-supplied input. |
+| Status | Validated - RC6 failed |
+
+---
+
+## PV-012
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 4 (RC6 end-to-end) |
+| Scenario | Editorial angle selection was artificially single-select |
+| Observation | Angle selection forced the Author to pick exactly one option, when the desired behavior is a recommended primary angle plus up to two optional supporting lenses. |
+| Evidence | The angle question was presented as a single-select choice among substantially duplicate options. |
+| Analysis | A single-select angle model understates the editorial nuance a strong piece can carry and forces artificial either/or framing. |
+| Decision | Permit up to three complementary angles - one primary, zero to two supporting lenses - with the Studio recommending the minimum needed. |
+| Status | Validated - RC6 failed |
+
+---
+
+## PV-013
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 4 (RC6 end-to-end) |
+| Scenario | End-to-end experience less polished than the original GPT |
+| Observation | The complete RC6 experience remained substantially less polished than the original four-hour Article & Post Generator, for the same kind of input. |
+| Evidence | Direct comparison during the validation session against the original GPT's immediacy, low cognitive burden, and concise editorial structure. |
+| Analysis | Version 1.1 capability accumulation increased procedural overhead faster than it increased Author-perceived value; sunk implementation effort had been preserved past the point it earned its complexity. |
+| Decision | Treat the original Article & Post Generator as the minimum UX and drafting-quality baseline; rebuild the Instructions from that baseline outward rather than continuing to append rules. |
+| Status | Validated - RC6 failed |
+
+---
+
+## PV-014
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 4 (RC6 end-to-end) |
+| Scenario | Hero Visual delivery failed the visible-output contract |
+| Observation | At the end of the workflow, the Author received text or path-like output indicating where a file existed rather than an immediately useful, visible Hero Visual. |
+| Evidence | The Author could not meaningfully access the result from the output produced. |
+| Analysis | A filename, path, or claim of successful generation is not a deliverable in a chat surface; only a visibly rendered image satisfies the Hero Visual contract. |
+| Decision | Successful Hero Visual generation means the image is visibly rendered in the conversation; a path, filename, or success claim is never sufficient. On failure, offer Retry, Revise visual direction, or Skip. |
+| Status | Validated - RC6 failed |
+
+---
+
+## PV-015
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 4 (RC6 end-to-end) |
+| Scenario | Workflow remained over-procedural through final delivery |
+| Observation | Beyond the specific intake, angle, and Hero Visual defects, the workflow as a whole remained procedural and effortful all the way through final delivery. |
+| Evidence | Cumulative Author labor across PV-011 through PV-014, observed within one continuous validation session. |
+| Analysis | Individually fixable defects were compounding into a systemically over-procedural experience; incremental patching of RC6 would not resolve this, only a rebuild from the original GPT's proven simplicity would. |
+| Decision | The Custom GPT deployment has failed end-to-end product validation. This conclusion applies to the Custom GPT deployment experience only, not to the underlying Version 1.1 repository engineering. Recover the deployment as GPT Recovery RC1, rewritten from the original Article & Post Generator baseline outward. |
+| Status | Validated - RC6 failed end-to-end |

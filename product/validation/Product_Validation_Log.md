@@ -24,6 +24,9 @@ the observation that motivated them.
 | [PV-005](#pv-005) | 2026-08-05 | Editorial house style during LinkedIn article generation | Validated |
 | [PV-006](#pv-006) | 2026-08-05 | Conversational continuation after a completed response | Validated |
 | [PV-007](#pv-007) | 2026-08-05 | In-conversation choice presentation and interaction | Validated |
+| [PV-008](#pv-008) | 2026-08-08 | Sources missing from publication package | Validated |
+| [PV-009](#pv-009) | 2026-08-08 | Hashtags omitted from publication package | Validated |
+| [PV-010](#pv-010) | 2026-08-08 | Publication completeness not checked before Hero Visual | Validated |
 
 ---
 
@@ -129,3 +132,48 @@ the observation that motivated them.
 | Analysis | The OpenAI Custom GPT surface provides opening-screen conversation starters but does not expose a supported builder control for custom in-conversation buttons. This is a deployment-platform constraint, not a content-generation defect. |
 | Decision | Do not promise clickable in-conversation buttons. Present short, standalone numbered choices designed for replies such as "1" or "1, 3". Preserve true clickable controls as a future web-product UX requirement. |
 | Status | Validated platform constraint and approved mitigation |
+
+---
+
+## PV-008
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 3 (NINJIO / FBI IC3 source) |
+| Scenario | Sources missing from publication package |
+| Observation | The GPT retrieved, verified, and cited sources during reasoning, but those sources were not preserved in the approval output or final publication package. |
+| Evidence | The draft and fact-checking relied on NINJIO and FBI IC3 evidence, but the final package omitted source references. |
+| Analysis | Evidence continuity is breaking between research and delivery. A source set gathered during validation must survive into publication output. |
+| Decision | Preserve the verified source set across the session and include a Sources section in the publication package whenever factual claims were grounded in external sources. |
+| Status | Validated and approved for RC6 |
+
+---
+
+## PV-009
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 3 (NINJIO / FBI IC3 source) |
+| Scenario | Hashtags omitted from publication package |
+| Observation | No hashtags were generated in the approval phase or final output. |
+| Evidence | The final LinkedIn package omitted hashtags entirely. |
+| Analysis | The deployment instructions treated hashtags as optional "if they exist," allowing a standard LinkedIn publication element to disappear without an Author decision. |
+| Decision | Generate a concise LinkedIn hashtag set by default unless the Author explicitly opts out. |
+| Status | Validated and approved for RC6 |
+
+---
+
+## PV-010
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Private GPT Validation Session 3 (NINJIO / FBI IC3 source) |
+| Scenario | Publication completeness not checked before Hero Visual |
+| Observation | The workflow approached Hero Visual preparation despite missing textual publication-package elements. |
+| Evidence | Sources and hashtags were absent before the transition toward Hero Visual generation. |
+| Analysis | Publication preparation needs a deterministic completeness check before visual generation begins. |
+| Decision | Before Hero Visual preparation, verify the required publication-text components are present and surface any missing component for completion. |
+| Status | Validated and approved for RC6 |

@@ -38,6 +38,9 @@ Each decision should reference the originating Product Validation entry.
 | [DEC-001](#dec-001) | PV-005 | Private GPT house style |
 | [DEC-002](#dec-002) | PV-006 | No unexplained conversational halts |
 | [DEC-003](#dec-003) | PV-007 | Platform-aware choice interaction |
+| [DEC-004](#dec-004) | PV-008 | Evidence continuity into final delivery |
+| [DEC-005](#dec-005) | PV-009 | Hashtags by default |
+| [DEC-006](#dec-006) | PV-010 | Pre-Hero-Visual completeness gate |
 
 ---
 
@@ -82,4 +85,49 @@ Each decision should reference the originating Product Validation entry.
 | Reason | The current Custom GPT interface does not provide a supported configuration mechanism for custom in-conversation buttons. |
 | Affected Product Areas | OpenAI Custom GPT deployment and future web-deployment requirements. |
 | Implementation Status | RC5 mitigation; native web control deferred to the web track. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-004
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-004 |
+| Validation Reference | PV-008 |
+| Date Approved | 2026-08-08 |
+| Decision | When the GPT uses external evidence to support factual claims, the verified source set must persist through planning, drafting, approval, and final delivery. Final publication output must include a Sources section. Each source should include, where available: source or publisher name; title or a concise identifying label; direct URL. Internal sourcing commentary or audit notes must not appear in the publication package. |
+| Reason | Evidence continuity was breaking between research and delivery; a source set gathered during validation must survive into publication output. |
+| Affected Product Areas | OpenAI Custom GPT publication workflow. |
+| Implementation Status | RC6. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-005
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-005 |
+| Validation Reference | PV-009 |
+| Date Approved | 2026-08-08 |
+| Decision | For LinkedIn article output, generate a concise, relevant hashtag set by default unless the Author explicitly requests none. Target 3 to 6 hashtags, preferring relevance and specificity over volume; do not keyword-stuff. |
+| Reason | Treating hashtags as optional "if they exist" allowed a standard LinkedIn publication element to disappear without an Author decision. |
+| Affected Product Areas | OpenAI Custom GPT final publication package. |
+| Implementation Status | RC6. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-006
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-006 |
+| Validation Reference | PV-010 |
+| Date Approved | 2026-08-08 |
+| Decision | Before beginning Hero Visual preparation, confirm that the publication text package contains: Headline; Hook; Article body; Call to Action; Hashtags, unless explicitly opted out; LinkedIn Description; Sources, whenever external evidence was used. If any required component is missing, complete or resolve it before moving to Hero Visual preparation. |
+| Reason | Publication preparation needs a deterministic completeness check before visual generation begins. |
+| Affected Product Areas | OpenAI Custom GPT publication workflow. |
+| Implementation Status | RC6. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |

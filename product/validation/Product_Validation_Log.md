@@ -38,6 +38,10 @@ the observation that motivated them.
 | [PV-019](#pv-019) | 2026-08-08 | Hashtag quantity was insufficient | Validated and implemented |
 | [PV-020](#pv-020) | 2026-08-08 | Publication tail order needs to match copy/paste workflow | Validated and implemented |
 | [PV-021](#pv-021) | 2026-08-08 | Output completeness must include order, not only presence | Validated and implemented |
+| [PV-022](#pv-022) | 2026-08-09 | Editorial Plan can be mistaken for final output | Validated and approved for Recovery RC3 |
+| [PV-023](#pv-023) | 2026-08-09 | Hero Visual personalization lacks an obvious fast path | Validated and approved for Recovery RC3 |
+| [PV-024](#pv-024) | 2026-08-09 | Workflow needs a definitive completion state | Validated and approved for Recovery RC3 |
+| [PV-025](#pv-025) | 2026-08-09 | Hero Visual dimensions did not meet LinkedIn requirement | Validated and approved for Recovery RC3 |
 
 ---
 
@@ -353,3 +357,63 @@ the observation that motivated them.
 | Analysis | Presence-only verification is insufficient once a fixed publication order is required. |
 | Decision | Before presenting a draft or final publication package, verify both required component presence and required component order; correct any missing or misplaced element before presenting it to the Author. |
 | Status | Validated and implemented |
+
+---
+
+## PV-022
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Successful Recovery RC2 end-to-end validation |
+| Scenario | Editorial Plan can be mistaken for final output |
+| Observation | The Editorial Plan is now useful and concise, but a first-time Author may not understand that it is a pre-draft review rather than the final article. |
+| Evidence | Direct observation during a successful Recovery RC2 end-to-end session. |
+| Analysis | The workflow should make the purpose of this approval boundary obvious without creating another explanation-heavy phase. |
+| Decision | Present the section as "Editorial Plan - Review Before Drafting" with the line "This is the proposed structure for your article, not the final article. Approve it to move to the full draft." immediately underneath. Retain 1. Approve / 2. Reject. |
+| Status | Validated and approved for Recovery RC3 |
+
+---
+
+## PV-023
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Successful Recovery RC2 end-to-end validation |
+| Scenario | Hero Visual personalization lacks an obvious fast path |
+| Observation | Hero Visual preparation asks for optional personalization inputs but does not make the quickest default path sufficiently obvious. |
+| Evidence | Direct observation during a successful Recovery RC2 end-to-end session. |
+| Analysis | "Skip personalization" can sound as though the Author is foregoing the Hero Visual rather than selecting the Studio's default visual treatment. |
+| Decision | After article approval, present "1. Continue with the Studio Theme - no additional assets needed" alongside the option to personalize with any combination of headshot, logo, website URL, or explicit palette. The Studio Theme path still generates the Hero Visual; it does not skip visual generation. |
+| Status | Validated and approved for Recovery RC3 |
+
+---
+
+## PV-024
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Successful Recovery RC2 end-to-end validation |
+| Scenario | Workflow needs a definitive completion state |
+| Observation | The workflow reaches the Hero Visual and final package successfully, but the Author needs an unmistakable signal that the complete process is finished. |
+| Evidence | Direct observation during a successful Recovery RC2 end-to-end session. |
+| Analysis | A polished product should terminate deliberately rather than merely stop producing content. |
+| Decision | After the complete final publication package, end with "Publication Package Complete / Your article and Hero Visual are ready for publication. / Thank you for using Ramrattan AI Editorial Studio." with no follow-up question, choice, or menu. |
+| Status | Validated and approved for Recovery RC3 |
+
+---
+
+## PV-025
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Recovery RC2 validation after transferring the generated Hero Visual into LinkedIn's cover-image workflow |
+| Scenario | Hero Visual dimensions did not meet LinkedIn requirement |
+| Observation | The Hero Visual was visibly generated and usable in conversation, but it was not in the explicitly required LinkedIn format of 720 x 425 pixels. |
+| Evidence | The Author transferred the Hero Visual into LinkedIn and observed that the image did not fit the required 720 x 425 presentation correctly. |
+| Analysis | Visible image delivery alone is insufficient; the Hero Visual publication contract includes both visible usable delivery and the correct intended LinkedIn canvas and composition. A visual that requires manual reformatting or cropping is not fully publication-ready. |
+| Decision | The LinkedIn Hero Visual target for this GPT deployment is 720 x 425 pixels, landscape orientation, 144:85 aspect ratio, composed specifically for that final canvas. If the image-generation surface cannot directly return an exact 720 x 425 pixel file: preserve the 144:85 intended composition, state the limitation truthfully, do not claim exact pixel compliance, do not treat a path or filename as a solution, and do not claim the package is fully publication-ready without disclosing the remaining sizing limitation. |
+| Status | Validated and approved for Recovery RC3 |

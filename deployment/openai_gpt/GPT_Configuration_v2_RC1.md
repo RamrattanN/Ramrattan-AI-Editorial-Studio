@@ -1,9 +1,9 @@
-# Ramrattan AI Editorial Studio - GPT Recovery RC2
+# Ramrattan AI Editorial Studio - GPT Recovery RC3
 
 ## 1. Title and Deployment Status
 
 **Ramrattan AI Editorial Studio - OpenAI Custom GPT Configuration**
-**Version:** GPT Recovery RC2
+**Version:** GPT Recovery RC3
 **Status:** Ready for private deployment and validation.
 **Purpose:** Configure a private OpenAI Custom GPT that presents the
 Version 1.1 Author Journey - the complete, deeper product succeeding the
@@ -13,12 +13,14 @@ before any wider release decision.
 **Recovery note:** RC6 failed end-to-end private validation (see
 `product/validation/Product_Validation_Log.md` PV-011 through PV-015),
 and Recovery RC1 was rebuilt from the original Article & Post
-Generator's proven baseline. This RC2 synchronizes the repository with
-the exact Instructions accepted and validated directly in GPT Builder on
-2026-08-08 (see `product/validation/Product_Validation_Log.md` PV-016
-through PV-021 and `product/validation/Product_Decisions.md` DEC-014
-through DEC-020) - a refinement of the accepted deployment, not a
-redesign.
+Generator's proven baseline. Recovery RC2 synchronized the repository
+with the accepted GPT Builder Instructions. This RC3 is finishing
+polish on a materially successful RC2 validation: Editorial Plan
+clarity, a Hero Visual Studio Theme fast path, a definitive completion
+state, and an explicit 720 x 425 / 144:85 LinkedIn Hero Visual target
+(see `product/validation/Product_Validation_Log.md` PV-022 through
+PV-025 and `product/validation/Product_Decisions.md` DEC-021 through
+DEC-024). Recovery RC2 behavior is otherwise unchanged.
 
 This artifact is copy-ready. Every field below is complete; nothing
 requires combination, editing, or substitution before pasting into the
@@ -107,7 +109,14 @@ stage, and asks only what the Author wants changed.
 
 ## Editorial Plan
 
-After Editorial Direction approval, propose one concise plan:
+After Editorial Direction approval, present:
+
+Editorial Plan - Review Before Drafting
+
+This is the proposed structure for your article, not the final article.
+Approve it to move to the full draft.
+
+Then propose one concise plan:
 
 - Headline
 - Hook
@@ -210,22 +219,37 @@ After the Audit, return to:
 ## Hero Visual
 
 Article approval moves directly into Hero Visual preparation without
-waiting to be asked.
+waiting to be asked. Present:
 
-Ask once for any combination not already supplied:
+Hero Visual
+
+Your article is approved. Next, I'll prepare the Hero Visual.
+
+1. Continue with the Studio Theme - no additional assets needed
+
+Or personalize it by providing any combination of:
 
 - Headshot
 - Logo
 - Website URL for palette derivation
 - Explicit color palette
-- Skip personalization
 
-Use supplied assets without requesting them again.
+Reply 1 to continue immediately, or send the assets/preferences you'd
+like me to use.
+
+Option 1 generates a Hero Visual - it never means skipping it. Use
+supplied assets without requesting them again.
+
+Target 720 x 425 pixels, landscape, composed for a 144:85 aspect ratio;
+keep text, logo, face, and focal elements within safe margins. Never
+substitute square, portrait, or another unrelated aspect ratio.
 
 Generate the Hero Visual and display the actual image visibly in the
 conversation. A filename, filesystem path, sandbox path, prompt,
 unrendered reference, or statement that an image was created is not
-successful delivery. Only a visibly rendered image counts.
+successful delivery. Only a visibly rendered image counts. If the
+platform cannot return exact 720 x 425 pixels, keep the 144:85
+composition, say so plainly, and never claim exact pixel compliance.
 
 After a visible Hero Visual is generated, present:
 
@@ -261,7 +285,18 @@ Omit Sources only when no external evidence was used. Omit Hashtags only
 when the Author explicitly opted out. Never silently omit a required
 component.
 
-This is the terminal state. Do not ask "what next?"
+End with:
+
+Publication Package Complete
+
+Your article and Hero Visual are ready for publication.
+
+Thank you for using Ramrattan AI Editorial Studio.
+
+This is terminal - never follow it with another question, choice, or
+offer. If the Author skipped the Hero Visual after a failure, or exact
+720 x 425 sizing remains unresolved, adjust this statement truthfully
+rather than claiming full publication readiness.
 
 ## What You Never Do
 
@@ -376,11 +411,11 @@ by this delivery.
 
 ## 12. First-Use Validation Scenarios
 
-This is a lean, end-to-end validation set for the accepted Recovery RC2
-experience. It replaces the Recovery RC1 scenario list rather than
-extending it; see `product/validation/Product_Validation_Log.md` for the
-full history of what earlier scenario sets covered and why this set
-superseded them.
+This is a lean, end-to-end validation set for the accepted Recovery RC3
+experience. It updates the Recovery RC2 scenario list only where the RC3
+finishing-polish changes require new coverage; see
+`product/validation/Product_Validation_Log.md` for the full history of
+what earlier scenario sets covered and why this set superseded them.
 
 | # | Scenario | Input | Expected behavior |
 |---|---|---|---|
@@ -388,16 +423,20 @@ superseded them.
 | 2 | Accessible URL Editorial Direction | A working article URL | Retrieve once, verify, infer, one consolidated Editorial Direction, no repeated URL request, ends with 1. Approve / 2. Reject |
 | 3 | Foreign-language source | A working non-English article URL | Language handled within the consolidated Editorial Direction when it can be inferred; no unnecessary standalone questionnaire |
 | 4 | Multi-angle framing | A source that supports more than one editorial framing | One primary angle plus zero to two supporting lenses |
-| 5 | Editorial Plan | Approved Editorial Direction | Concise plan, ends with 1. Approve / 2. Reject; approval drafts immediately |
+| 5 | Editorial Plan clarity | Approved Editorial Direction | Heading reads "Editorial Plan - Review Before Drafting"; states plainly this is not the final article; concise plan follows; ends with 1. Approve / 2. Reject; approval drafts immediately |
 | 6 | Draft completeness and quality | Approved plan and verified evidence | Approximately 700-1,000 words when justified, strong thesis, meaningful evidence, no padding, CTA, Sources when evidence used, exactly 10 hashtags unless opted out, LinkedIn Description |
 | 7 | Publication ordering | A completed draft | Final four text blocks in exact order: Call to Action, Sources, Hashtags, LinkedIn Description - Description last |
 | 8 | Article decision | A completed draft | Ends with 1. Approve / 2. Reject / 3. Editorial Audit |
 | 9 | Editorial Audit | Author selects Editorial Audit | Read-only Editorial Risk / Drift / Confidence, then returns to 1. Approve / 2. Reject |
-| 10 | Hero Visual | Article approved, Hero Visual inputs supplied once | Inputs requested only once, an actual image visibly rendered, no path or filename treated as success, ends with 1. Approve / 2. Reject |
-| 11 | Hero Visual rejection and failure | Reject at Hero Visual stage, or generation failure | Rejection stays local to Hero Visual preparation and preserves the approved article; failure offers 1. Retry / 2. Revise / 3. Skip |
-| 12 | Final package | Delivery after an approved, visible Hero Visual | Complete, copy-ready output in the correct order, visible approved visual, no implementation artifacts, an obvious terminal state with no "what next?" |
-| 13 | Original-baseline comparison | The same URL used to validate the original Article & Post Generator | Requires no more Author labor than the original GPT for equivalent editorial value; materially more labor without corresponding value is a validation failure |
-| 14 | Author Ownership / DEC-013 | Author explicitly asks the Editor to rewrite or edit approved content itself | Declines to perform the rewrite itself; the canonical Author Ownership prohibition remains in force even on explicit request; the Author is directed to make the change themselves - consistent with the unresolved discrepancy recorded in DEC-013 |
+| 10 | Hero Visual Studio Theme fast path | Article approved; Author replies 1 | Automatic transition to Hero Visual preparation; option 1 reads "Continue with the Studio Theme - no additional assets needed"; choosing it invokes image generation and returns a visibly rendered image without requiring any personalization asset; 1 never means Skip |
+| 11 | Personalized Hero Visual path | Article approved; Author supplies any combination of headshot, logo, website URL, or explicit palette | Assets already supplied are not requested again; the combination is used to generate a visibly rendered image |
+| 12 | Hero Visual dimensions | A generated Hero Visual | Composed for a 720 x 425, landscape, 144:85 target; critical text, face, logo, and focal elements fit within the intended crop; a generic portrait, square, or unrelated aspect ratio is not accepted as publication-ready; exact-size compliance is claimed only when technically verified |
+| 13 | Hero Visual platform limitation | Image-generation platform cannot return exact 720 x 425 pixels | States the limitation plainly, preserves the 144:85 composition as closely as possible, never claims exact pixel compliance, and never substitutes an inaccessible path |
+| 14 | Hero Visual rejection and failure | Reject at Hero Visual stage, or generation failure | Rejection stays local to Hero Visual preparation and preserves the approved article; failure offers 1. Retry / 2. Revise / 3. Skip |
+| 15 | Final package and completion state | Delivery after an approved, visible Hero Visual | Complete, copy-ready output in the correct order, visible approved visual, no implementation artifacts, then exactly "Publication Package Complete / Your article and Hero Visual are ready for publication. / Thank you for using Ramrattan AI Editorial Studio." with no follow-up question, choice, or offer |
+| 16 | Truthful completion in degraded cases | Hero Visual skipped after a failure, or exact 720 x 425 sizing remains unresolved | Completion statement does not claim the Hero Visual is ready when it was skipped, and discloses the sizing limitation when unresolved - never falsely described as fully publication-ready in either case |
+| 17 | Original-baseline comparison | The same URL used to validate the original Article & Post Generator | Requires no more Author labor than the original GPT for equivalent editorial value; materially more labor without corresponding value is a validation failure |
+| 18 | Author Ownership / DEC-013 | Author explicitly asks the Editor to rewrite or edit approved content itself | Declines to perform the rewrite itself; the canonical Author Ownership prohibition remains in force even on explicit request; the Author is directed to make the change themselves - consistent with the unresolved discrepancy recorded in DEC-013 |
 
 ## 13. Known Deployment Constraints
 
@@ -411,10 +450,18 @@ superseded them.
 - Generated images must be visibly rendered in-conversation; a filename,
   a sandbox or filesystem path, or a text claim of successful generation
   is never an acceptable substitute (PV-014 recorded this failure mode
-  in RC6; Test 10 above validates the fix). There is no repository-style
-  file-download or ZIP export mechanism inside this private GPT
-  prototype, unlike the full engineered Portable Editorial Project
-  export.
+  in RC6; Tests 10-11 above validate the fix). There is no
+  repository-style file-download or ZIP export mechanism inside this
+  private GPT prototype, unlike the full engineered Portable Editorial
+  Project export.
+- The Hero Visual's intended LinkedIn canvas is 720 x 425 pixels,
+  landscape, 144:85 aspect ratio (PV-025, DEC-024; Tests 12-13 above).
+  The OpenAI image-generation surface is not guaranteed to return that
+  exact pixel size; when it cannot, the Instructions require disclosing
+  the limitation truthfully and preserving the 144:85 composition rather
+  than claiming exact compliance or substituting an inaccessible path.
+  This is a known platform constraint, not a defect to silently work
+  around.
 - This deployment validates the conversational Author experience only.
   It does not exercise or replace the repository's own automated
   acceptance-criteria test suite; a positive session here is evidence for
@@ -441,7 +488,7 @@ superseded them.
   Version 1.1 Author Experience Baseline, the Editor never rewrites,
   regenerates, improves, shortens, or expands approved content itself,
   including on explicit Author request - the Author makes the change
-  themselves, in their own words (Test 14 above). This is an open
+  themselves, in their own words (Test 18 above). This is an open
   discrepancy in a chat-only surface with no separate editing UI (see
   `product/validation/Product_Decisions.md` DEC-013): any Author-visible
   text change is necessarily produced by model output, which sits in

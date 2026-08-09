@@ -42,6 +42,7 @@ the observation that motivated them.
 | [PV-023](#pv-023) | 2026-08-09 | Hero Visual personalization lacks an obvious fast path | Validated and approved for Recovery RC3 |
 | [PV-024](#pv-024) | 2026-08-09 | Workflow needs a definitive completion state | Validated and approved for Recovery RC3 |
 | [PV-025](#pv-025) | 2026-08-09 | Hero Visual dimensions did not meet LinkedIn requirement | Validated and approved for Recovery RC3 |
+| [PV-026](#pv-026) | 2026-08-09 | Hero Visual rendered but workflow halted | Validated and approved for Recovery RC4 |
 
 ---
 
@@ -417,3 +418,18 @@ the observation that motivated them.
 | Analysis | Visible image delivery alone is insufficient; the Hero Visual publication contract includes both visible usable delivery and the correct intended LinkedIn canvas and composition. A visual that requires manual reformatting or cropping is not fully publication-ready. |
 | Decision | The LinkedIn Hero Visual target for this GPT deployment is 720 x 425 pixels, landscape orientation, 144:85 aspect ratio, composed specifically for that final canvas. If the image-generation surface cannot directly return an exact 720 x 425 pixel file: preserve the 144:85 intended composition, state the limitation truthfully, do not claim exact pixel compliance, do not treat a path or filename as a solution, and do not claim the package is fully publication-ready without disclosing the remaining sizing limitation. |
 | Status | Validated and approved for Recovery RC3 |
+
+---
+
+## PV-026
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Recovery RC3 end-to-end validation |
+| Scenario | Hero Visual rendered but workflow halted |
+| Observation | Direct URL intake, consolidated Editorial Direction, the "Editorial Plan - Review Before Drafting" clarity, article generation, exactly 10 hashtags, correct publication-tail ordering, automatic transition into Hero Visual preparation, the Studio Theme fast path, and visible Hero Visual rendering all worked as intended. Immediately after visibly rendering the Hero Visual, the GPT stopped and did not present 1. Approve / 2. Reject. |
+| Evidence | The Author could not naturally advance into final-package delivery, and the required "Publication Package Complete" terminal message was never reached, because the approval boundary after the Hero Visual was never presented. |
+| Analysis | The completion-message requirement itself was not disproven; the workflow failed one transition earlier. Hero Visual rendering and Hero Visual approval presentation must be treated as one atomic conversational interaction - a visible image by itself is not the end of the Hero Visual stage. |
+| Decision | Immediately after a Hero Visual is visibly rendered, the GPT must present 1. Approve / 2. Reject in the same response - never terminate a response on the generated Hero Visual alone. 1 / Approve advances directly to final-package delivery. 2 / Reject remains local to Hero Visual preparation, preserves the approved article, and asks only what should change about the visual. |
+| Status | Validated and approved for Recovery RC4 |

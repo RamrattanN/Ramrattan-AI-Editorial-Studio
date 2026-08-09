@@ -32,6 +32,12 @@ the observation that motivated them.
 | [PV-013](#pv-013) | 2026-08-08 | End-to-end experience less polished than the original GPT | Validated - RC6 failed |
 | [PV-014](#pv-014) | 2026-08-08 | Hero Visual delivery failed the visible-output contract | Validated - RC6 failed |
 | [PV-015](#pv-015) | 2026-08-08 | Workflow remained over-procedural through final delivery | Validated - RC6 failed end-to-end |
+| [PV-016](#pv-016) | 2026-08-08 | URL starter produced redundant intake choices | Validated and implemented |
+| [PV-017](#pv-017) | 2026-08-08 | Consolidated Editorial Direction materially improved UX | Validated and implemented |
+| [PV-018](#pv-018) | 2026-08-08 | Numeric workflow vocabulary should be consistent | Validated and implemented |
+| [PV-019](#pv-019) | 2026-08-08 | Hashtag quantity was insufficient | Validated and implemented |
+| [PV-020](#pv-020) | 2026-08-08 | Publication tail order needs to match copy/paste workflow | Validated and implemented |
+| [PV-021](#pv-021) | 2026-08-08 | Output completeness must include order, not only presence | Validated and implemented |
 
 ---
 
@@ -257,3 +263,93 @@ the observation that motivated them.
 | Analysis | Individually fixable defects were compounding into a systemically over-procedural experience; incremental patching of RC6 would not resolve this, only a rebuild from the original GPT's proven simplicity would. |
 | Decision | The Custom GPT deployment has failed end-to-end product validation. This conclusion applies to the Custom GPT deployment experience only, not to the underlying Version 1.1 repository engineering. Recover the deployment as GPT Recovery RC1, rewritten from the original Article & Post Generator baseline outward. |
 | Status | Validated - RC6 failed end-to-end |
+
+---
+
+## PV-016
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) |
+| Scenario | URL starter produced redundant intake choices |
+| Observation | After the Author selected the URL conversation starter, the GPT asked what URL it should use and presented redundant options (paste the URL, upload the source, another paste-URL interaction) even though the Author had already selected the URL workflow. |
+| Evidence | The conversation starter had already established intent; the follow-up menu added cognitive effort without adding information. |
+| Analysis | Presenting intake choices the starter already resolved violates the consolidated-intake intent of Recovery RC1. |
+| Decision | When the URL conversation starter is selected and no URL has yet been supplied, respond only "Paste the URL here to get started." - no alternative input methods offered at that moment. A subsequent live test produced exactly that response, after which the Author pasted the URL and the GPT proceeded directly into research and a consolidated Editorial Direction. |
+| Status | Validated and implemented |
+
+---
+
+## PV-017
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) - https://thehackernews.com/2026/08/new-css-attacks-can-break-webmail.html |
+| Scenario | Consolidated Editorial Direction materially improved UX |
+| Observation | After the URL was supplied, the GPT retrieved and researched the source, verified important claims, inferred audience and objective, used US English, recommended one primary angle plus two supporting lenses, and presented one consolidated editorial thesis - without separate angle/outcome/audience questionnaires and without requesting the URL again. |
+| Evidence | Direct observation of the full intake-to-direction sequence for the URL above. |
+| Analysis | This was materially closer to the intended low-friction experience and to the original four-hour GPT baseline. |
+| Decision | Preserve consolidated Editorial Direction as the normal URL-intake behavior. |
+| Status | Validated and implemented |
+
+---
+
+## PV-018
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) |
+| Scenario | Numeric workflow vocabulary should be consistent |
+| Observation | Mixed interaction terms across Editorial Direction, Editorial Plan, article approval, and Hero Visual (Proceed, Approve, Adjust, Audit, and various numeric selections) created unnecessary inconsistency. |
+| Evidence | Direct comparison of the decision prompts presented at each approval boundary during the session. |
+| Analysis | A single, stable decision vocabulary reduces cognitive load at every approval boundary. |
+| Decision | Use "1. Approve / 2. Reject" as the standard decision vocabulary at every approval boundary, with "3. Editorial Audit" added only at article approval. Accept either the number or the corresponding word; meaning stays stable everywhere (1 = Approve, 2 = Reject). Reject does not discard previously approved upstream work. |
+| Status | Validated and implemented |
+
+---
+
+## PV-019
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) |
+| Scenario | Hashtag quantity was insufficient |
+| Observation | The GPT generated five hashtags in the live article-generation test. |
+| Evidence | Direct count of hashtags in the generated publication package. |
+| Analysis | Five hashtags under-served the LinkedIn publication package the Repository Author expects by default. |
+| Decision | Generate exactly 10 relevant LinkedIn hashtags by default unless the Author explicitly opts out, using a deliberate mix of approximately 2-3 broad, 4-5 topic-specific, and 2-3 niche hashtags - no duplicates, no irrelevant trending tags, no keyword stuffing. |
+| Status | Validated and implemented |
+
+---
+
+## PV-020
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) |
+| Scenario | Publication tail order needs to match copy/paste workflow |
+| Observation | The final publication elements were not ordered optimally for the Author's LinkedIn copy/paste workflow. |
+| Evidence | Direct review of the final publication package's element order during the session. |
+| Analysis | A predictable, fixed publication sequence reduces manual reordering before the Author posts. |
+| Decision | The final four text blocks must always appear in this order: Call to Action, Sources, Hashtags, LinkedIn Description - LinkedIn Description always last. |
+| Status | Validated and implemented |
+
+---
+
+## PV-021
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-08 |
+| Validation Session | Recovery RC1 live validation session (GPT Builder) |
+| Scenario | Output completeness must include order, not only presence |
+| Observation | Prior completeness checks verified whether elements existed but did not guarantee their final order. |
+| Evidence | Direct comparison of package contents against the approved order from PV-020. |
+| Analysis | Presence-only verification is insufficient once a fixed publication order is required. |
+| Decision | Before presenting a draft or final publication package, verify both required component presence and required component order; correct any missing or misplaced element before presenting it to the Author. |
+| Status | Validated and implemented |

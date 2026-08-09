@@ -43,6 +43,7 @@ the observation that motivated them.
 | [PV-024](#pv-024) | 2026-08-09 | Workflow needs a definitive completion state | Validated and approved for Recovery RC3 |
 | [PV-025](#pv-025) | 2026-08-09 | Hero Visual dimensions did not meet LinkedIn requirement | Validated and approved for Recovery RC3 |
 | [PV-026](#pv-026) | 2026-08-09 | Hero Visual rendered but workflow halted | Validated and approved for Recovery RC4 |
+| [PV-027](#pv-027) | 2026-08-09 | Post-image continuation is not reliable in Custom GPT | Validated, approved, and locked for the private GPT baseline |
 
 ---
 
@@ -433,3 +434,18 @@ the observation that motivated them.
 | Analysis | The completion-message requirement itself was not disproven; the workflow failed one transition earlier. Hero Visual rendering and Hero Visual approval presentation must be treated as one atomic conversational interaction - a visible image by itself is not the end of the Hero Visual stage. |
 | Decision | Immediately after a Hero Visual is visibly rendered, the GPT must present 1. Approve / 2. Reject in the same response - never terminate a response on the generated Hero Visual alone. 1 / Approve advances directly to final-package delivery. 2 / Reject remains local to Hero Visual preparation, preserves the approved article, and asks only what should change about the visual. |
 | Status | Validated and approved for Recovery RC4 |
+
+---
+
+## PV-027
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-09 |
+| Validation Session | Repeated end-to-end Recovery validation through successful Hero Visual generation |
+| Scenario | Post-image continuation is not reliable in Custom GPT |
+| Observation | Multiple configurations explicitly instructed the GPT to continue after the Hero Visual rendered, including Recovery RC4's atomic 1. Approve / 2. Reject requirement immediately after rendering. Live validation repeatedly showed that successful image generation could end the assistant interaction regardless. A subsequent test that moved all required publication text and completion messaging before image generation produced a materially better experience and was approved by the Repository Author. |
+| Evidence | Positive evidence from the final validation session: direct URL intake remained effective; consolidated Editorial Direction remained effective; the GPT handled an unexpected mid-workflow change well; Editorial Plan clarity remained effective; article generation remained materially improved; source continuity remained effective; 10 hashtags remained effective; publication-tail ordering remained effective; the Hero Visual visibly rendered; the overall experience was materially better than earlier recovery builds. |
+| Analysis | The product should not depend on a Custom GPT behavior that repeated live validation has shown to be unreliable. Image generation should be treated as the final production action in the private Custom GPT deployment, with the graceful completion message occurring immediately before image generation rather than after it. |
+| Decision | For the private Custom GPT: (1) deliver the complete approved publication text before Hero Visual generation; (2) present Hero Visual as the explicit final step; (3) obtain any required visual-direction approval before generation; (4) display the graceful completion/sign-off before invoking image generation; (5) generate and visibly render the Hero Visual; (6) treat the visible Hero Visual as the terminal artifact; (7) never depend on another assistant turn after successful image generation. |
+| Status | Validated, approved, and locked for the private GPT baseline |

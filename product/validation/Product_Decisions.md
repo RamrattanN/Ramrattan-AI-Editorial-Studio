@@ -18,6 +18,27 @@ may be entered here.
 
 Each decision should reference the originating Product Validation entry.
 
+## Baseline Status
+
+**GPT Recovery RC5 - Locked Private GPT Baseline**
+
+Locked: 2026-08-09, following DEC-026 and PV-027.
+
+The recovery is considered successful. `deployment/openai_gpt/GPT_Configuration_v2_RC1.md`
+at "GPT Recovery RC5" is the reference private-GPT implementation.
+
+"Locked" means change-controlled by evidence, not immutable forever:
+
+- further changes to the private GPT require new real-use validation
+  evidence, entered through the Product Validation Log first;
+- speculative polishing is not sufficient reason to modify the baseline;
+- the private GPT should now be used for real editorial work;
+- new observations return through the Product Validation Log, and
+  approved changes return through this register, in that order; and
+- the web-product track remains separate and may implement richer
+  native UI behavior (for example, a post-image completion screen) that
+  the Custom GPT deployment cannot rely on.
+
 ## Decision Template
 
 | Field | Value |
@@ -60,6 +81,7 @@ Each decision should reference the originating Product Validation entry.
 | [DEC-023](#dec-023) | PV-024 | Terminal completion state |
 | [DEC-024](#dec-024) | PV-025 | Hero Visual dimensions and composition |
 | [DEC-025](#dec-025) | PV-026 | Atomic Hero Visual approval transition |
+| [DEC-026](#dec-026) | PV-027 | Custom GPT terminal Hero Visual model |
 
 ---
 
@@ -433,5 +455,20 @@ Each decision should reference the originating Product Validation entry.
 | Decision | Hero Visual rendering and Hero Visual approval form one atomic workflow transition. After the visible Hero Visual is rendered, the GPT immediately presents 1. Approve / 2. Reject in the same interaction - it never ends a response with the image alone. 1 = Approve: accept the visible Hero Visual, advance automatically, deliver the complete final publication package, display the terminal completion state, and do not ask for another approval. 2 = Reject: preserve the approved article and all approved upstream work, remain in Hero Visual preparation, ask only what should change about the visual, and regenerate only the Hero Visual after receiving revised direction - again presenting 1. Approve / 2. Reject immediately once the new visual renders. This decision does not change canonical Author Ownership rules for Publication Content. |
 | Reason | RC3 validation showed the Hero Visual rendering visibly but the workflow halting immediately afterward without presenting the required approval decision, so the Author could never reach final-package delivery or the terminal completion state. |
 | Affected Product Areas | OpenAI Custom GPT Hero Visual approval and final-package transition. |
-| Implementation Status | GPT Recovery RC4. |
+| Implementation Status | GPT Recovery RC4. Superseded by DEC-026 for the private GPT deployment - repeated live validation showed the atomic post-image approval this decision required was not reliably reachable in the Custom GPT surface. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-026
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-026 |
+| Validation Reference | PV-027 |
+| Date Approved | 2026-08-09 |
+| Decision | Custom GPT terminal Hero Visual model. For the private OpenAI Custom GPT deployment, successful Hero Visual generation is the final production action. Required sequence: Approved Article -> Complete Approved Publication Text Package -> Hero Visual - Final Step -> Visual Direction Approval when required -> Graceful Completion / Thank You -> Image Generation -> Visible Hero Visual -> END. No behavior after successful image generation is required for the Custom GPT deployment. Studio Theme path: selecting Studio Theme approves that visual direction; do not introduce an unnecessary second visual-direction approval; present final sign-off; invoke image generation; the visible image is terminal. Personalized path: collect only personalization information not already supplied; summarize visual direction; obtain 1. Approve / 2. Reject before generation; after approval, present final sign-off; invoke image generation; the visible image is terminal. The completion/sign-off communicates substantially: "Everything else is complete. Once your Hero Visual appears, your Ramrattan AI Editorial Studio session is finished. Thank you for using Ramrattan AI Editorial Studio." The product must never promise or depend on a post-image assistant message. This decision applies specifically to the private Custom GPT deployment; future web-product UX may provide a post-image completion screen because the web application controls its own interface. This decision supersedes DEC-025's post-image 1. Approve / 2. Reject requirement and Recovery RC3/RC4's post-image final-package delivery and completion message for the private GPT; it does not change canonical Author Ownership rules for Publication Content, and DEC-013 remains unresolved. |
+| Reason | Repeated live end-to-end validation showed that successful Hero Visual generation could terminate the assistant interaction even when the Instructions explicitly required an atomic post-image approval step (DEC-025). Moving all required publication text, the final-step explanation, and the completion/sign-off before image generation produced a materially better, Repository-Author-approved experience that does not depend on unreliable post-image continuation. |
+| Affected Product Areas | OpenAI Custom GPT Hero Visual sequencing and final delivery. |
+| Implementation Status | GPT Recovery RC5 - Locked Private GPT Baseline. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |

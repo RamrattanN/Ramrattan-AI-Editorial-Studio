@@ -48,6 +48,13 @@ Each decision should reference the originating Product Validation entry.
 | [DEC-011](#dec-011) | PV-014 | Visible Hero Visual contract |
 | [DEC-012](#dec-012) | PV-015 | Complete publication package |
 | [DEC-013](#dec-013) | Governance review (ADR-018, Author Experience Baseline) | Explicitly authorized editing - NOT adopted; discrepancy recorded |
+| [DEC-014](#dec-014) | PV-016 | URL conversation-starter behavior |
+| [DEC-015](#dec-015) | PV-017 | Consolidated Editorial Direction (reaffirmed) |
+| [DEC-016](#dec-016) | PV-018 | Approval vocabulary |
+| [DEC-017](#dec-017) | PV-018 | Stage-local rejection |
+| [DEC-018](#dec-018) | PV-019 | Hashtag standard - exactly 10 by default |
+| [DEC-019](#dec-019) | PV-020 | Publication-tail order |
+| [DEC-020](#dec-020) | PV-021 | Presence-and-order verification |
 
 ---
 
@@ -243,3 +250,108 @@ Each decision should reference the originating Product Validation entry.
 | Affected Product Areas | OpenAI Custom GPT deployment; potentially Version 1.1 architecture if the Repository Author elects to formally address the chat-surface tension. |
 | Implementation Status | GPT Recovery RC1 - rule retained unchanged; no override applied; discrepancy open. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md`; `docs/architecture/adr/ADR-018-author-ownership-and-publication-studio.md`; `docs/product/Version_1_1_Author_Experience_Baseline.md` |
+
+---
+
+## DEC-014
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-014 |
+| Validation Reference | PV-016 |
+| Date Approved | 2026-08-08 |
+| Decision | When the Author selects the URL conversation starter and has not yet supplied a URL, the GPT responds only "Paste the URL here to get started." - no redundant intake menu, no alternative input methods offered at that moment. Once the URL is supplied, retrieve it and continue. |
+| Reason | The URL starter already established the Author's intent; a follow-up menu re-asking how to supply a URL added cognitive effort without adding information. |
+| Affected Product Areas | OpenAI Custom GPT conversation-starter response and intake flow. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-015
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-015 |
+| Validation Reference | PV-017 |
+| Date Approved | 2026-08-08 |
+| Decision | For a normal accessible URL, research and inference occur before one consolidated Editorial Direction is presented. The GPT does not separately interview for angle, objective, audience, personalization, or language when these can reasonably be inferred. This reaffirms DEC-008 and DEC-009 (Recovery RC1), now confirmed by direct live-session evidence rather than by design intent alone. |
+| Reason | A live test against a real URL showed this behavior working as intended and materially closer to the original GPT's low-friction experience; no change to the underlying behavior is needed. |
+| Affected Product Areas | OpenAI Custom GPT Editorial Direction flow. |
+| Implementation Status | GPT Recovery RC2 - preserved unchanged from Recovery RC1. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-016
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-016 |
+| Validation Reference | PV-018 |
+| Date Approved | 2026-08-08 |
+| Decision | At every approval boundary, use "1. Approve / 2. Reject" as the standard decision vocabulary. At article approval only, add "3. Editorial Audit". Accept either the number or the corresponding word; the meaning of 1 and 2 stays stable everywhere (1 = Approve, 2 = Reject). |
+| Reason | Mixed interaction terms (Proceed, Approve, Adjust, Audit, and various numeric selections) across the workflow created unnecessary inconsistency. |
+| Affected Product Areas | OpenAI Custom GPT decision prompts at every approval boundary. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-017
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-017 |
+| Validation Reference | PV-018 |
+| Date Approved | 2026-08-08 |
+| Decision | Reject preserves approved upstream work, remains at the current relevant stage, asks only what the Author wants changed, does not restart the workflow, does not discard verified evidence, and does not silently regenerate unrelated work. At the article stage, Reject asks what the Author wants changed and does not regenerate the article. This decision does not override the canonical post-generation Author Ownership prohibition; DEC-013 remains unresolved, and Reject at the article stage remains compatible with the canonical rule that the Editor cannot rewrite approved Publication Content. |
+| Reason | A single, predictable rejection model - local to the stage, non-destructive to prior approvals - reduces friction without reopening the DEC-013 discrepancy. |
+| Affected Product Areas | OpenAI Custom GPT decision handling at every approval boundary. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md`; DEC-013 |
+
+---
+
+## DEC-018
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-018 |
+| Validation Reference | PV-019 |
+| Date Approved | 2026-08-08 |
+| Decision | Generate exactly 10 relevant LinkedIn hashtags by default unless the Author explicitly opts out, using a deliberate mix of approximately 2 to 3 broad, 4 to 5 topic-specific, and 2 to 3 niche hashtags. No duplicates, no irrelevant trending tags, no keyword stuffing. This supersedes DEC-005's 3-to-6 default. |
+| Reason | A live test produced only five hashtags; the Repository Author determined the publication package should contain ten hashtags by default. |
+| Affected Product Areas | OpenAI Custom GPT final publication package. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-019
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-019 |
+| Validation Reference | PV-020 |
+| Date Approved | 2026-08-08 |
+| Decision | The final four text blocks must always appear in this exact order: Call to Action, Sources, Hashtags, LinkedIn Description. LinkedIn Description is always the final text block. |
+| Reason | A predictable publication sequence reduces manual reordering in the Author's LinkedIn copy/paste workflow. |
+| Affected Product Areas | OpenAI Custom GPT final publication package. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-020
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-020 |
+| Validation Reference | PV-021 |
+| Date Approved | 2026-08-08 |
+| Decision | Before presenting a draft or final publication package, verify both required-component presence and required-component order (per DEC-019). If an element is missing or misplaced, correct the package before presenting it to the Author. |
+| Reason | Prior completeness checks verified presence only and did not guarantee the fixed order DEC-019 now requires. |
+| Affected Product Areas | OpenAI Custom GPT draft and final package presentation. |
+| Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |

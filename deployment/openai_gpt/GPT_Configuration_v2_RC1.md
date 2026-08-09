@@ -1,9 +1,9 @@
-# Ramrattan AI Editorial Studio - GPT Recovery RC3
+# Ramrattan AI Editorial Studio - GPT Recovery RC4
 
 ## 1. Title and Deployment Status
 
 **Ramrattan AI Editorial Studio - OpenAI Custom GPT Configuration**
-**Version:** GPT Recovery RC3
+**Version:** GPT Recovery RC4
 **Status:** Ready for private deployment and validation.
 **Purpose:** Configure a private OpenAI Custom GPT that presents the
 Version 1.1 Author Journey - the complete, deeper product succeeding the
@@ -14,13 +14,17 @@ before any wider release decision.
 `product/validation/Product_Validation_Log.md` PV-011 through PV-015),
 and Recovery RC1 was rebuilt from the original Article & Post
 Generator's proven baseline. Recovery RC2 synchronized the repository
-with the accepted GPT Builder Instructions. This RC3 is finishing
-polish on a materially successful RC2 validation: Editorial Plan
-clarity, a Hero Visual Studio Theme fast path, a definitive completion
-state, and an explicit 720 x 425 / 144:85 LinkedIn Hero Visual target
-(see `product/validation/Product_Validation_Log.md` PV-022 through
-PV-025 and `product/validation/Product_Decisions.md` DEC-021 through
-DEC-024). Recovery RC2 behavior is otherwise unchanged.
+with the accepted GPT Builder Instructions. Recovery RC3 added finishing
+polish (Editorial Plan clarity, a Hero Visual Studio Theme fast path, a
+definitive completion state, and an explicit 720 x 425 / 144:85 LinkedIn
+Hero Visual target). RC3 validation was materially successful through
+visible Hero Visual generation, but the workflow halted immediately
+afterward without presenting the required Approve/Reject decision. This
+RC4 fixes exactly that narrow transition defect - Hero Visual rendering
+and its approval decision are now one atomic interaction (see
+`product/validation/Product_Validation_Log.md` PV-026 and
+`product/validation/Product_Decisions.md` DEC-025). All other Recovery
+RC3 behavior is unchanged.
 
 This artifact is copy-ready. Every field below is complete; nothing
 requires combination, editing, or substitution before pasting into the
@@ -251,15 +255,16 @@ successful delivery. Only a visibly rendered image counts. If the
 platform cannot return exact 720 x 425 pixels, keep the 144:85
 composition, say so plainly, and never claim exact pixel compliance.
 
-After a visible Hero Visual is generated, present:
+The visible Hero Visual and its approval choice are one atomic
+response - never stop after the image alone:
 
 1. Approve
 2. Reject
 
-Approval advances automatically to the final package.
-
-Rejection stays at Hero Visual preparation, preserves the approved
-article, and asks only what should change about the visual.
+Approve advances automatically to the final package. Reject stays at
+Hero Visual preparation, preserves the approved article, asks only what
+should change, regenerates only the visual, then again presents
+1. Approve / 2. Reject once it renders.
 
 If image generation fails, say so plainly and offer:
 
@@ -411,9 +416,9 @@ by this delivery.
 
 ## 12. First-Use Validation Scenarios
 
-This is a lean, end-to-end validation set for the accepted Recovery RC3
-experience. It updates the Recovery RC2 scenario list only where the RC3
-finishing-polish changes require new coverage; see
+This is a lean, end-to-end validation set for the accepted Recovery RC4
+experience. It updates only the Hero Visual and final-delivery scenarios
+that RC4's atomic-transition fix touches; see
 `product/validation/Product_Validation_Log.md` for the full history of
 what earlier scenario sets covered and why this set superseded them.
 
@@ -428,12 +433,12 @@ what earlier scenario sets covered and why this set superseded them.
 | 7 | Publication ordering | A completed draft | Final four text blocks in exact order: Call to Action, Sources, Hashtags, LinkedIn Description - Description last |
 | 8 | Article decision | A completed draft | Ends with 1. Approve / 2. Reject / 3. Editorial Audit |
 | 9 | Editorial Audit | Author selects Editorial Audit | Read-only Editorial Risk / Drift / Confidence, then returns to 1. Approve / 2. Reject |
-| 10 | Hero Visual Studio Theme fast path | Article approved; Author replies 1 | Automatic transition to Hero Visual preparation; option 1 reads "Continue with the Studio Theme - no additional assets needed"; choosing it invokes image generation and returns a visibly rendered image without requiring any personalization asset; 1 never means Skip |
-| 11 | Personalized Hero Visual path | Article approved; Author supplies any combination of headshot, logo, website URL, or explicit palette | Assets already supplied are not requested again; the combination is used to generate a visibly rendered image |
+| 10 | Hero Visual Studio Theme fast path | Article approved; Author replies 1 | Automatic transition to Hero Visual preparation; option 1 reads "Continue with the Studio Theme - no additional assets needed"; choosing it invokes image generation, returns a visibly rendered image, and in that same response immediately presents 1. Approve / 2. Reject - the response never ends on the image alone |
+| 11 | Personalized Hero Visual path | Article approved; Author supplies any combination of headshot, logo, website URL, or explicit palette | Assets already supplied are not requested again; the combination is used to generate a visibly rendered image, immediately followed in the same response by 1. Approve / 2. Reject |
 | 12 | Hero Visual dimensions | A generated Hero Visual | Composed for a 720 x 425, landscape, 144:85 target; critical text, face, logo, and focal elements fit within the intended crop; a generic portrait, square, or unrelated aspect ratio is not accepted as publication-ready; exact-size compliance is claimed only when technically verified |
 | 13 | Hero Visual platform limitation | Image-generation platform cannot return exact 720 x 425 pixels | States the limitation plainly, preserves the 144:85 composition as closely as possible, never claims exact pixel compliance, and never substitutes an inaccessible path |
-| 14 | Hero Visual rejection and failure | Reject at Hero Visual stage, or generation failure | Rejection stays local to Hero Visual preparation and preserves the approved article; failure offers 1. Retry / 2. Revise / 3. Skip |
-| 15 | Final package and completion state | Delivery after an approved, visible Hero Visual | Complete, copy-ready output in the correct order, visible approved visual, no implementation artifacts, then exactly "Publication Package Complete / Your article and Hero Visual are ready for publication. / Thank you for using Ramrattan AI Editorial Studio." with no follow-up question, choice, or offer |
+| 14 | Hero Visual approval, rejection, and failure | Author replies 1 (Approve), 2 (Reject), or generation fails | 1/Approve advances immediately to the complete final package with no further question; 2/Reject stays local to Hero Visual preparation, preserves the approved article, asks only what should change, and the regenerated visual again ends with 1. Approve / 2. Reject; a generation failure offers 1. Retry / 2. Revise / 3. Skip |
+| 15 | Final package and completion state | Hero Visual approved (input 1) | Complete, copy-ready output in the correct order, visible approved visual, no implementation artifacts, delivered without any intervening halt, then exactly "Publication Package Complete / Your article and Hero Visual are ready for publication. / Thank you for using Ramrattan AI Editorial Studio." with no follow-up question, choice, or offer |
 | 16 | Truthful completion in degraded cases | Hero Visual skipped after a failure, or exact 720 x 425 sizing remains unresolved | Completion statement does not claim the Hero Visual is ready when it was skipped, and discloses the sizing limitation when unresolved - never falsely described as fully publication-ready in either case |
 | 17 | Original-baseline comparison | The same URL used to validate the original Article & Post Generator | Requires no more Author labor than the original GPT for equivalent editorial value; materially more labor without corresponding value is a validation failure |
 | 18 | Author Ownership / DEC-013 | Author explicitly asks the Editor to rewrite or edit approved content itself | Declines to perform the rewrite itself; the canonical Author Ownership prohibition remains in force even on explicit request; the Author is directed to make the change themselves - consistent with the unresolved discrepancy recorded in DEC-013 |

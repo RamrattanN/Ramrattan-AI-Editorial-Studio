@@ -59,6 +59,7 @@ Each decision should reference the originating Product Validation entry.
 | [DEC-022](#dec-022) | PV-023 | Hero Visual Studio Theme fast path |
 | [DEC-023](#dec-023) | PV-024 | Terminal completion state |
 | [DEC-024](#dec-024) | PV-025 | Hero Visual dimensions and composition |
+| [DEC-025](#dec-025) | PV-026 | Atomic Hero Visual approval transition |
 
 ---
 
@@ -418,4 +419,19 @@ Each decision should reference the originating Product Validation entry.
 | Reason | The generated Hero Visual was visibly usable in conversation but did not fit LinkedIn's required 720 x 425 presentation; visible delivery alone is insufficient without the correct intended canvas and composition. |
 | Affected Product Areas | OpenAI Custom GPT Hero Visual generation; future web-product Hero Visual export requirement. |
 | Implementation Status | GPT Recovery RC3 (GPT deployment); web-product guarantee deferred to that track. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-025
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-025 |
+| Validation Reference | PV-026 |
+| Date Approved | 2026-08-09 |
+| Decision | Hero Visual rendering and Hero Visual approval form one atomic workflow transition. After the visible Hero Visual is rendered, the GPT immediately presents 1. Approve / 2. Reject in the same interaction - it never ends a response with the image alone. 1 = Approve: accept the visible Hero Visual, advance automatically, deliver the complete final publication package, display the terminal completion state, and do not ask for another approval. 2 = Reject: preserve the approved article and all approved upstream work, remain in Hero Visual preparation, ask only what should change about the visual, and regenerate only the Hero Visual after receiving revised direction - again presenting 1. Approve / 2. Reject immediately once the new visual renders. This decision does not change canonical Author Ownership rules for Publication Content. |
+| Reason | RC3 validation showed the Hero Visual rendering visibly but the workflow halting immediately afterward without presenting the required approval decision, so the Author could never reach final-package delivery or the terminal completion state. |
+| Affected Product Areas | OpenAI Custom GPT Hero Visual approval and final-package transition. |
+| Implementation Status | GPT Recovery RC4. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |

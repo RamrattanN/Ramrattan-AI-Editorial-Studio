@@ -55,6 +55,10 @@ Each decision should reference the originating Product Validation entry.
 | [DEC-018](#dec-018) | PV-019 | Hashtag standard - exactly 10 by default |
 | [DEC-019](#dec-019) | PV-020 | Publication-tail order |
 | [DEC-020](#dec-020) | PV-021 | Presence-and-order verification |
+| [DEC-021](#dec-021) | PV-022 | Editorial Plan labeling |
+| [DEC-022](#dec-022) | PV-023 | Hero Visual Studio Theme fast path |
+| [DEC-023](#dec-023) | PV-024 | Terminal completion state |
+| [DEC-024](#dec-024) | PV-025 | Hero Visual dimensions and composition |
 
 ---
 
@@ -354,4 +358,64 @@ Each decision should reference the originating Product Validation entry.
 | Reason | Prior completeness checks verified presence only and did not guarantee the fixed order DEC-019 now requires. |
 | Affected Product Areas | OpenAI Custom GPT draft and final package presentation. |
 | Implementation Status | GPT Recovery RC2. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-021
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-021 |
+| Validation Reference | PV-022 |
+| Date Approved | 2026-08-09 |
+| Decision | Present the Editorial Plan as "Editorial Plan - Review Before Drafting" and immediately state "This is the proposed structure for your article, not the final article. Approve it to move to the full draft." This is explanatory UX, not a new workflow stage; 1. Approve / 2. Reject are retained unchanged. |
+| Reason | A first-time Author may not understand the Editorial Plan is a pre-draft review rather than the final article. |
+| Affected Product Areas | OpenAI Custom GPT Editorial Plan presentation. |
+| Implementation Status | GPT Recovery RC3. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-022
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-022 |
+| Validation Reference | PV-023 |
+| Date Approved | 2026-08-09 |
+| Decision | At Hero Visual preparation, present "1. Continue with the Studio Theme - no additional assets needed" alongside the option to instead provide any combination of headshot, logo, website URL, or explicit color palette. Selecting 1 must generate a Hero Visual; it must never be interpreted as skipping Hero Visual generation. |
+| Reason | "Skip personalization" could sound as though the Author is foregoing the Hero Visual rather than selecting the Studio's default visual treatment. |
+| Affected Product Areas | OpenAI Custom GPT Hero Visual preparation. |
+| Implementation Status | GPT Recovery RC3. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-023
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-023 |
+| Validation Reference | PV-024 |
+| Date Approved | 2026-08-09 |
+| Decision | After final package delivery, display "Publication Package Complete / Your article and Hero Visual are ready for publication. / Thank you for using Ramrattan AI Editorial Studio." with no further prompt. If the Author explicitly skipped Hero Visual generation after a failure, or if exact 720 x 425 sizing remains unresolved, adapt the completion statement truthfully so it does not claim full publication readiness. |
+| Reason | The Author needs an unmistakable signal that the complete process is finished; a polished product terminates deliberately rather than merely stopping. |
+| Affected Product Areas | OpenAI Custom GPT final delivery. |
+| Implementation Status | GPT Recovery RC3. |
+| Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-024
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-024 |
+| Validation Reference | PV-025 |
+| Date Approved | 2026-08-09 |
+| Decision | Every LinkedIn Hero Visual should target 720 x 425 pixels, landscape orientation, 144:85 aspect ratio, with composition designed for that intended final canvas; critical text, face, logo, and focal elements remain within safe margins, and the Editor never relies on LinkedIn to repair bad composition. The Editor does not claim exact pixel compliance unless the platform actually provides it; if exact 720 x 425 output is not technically supported, the limitation is disclosed truthfully. The future web product must guarantee final 720 x 425 output before download or publication preparation. |
+| Reason | The generated Hero Visual was visibly usable in conversation but did not fit LinkedIn's required 720 x 425 presentation; visible delivery alone is insufficient without the correct intended canvas and composition. |
+| Affected Product Areas | OpenAI Custom GPT Hero Visual generation; future web-product Hero Visual export requirement. |
+| Implementation Status | GPT Recovery RC3 (GPT deployment); web-product guarantee deferred to that track. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |

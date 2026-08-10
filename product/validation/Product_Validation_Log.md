@@ -44,6 +44,7 @@ the observation that motivated them.
 | [PV-025](#pv-025) | 2026-08-09 | Hero Visual dimensions did not meet LinkedIn requirement | Validated and approved for Recovery RC3 |
 | [PV-026](#pv-026) | 2026-08-09 | Hero Visual rendered but workflow halted | Validated and approved for Recovery RC4 |
 | [PV-027](#pv-027) | 2026-08-09 | Post-image continuation is not reliable in Custom GPT | Validated, approved, and locked for the private GPT baseline |
+| [PV-028](#pv-028) | 2026-08-10 | Post-publication Reader Engagement extends Editorial Project value | Validated real-use discovery - candidate requirement for web-product discovery |
 
 ---
 
@@ -449,3 +450,18 @@ the observation that motivated them.
 | Analysis | The product should not depend on a Custom GPT behavior that repeated live validation has shown to be unreliable. Image generation should be treated as the final production action in the private Custom GPT deployment, with the graceful completion message occurring immediately before image generation rather than after it. |
 | Decision | For the private Custom GPT: (1) deliver the complete approved publication text before Hero Visual generation; (2) present Hero Visual as the explicit final step; (3) obtain any required visual-direction approval before generation; (4) display the graceful completion/sign-off before invoking image generation; (5) generate and visibly render the Hero Visual; (6) treat the visible Hero Visual as the terminal artifact; (7) never depend on another assistant turn after successful image generation. |
 | Status | Validated, approved, and locked for the private GPT baseline |
+
+---
+
+## PV-028
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-10 |
+| Validation Session | Real editorial use of the locked private GPT (GPT Recovery RC5) |
+| Scenario | Post-publication Reader Engagement extends Editorial Project value |
+| Observation | The Author created an article using Ramrattan AI Editorial Studio and kept the original conversation available after publication. The Author subsequently received reader replies/comments and supplied those responses back into the original article conversation. Because the conversation still contained the article's editorial context, the Studio could help the Author understand and interpret the reader response in relation to the article's thesis, supporting arguments, evidence, intended meaning, and professional context, and could help the Author consider an appropriate and meaningful response. |
+| Evidence | Direct real-use observation: the Studio remained useful after publication because the original conversation retained the article's in-session editorial context; this was not a new, context-free AI conversation. |
+| Analysis | Post-publication discussion is part of the Author's editorial lifecycle. Reader comments may contain agreement, disagreement, questions, challenges, misunderstandings, additional evidence, alternative perspectives, requests for clarification, or ideas for future articles. Because the Studio already understands the originating article and its evidence context, it may provide higher-value analysis than a fresh, context-free AI conversation - particularly when the Author wants to understand a reader's point before deciding whether or how to respond. The observed behavior depends on the original conversation remaining available with its in-session context; this must not be misrepresented as persistent cross-session product memory. |
+| Decision | Record Reader Engagement as a candidate future web-product capability, extending the Editorial Project lifecycle to Create -> Publish -> Engage. A future web Editorial Project should remain available after publication and may enter a Reader Engagement state. This is a product discovery, not authorization to modify the locked private GPT, implement LinkedIn integration, implement automatic replies, or change canonical Author Ownership rules. |
+| Status | Validated real-use discovery. Not yet implemented as a formal new GPT capability. Candidate requirement for web-product discovery. |

@@ -620,3 +620,138 @@ tagging, and GitHub Release publication each remain a separate, explicit
 Repository Author decision, exactly as for Version 1.0.
 
 <!-- VERSION_1_1_ROADMAP_END -->
+
+<!-- VERSION_2_CHECKPOINT_START -->
+
+## Version 2 Checkpoint - Private GPT, Reader Engagement Discovery, and Web Foundation
+
+Status: **Current**
+
+This section is authoritative for the active checkpoint. Earlier capability
+and Version 1.1 sections above remain historical delivery records for
+Version 1.0/1.1 and are not superseded by this section for that scope.
+
+### Completed / Established
+
+- Private GPT recovery and lock - **GPT Recovery RC5 - Locked Private GPT
+  Baseline** (`deployment/openai_gpt/GPT_Configuration_v2_RC1.md`, PR #108,
+  DEC-026). Locked and change-controlled by real-use evidence per DEC-026 in
+  `product/validation/Product_Decisions.md`; further changes require new
+  Product Validation Log evidence followed by an approved Product Decision.
+  The locked baseline is unchanged by this checkpoint.
+- Reader Engagement discovery (PV-028, DEC-027, PR #109) - real editorial use
+  of the locked GPT showed that post-publication Reader Engagement extends
+  Editorial Project value. Recorded as future web-product scope in
+  [`docs/product/version2/Capability_013_Reader_Engagement.md`](docs/product/version2/Capability_013_Reader_Engagement.md).
+  Not implemented as an automated capability; the candidate lifecycle is
+  Research -> Create -> Review -> Publish -> Engage -> Learn -> Next Article.
+- Web Product Foundation v1 adopted (DEC-028, PR #110) - lean technical
+  foundation spike in
+  [`docs/product/version2/Web_Product_Foundation_v1.md`](docs/product/version2/Web_Product_Foundation_v1.md):
+  React frontend, TypeScript/Node.js REST backend, PostgreSQL, email magic
+  link authentication, server-side OpenAI on the application's own API
+  account (independent of the Repository Author's personal ChatGPT
+  subscription tier), managed container/PaaS deployment with separated
+  development/production environments.
+- Web Walking Skeleton 01 implemented (PR #111, merged commit `08cb986`) -
+  `web/client` (React 18 + Vite) and `web/server` (Express 4 / TypeScript)
+  npm-workspaces monorepo with PostgreSQL persistence. Delivers: email
+  magic-link auth (single-use SHA-256-hashed token, 15-minute TTL,
+  Postgres-backed sessions, `ConsoleEmailProvider` for development,
+  `SmtpEmailProvider`/nodemailer for production-compatible delivery);
+  persistent `Author`, `EditorialProject` (`REP-XXXXXXXX` IDs), `Source`,
+  `EditorialDirection` entities; server-side OpenAI integration using
+  Structured Outputs, strict JSON schema, zod validation, and bounded retry,
+  with malformed output never persisted; SSRF-protected URL intake (scheme
+  allowlist, DNS/IP-range blocking, timeout, size cap); native Sign In,
+  project creation, URL intake, Editorial Direction rendering, and real
+  Approve/Reject controls with persistent, refresh-safe, Author-scoped
+  state.
+
+### Verified
+
+- Web automated tests, `npm install`, typecheck, lint, production build, and
+  `npm audit` (0 vulnerabilities) all pass.
+- Existing Python validation remains green: 484 tests pass, `studio.py
+  validate` passes, `git diff --check` passes, GitHub Actions validation
+  passes.
+- Real-stack HTTP/API-level verification (real PostgreSQL, real Express
+  server, real Vite dev server): magic-link flow, project creation and
+  rehydration, public-URL retrieval, SSRF/invalid-URL rejection,
+  cross-Author isolation, and sign-out revocation.
+
+### Not Yet Verified
+
+- **Real OpenAI Editorial Direction generation** - `OPENAI_API_KEY` was not
+  available in the implementation environment; the code path reached the
+  correct explicit failure (`OPENAI_API_KEY is required but was not set`)
+  with no mocked or fabricated success.
+- **Literal browser click-through** - the implementation environment did not
+  expose browser automation; HTTP/API-level behavior was verified instead.
+- **Hosted development URL** - not yet available; no development-deployment
+  platform/account has been configured.
+- **Real outbound email delivery** - not yet verified; no SMTP credentials
+  are configured. `ConsoleEmailProvider` is working for local development.
+
+### Current Phase - Web Product Foundation Verification and Development Deployment
+
+Immediate objectives, in sequence:
+
+1. Configure `OPENAI_API_KEY` securely (server-side only, application's own
+   OpenAI API account, never committed) - the immediate external dependency
+   blocking real AI verification. A conservative development budget guardrail
+   of approximately $20/month is a starting estimate only, to be replaced by
+   measured actual cost per Editorial Project once real usage exists.
+2. Execute a real OpenAI Editorial Direction request and verify the result.
+3. Validate the walking skeleton end-to-end in a real browser.
+4. Configure a development deployment target. **Render** is the current
+   recommended platform - it maps cleanly to the implemented React frontend,
+   Express backend, PostgreSQL, environment-secret model, and Git-connected
+   deployment - but no Render account or configuration exists yet; this is a
+   recommendation, not an implementation.
+5. Obtain a hosted development URL.
+6. Continue using `ConsoleEmailProvider` for local/development auth unless
+   and until hosted browser testing requires real outbound email delivery.
+   Production-compatible SMTP support (`SmtpEmailProvider`/nodemailer)
+   already exists in the walking skeleton; **Resend via SMTP** is a
+   candidate production provider, not yet implemented or selected.
+
+### Next Vertical Slice (Not Started)
+
+**Web Walking Skeleton 02 - Editorial Plan + Draft**, once the foundation
+above is verified:
+
+```text
+Approved Editorial Direction -> Editorial Plan -> native Approve/Reject ->
+Draft generation -> persistent article workspace
+```
+
+Its Engineering Delivery is not written by this checkpoint.
+
+### Later Web Slices (sequence, not started)
+
+- Editorial Audit
+- Author editing workspace / DEC-013 resolution through a native editing
+  surface
+- Hero Visual generation and deterministic 720 x 425 processing
+- Publication package assembly
+- LinkedIn OAuth
+- Author-approved LinkedIn publishing
+- Published Editorial Project state
+- Reader Engagement manual-input path
+- Automated LinkedIn Reader Engagement comment ingestion only if LinkedIn's
+  Comments API (`r_member_social`) access becomes available - currently
+  closed to new requests (see Web Product Foundation v1, Section 7)
+
+### Deferred
+
+- Billing/subscriptions
+- Teams/organizations
+- Analytics
+- Scheduling
+- Mobile application
+- Production public launch
+- Automated LinkedIn comment ingestion while API access remains
+  unavailable/restricted
+
+<!-- VERSION_2_CHECKPOINT_END -->

@@ -83,6 +83,7 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | [DEC-025](#dec-025) | PV-026 | Atomic Hero Visual approval transition |
 | [DEC-026](#dec-026) | PV-027 | Custom GPT terminal Hero Visual model |
 | [DEC-027](#dec-027) | PV-028 | Published Editorial Projects may continue into Reader Engagement |
+| [DEC-028](#dec-028) | Web Product Foundation discovery spike | Web Product Foundation v1 adopted |
 
 ---
 
@@ -488,3 +489,18 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | Affected Product Areas | Future web-product Editorial Project lifecycle and architecture discovery. |
 | Implementation Status | Approved as a web-product discovery requirement. NOT approved for implementation. NOT a change to the locked private GPT baseline (`deployment/openai_gpt/GPT_Configuration_v2_RC1.md`, GPT Recovery RC5, unchanged). |
 | Repository References | `docs/product/version2/Capability_013_Reader_Engagement.md` |
+
+---
+
+## DEC-028
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-028 |
+| Validation Reference | Web Product Foundation discovery spike (`docs/product/version2/Web_Product_Foundation_v1.md`) |
+| Date Approved | 2026-08-10 |
+| Decision | Adopt Web Product Foundation v1 as the minimum technical foundation for the first browser-based Ramrattan AI Editorial Studio vertical slice. Key foundation decisions: (1) a thin conventional stack - TypeScript/Node.js backend, React frontend, PostgreSQL, managed container/PaaS deployment with separated development and production environments; (2) email magic link Author authentication, server-verified, no password stored - explicitly NOT a "sign in with ChatGPT and use my subscription" model, because no such officially supported third-party delegation capability currently exists; (3) all OpenAI calls are server-side only, billed under the application's own OpenAI API account (never the Author's ChatGPT subscription), using separate development/production API projects with independent spend limits; (4) a minimal relational data model (Author, EditorialProject, Source, EditorialDirection, EditorialPlan) that extends without a blocking migration to Article, Evidence, HeroVisual, Publication, and ReaderEngagement, and that represents publication as a state transition rather than project termination, per DEC-027/Capability 013; (5) the web application owns final Hero Visual image processing and guarantees the exact 720 x 425, 144:85 deliverable deterministically, with the AI model generating source artwork only; (6) LinkedIn publish-on-behalf-of-member (`w_member_social`) and image upload are confirmed feasible now via self-serve OAuth, while comment retrieval/reply (`r_member_social`) is confirmed closed to new access requests as of this spike - Reader Engagement automation remains blocked until that changes. The full foundation, including sourced current-documentation citations, is recorded in `docs/product/version2/Web_Product_Foundation_v1.md`. |
+| Reason | The web product needed a minimum, evidence-based technical foundation - verified against current official OpenAI and LinkedIn documentation rather than assumption - so the next Engineering Delivery (Web Walking Skeleton 01) can begin implementation without a further architecture discussion, consistent with Baseline Before Better and the lean-foundation-spike scope authorized for this delivery. |
+| Affected Product Areas | Future web-product architecture, authentication, OpenAI integration, data model, Hero Visual pipeline, and LinkedIn integration planning. |
+| Implementation Status | Foundation adopted; NOT an authorization to implement the full web product. Only "Web Walking Skeleton 01," as scoped in `docs/product/version2/Web_Product_Foundation_v1.md` Section 9, is build-ready for the next Engineering Delivery. Does not change the locked private GPT baseline (`deployment/openai_gpt/GPT_Configuration_v2_RC1.md`, GPT Recovery RC5, unchanged) or DEC-013. |
+| Repository References | `docs/product/version2/Web_Product_Foundation_v1.md` |

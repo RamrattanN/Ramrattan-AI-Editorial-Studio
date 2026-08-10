@@ -82,6 +82,7 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | [DEC-024](#dec-024) | PV-025 | Hero Visual dimensions and composition |
 | [DEC-025](#dec-025) | PV-026 | Atomic Hero Visual approval transition |
 | [DEC-026](#dec-026) | PV-027 | Custom GPT terminal Hero Visual model |
+| [DEC-027](#dec-027) | PV-028 | Published Editorial Projects may continue into Reader Engagement |
 
 ---
 
@@ -472,3 +473,18 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | Affected Product Areas | OpenAI Custom GPT Hero Visual sequencing and final delivery. |
 | Implementation Status | GPT Recovery RC5 - Locked Private GPT Baseline. |
 | Repository References | `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` |
+
+---
+
+## DEC-027
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-027 |
+| Validation Reference | PV-028 |
+| Date Approved | 2026-08-10 |
+| Decision | Published Editorial Projects may continue into Reader Engagement. Publication does not necessarily terminate an Editorial Project. For future web-product design, a published project may enter a Reader Engagement state, extending the candidate lifecycle to Create -> Publish -> Engage. Reader Engagement should preserve enough project context to support post-publication analysis, subject to future privacy, retention, and Author-control decisions. At minimum, future discovery should evaluate preserving: the approved article; the approved editorial thesis/direction; verified evidence/source context; publication metadata; Author-approved project context; and reader comments/replies associated with that article. Purpose: enable the Studio to help the Author understand and respond thoughtfully to post-publication discussion without reconstructing the article's context from scratch. See `docs/product/version2/Capability_013_Reader_Engagement.md` for the full candidate concept, including the Author Ownership boundary on response-text generation (not decided by this discovery) and the LinkedIn integration feasibility boundary (not approved or implemented by this discovery). |
+| Reason | Real editorial use of the locked private GPT (PV-028) showed that retained article context let the Studio meaningfully help the Author interpret and consider a response to reader comments - value that a fresh, context-free conversation could not provide. |
+| Affected Product Areas | Future web-product Editorial Project lifecycle and architecture discovery. |
+| Implementation Status | Approved as a web-product discovery requirement. NOT approved for implementation. NOT a change to the locked private GPT baseline (`deployment/openai_gpt/GPT_Configuration_v2_RC1.md`, GPT Recovery RC5, unchanged). |
+| Repository References | `docs/product/version2/Capability_013_Reader_Engagement.md` |

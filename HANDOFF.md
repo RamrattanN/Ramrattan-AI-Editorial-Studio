@@ -96,13 +96,31 @@ Current validation baseline:
 - Repository Validation PASS
 - 484 Tests PASS
 
+### Version 2 (Web Product Track)
+
+- Private GPT recovery locked as **GPT Recovery RC5 - Locked Private GPT
+  Baseline** (PR #108, DEC-026); change-controlled by real-use evidence.
+- Reader Engagement discovery recorded (PV-028, DEC-027, PR #109);
+  future web-product scope only, not implemented.
+- Web Product Foundation v1 adopted (DEC-028, PR #110).
+- Web Walking Skeleton 01 implemented (PR #111, merged commit `08cb986`):
+  `web/client` and `web/server`, email magic-link auth, persistent
+  `EditorialProject`/`Source`/`EditorialDirection`, server-side OpenAI
+  integration, native Approve/Reject.
+
+`ROADMAP.md` ("Version 2 Checkpoint" section) is authoritative for current
+Version 2 status, including what remains not yet verified.
+
 ---
 
 # Current Focus
 
 ## Active Objective
 
-**Manual Version 1 and Version 1.1 Release Decisions**
+Two independent objectives are active in parallel; neither blocks the
+other.
+
+**1. Manual Version 1 and Version 1.1 Release Decisions**
 
 Issue #18 and Version 1 RC1 Release Readiness are Complete. Version 1.1
 (V11-01 through V11-10, Issue #69 Epic) is also now Complete on `develop`.
@@ -119,6 +137,17 @@ decisions require explicit Repository Author approval:
 
 No release action or additional feature work should begin unless explicitly
 approved by the Repository Author.
+
+**2. Web Product - Foundation Verification and Development Deployment**
+
+Web Walking Skeleton 01 (PR #111) is implemented but not yet fully
+verified. Immediate sequence: configure `OPENAI_API_KEY` securely; verify
+a real OpenAI Editorial Direction request; validate in a real browser;
+configure a development deployment (Render recommended, not yet
+configured); obtain a hosted development URL. See `ROADMAP.md` ("Version 2
+Checkpoint") and `docs/product/version2/Web_Product_Foundation_v1.md`
+(Section 13) for full detail. Web Walking Skeleton 02 (Editorial Plan +
+Draft) is the next vertical slice and has not started.
 
 ---
 
@@ -239,6 +268,11 @@ Guidelines
 4. Publish an external announcement, if approved, and verify the release.
 5. Post-RC1 Improvements.
 6. B002 Brand Refinement.
+7. Configure `OPENAI_API_KEY` and verify real OpenAI Editorial Direction
+   generation for Web Walking Skeleton 01.
+8. Configure a development deployment (Render recommended) and obtain a
+   hosted development URL.
+9. Web Walking Skeleton 02 - Editorial Plan + Draft (not started).
 
 ---
 
@@ -319,6 +353,17 @@ Recent engineering milestones
   (Issues #70-#79, PRs #81-#91) complete on `develop`.
 - ADR-018 and ADR-019 transitioned to Accepted.
 - Architecture Baseline advanced to `2026.08.04v14`.
+- Private GPT recovered and locked as GPT Recovery RC5 - Locked Private GPT
+  Baseline (PR #108, DEC-026).
+- Reader Engagement discovered through real GPT use and recorded as future
+  web-product scope (PV-028, DEC-027, PR #109).
+- Web Product Foundation v1 adopted for the Version 2 web product (DEC-028,
+  PR #110).
+- Web Walking Skeleton 01 implemented: React/Vite client, Express/TypeScript
+  server, PostgreSQL persistence, email magic-link auth, server-side OpenAI
+  integration (PR #111, merged commit `08cb986`). Real OpenAI verification,
+  browser click-through, hosted development URL, and production email
+  delivery remain not yet verified/available.
 
 ---
 
@@ -350,9 +395,16 @@ Version 1.1
 
 **V11-01–V11-10 Complete**
 
+Version 2 (Web Product Track)
+
+**GPT Recovery RC5 locked; Reader Engagement discovery recorded; Web
+Product Foundation v1 adopted; Web Walking Skeleton 01 implemented,
+not yet fully verified**
+
 Current Objective
 
-**Manual Version 1 and Version 1.1 Release Decisions**
+**(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
+Foundation Verification and Development Deployment**
 
 Deferred
 
@@ -376,12 +428,13 @@ Repository
 
 Version
 
-**1.0**
+**1.1**
 
 Last Updated
 
-**2026-08-04**
+**2026-08-10**
 
 Current Phase
 
-**Manual Version 1 and Version 1.1 Release Decisions**
+**(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
+Foundation Verification and Development Deployment**

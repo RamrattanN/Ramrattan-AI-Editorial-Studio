@@ -410,6 +410,72 @@ criteria) without another architecture discussion. Section 7 and Section
 and apply only once those capabilities are explicitly authorized in a
 future delivery, not as part of Walking Skeleton 01.
 
+## 13. Walking Skeleton 01 - Implementation Status
+
+Recorded as of 2026-08-10, after PR #111 (merged commit `08cb986`)
+delivered `web/client` and `web/server` against Section 9's acceptance
+criteria. This section reports outcome only; it does not reopen or
+restate the foundation decisions above.
+
+**DECIDED and IMPLEMENTED:** the Section 3 stack (React 18 + Vite,
+Express 4/TypeScript, PostgreSQL, npm workspaces); the Section 4
+authentication decision (single-use SHA-256-hashed magic-link token,
+15-minute TTL, Postgres-backed sessions, pluggable `EmailProvider` with
+`ConsoleEmailProvider` for development and `SmtpEmailProvider`/nodemailer
+for production-compatible delivery); the Section 5 OpenAI execution
+decision (server-side only, `openai` SDK, Structured Outputs against a
+strict JSON schema, zod validation, bounded retry, no client-side key
+exposure); the Section 6 data model's `Author`, `EditorialProject`
+(`REP-XXXXXXXX` IDs), `Source`, and `EditorialDirection` entities
+(`EditorialPlan` remains schema-only, not written to); Section 9's SSRF
+protections (scheme allowlist, DNS/IP-range blocking, timeout, source-size
+cap) and Author-scoping enforcement.
+
+**VERIFIED:** web automated tests, `npm install`, typecheck, lint,
+production build, `npm audit` (0 vulnerabilities); existing Python
+validation remains green (484 tests, `studio.py validate`, `git diff
+--check`); real-stack HTTP/API-level behavior against a real PostgreSQL,
+Express, and Vite dev server - magic-link flow, project creation and
+rehydration, public-URL retrieval, SSRF/invalid-URL rejection,
+cross-Author isolation, sign-out revocation.
+
+**NOT YET VERIFIED:**
+
+- Real OpenAI Editorial Direction generation - `OPENAI_API_KEY` was not
+  available in the implementation environment; the code path reached the
+  correct explicit failure (`OPENAI_API_KEY is required but was not set`),
+  with no mocked or fabricated success substituted.
+- Literal browser click-through - the implementation environment did not
+  expose browser automation; HTTP/API-level verification was substituted.
+- A hosted development URL - no development-deployment platform or account
+  has been configured.
+- Real outbound email delivery - no SMTP credentials are configured;
+  `ConsoleEmailProvider` is working for local development.
+
+**DEFERRED** (unchanged from Section 9 and Section 10): Editorial Plan,
+article drafting, Editorial Audit, Hero Visual, LinkedIn publishing, Reader
+Engagement, and all billing/org/analytics scope.
+
+**Immediate external-dependency plan**, in sequence: (1) configure
+`OPENAI_API_KEY` securely, server-side only, under the application's own
+OpenAI API account, never committed - the immediate blocking dependency
+for real AI verification, with an approximately $20/month development
+budget guardrail as a starting estimate to be replaced by measured actual
+cost once real usage exists; (2) execute and verify a real OpenAI
+Editorial Direction request; (3) validate in a real browser; (4) configure
+a development deployment - **Render** is the current recommended target
+(clean fit for the implemented React/Express/PostgreSQL/environment-secret
+model), not yet configured, and not an irreversible production-platform
+commitment; (5) obtain a hosted development URL; (6) continue
+`ConsoleEmailProvider` for development and defer real outbound SMTP
+delivery until hosted browser testing requires it - **Resend via SMTP** is
+a candidate production provider, not yet implemented or selected.
+
+Full status detail and sequencing are also recorded in `ROADMAP.md`
+("Version 2 Checkpoint" section), which is authoritative for current
+program status; this section exists so the foundation document is not
+read as still purely prospective.
+
 ## Non-Goals
 
 This document does not:

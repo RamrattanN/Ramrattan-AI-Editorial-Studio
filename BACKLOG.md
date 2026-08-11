@@ -43,7 +43,7 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-001 through BL-010, BL-012 through BL-014 | BL-011 | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
+| BL-001 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
 
 ## Current Sprint
 
@@ -231,6 +231,18 @@ versus what goes to the backlog) are defined in
 | Dependencies | Architectural/governance decision; likely intersects with the Web Walking Skeleton progression once a Draft/article surface exists (BL-003). |
 | Acceptance Summary | Not yet written. |
 | Notes | Long-standing and deliberately unresolved - do not resolve unilaterally. |
+
+### BL-015 - Wiki Evolution - Human-Facing Project Knowledge
+
+| Field | Value |
+|---|---|
+| Outcome | Evolve the GitHub Wiki beyond its minimal Home/Sidebar only when project complexity creates a demonstrated navigation, onboarding, stakeholder, release, or knowledge-orientation need. |
+| Evidence / Source | GitHub Wiki Discovery found the Wiki had never been initialized and that a single Home page is currently sufficient - additional pages would largely duplicate authoritative repository sources (`BACKLOG.md`, `ROADMAP.md`, `HANDOFF.md`, `docs/product/version2/Web_Product_Foundation_v1.md`, etc.). |
+| Priority | P3 |
+| Kanban State | Backlog |
+| Dependencies | None. |
+| Acceptance Summary | Not yet written. |
+| Notes | Reconsideration triggers may include: a major release; multiple implemented Version 2 capabilities; material architecture expansion; a meaningful stakeholder/onboarding need; the Home page becoming difficult to navigate; or a subject gaining enough stable orientation value to justify a maintained Wiki page. Acceptance principle for any additional page: it must have a clear human-navigation/orientation purpose, identify or link to authoritative repository sources, avoid becoming an operational source of truth, and avoid duplicating fast-changing backlog/Kanban state. Not moved to Ready or In Progress by this delivery. |
 
 ## GitHub Project and Issues - Known State, Not Canonical
 

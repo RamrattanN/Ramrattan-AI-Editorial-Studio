@@ -15,13 +15,18 @@ principles and checkpoints, not values.
 Bootstrap is not complete until:
 
 > AI-assisted development setup is not complete until routine repository
-> work can proceed without repetitive approval prompts, while
-> destructive, privileged, secret-sensitive, merge-governed, and
-> production-sensitive actions remain explicitly gated.
+> work can proceed without repetitive approval prompts; destructive,
+> privileged, secret-sensitive, merge-governed, and production-sensitive
+> actions remain explicitly gated; a genuine human-attention boundary
+> produces one reliable audible notification before the Repository
+> Author interacts with the prompt; and that notification behavior has
+> been verified live, not merely configured.
 
-Verify both halves before moving on - a setup that still prompts for
+Verify every part before moving on - a setup that still prompts for
 `git status` has not removed friction; a setup that auto-approves a
-force push has not preserved control.
+force push has not preserved control; a notification hook that has
+never been heard firing at the right moment has not actually solved
+"is the agent blocked or still working?"
 
 ## 1. Developer Machine
 
@@ -79,7 +84,29 @@ force push has not preserved control.
       Claude Code deny list
 - [ ] No blanket full-access ("yolo") mode adopted as a shortcut
 
-## 4. Secrets
+## 4. Audible Attention Notifications
+
+- [ ] Human-attention sound wired to the **pre-approval** event
+      (`PermissionRequest` in Claude Code, or the Codex equivalent) -
+      **not** a generic `Notification`/post-approval event
+- [ ] Exactly one attention sound configured per boundary - checked that
+      no second hook (e.g. `Notification`) fires for the same event,
+      producing a duplicate alert
+- [ ] **Live-tested, not just configured**: a genuinely benign,
+      not-yet-allow-listed command run deliberately to trigger a real
+      approval prompt, and a human confirmed the sound played *before*
+      interacting with the prompt - not after approval, not after the
+      command executed, not on every tool call, not on ordinary turns
+- [ ] If configuration was added to an already-running session and
+      nothing fires at all, the session/window reloaded or restarted
+      before concluding the configuration itself is wrong
+- [ ] No automatic "task completed" sound assumed reliable - no hook
+      event distinguishes a substantial delivery finishing from an
+      ordinary turn ending; a completion sound, if used, is an
+      occasional, deliberate, agent-invoked action, not a structural
+      guarantee
+
+## 5. Secrets
 
 - [ ] `.env` (or equivalent) confirmed local and gitignored
 - [ ] No secret ever pasted into an AI chat session, in either direction
@@ -88,7 +115,7 @@ force push has not preserved control.
 - [ ] Rotation plan understood: a *suspected* exposure is treated the
       same as a confirmed one
 
-## 5. Human Approval Boundaries
+## 6. Human Approval Boundaries
 
 Confirm these remain gated regardless of how streamlined routine work
 becomes:
@@ -100,7 +127,7 @@ becomes:
 - [ ] Production deployment
 - [ ] Any destructive or difficult-to-recover operation
 
-## 6. Multi-Machine Discipline
+## 7. Multi-Machine Discipline
 
 - [ ] Before starting work on any machine: `git fetch origin`,
       synchronize the integration branch safely, verify `HEAD` against

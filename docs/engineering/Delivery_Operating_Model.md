@@ -247,10 +247,19 @@ tracked in `BACKLOG.md`, not a permanent process rule.
 | `docs/learning/` (Lessons Learned) | When a reusable lesson is promoted - normally at closeout or retrospective. |
 | `product/validation/Product_Validation_Log.md` | Only when real product evidence meets the existing governance criteria in that document. |
 | `product/validation/Product_Decisions.md` | Only when evidence is promoted into an explicit, Repository-Author-approved product decision. |
+| GitHub Wiki | At meaningful product milestones, releases, major accepted capability changes, or material architecture/deployment changes. Not on every PR. |
 
 Do not churn `ROADMAP.md` or `HANDOFF.md` after trivial actions. If an
 update to one of them would only restate what `BACKLOG.md` already
 says, it's the wrong document for that update.
+
+The GitHub Wiki is human-facing orientation and synthesis only. It is
+never canonical for backlog, Kanban, roadmap, product decisions,
+acceptance criteria, or architecture specification - those remain owned
+by the documents in the table above and in `BACKLOG.md`'s "Authority and
+Scope" section. Synchronize the Wiki at the cadence in the table; do not
+update it after every PR, and do not let it accumulate detail that
+duplicates a faster-moving canonical source.
 
 ## Non-Goals
 

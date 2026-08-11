@@ -314,7 +314,7 @@ consequential human boundary occurs -> one audible alert fires ->
 Repository Author responds -> agent continues
 ```
 
-### Verified configuration
+### Claude Code - verified in real use
 
 **Claude Code** (local, gitignored `.claude/settings.local.json` - the
 same file and mechanism as Sections 1-2's permission profile):
@@ -322,15 +322,43 @@ same file and mechanism as Sections 1-2's permission profile):
 - the human-attention sound is wired to the **`PermissionRequest`** hook
   event, not `Notification`
 - `Glass.aiff` (`afplay /System/Library/Sounds/Glass.aiff`) fires
-  **before** the Repository Author interacts with the approval prompt
+  **before** the Repository Author interacts with the approval prompt,
+  confirmed by a live, human-observed test (see "The critical testing
+  lesson" below)
 - the `Notification` hook is deliberately **not** used for this purpose
 - no duplicate attention sound fires for the same boundary
 
-**Codex** (its own local configuration surface): the same
-`PermissionRequest`-equivalent event drives `Glass.aiff` as the intended
-attention sound; a duplicate BEL/notification behavior that fired
-separately was identified and removed. No completion sound is
-configured for Codex, for the same reason described below.
+### Codex VS Code - not verified, deferred, non-blocking
+
+Pre-approval audible attention for Codex's VS Code extension is **not
+currently verified** and remains deferred - it does not yet reliably
+sound before the Repository Author interacts with an approval prompt.
+This does not weaken any security boundary: the approval prompt itself
+still gates the action correctly regardless of whether a sound
+accompanies it. It is a missing convenience signal, tabled for later
+investigation, not a blocker for ordinary Codex use.
+
+Investigation found:
+
+- Codex exposes a `PermissionRequest`-equivalent hook capability in
+  principle, and the hook must be explicitly trusted before it can run.
+- Even once configured and trusted, the tested VS Code host-managed
+  approval path did not emit the expected Codex-core `HookStarted` /
+  `HookCompleted` lifecycle events, so the configured `Glass.aiff` sound
+  did not fire reliably at the pre-approval boundary.
+- A separate duplicate BEL/notification behavior was also identified
+  during this investigation and removed; that removal is real, but it is
+  independent of, and does not substitute for, verifying the intended
+  pre-approval sound itself.
+- No completion sound is configured for Codex, for the same reason
+  described below.
+
+**Do not state that Codex pre-approval audible attention is working
+until it has been live-tested and directly observed by a human, the same
+standard already met for Claude Code above.** This is a live example of
+the section's own central lesson: a hook that is configured, and even
+partially functions (the duplicate-signal cleanup), is not the same as a
+verified pre-approval signal.
 
 ### The critical testing lesson: structural configuration alone is not sufficient
 

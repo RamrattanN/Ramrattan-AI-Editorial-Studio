@@ -138,11 +138,13 @@ decisions require explicit Repository Author approval:
 No release action or additional feature work should begin unless explicitly
 approved by the Repository Author.
 
-**2. Web Product - Foundation Verification and Development Deployment**
+**2. Web Product - Development Deployment and Browser Acceptance**
 
-Web Walking Skeleton 01 (PR #111) is implemented but not yet fully
-verified. Immediate sequence: configure `OPENAI_API_KEY` securely; verify
-a real OpenAI Editorial Direction request; validate in a real browser;
+Web Walking Skeleton 01 (PR #111) is implemented; real OpenAI Editorial
+Direction generation is now verified (2026-08-10) - `OPENAI_API_KEY` is
+configured locally, and two real end-to-end Editorial Direction requests
+have been executed, approved, and persisted through the actual
+application path. Remaining sequence: validate in a real browser;
 configure a development deployment (Render recommended, not yet
 configured); obtain a hosted development URL. See `ROADMAP.md` ("Version 2
 Checkpoint") and `docs/product/version2/Web_Product_Foundation_v1.md`
@@ -268,10 +270,10 @@ Guidelines
 4. Publish an external announcement, if approved, and verify the release.
 5. Post-RC1 Improvements.
 6. B002 Brand Refinement.
-7. Configure `OPENAI_API_KEY` and verify real OpenAI Editorial Direction
-   generation for Web Walking Skeleton 01.
+7. ~~Configure `OPENAI_API_KEY` and verify real OpenAI Editorial Direction
+   generation for Web Walking Skeleton 01~~ - done (2026-08-10).
 8. Configure a development deployment (Render recommended) and obtain a
-   hosted development URL.
+   hosted development URL; validate in a real browser.
 9. Web Walking Skeleton 02 - Editorial Plan + Draft (not started).
 
 ---
@@ -361,8 +363,12 @@ Recent engineering milestones
   PR #110).
 - Web Walking Skeleton 01 implemented: React/Vite client, Express/TypeScript
   server, PostgreSQL persistence, email magic-link auth, server-side OpenAI
-  integration (PR #111, merged commit `08cb986`). Real OpenAI verification,
-  browser click-through, hosted development URL, and production email
+  integration (PR #111, merged commit `08cb986`).
+- Real OpenAI Editorial Direction foundation verified (2026-08-10):
+  `OPENAI_API_KEY` configured locally; two real, non-mocked Editorial
+  Direction requests executed end-to-end, approved, and persisted through
+  the actual application path; non-secret usage-metadata logging added.
+  Browser click-through, hosted development URL, and production email
   delivery remain not yet verified/available.
 
 ---
@@ -398,13 +404,13 @@ Version 1.1
 Version 2 (Web Product Track)
 
 **GPT Recovery RC5 locked; Reader Engagement discovery recorded; Web
-Product Foundation v1 adopted; Web Walking Skeleton 01 implemented,
-not yet fully verified**
+Product Foundation v1 adopted; Web Walking Skeleton 01 implemented; real
+OpenAI Editorial Direction foundation verified**
 
 Current Objective
 
 **(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-Foundation Verification and Development Deployment**
+Development Deployment and Browser Acceptance**
 
 Deferred
 
@@ -437,4 +443,4 @@ Last Updated
 Current Phase
 
 **(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-Foundation Verification and Development Deployment**
+Development Deployment and Browser Acceptance**

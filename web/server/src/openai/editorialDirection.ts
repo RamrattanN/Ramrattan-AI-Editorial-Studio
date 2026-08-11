@@ -59,6 +59,23 @@ export type EditorialDirectionTaskResult =
   | { ok: true; data: EditorialDirectionPayload }
   | { ok: false; error: string };
 
+/**
+ * Development cost observability: logs non-secret usage metadata for every
+ * completed request (regardless of downstream validation outcome), so
+ * cost-per-Editorial-Project can eventually be measured. Never logs the
+ * prompt or source text.
+ */
+function logUsage(completion: OpenAI.Chat.Completions.ChatCompletion): void {
+  console.info("[openai-usage]", {
+    model: completion.model,
+    requestId: completion.id,
+    promptTokens: completion.usage?.prompt_tokens ?? null,
+    completionTokens: completion.usage?.completion_tokens ?? null,
+    totalTokens: completion.usage?.total_tokens ?? null,
+    timestamp: new Date().toISOString(),
+  });
+}
+
 async function requestOnce(
   client: OpenAI,
   model: string,
@@ -76,6 +93,8 @@ async function requestOnce(
     ],
     response_format: { type: "json_schema", json_schema: JSON_SCHEMA },
   });
+
+  logUsage(completion);
 
   const raw = completion.choices[0]?.message?.content;
   if (!raw) {

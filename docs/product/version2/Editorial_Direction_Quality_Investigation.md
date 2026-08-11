@@ -1,6 +1,6 @@
 # Editorial Direction Quality Investigation
 
-**Status:** DS-01 Complete - Approved by the Repository Author 2026-08-11 as `product/validation/Product_Decisions.md` DEC-030 (Section 15).  Model and prompt configuration approved; implementation authorized as a separate, bounded delivery, not yet started.
+**Status:** DS-01 Complete and closed - approved by the Repository Author 2026-08-11 as `product/validation/Product_Decisions.md` DEC-030 (Section 15), implemented and merged as PR #130 (commit `afb07eb`), and hosted-verified by the Repository Author through the real Web Product path (Section 16).  BL-001 is Done.
 **Classification:** Evidence and recommendation artifact (Informative - not a Product Decision)
 **Backlog:** BL-001 (primary), BL-002 (supporting)
 **Evidence base:** PV-029
@@ -256,3 +256,23 @@ Per the Repository Author's stop condition, the two passes were compared for mat
 This closes Section 9's "provisional" status for the purpose of authorizing implementation - Category E (prompt + model combination) is the accepted basis for the approved configuration.  Sections 9, 13, and 14 above are left as written; they are the evidentiary record the decision was based on, not superseded text.
 
 **Not authorized by this decision:** the implementation itself.  DEC-030's Implementation Status field is the authoritative scope boundary for that separate, bounded delivery - model selection and Editorial Direction instructions only, with schema, persisted shape, source-processing, workflow state, Approve/Reject, authentication, Render, the locked GPT, and GPT Knowledge all explicitly out of scope, plus required regression tests and one bounded real verification through the actual Web Product path before that delivery can be considered complete.
+
+## 16. Implementation and Post-Merge Hosted Acceptance (2026-08-11) - Closure
+
+**Implementation.** The bounded delivery DEC-030 authorized was completed on `feature/editorial-direction-gpt-5-6-terra`: `getConfiguredModel()` defaults to `gpt-5.6-terra` (`OPENAI_MODEL` remains a supported override), the Editorial Direction system prompt was replaced with the approved Variant D instructions verbatim, and `render.yaml`'s `OPENAI_MODEL` value was updated to match.  Schema, persistence, source retrieval/processing, Approve/Reject behavior, and authentication were unchanged, per DEC-030's scope boundary.  New regression coverage (`web/server/tests/editorialDirection.model.test.ts`) guards the model default and override, the exact prompt text, the unchanged schema, and unchanged user/source message construction.  Full verification passed: typecheck, lint, 41/41 tests, build, and repository validation (`compileall`, 484 Python unittests, `studio.py validate`).  One bounded real application-path call (not mocked) confirmed the deployed request shape end-to-end before merge.  Merged to `develop` as PR #130, commit `afb07eb`.
+
+**Post-merge hosted acceptance.** The Repository Author completed literal hosted acceptance through `https://studio.ramrattan.com` against the merged commit:
+
+- Hosted health - `/api/health` returned `{"status":"ok"}`.
+- Authentication - normal magic-link sign-in succeeded; the authenticated application loaded correctly.
+- Editorial Project creation - a new hosted project (`REP-97BE2BC6`) was created successfully.
+- Real public-URL submission - the same NASA source used in Section 14's second evaluation pass (`https://www.nasa.gov/news-release/nasa-joins-genesis-mission-to-accelerate-ai-driven-discovery/`) was accepted and processed, after an unrelated first URL returned an HTTP 403 during source retrieval (a source-retrieval-target issue, not a DEC-030 model or implementation defect; source-processing code was not changed).
+- Editorial Direction generation - succeeded through the real hosted application path.
+- Runtime model evidence - fresh Render `[openai-usage]` log entries showed `model: 'gpt-5.6-terra'`, confirming the deployed Render environment is using the DEC-030-approved model, not a stale `gpt-4o-mini` override.
+- Schema/rendering - the hosted Editorial Direction rendered all seven unchanged fields: `source_understanding`, `audience`, `objective`, `publication_language`, `primary_angle`, `supporting_lenses`, `editorial_thesis`.
+- Persistence/rehydration - a browser refresh preserved and rehydrated the generated Editorial Direction.
+- Reject behavior - Reject exposed the expected feedback workflow; feedback was submitted, the project showed "Changes requested", and the feedback remained present after a browser refresh.
+- Approve behavior - an existing Editorial Direction project (`REP-82C8BD41`) was used for the normal approval path; approval succeeded, the project displayed "Approved", and the UI confirmed advancement to the Editorial Plan stage.
+- Authentication protection - after sign-out, protected application content was no longer available and the application returned to the sign-in / magic-link request screen.
+
+**Conclusion.** All required hosted acceptance criteria passed.  BL-001's Outcome is achieved to the standard this delivery was scoped to prove.  DS-01 is closed; see `BACKLOG.md`'s "Latest Closeout" section for the operating-model record.

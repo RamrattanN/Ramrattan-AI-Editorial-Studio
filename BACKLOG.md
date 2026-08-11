@@ -43,7 +43,7 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-003 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | BL-001 | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030)* |
+| BL-003 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance)* |
 
 ## Current Sprint
 
@@ -59,13 +59,25 @@ more work.
 | Explicit Non-Goals | Web Walking Skeleton 02, Editorial Plan, Draft, Hero Visual, LinkedIn publishing, Reader Engagement, locked GPT or GPT Knowledge changes, SMTP, Render/DNS changes, `main` promotion, tagging, BL-011, BL-016, Codex audible-notification troubleshooting, Wiki expansion. |
 | Owner / Execution Agent | Claude |
 | Review Agent | Codex, scope determined by findings (see final report) |
-| Status | In Progress - baseline reconstruction, difference analysis, evaluation design, and model research are complete; the sprint's Must Complete bar requires *executed* controlled comparisons, which have not run (Section 5 of the evidence artifact - no `OPENAI_API_KEY` in this environment).  Not Review / Validation: an unexecuted evidence package is not yet the completed evidence the Delivery Operating Model's Review / Validation column presumes.  See `docs/product/version2/Editorial_Direction_Quality_Investigation.md` and the pending execution-boundary decision recorded there. |
+| Status | Closed.  The sprint's five governing questions were each answered with a bounded, evidence-based conclusion (Sections 9, 13-14 of the evidence artifact); the Repository Author approved the resulting model/prompt recommendation as `product/validation/Product_Decisions.md` DEC-030; the separate, bounded implementation delivery DEC-030 authorized was completed and merged (PR #130, commit `afb07eb`); and post-merge hosted acceptance through the real Web Product path passed all required criteria.  See BACKLOG.md's "Latest Closeout" section below for the full record. |
 
 ## Latest Closeout
 
-**Not applicable yet** - no Daily Sprint has run under this operating
-model. The first Daily Closeout will be recorded here after the first
-Daily Sprint.
+**DS-01 - Editorial Direction Quality Investigation vs. Locked GPT Baseline (2026-08-11)**
+
+| Field | Value |
+|---|---|
+| Committed Outcome | Determine why the Web Product's Editorial Direction was materially weaker editorially than the locked GPT baseline (PV-029), and produce an evidence-backed recommendation for the Web Product's Editorial Direction configuration. |
+| Completed | Baseline reconstruction, difference analysis, and a two-pass controlled evaluation (Sections 9, 13-14 of `docs/product/version2/Editorial_Direction_Quality_Investigation.md`); Repository Author approval of `gpt-5.6-terra` and the Variant D instructions as `product/validation/Product_Decisions.md` DEC-030; the bounded implementation delivery DEC-030 authorized, merged as PR #130 (commit `afb07eb`); and post-merge hosted acceptance through `https://studio.ramrattan.com` covering health, authentication, project creation, real public-URL submission, Editorial Direction generation, runtime model evidence, schema rendering, persistence/rehydration, Reject durability, Approve advancement, and authentication protection. |
+| Not Completed | Nothing outstanding within DS-01's scope. |
+| Blockers | None outstanding.  Two transient local-environment blockers were hit and resolved during implementation verification: a stale local `OPENAI_MODEL=gpt-4o-mini` override in `web/server/.env` masked the new default on the first two verification attempts, and the Repository Author's first hosted-acceptance attempt hit an HTTP 403 during source retrieval on an unrelated URL, resolved by using the same NASA source already verified reachable in DS-01's second evaluation pass. |
+| Defects Discovered | One test-only defect: the new `editorialDirection.model.test.ts` mocked the `openai` package with an arrow function passed to `mockImplementation`, which cannot be used as a constructor (`new OpenAI(...)` in `client.ts`).  Fixed to a regular function before the delivery's test suite was reported green; no production code was affected. |
+| Product Discoveries | None beyond PV-029 (already recorded) and DEC-030 (already recorded). |
+| Lessons Learned | None promoted to `docs/learning/` - the mock-constructor and stale-local-env issues were mechanical, not reusable beyond this instance. |
+| Backlog Changes | BL-001 moved Review / Validation -> Done.  BL-002 remains Done (unchanged, resolved earlier in DS-01). |
+| Kanban Changes | Review / Validation column returns to empty (0/2).  Done column note updated to record BL-001's completion alongside BL-002's. |
+| Repository / Deployment State | `develop` synchronized with `origin/develop` at commit `afb07eb` (PR #130 merged).  Render redeployed the merged commit; hosted runtime `[openai-usage]` evidence confirmed `gpt-5.6-terra` is live, not `gpt-4o-mini`. |
+| Recommended Starting Point for Tomorrow | No sprint is currently committed.  The next Daily Start should review `BACKLOG.md`'s Backlog/Ready columns (BL-011 release decision; BL-005 time-bound Render database decision) for the next primary WIP=1 item.  Web Walking Skeleton 02 (BL-003) remains a candidate but is not pre-selected. |
 
 ## Priority Model
 
@@ -99,10 +111,10 @@ versus what goes to the backlog) are defined in
 | Outcome | Web Editorial Direction output is at least as strong, editorially, as the locked private GPT's (`GPT Recovery RC5`) output for comparable source material. |
 | Evidence / Source | Repository Author, real hosted browser acceptance (2026-08-11): the Web Editorial Direction was technically functional (real OpenAI call, schema-valid, persisted, Approve/Reject working) but materially weaker editorially than the locked GPT baseline.  Formalized as `product/validation/Product_Validation_Log.md` PV-029 (observational evidence only, no cause prejudged). |
 | Priority | P1 |
-| Kanban State | Review / Validation (DS-01, decision approved as DEC-030) |
-| Dependencies | Closely coupled to BL-002 (model selection, now resolved by DEC-030); implementation (approved model/prompt only) may now precede BL-003, per the Repository Author's approval. |
-| Acceptance Summary | DS-01 (2026-08-11) executed two bounded 4-call evaluation matrices on materially different sources (cybersecurity, then NASA/AI-policy; combined measured cost $0.042630; see `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Sections 13-14).  Both passes showed the same D > C > B > A quality pattern; the model effect (A -> C) repeated strongly, the prompt effect (A -> B) repeated but with variable magnitude, D remained strongest in both, and extraction noise did not visibly degrade either result.  The Repository Author reviewed both passes and approved adopting `gpt-5.6-terra` and the Variant D instructions as the target configuration, recorded as `product/validation/Product_Decisions.md` DEC-030.  BL-001's Outcome (proven editorial parity) is not yet achieved - that requires the separate, bounded implementation delivery DEC-030 authorizes, plus its required regression tests and real hosted/local verification. |
-| Notes | Primary WIP=1 item for DS-01, now reviewed and approved.  BL-002 is resolved (Done) alongside it, never having independently entered In Progress, per the Delivery Operating Model's WIP=1 rule.  Moved to Review / Validation, not Done - BL-001's actual outcome requires the implementation delivery DEC-030 authorizes, not yet started. |
+| Kanban State | Done (DEC-030 implementation delivered via PR #130, commit `afb07eb`; post-merge hosted acceptance passed 2026-08-11) |
+| Dependencies | Closely coupled to BL-002 (model selection, resolved by DEC-030); resolved together. |
+| Acceptance Summary | DS-01 (2026-08-11) executed two bounded 4-call evaluation matrices on materially different sources (cybersecurity, then NASA/AI-policy; combined measured cost $0.042630; see `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Sections 13-14).  Both passes showed the same D > C > B > A quality pattern; the model effect (A -> C) repeated strongly, the prompt effect (A -> B) repeated but with variable magnitude, D remained strongest in both, and extraction noise did not visibly degrade either result.  The Repository Author reviewed both passes and approved adopting `gpt-5.6-terra` and the Variant D instructions as the target configuration, recorded as `product/validation/Product_Decisions.md` DEC-030.  The bounded implementation delivery DEC-030 authorized was completed on `feature/editorial-direction-gpt-5-6-terra` (typecheck, lint, 41/41 tests including new DEC-030 regression coverage, build, and full repository validation all passing) and merged to `develop` as PR #130 (commit `afb07eb`), including the matching `render.yaml` `OPENAI_MODEL` update.  Post-merge, the Repository Author completed literal hosted acceptance through `https://studio.ramrattan.com`: hosted health, magic-link authentication, project creation, real public-URL submission, Editorial Direction generation, fresh Render `[openai-usage]` runtime evidence confirming `gpt-5.6-terra` (not `gpt-4o-mini`), unchanged schema rendering, browser-refresh persistence/rehydration, durable Reject with feedback surviving refresh, Approve advancing the workflow, and confirmed authentication protection after sign-out.  BL-001's Outcome (editorial parity with the locked GPT baseline) is achieved to the standard this delivery was scoped to prove: the approved configuration is live in the hosted Web Product and verified end-to-end through the real application path. |
+| Notes | Primary WIP=1 item for DS-01.  BL-002 completed (Done) alongside it, never having independently entered In Progress, per the Delivery Operating Model's WIP=1 rule.  DS-01 is closed; see BACKLOG.md's "Latest Closeout" section for the full record. |
 
 ### BL-002 - Model-selection quality/cost evaluation for Editorial Direction
 

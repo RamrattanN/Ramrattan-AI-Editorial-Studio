@@ -128,12 +128,12 @@ export function createProjectsRouter(repository: ProjectRepository): Router {
       return;
     }
     try {
-      const direction = await repository.approveDirection(id, authorId);
-      if (!direction) {
+      const approved = await repository.approveDirection(id, authorId);
+      if (!approved) {
         res.status(404).json({ error: "No Editorial Direction to approve yet." });
         return;
       }
-      res.json({ editorialDirection: direction });
+      res.json({ editorialDirection: approved.direction, project: approved.project });
     } catch (error) {
       if (error instanceof ProjectNotFoundError) {
         res.status(404).json({ error: "Project not found." });

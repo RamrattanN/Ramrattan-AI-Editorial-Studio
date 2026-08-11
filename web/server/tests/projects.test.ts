@@ -177,6 +177,13 @@ describe("editorial projects", () => {
     expect(approved.status).toBe(200);
     expect(approved.body.editorialDirection.status).toBe("approved");
     expect(approved.body.editorialDirection.decidedAt).not.toBeNull();
+    // DEC-029: Approve persists the decision and advances the workflow -
+    // both in the same response and once rehydrated from a fresh fetch.
+    expect(approved.body.project.stage).toBe("editorial_plan");
+
+    const view = await agent.get(`/api/projects/${projectId}`);
+    expect(view.body.project.stage).toBe("editorial_plan");
+    expect(view.body.editorialDirection.status).toBe("approved");
   });
 
   it("persists rejection feedback without discarding the project or source", async () => {
@@ -229,7 +236,9 @@ describe("editorial projects", () => {
     // conversational state.
     const rehydrated = await agent.get(`/api/projects/${projectId}`);
     expect(rehydrated.status).toBe(200);
-    expect(rehydrated.body.project.stage).toBe("editorial_direction");
+    // DEC-029: Approve advances the workflow, and the advanced stage
+    // survives rehydration - it is not lost on refresh.
+    expect(rehydrated.body.project.stage).toBe("editorial_plan");
     expect(rehydrated.body.source.rawReference).toBe("https://example.com/article");
     expect(rehydrated.body.editorialDirection.status).toBe("approved");
     expect(rehydrated.body.editorialDirection.primaryAngle).toBe(

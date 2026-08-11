@@ -4,7 +4,10 @@ export interface Author {
   createdAt: string;
 }
 
-export type ProjectStage = "source_intake" | "editorial_direction";
+export type ProjectStage =
+  | "source_intake"
+  | "editorial_direction"
+  | "editorial_plan";
 
 export interface EditorialProject {
   id: string;

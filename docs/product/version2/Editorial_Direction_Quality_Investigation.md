@@ -155,9 +155,9 @@ This recommendation requires a model swap, which is a production change - per th
 
 Not started automatically.  If the Repository Author authorizes the model/prompt change for implementation, recommend a narrow Codex review scoped specifically to: (a) confirming the change is genuinely prompt/configuration-only with no schema, persistence, or Approve/Reject workflow drift, and (b) independently reproducing at least one of the four evaluation variants to confirm the reported comparison is genuine and reproducible - matching the risk categories (persistence, workflow state, evidence verification) the Delivery Operating Model reserves Codex review for, not a blanket second pass.
 
-## 12. Execution Boundary - Safe Path to Run the Evaluation (Proposed, Not Yet Approved)
+## 12. Execution Boundary - Safe Path to Run the Evaluation (Approved and Executed)
 
-Recorded 2026-08-11, before any evaluation call was made, in response to the Repository Author's request to determine the safest way to execute Section 4.B's matrix without exposing or copying the Render-hosted `OPENAI_API_KEY`.
+Recorded 2026-08-11, before any evaluation call was made, in response to the Repository Author's request to determine the safest way to execute Section 4.B's matrix without exposing or copying the Render-hosted `OPENAI_API_KEY`.  The Repository Author approved this path (with a hard bound of 4 calls, variants A/B/C/D only) and confirmed `OPENAI_API_KEY` was already present in `web/server/.env`.  It was never inspected, printed, echoed, or copied - the harness's `loadLocalEnvIfPresent()` loads it via Node's built-in `process.loadEnvFile()`, the same mechanism production's own `dotenv.config()` call would use, and never logs the value.  Execution is recorded in Section 13.
 
 **Why Render's key cannot be used directly here.**  `render.yaml` sets `OPENAI_API_KEY` with `sync: false` - by design, its value exists only inside the Render dashboard and the running Render service's environment, never in any tracked file, and is not retrievable by an agent working in this local repository checkout.  This is correct, established behavior (see `docs/learning/AI_Developer_Bootstrap_Lessons.md` Section 6) and was not worked around.
 
@@ -170,3 +170,40 @@ Recorded 2026-08-11, before any evaluation call was made, in response to the Rep
 **Expected OpenAI calls and approximate cost.**  Section 4.B's matrix is four variants (A, B, C, D), one call each for an initial pass: 4 calls total.  Using Section 6's estimated per-request costs, the most expensive pairing (`gpt-5.6-terra`, variants C and D) is approximately $0.0108 each, and the cheapest (`gpt-4o-mini`, variants A and B) approximately $0.0007 each - **approximately $0.023 total for one pass**, well under five cents.  If results are ambiguous and the Repository Author wants multiple repetitions per variant for reliability (e.g., three reps, twelve calls), the total remains under $0.10.  No broad benchmarking or multi-model sweep is proposed.
 
 **Recommendation summary:** the Repository Author provisions a fresh local `OPENAI_API_KEY` (Section 12, "Recommended path"); no dependency installation is required for the harness; four OpenAI calls (~$0.02) are expected for one pass of the evaluation matrix; Render's key remains untouched and unexposed throughout.  No call has been made; this is a proposal awaiting explicit approval.
+
+## 13. Executed Comparison Results (2026-08-11) - Awaiting Repository Author Review
+
+**Not a conclusion.**  This section reports what the four approved calls produced.  The Repository Author has not yet reviewed it; no winner is declared here, and Category E (Section 9) remains provisional until that review happens.
+
+**Source:** the same URL used for the Section 5 fidelity test (Section 4.C), 9,768 extracted characters, reused unchanged across all four variants so the disclosed boilerplate (Section 5 fidelity notes) affects every variant equally rather than biasing the prompt-effect or model-effect comparison.
+
+**Usage, latency, and cost (all measured, not estimated):**
+
+| Variant | Model | Prompt | Tokens (prompt/completion/total) | Latency | Actual cost |
+|---|---|---|---|---|---|
+| A | `gpt-4o-mini` | current | 2428 / 223 / 2651 | 4804ms | $0.000498 |
+| B | `gpt-4o-mini` | improved | 2629 / 287 / 2916 | 3519ms | $0.000567 |
+| C | `gpt-5.6-terra` | current | 2426 / 325 / 2751 | 5765ms | $0.008752 |
+| D | `gpt-5.6-terra` | improved | 2627 / 466 / 3093 | 7354ms | $0.010846 |
+
+**Total measured cost for the 4-call pass: $0.020663** - within the approved bound and closely matching Section 12's $0.023 estimate.  All four calls returned schema-valid, parseable output on the first attempt; no retries were needed.
+
+**Generated output** (each variant's full `editorial_thesis` and `primary_angle`, the two fields most directly reflecting editorial judgment; full JSON for all seven fields per variant is in the local, uncommitted results file the harness wrote, per its header note not to commit raw evaluation output):
+
+- **A** (`gpt-4o-mini` / current): *Primary angle:* "Emerging CSS vulnerabilities pose serious threats to webmail security, highlighting the need for robust defensive practices." *Thesis:* "As webmail continues to be a key conduit for sensitive information, understanding and mitigating emerging CSS attack vectors is crucial for maintaining user security and trust."
+- **B** (`gpt-4o-mini` / improved): *Primary angle:* "Webmail security is critically compromised by new CSS vulnerabilities, requiring urgent action from service providers to implement more robust isolation and security controls to thwart sophisticated credential theft and data exfiltration efforts." *Thesis:* "Cybersecurity managers should prioritize understanding and addressing the latest CSS vulnerabilities in webmail platforms, as these represent an evolving threat landscape that endangers user data and corporate security."
+- **C** (`gpt-5.6-terra` / current): *Primary angle:* "The webmail trust-boundary failure: why allowing email content to interact with the surrounding application UI creates identity-security risk." *Thesis:* "Webmail security cannot be reduced to phishing filters: when untrusted email HTML and CSS can influence trusted interface behavior, browsers and AI integrations can turn message rendering into a route to credential, token, and privacy compromise."
+- **D** (`gpt-5.6-terra` / improved): *Primary angle:* "Email rendering is no longer a self-contained phishing surface... permitted markup and browser/application parsing differences can let untrusted message content cross into trusted webmail UI and AI-connected workflows, turning defensive conveniences... into credential and token-exfiltration paths." *Thesis:* "The webmail threat model must shift from treating malicious email as a content-filtering problem to treating it as untrusted code containment: if message HTML/CSS can influence trusted interface elements, browser behavior, or connected AI workflows, sanitization alone is not a dependable security boundary."
+
+**Agent rubric assessment (supporting evidence only, per Section 4.A - the Repository Author's judgment is authoritative, not this scoring).**  Approximate 1-5 averages across the 11 rubric dimensions: A ~2.5, B ~3.3, C ~3.9, D ~4.5.  The pattern was monotonic (D > C > B > A) on nearly every individual dimension, not just the average, which is itself notable.
+
+**Qualitative observations, offered as evidence, not as a declared winner:**
+
+- A (current prompt/current model) produced the most generic framing of the four - a plausible but unremarkable summary, closest to what PV-029 originally described as "materially weaker."
+- B (improved prompt/current model) added concrete specifics (named platforms, message-boundary escaping, disguised UI elements) absent from A, without any model change - direct evidence of a real, non-zero prompt effect.
+- C (current prompt/stronger model) reframed the story around a "trust-boundary failure" and named the source research (PortSwigger, Black Hat USA 2026) despite using the *same weaker prompt as A* - direct evidence of a real, non-zero model effect independent of the prompt.
+- D (improved prompt/stronger model) was the only variant to explicitly hedge on unverified claims ("Claims and vendor-fix status are reported by the article and underlying researchers, not independently verified here") - directly traceable to the improved prompt's verification/uncertainty instruction, and only appearing when paired with the stronger model.
+
+This pattern is consistent with, and provides the first empirical support for, Section 9's provisional Category E finding (prompt and model both contribute, in different and complementary ways) - but it is one source, one pass, no repetitions, and Repository Author review has not happened.  It should not yet be treated as proof.
+
+**Not done:** no winner declared, no production change made, BL-001 remains In Progress (not Review / Validation) pending this review, per the Repository Author's explicit condition.

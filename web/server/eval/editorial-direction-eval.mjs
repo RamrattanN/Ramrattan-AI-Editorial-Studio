@@ -64,7 +64,26 @@
 
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+// Loads web/server/.env into this process's own environment using Node's
+// built-in loader (no `dotenv` package needed, since it is not installed
+// here) - the same file production's own `dotenv.config()` call would
+// load. This never prints, logs, or returns the file's contents; it only
+// makes OPENAI_API_KEY available to this process via `process.env`,
+// exactly as the running application does. Silently does nothing if the
+// file is absent (e.g. `OPENAI_API_KEY` was exported some other way).
+function loadLocalEnvIfPresent() {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const envPath = join(here, "..", ".env");
+  try {
+    process.loadEnvFile(envPath);
+  } catch {
+    // No .env file at that path - fall through and rely on whatever is
+    // already in process.env, matching production's own behavior.
+  }
+}
 
 // Mirrors web/server/src/source/retrieve.ts's bounds exactly.
 const FETCH_TIMEOUT_MS = 10_000;
@@ -442,6 +461,7 @@ function writeResult(outDir, label, result) {
 }
 
 async function main() {
+  loadLocalEnvIfPresent();
   const args = parseArgs(process.argv.slice(2));
 
   if (args.mode === "fetch-source") {

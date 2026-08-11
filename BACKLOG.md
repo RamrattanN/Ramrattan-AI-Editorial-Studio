@@ -101,8 +101,8 @@ versus what goes to the backlog) are defined in
 | Priority | P1 |
 | Kanban State | In Progress (DS-01) |
 | Dependencies | Closely coupled to BL-002 (model selection); recommend resolving before deepening the generation pipeline (BL-003). |
-| Acceptance Summary | DS-01 (2026-08-11) produced an interim, evidence-based hypothesis, not yet a proven answer: the quality gap is provisionally assessed as a combination of prompt/instruction completeness and model capability, with missing verification/browsing tooling as a secondary, architecturally larger contributing factor, and `gpt-5.6-terra` as a candidate model.  **Not yet proven** - no controlled comparison has been executed (see `docs/product/version2/Editorial_Direction_Quality_Investigation.md`).  Executed comparisons and Repository Author review remain required before this Acceptance Summary can be treated as answered. |
-| Notes | Primary WIP=1 item for DS-01; BL-002 is resolved alongside it as supporting investigation and does not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule.  Remains In Progress, not Review / Validation or Done, until the evaluation matrix is actually executed. |
+| Acceptance Summary | DS-01 (2026-08-11) executed the approved 4-call evaluation matrix (variants A/B/C/D; measured cost $0.020663; see `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Section 13).  Results show a monotonic quality pattern (D > C > B > A) consistent with the provisional combination hypothesis, but this is one source, one pass, no repetitions, and **not yet reviewed by the Repository Author**.  Not treated as proof; no winner has been declared. |
+| Notes | Primary WIP=1 item for DS-01; BL-002 is resolved alongside it as supporting investigation and does not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule.  Remains In Progress, not Review / Validation, until the Repository Author has reviewed the executed comparison (Section 13 of the evidence artifact), per explicit instruction. |
 
 ### BL-002 - Model-selection quality/cost evaluation for Editorial Direction
 

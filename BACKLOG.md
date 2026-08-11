@@ -43,7 +43,7 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-002 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | BL-001 | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
+| BL-002 through BL-010, BL-012 through BL-015 | BL-011 | BL-001 | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
 
 ## Current Sprint
 
@@ -59,7 +59,7 @@ more work.
 | Explicit Non-Goals | Web Walking Skeleton 02, Editorial Plan, Draft, Hero Visual, LinkedIn publishing, Reader Engagement, locked GPT or GPT Knowledge changes, SMTP, Render/DNS changes, `main` promotion, tagging, BL-011, BL-016, Codex audible-notification troubleshooting, Wiki expansion. |
 | Owner / Execution Agent | Claude |
 | Review Agent | Codex, scope determined by findings (see final report) |
-| Status | Review / Validation - investigation and recommendation complete; live evaluation execution (Section 5 of the evidence artifact) not run in this environment, no `OPENAI_API_KEY` was available - see `docs/product/version2/Editorial_Direction_Quality_Investigation.md` |
+| Status | In Progress - baseline reconstruction, difference analysis, evaluation design, and model research are complete; the sprint's Must Complete bar requires *executed* controlled comparisons, which have not run (Section 5 of the evidence artifact - no `OPENAI_API_KEY` in this environment).  Not Review / Validation: an unexecuted evidence package is not yet the completed evidence the Delivery Operating Model's Review / Validation column presumes.  See `docs/product/version2/Editorial_Direction_Quality_Investigation.md` and the pending execution-boundary decision recorded there. |
 
 ## Latest Closeout
 
@@ -99,10 +99,10 @@ versus what goes to the backlog) are defined in
 | Outcome | Web Editorial Direction output is at least as strong, editorially, as the locked private GPT's (`GPT Recovery RC5`) output for comparable source material. |
 | Evidence / Source | Repository Author, real hosted browser acceptance (2026-08-11): the Web Editorial Direction was technically functional (real OpenAI call, schema-valid, persisted, Approve/Reject working) but materially weaker editorially than the locked GPT baseline.  Formalized as `product/validation/Product_Validation_Log.md` PV-029 (observational evidence only, no cause prejudged). |
 | Priority | P1 |
-| Kanban State | Review / Validation (DS-01) |
+| Kanban State | In Progress (DS-01) |
 | Dependencies | Closely coupled to BL-002 (model selection); recommend resolving before deepening the generation pipeline (BL-003). |
-| Acceptance Summary | DS-01 (2026-08-11) answered the deferred product decision: the quality gap is a combination of prompt/instruction completeness and model capability, with missing verification/browsing tooling as a secondary, architecturally larger contributing factor.  Recommendation: `gpt-5.6-terra` plus a baseline-aligned prompt revision, pending empirical confirmation - see `docs/product/version2/Editorial_Direction_Quality_Investigation.md`.  Live evaluation execution was designed and tooled (`web/server/eval/editorial-direction-eval.mjs`) but not run in this environment - no `OPENAI_API_KEY` was available. |
-| Notes | Primary WIP=1 item for DS-01; BL-002 was resolved alongside it as supporting investigation and did not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule.  Remains in Review / Validation, not Done, pending Repository Author review and the still-outstanding live evaluation run. |
+| Acceptance Summary | DS-01 (2026-08-11) produced an interim, evidence-based hypothesis, not yet a proven answer: the quality gap is provisionally assessed as a combination of prompt/instruction completeness and model capability, with missing verification/browsing tooling as a secondary, architecturally larger contributing factor, and `gpt-5.6-terra` as a candidate model.  **Not yet proven** - no controlled comparison has been executed (see `docs/product/version2/Editorial_Direction_Quality_Investigation.md`).  Executed comparisons and Repository Author review remain required before this Acceptance Summary can be treated as answered. |
+| Notes | Primary WIP=1 item for DS-01; BL-002 is resolved alongside it as supporting investigation and does not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule.  Remains In Progress, not Review / Validation or Done, until the evaluation matrix is actually executed. |
 
 ### BL-002 - Model-selection quality/cost evaluation for Editorial Direction
 
@@ -113,7 +113,7 @@ versus what goes to the backlog) are defined in
 | Priority | P1 |
 | Kanban State | Backlog (resolved as DS-01 supporting investigation; not moved independently) |
 | Dependencies | Informs BL-001; resolved together in DS-01. |
-| Acceptance Summary | DS-01 (2026-08-11) produced a candidate recommendation - `gpt-5.6-terra`, OpenAI's current "balance of intelligence and cost" tier - grounded in authoritative OpenAI pricing/model documentation, with an estimated per-request cost comparison against `gpt-4o-mini`, `gpt-5.6-luna`, `gpt-5.6-sol`, and `gpt-4o`.  Not yet empirically confirmed by live comparison (no `OPENAI_API_KEY` in this environment) and not yet reviewed or accepted by the Repository Author.  See `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Section 6 and Section 9. |
+| Acceptance Summary | DS-01 (2026-08-11) produced an interim candidate, not yet a decision: `gpt-5.6-terra`, OpenAI's current "balance of intelligence and cost" tier, grounded in authoritative OpenAI pricing/model documentation, with an estimated per-request cost comparison against `gpt-4o-mini`, `gpt-5.6-luna`, `gpt-5.6-sol`, and `gpt-4o`.  **Not empirically confirmed** - no live comparison has been executed (no `OPENAI_API_KEY` in this environment) and the Repository Author has not reviewed or accepted it.  See `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Section 6 and Section 9. |
 | Notes | Supporting investigation for BL-001, not a second primary In Progress item.  Resolved within the same sprint as BL-001 without independently entering the In Progress column, per the Delivery Operating Model's WIP=1 rule. |
 
 ### BL-003 - Web Walking Skeleton 02 - Editorial Plan + Draft

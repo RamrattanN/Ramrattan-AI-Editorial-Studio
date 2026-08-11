@@ -1,6 +1,6 @@
 # Editorial Direction Quality Investigation
 
-**Status:** DS-01 Investigation Complete - Recommendation Pending Repository Author Review
+**Status:** DS-01 Interim - Baseline, Difference Analysis, and Evaluation Design Complete; Controlled Comparisons Not Yet Executed; Recommendation Provisional Pending Execution and Repository Author Review
 **Classification:** Evidence and recommendation artifact (Informative - not a Product Decision)
 **Backlog:** BL-001 (primary), BL-002 (supporting)
 **Evidence base:** PV-029
@@ -131,9 +131,11 @@ Ranked by strength of evidence, not assumption:
 - Harness safety was verified (fails closed, no network call, no secret exposure without a key - Section 5), but its actual generation behavior across the four variants has not been observed.
 - Cost estimates use a representative token-count assumption, not measured usage; actual costs will vary by source length and output verbosity.
 
-## 9. Recommendation
+## 9. Recommendation (Provisional - Not Yet Proven)
 
-**Category: E - combination (prompt + model, with an architecturally larger factor noted but not recommended for immediate action).**
+**Everything below is a hypothesis grounded in code- and documentation-level evidence, not a proven conclusion.**  Section 8's limitations apply directly: no controlled comparison has been executed.  This section states what the evidence currently points to and what would need to happen to treat it as confirmed - it does not itself establish Category E as the root cause or authorize adopting `gpt-5.6-terra`.
+
+**Provisional category: E - combination (prompt + model, with an architecturally larger factor noted but not recommended for immediate action).**  This classification should be treated as the leading hypothesis to test, not a settled finding.
 
 - **Model/configuration:** adopt `gpt-5.6-terra` as the Editorial Direction model, pending empirical confirmation via the evaluation matrix (Section 4.B) run through the harness (Section 5).  It is OpenAI's own current "balance of intelligence and cost" tier, directly answering BL-002, and aligns with the locked GPT's flagship-not-reasoning-optimized principle applied to the current model lineup.
 - **Prompt:** adopt the `IMPROVED_SYSTEM_PROMPT` candidate in the harness (or a Repository-Author-refined version of it) after review - it closes the concretely identified gaps (verification framing, editor persona, distinctiveness bar) without requiring browsing-tool access the Web path does not have.
@@ -152,3 +154,19 @@ This recommendation requires a model swap, which is a production change - per th
 ## 11. Recommended Codex Review Scope
 
 Not started automatically.  If the Repository Author authorizes the model/prompt change for implementation, recommend a narrow Codex review scoped specifically to: (a) confirming the change is genuinely prompt/configuration-only with no schema, persistence, or Approve/Reject workflow drift, and (b) independently reproducing at least one of the four evaluation variants to confirm the reported comparison is genuine and reproducible - matching the risk categories (persistence, workflow state, evidence verification) the Delivery Operating Model reserves Codex review for, not a blanket second pass.
+
+## 12. Execution Boundary - Safe Path to Run the Evaluation (Proposed, Not Yet Approved)
+
+Recorded 2026-08-11, before any evaluation call was made, in response to the Repository Author's request to determine the safest way to execute Section 4.B's matrix without exposing or copying the Render-hosted `OPENAI_API_KEY`.
+
+**Why Render's key cannot be used directly here.**  `render.yaml` sets `OPENAI_API_KEY` with `sync: false` - by design, its value exists only inside the Render dashboard and the running Render service's environment, never in any tracked file, and is not retrievable by an agent working in this local repository checkout.  This is correct, established behavior (see `docs/learning/AI_Developer_Bootstrap_Lessons.md` Section 6) and was not worked around.
+
+**Recommended path: a fresh local key, entered directly by the Repository Author.**  This repeats the exact pattern already used successfully for the original OpenAI foundation verification (`Web_Product_Foundation_v1.md` Section 13): the Repository Author enters an `OPENAI_API_KEY` (the same key or a distinct one, their choice) directly into a local, gitignored location - `web/server/.env`, verified ignored first via `git check-ignore -v web/server/.env`, or simply exported in the shell for a single command - never pasted into chat, never handled by an AI participant.  The harness (`web/server/eval/editorial-direction-eval.mjs`) then reads it from `process.env`, exactly as production code does, and never logs it.
+
+**Dependency installation - not required for the harness.**  The harness was deliberately built dependency-free (Node's built-in `fetch` only); it imports nothing from `web/server/node_modules`.  Running it requires no `npm install` or `npm ci` at all.  Dependency installation would only become relevant if the Repository Author instead wanted to exercise the real production TypeScript path (e.g., via `npm run dev` or an integration test) for an even more faithful reproduction - that would require `npm ci` (or `npm ci --include=dev` if typecheck/build is also needed) run from `web/` (the npm-workspaces root; `web/package-lock.json` is committed, so this installs already-locked versions, not new ones - the same command `render.yaml`'s own build already runs).  `AGENTS.md`'s Approval Boundaries list "installing dependencies" unconditionally, with no exception for locked/existing versions, so this would still require explicit Repository Author approval before being run, even though it is low-risk and already precedented.  It is not needed for the recommended harness path.
+
+**Render as an alternative - possible but not recommended.**  Render's Shell feature (dashboard-only, browser-based) would let a script run inside the live service's environment, using `OPENAI_API_KEY` in place without ever displaying it - technically avoiding exposure.  Not recommended as the primary path: it requires the Repository Author to manually operate the Render dashboard and paste the harness script in (no reduction in their effort), mixes investigation traffic with the production service's runtime context, and is harder to iterate on than a local run.  The local-key path above achieves the same secrecy guarantee with less friction.
+
+**Expected OpenAI calls and approximate cost.**  Section 4.B's matrix is four variants (A, B, C, D), one call each for an initial pass: 4 calls total.  Using Section 6's estimated per-request costs, the most expensive pairing (`gpt-5.6-terra`, variants C and D) is approximately $0.0108 each, and the cheapest (`gpt-4o-mini`, variants A and B) approximately $0.0007 each - **approximately $0.023 total for one pass**, well under five cents.  If results are ambiguous and the Repository Author wants multiple repetitions per variant for reliability (e.g., three reps, twelve calls), the total remains under $0.10.  No broad benchmarking or multi-model sweep is proposed.
+
+**Recommendation summary:** the Repository Author provisions a fresh local `OPENAI_API_KEY` (Section 12, "Recommended path"); no dependency installation is required for the harness; four OpenAI calls (~$0.02) are expected for one pass of the evaluation matrix; Render's key remains untouched and unexposed throughout.  No call has been made; this is a proposal awaiting explicit approval.

@@ -242,7 +242,7 @@ versus what goes to the backlog) are defined in
 | Kanban State | Backlog |
 | Dependencies | None. |
 | Acceptance Summary | Not yet written. |
-| Notes | Reconsideration triggers may include: a major release; multiple implemented Version 2 capabilities; material architecture expansion; a meaningful stakeholder/onboarding need; the Home page becoming difficult to navigate; or a subject gaining enough stable orientation value to justify a maintained Wiki page. Acceptance principle for any additional page: it must have a clear human-navigation/orientation purpose, identify or link to authoritative repository sources, avoid becoming an operational source of truth, and avoid duplicating fast-changing backlog/Kanban state. Not moved to Ready or In Progress by this delivery. |
+| Notes | Reconsideration triggers may include: a major release; multiple implemented Version 2 capabilities; material architecture expansion; a meaningful stakeholder/onboarding need; the Home page becoming difficult to navigate; or a subject gaining enough stable orientation value to justify a maintained Wiki page.  Acceptance principle for any additional page: it must have a clear human-navigation/orientation purpose, identify or link to authoritative repository sources, avoid becoming an operational source of truth, and avoid duplicating fast-changing backlog/Kanban state.  Not moved to Ready or In Progress by this delivery. |
 
 ## GitHub Project and Issues - Known State, Not Canonical
 

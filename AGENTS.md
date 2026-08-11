@@ -526,6 +526,19 @@ explicitly authorized Repository Maintainer requests a broader plan.
 Keep reporting proportional to the task. Do not repeat large repository
 summaries when only a narrow state transition occurred.
 
+## Prose Convention
+
+This is a repository prose convention, not a machine-specific local setting.  Apply it to human-readable prose that Claude, Codex, or any other AI collaborator (present or future) creates or materially edits in this repository.
+
+- Never use em dashes (`—`) or en dashes (`–`).  Use space-hyphen-space
+  (` - `) instead: one space, one hyphen, one space.
+- Use exactly one space after a comma.
+- Use exactly two spaces after a sentence-ending period in prose.
+
+Do not apply these rules where doing so could alter technical meaning or functionality.  Exempt: source code, code blocks, shell commands, URLs, Markdown link destinations, filesystem paths, filenames, configuration, identifiers, version numbers, decimal numbers, structured data (YAML, JSON, TOML, SQL), regular expressions, machine-generated output, and quoted external text where fidelity matters.  Use judgment for abbreviations and other punctuation where a period is not functioning as the end of a prose sentence.
+
+Apply this convention prospectively - to new prose and to prose materially edited during a delivery.  Do not perform a repository-wide rewrite of historical documents merely to normalize spacing or punctuation; historical prose may be normalized when it is naturally edited in future work.  Never alter factual meaning merely to satisfy typography.
+
 ## Engineering Principles
 
 Prefer:

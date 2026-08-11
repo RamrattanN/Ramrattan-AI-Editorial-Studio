@@ -14,29 +14,46 @@
  * imported by `src/`, not covered by `npm run lint`/`typecheck` (both
  * scoped to `src`/`tests`), and must never be wired into the application.
  *
- * Usage:
+ * Fidelity notes (see docs/product/version2/Editorial_Direction_Quality_Investigation.md
+ * Section 5 for the full fidelity proof):
+ * - SYSTEM_PROMPT and JSON_SCHEMA below are verified byte-for-byte/deep-equal
+ *   identical to web/server/src/openai/editorialDirection.ts.
+ * - The request body (model, messages, response_format) and endpoint
+ *   (POST https://api.openai.com/v1/chat/completions) match exactly what
+ *   the `openai` SDK's `chat.completions.create` sends over the wire.
+ * - Neither production nor this harness sets temperature/top_p/max_tokens,
+ *   so both rely on identical API defaults.
+ * - Source extraction (fetchAndExtractSource below) is a dependency-free,
+ *   good-faith reproduction of web/server/src/source/retrieve.ts's rules
+ *   (same selectors stripped, same 12,000-char cap) using regex-based tag
+ *   stripping instead of the `html-to-text` package (unavailable - no
+ *   `npm install` was authorized).  It is NOT byte-identical to
+ *   `html-to-text`'s output.  This is disclosed, and does not bias the
+ *   prompt-effect/model-effect comparison because the SAME extracted text
+ *   is reused across all four matrix variants.
+ *
+ * Usage - fetch and inspect a source before spending any OpenAI budget:
+ *   node web/server/eval/editorial-direction-eval.mjs \
+ *     --mode fetch-source \
+ *     --source-url "https://example.com/article" \
+ *     --out-file /path/outside/the/repo/source.txt
+ *
+ * Usage - run the approved 4-call matrix (A/B/C/D) in one bounded pass:
  *   OPENAI_API_KEY=sk-... node web/server/eval/editorial-direction-eval.mjs \
- *     --model gpt-4o-mini \
- *     --prompt current \
- *     --source /path/to/extracted-source-text.txt \
- *     --source-url "https://example.com/original-article" \
+ *     --mode run-matrix \
+ *     --source-url "https://example.com/article" \
+ *     --stronger-model gpt-5.6-terra \
  *     [--out /path/outside/the/repo]
  *
- * --model   Any current Chat Completions model name (see MODEL_PRICING
- *           below for the reference set this investigation considered).
- * --prompt  "current" (verbatim production SYSTEM_PROMPT) or "improved"
- *           (DS-01's candidate baseline-aligned instructions - see
- *           IMPROVED_SYSTEM_PROMPT below).
- * --source  Path to a local text file containing already-extracted source
- *           text (the same shape `retrieveSource()` produces - plain text,
- *           boilerplate stripped).  This script does not fetch or parse
- *           HTML itself, to stay dependency-free; extract the source text
- *           the same way production does, or reuse a fixture already
- *           captured that way.
- * --source-url  Recorded in the result file for provenance only.
- * --out     Output directory for the JSON result file.  Defaults to the
- *           system temp directory, deliberately outside the repository -
- *           see the note on copyrighted source text below.
+ * Usage - a single ad hoc call (not part of the approved 4-call bound):
+ *   OPENAI_API_KEY=sk-... node web/server/eval/editorial-direction-eval.mjs \
+ *     --mode single --model gpt-4o-mini --prompt current \
+ *     --source /path/to/extracted-source-text.txt \
+ *     --source-url "https://example.com/article" [--out /path]
+ *
+ * --out / --out-file  Defaults to the system temp directory, deliberately
+ *           outside the repository - see the note on copyrighted source
+ *           text below.
  *
  * Do NOT commit result files to the repository: they can contain the
  * model's echo of copyrighted source text via `source_understanding`.
@@ -48,6 +65,96 @@
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+
+// Mirrors web/server/src/source/retrieve.ts's bounds exactly.
+const FETCH_TIMEOUT_MS = 10_000;
+const MAX_BYTES = 2_000_000;
+const MAX_SUMMARY_CHARS = 12_000;
+
+/**
+ * Dependency-free, good-faith reproduction of retrieveSource()'s
+ * `html-to-text` conversion: strips script/style/nav/footer blocks
+ * (including their content), strips img tags, drops all remaining tags
+ * (so link text survives but hrefs do not - matching `ignoreHref`),
+ * decodes common entities, and collapses blank-line runs the same way
+ * (`\n{3,}` -> `\n\n`, then trim). Not byte-identical to `html-to-text`.
+ */
+function stripHtmlToText(html) {
+  let text = html;
+  text = text.replace(/<script[\s\S]*?<\/script>/gi, "");
+  text = text.replace(/<style[\s\S]*?<\/style>/gi, "");
+  text = text.replace(/<nav[\s\S]*?<\/nav>/gi, "");
+  text = text.replace(/<footer[\s\S]*?<\/footer>/gi, "");
+  text = text.replace(/<img\b[^>]*>/gi, "");
+  // Insert newlines at common block boundaries so paragraph structure
+  // survives tag stripping, approximating html-to-text's block handling.
+  text = text.replace(/<\/(p|div|li|h[1-6]|tr|blockquote)>/gi, "\n");
+  text = text.replace(/<br\s*\/?>/gi, "\n");
+  text = text.replace(/<[^>]+>/g, "");
+  text = text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, " ");
+  text = text.replace(/[ \t]{2,}/g, " ");
+  text = text.replace(/\n{3,}/g, "\n\n").trim();
+  return text;
+}
+
+/**
+ * Fetch and extract, mirroring retrieveSource()'s network behavior
+ * (timeout, headers, byte cap, content-type check, minimum-length guard,
+ * MAX_SUMMARY_CHARS truncation) without the SSRF guard - not needed for
+ * a deliberately chosen, known-public evaluation fixture, unlike
+ * production's arbitrary Author-submitted URLs.
+ */
+async function fetchAndExtractSource(rawUrl) {
+  const url = new URL(rawUrl);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      redirect: "follow",
+      headers: {
+        "User-Agent": "RamrattanEditorialStudio/0.1 (+walking-skeleton-01-eval)",
+        Accept: "text/html,application/xhtml+xml",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`The source could not be retrieved (HTTP ${response.status}).`);
+    }
+    const contentType = response.headers.get("content-type") ?? "";
+    if (!contentType.includes("html") && !contentType.includes("text")) {
+      throw new Error("This source's content type is not supported.");
+    }
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("The source returned no content.");
+    let received = 0;
+    const chunks = [];
+    while (received < MAX_BYTES) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (value) {
+        chunks.push(value);
+        received += value.byteLength;
+      }
+    }
+    await reader.cancel().catch(() => undefined);
+    const html = Buffer.concat(chunks.map((c) => Buffer.from(c))).toString("utf-8");
+    const text = stripHtmlToText(html);
+    if (text.length < 200) {
+      throw new Error(
+        "Not enough readable content was found at this URL. It may require a browser, a login, or be paywalled.",
+      );
+    }
+    return text.slice(0, MAX_SUMMARY_CHARS);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 // Verbatim copy of web/server/src/openai/editorialDirection.ts's SYSTEM_PROMPT
 // (2026-08-11).  Keep these two in sync manually; this file intentionally
@@ -146,14 +253,17 @@ const MODEL_PRICING = {
 };
 
 function parseArgs(argv) {
-  const args = { out: tmpdir() };
+  const args = { out: tmpdir(), mode: "single" };
   for (let i = 0; i < argv.length; i += 1) {
     const flag = argv[i];
-    if (flag === "--model") args.model = argv[++i];
+    if (flag === "--mode") args.mode = argv[++i];
+    else if (flag === "--model") args.model = argv[++i];
     else if (flag === "--prompt") args.prompt = argv[++i];
     else if (flag === "--source") args.source = argv[++i];
     else if (flag === "--source-url") args.sourceUrl = argv[++i];
+    else if (flag === "--stronger-model") args.strongerModel = argv[++i];
     else if (flag === "--out") args.out = argv[++i];
+    else if (flag === "--out-file") args.outFile = argv[++i];
   }
   return args;
 }
@@ -166,47 +276,21 @@ function estimateCost(model, usage) {
   return Number((inputCost + outputCost).toFixed(6));
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
+function resolvePrompt(condition) {
+  if (condition === "current") return CURRENT_SYSTEM_PROMPT;
+  if (condition === "improved") return IMPROVED_SYSTEM_PROMPT;
+  return null;
+}
 
-  if (!args.model || !args.prompt || !args.source) {
-    console.error(
-      "Usage: node editorial-direction-eval.mjs --model <name> --prompt <current|improved> --source <path> [--source-url <url>] [--out <dir>]",
-    );
-    process.exitCode = 1;
-    return;
-  }
-
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    // Mirrors web/server/src/openai/client.ts's guard: fail closed before
-    // any network call, no key ever logged.
-    console.error("OPENAI_API_KEY is required but was not set.");
-    process.exitCode = 1;
-    return;
-  }
-
-  const systemPrompt =
-    args.prompt === "current"
-      ? CURRENT_SYSTEM_PROMPT
-      : args.prompt === "improved"
-        ? IMPROVED_SYSTEM_PROMPT
-        : null;
-  if (!systemPrompt) {
-    console.error('--prompt must be "current" or "improved".');
-    process.exitCode = 1;
-    return;
-  }
-
-  const sourceText = readFileSync(args.source, "utf-8");
-
+async function callOnce({ model, promptCondition, sourceUrl, sourceText, apiKey }) {
+  const systemPrompt = resolvePrompt(promptCondition);
   const requestBody = {
-    model: args.model,
+    model,
     messages: [
       { role: "system", content: systemPrompt },
       {
         role: "user",
-        content: `Source URL: ${args.sourceUrl ?? "(not supplied)"}\n\nSource content:\n${sourceText}`,
+        content: `Source URL: ${sourceUrl ?? "(not supplied)"}\n\nSource content:\n${sourceText}`,
       },
     ],
     response_format: { type: "json_schema", json_schema: JSON_SCHEMA },
@@ -215,20 +299,17 @@ async function main() {
   const startedAt = Date.now();
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify(requestBody),
   });
   const latencyMs = Date.now() - startedAt;
-
   const completion = await response.json();
 
   if (!response.ok) {
-    console.error(`OpenAI API error (${response.status}):`, completion.error?.message ?? completion);
-    process.exitCode = 1;
-    return;
+    return {
+      variantMeta: { model, promptCondition, sourceUrl, timestamp: new Date().toISOString(), latencyMs },
+      error: `OpenAI API error (${response.status}): ${completion.error?.message ?? JSON.stringify(completion)}`,
+    };
   }
 
   const raw = completion.choices?.[0]?.message?.content;
@@ -241,41 +322,151 @@ async function main() {
   }
 
   const usage = completion.usage ?? null;
-  const result = {
-    variantMeta: {
-      model: args.model,
-      promptCondition: args.prompt,
-      sourceUrl: args.sourceUrl ?? null,
-      sourcePath: args.source,
-      timestamp: new Date().toISOString(),
-      latencyMs,
-    },
+  return {
+    variantMeta: { model, promptCondition, sourceUrl, timestamp: new Date().toISOString(), latencyMs },
     usage: usage
-      ? {
-          promptTokens: usage.prompt_tokens,
-          completionTokens: usage.completion_tokens,
-          totalTokens: usage.total_tokens,
-        }
+      ? { promptTokens: usage.prompt_tokens, completionTokens: usage.completion_tokens, totalTokens: usage.total_tokens }
       : null,
-    estimatedCostUsd: estimateCost(args.model, usage),
+    estimatedCostUsd: estimateCost(model, usage),
     parseError,
     editorialDirection: parsed,
   };
+}
+
+async function runFetchSource(args) {
+  if (!args.sourceUrl) {
+    console.error("Usage: --mode fetch-source --source-url <url> [--out-file <path>]");
+    process.exitCode = 1;
+    return;
+  }
+  const text = await fetchAndExtractSource(args.sourceUrl);
+  console.log(`Extracted ${text.length} characters from ${args.sourceUrl}`);
+  console.log("--- preview (first 500 chars) ---");
+  console.log(text.slice(0, 500));
+  console.log("--- end preview ---");
+  if (args.outFile) {
+    writeFileSync(args.outFile, text, "utf-8");
+    console.log(`Full extracted text written to: ${args.outFile}`);
+  } else {
+    console.log("(pass --out-file <path> to save the full text for reuse)");
+  }
+}
+
+async function runSingle(args, apiKey) {
+  if (!args.model || !args.prompt || !args.source) {
+    console.error(
+      "Usage: --mode single --model <name> --prompt <current|improved> --source <path> [--source-url <url>] [--out <dir>]",
+    );
+    process.exitCode = 1;
+    return;
+  }
+  if (!resolvePrompt(args.prompt)) {
+    console.error('--prompt must be "current" or "improved".');
+    process.exitCode = 1;
+    return;
+  }
+  const sourceText = readFileSync(args.source, "utf-8");
+  const result = await callOnce({
+    model: args.model,
+    promptCondition: args.prompt,
+    sourceUrl: args.sourceUrl,
+    sourceText,
+    apiKey,
+  });
+  writeResult(args.out, `${args.model}-${args.prompt}`, result);
+}
+
+/**
+ * The approved DS-01 bounded pass: exactly four calls (A/B/C/D), fetching
+ * the source once and reusing it across all four, per the Repository
+ * Author's approval of "one bounded evaluation pass of 4 OpenAI calls
+ * total - variants A/B/C/D only." This function makes no more and no
+ * fewer than four `callOnce` invocations.
+ */
+async function runMatrix(args, apiKey) {
+  if (!args.sourceUrl) {
+    console.error("Usage: --mode run-matrix --source-url <url> --stronger-model <name> [--out <dir>]");
+    process.exitCode = 1;
+    return;
+  }
+  if (!args.strongerModel) {
+    console.error("--stronger-model is required, e.g. --stronger-model gpt-5.6-terra");
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log(`Fetching and extracting source: ${args.sourceUrl}`);
+  const sourceText = await fetchAndExtractSource(args.sourceUrl);
+  console.log(`Extracted ${sourceText.length} characters.  Running the approved 4-call matrix (A/B/C/D)...`);
+
+  const variants = [
+    { id: "A", model: "gpt-4o-mini", promptCondition: "current" },
+    { id: "B", model: "gpt-4o-mini", promptCondition: "improved" },
+    { id: "C", model: args.strongerModel, promptCondition: "current" },
+    { id: "D", model: args.strongerModel, promptCondition: "improved" },
+  ];
+
+  const results = [];
+  for (const variant of variants) {
+    console.log(`--- Variant ${variant.id}: ${variant.model} / ${variant.promptCondition} ---`);
+    const result = await callOnce({ ...variant, sourceUrl: args.sourceUrl, sourceText, apiKey });
+    results.push({ variantId: variant.id, ...result });
+    if (result.error) {
+      console.error(`Variant ${variant.id} FAILED: ${result.error}`);
+    } else {
+      console.log(
+        `Variant ${variant.id} OK - tokens: ${result.usage?.totalTokens ?? "?"}, est. cost: $${result.estimatedCostUsd ?? "?"}, latency: ${result.variantMeta.latencyMs}ms`,
+      );
+    }
+  }
 
   mkdirSync(args.out, { recursive: true });
-  const outPath = join(
-    args.out,
-    `ds01-${args.model}-${args.prompt}-${Date.now()}.json`,
-  );
-  writeFileSync(outPath, JSON.stringify(result, null, 2), "utf-8");
+  const outPath = join(args.out, `ds01-matrix-${Date.now()}.json`);
+  writeFileSync(outPath, JSON.stringify({ sourceUrl: args.sourceUrl, results }, null, 2), "utf-8");
+  console.log(`\nAll 4 results written to: ${outPath}`);
+  console.log("Do not commit this file - see the header comment on copyrighted source text.");
+}
 
-  console.log(`Model: ${args.model} | Prompt: ${args.prompt} | Latency: ${latencyMs}ms`);
-  console.log(
-    `Tokens - prompt: ${usage?.prompt_tokens ?? "?"}, completion: ${usage?.completion_tokens ?? "?"}, total: ${usage?.total_tokens ?? "?"}`,
-  );
-  console.log(`Estimated cost: $${result.estimatedCostUsd ?? "unknown (model not in MODEL_PRICING)"}`);
+function writeResult(outDir, label, result) {
+  mkdirSync(outDir, { recursive: true });
+  const outPath = join(outDir, `ds01-${label}-${Date.now()}.json`);
+  writeFileSync(outPath, JSON.stringify(result, null, 2), "utf-8");
+  if (result.error) {
+    console.error(result.error);
+  } else {
+    console.log(
+      `${label} - tokens: ${result.usage?.totalTokens ?? "?"}, est. cost: $${result.estimatedCostUsd ?? "?"}, latency: ${result.variantMeta.latencyMs}ms`,
+    );
+  }
   console.log(`Result written to: ${outPath}`);
-  if (parseError) console.error(`Schema/JSON parse error: ${parseError}`);
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+
+  if (args.mode === "fetch-source") {
+    // No API key needed - this mode makes no OpenAI call.
+    await runFetchSource(args);
+    return;
+  }
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    // Mirrors web/server/src/openai/client.ts's guard: fail closed before
+    // any network call, no key ever logged.
+    console.error("OPENAI_API_KEY is required but was not set.");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (args.mode === "run-matrix") {
+    await runMatrix(args, apiKey);
+  } else if (args.mode === "single") {
+    await runSingle(args, apiKey);
+  } else {
+    console.error('--mode must be "fetch-source", "single", or "run-matrix".');
+    process.exitCode = 1;
+  }
 }
 
 main().catch((error) => {

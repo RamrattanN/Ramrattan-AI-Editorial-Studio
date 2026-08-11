@@ -396,6 +396,14 @@ Recent engineering milestones
   completed full browser acceptance against both URLs, including a
   second independent sign-in recovering the same persisted project.
   Web Walking Skeleton 01's foundation is now fully verified end to end.
+- AI developer bootstrap lessons captured (2026-08-11):
+  `docs/learning/AI_Developer_Bootstrap_Lessons.md` and its companion
+  `AI_Developer_Bootstrap_Checklist.md` record the reusable engineering
+  lessons from this delivery - most importantly, that AI-agent
+  permission optimization (Claude Code and Codex) is a project-bootstrap
+  requirement, not a late-stage convenience - so a future project starts
+  with low-friction routine work and deliberately gated
+  destructive/privileged/secret/merge/production actions from day one.
 
 ---
 

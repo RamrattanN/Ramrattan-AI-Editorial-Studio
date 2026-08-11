@@ -332,11 +332,7 @@ same file and mechanism as Sections 1-2's permission profile):
 
 Pre-approval audible attention for Codex's VS Code extension is **not
 currently verified** and remains deferred - it does not yet reliably
-sound before the Repository Author interacts with an approval prompt.
-This does not weaken any security boundary: the approval prompt itself
-still gates the action correctly regardless of whether a sound
-accompanies it. It is a missing convenience signal, tabled for later
-investigation, not a blocker for ordinary Codex use.
+sound before the Repository Author interacts with an approval prompt.  This does not weaken any security boundary: the approval prompt itself still gates the action correctly regardless of whether a sound accompanies it.  It is a missing convenience signal, tabled for later investigation, not a blocker for ordinary Codex use.
 
 Investigation found:
 
@@ -355,10 +351,7 @@ Investigation found:
 
 **Do not state that Codex pre-approval audible attention is working
 until it has been live-tested and directly observed by a human, the same
-standard already met for Claude Code above.** This is a live example of
-the section's own central lesson: a hook that is configured, and even
-partially functions (the duplicate-signal cleanup), is not the same as a
-verified pre-approval signal.
+standard already met for Claude Code above.**  This is a live example of the section's own central lesson: a hook that is configured, and even partially functions (the duplicate-signal cleanup), is not the same as a verified pre-approval signal.
 
 ### The critical testing lesson: structural configuration alone is not sufficient
 

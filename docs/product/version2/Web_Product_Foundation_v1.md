@@ -439,12 +439,37 @@ Express, and Vite dev server - magic-link flow, project creation and
 rehydration, public-URL retrieval, SSRF/invalid-URL rejection,
 cross-Author isolation, sign-out revocation.
 
+**VERIFIED (2026-08-10, real-OpenAI-foundation verification):**
+
+- **Real OpenAI Editorial Direction generation** - `OPENAI_API_KEY` was
+  configured locally by the Repository Author directly into the existing
+  gitignored `web/server/.env` mechanism (never pasted into or handled by
+  an AI participant). Two real, non-mocked, end-to-end requests were
+  executed through the actual application path (`POST
+  /api/projects/:id/source`) against real public URLs (RFC 2119, RFC
+  8174): real server-side source retrieval, a real `gpt-4o-mini` chat
+  completion using Structured Outputs, strict JSON-schema validation, and
+  persistence of the resulting `EditorialDirection` - `source_understanding`,
+  `audience`, `objective`, `publication_language`, `primary_angle`, zero
+  and two `supporting_lenses` (both cases exercised), and
+  `editorial_thesis` were all present, schema-valid, and accurately
+  reflected the real retrieved source text. Both were approved through the
+  real Approve path, persisted, and confirmed present after a simulated
+  refresh (re-`GET` of the project). The configured model
+  (`gpt-4o-mini`) was confirmed available to the configured key via
+  `models.retrieve` before use; no model substitution was required.
+- Non-secret OpenAI usage metadata (model, request id, prompt/completion/
+  total token counts, timestamp) is now logged server-side on every
+  completed request, for future cost-per-Editorial-Project measurement.
+  No prompt or source text is logged.
+- Missing- and invalid-API-key error handling verified safely: an unset
+  key produces the exact application guard error before any network call;
+  an invalid key is rejected by the OpenAI API with `401` before any
+  usage is billed. Neither path exposes the key or internal detail to the
+  browser.
+
 **NOT YET VERIFIED:**
 
-- Real OpenAI Editorial Direction generation - `OPENAI_API_KEY` was not
-  available in the implementation environment; the code path reached the
-  correct explicit failure (`OPENAI_API_KEY is required but was not set`),
-  with no mocked or fabricated success substituted.
 - Literal browser click-through - the implementation environment did not
   expose browser automation; HTTP/API-level verification was substituted.
 - A hosted development URL - no development-deployment platform or account
@@ -456,20 +481,17 @@ cross-Author isolation, sign-out revocation.
 article drafting, Editorial Audit, Hero Visual, LinkedIn publishing, Reader
 Engagement, and all billing/org/analytics scope.
 
-**Immediate external-dependency plan**, in sequence: (1) configure
-`OPENAI_API_KEY` securely, server-side only, under the application's own
-OpenAI API account, never committed - the immediate blocking dependency
-for real AI verification, with an approximately $20/month development
-budget guardrail as a starting estimate to be replaced by measured actual
-cost once real usage exists; (2) execute and verify a real OpenAI
-Editorial Direction request; (3) validate in a real browser; (4) configure
-a development deployment - **Render** is the current recommended target
-(clean fit for the implemented React/Express/PostgreSQL/environment-secret
-model), not yet configured, and not an irreversible production-platform
-commitment; (5) obtain a hosted development URL; (6) continue
-`ConsoleEmailProvider` for development and defer real outbound SMTP
-delivery until hosted browser testing requires it - **Resend via SMTP** is
-a candidate production provider, not yet implemented or selected.
+**Immediate external-dependency plan**, in sequence: ~~(1) configure
+`OPENAI_API_KEY`~~ - done; ~~(2) execute and verify a real OpenAI
+Editorial Direction request~~ - done; (3) validate in a real browser; (4)
+configure a development deployment - **Render** is the current
+recommended target (clean fit for the implemented
+React/Express/PostgreSQL/environment-secret model), not yet configured,
+and not an irreversible production-platform commitment; (5) obtain a
+hosted development URL; (6) continue `ConsoleEmailProvider` for
+development and defer real outbound SMTP delivery until hosted browser
+testing requires it - **Resend via SMTP** is a candidate production
+provider, not yet implemented or selected.
 
 Full status detail and sequencing are also recorded in `ROADMAP.md`
 ("Version 2 Checkpoint" section), which is authoritative for current

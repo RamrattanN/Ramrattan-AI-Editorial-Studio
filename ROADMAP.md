@@ -668,6 +668,17 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   Approve/Reject controls with persistent, refresh-safe, Author-scoped
   state.
 
+- Real OpenAI Editorial Direction foundation verified (2026-08-10) -
+  `OPENAI_API_KEY` configured locally by the Repository Author directly
+  into the existing gitignored `web/server/.env` mechanism; two real,
+  non-mocked Editorial Direction requests executed end-to-end through the
+  application's own server-side path against real public URLs, both
+  approved and persisted. See
+  [`docs/product/version2/Web_Product_Foundation_v1.md`](docs/product/version2/Web_Product_Foundation_v1.md)
+  Section 13 for full evidence. Non-secret OpenAI usage metadata (model,
+  request id, token counts, timestamp) is now logged server-side for
+  future cost-per-Editorial-Project measurement.
+
 ### Verified
 
 - Web automated tests, `npm install`, typecheck, lint, production build, and
@@ -679,13 +690,13 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   server, real Vite dev server): magic-link flow, project creation and
   rehydration, public-URL retrieval, SSRF/invalid-URL rejection,
   cross-Author isolation, and sign-out revocation.
+- Real OpenAI Editorial Direction generation (Section 13 of the Web Product
+  Foundation document): real source retrieval, real `gpt-4o-mini`
+  Structured Outputs request, schema validation, persistence, real Approve,
+  and refresh-safe rehydration, all through the actual application path.
 
 ### Not Yet Verified
 
-- **Real OpenAI Editorial Direction generation** - `OPENAI_API_KEY` was not
-  available in the implementation environment; the code path reached the
-  correct explicit failure (`OPENAI_API_KEY is required but was not set`)
-  with no mocked or fabricated success.
 - **Literal browser click-through** - the implementation environment did not
   expose browser automation; HTTP/API-level behavior was verified instead.
 - **Hosted development URL** - not yet available; no development-deployment
@@ -693,16 +704,13 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
 - **Real outbound email delivery** - not yet verified; no SMTP credentials
   are configured. `ConsoleEmailProvider` is working for local development.
 
-### Current Phase - Web Product Foundation Verification and Development Deployment
+### Current Phase - Development Deployment and Browser Acceptance
 
 Immediate objectives, in sequence:
 
-1. Configure `OPENAI_API_KEY` securely (server-side only, application's own
-   OpenAI API account, never committed) - the immediate external dependency
-   blocking real AI verification. A conservative development budget guardrail
-   of approximately $20/month is a starting estimate only, to be replaced by
-   measured actual cost per Editorial Project once real usage exists.
-2. Execute a real OpenAI Editorial Direction request and verify the result.
+1. ~~Configure `OPENAI_API_KEY` securely~~ - done.
+2. ~~Execute a real OpenAI Editorial Direction request and verify the
+   result~~ - done.
 3. Validate the walking skeleton end-to-end in a real browser.
 4. Configure a development deployment target. **Render** is the current
    recommended platform - it maps cleanly to the implemented React frontend,

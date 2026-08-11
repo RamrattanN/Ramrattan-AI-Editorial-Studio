@@ -1,6 +1,6 @@
 # Editorial Direction Quality Investigation
 
-**Status:** DS-01 Interim - Baseline, Difference Analysis, and Evaluation Design Complete; Controlled Comparisons Not Yet Executed; Recommendation Provisional Pending Execution and Repository Author Review
+**Status:** DS-01 Complete - Approved by the Repository Author 2026-08-11 as `product/validation/Product_Decisions.md` DEC-030 (Section 15).  Model and prompt configuration approved; implementation authorized as a separate, bounded delivery, not yet started.
 **Classification:** Evidence and recommendation artifact (Informative - not a Product Decision)
 **Backlog:** BL-001 (primary), BL-002 (supporting)
 **Evidence base:** PV-029
@@ -246,3 +246,13 @@ This pattern is consistent with, and provides the first empirical support for, S
 Per the Repository Author's stop condition, the two passes were compared for material contradiction before writing this section.  None was found: the core pattern (model effect strong and repeatable; prompt effect real but variable in magnitude; D strongest in both; noise not clearly harmful in either case) held across two materially different sources.  No further calls were made or are proposed.  This strengthens, but does not prove, Section 9's provisional Category E hypothesis - two sources, one pass each, is still a small evidence base.
 
 **Not done:** no winner declared, no production change made, BL-001 remains In Progress, per the Repository Author's explicit condition.
+
+## 15. Repository Author Decision (DEC-030) - Final Conclusion
+
+**Approved 2026-08-11.**  The Repository Author reviewed Sections 13-14 and judged the two-source evidence sufficient for a product decision: the same D > C > B > A ordering on materially different sources, a repeatable model effect (A -> C) holding the prompt constant, a repeatable-but-variable prompt effect (A -> B), and no material contradiction between passes.
+
+**Decision:** adopt `gpt-5.6-terra` as the Editorial Direction model and the Variant D "improved" instructions as the Editorial Direction system prompt, replacing `gpt-4o-mini` and the current production prompt respectively.  Schema, persistence, source retrieval/processing, and Approve/Reject behavior are explicitly unchanged.  Recorded formally as `product/validation/Product_Decisions.md` DEC-030.
+
+This closes Section 9's "provisional" status for the purpose of authorizing implementation - Category E (prompt + model combination) is the accepted basis for the approved configuration.  Sections 9, 13, and 14 above are left as written; they are the evidentiary record the decision was based on, not superseded text.
+
+**Not authorized by this decision:** the implementation itself.  DEC-030's Implementation Status field is the authoritative scope boundary for that separate, bounded delivery - model selection and Editorial Direction instructions only, with schema, persisted shape, source-processing, workflow state, Approve/Reject, authentication, Render, the locked GPT, and GPT Knowledge all explicitly out of scope, plus required regression tests and one bounded real verification through the actual Web Product path before that delivery can be considered complete.

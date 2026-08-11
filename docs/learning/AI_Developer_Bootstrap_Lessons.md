@@ -295,19 +295,113 @@ a deliberately strict default and a legitimate one-off need, and it is
 preferable to either refusing the diagnostic entirely or loosening the
 rule permanently.
 
+## 8. Audible Human-Attention Notifications
+
+Low-friction AI collaboration requires **both**:
+
+1. routine-work permission optimization (Sections 1-2), and
+2. reliable human-attention signaling at genuine approval/input
+   boundaries.
+
+The first without the second produces an agent that works quietly and
+correctly but leaves the Repository Author polling a quiet screen,
+unsure whether it's still working or already blocked waiting on them.
+The intended flow:
+
+```text
+Agent works quietly -> routine work proceeds automatically ->
+consequential human boundary occurs -> one audible alert fires ->
+Repository Author responds -> agent continues
+```
+
+### Verified configuration
+
+**Claude Code** (local, gitignored `.claude/settings.local.json` - the
+same file and mechanism as Sections 1-2's permission profile):
+
+- the human-attention sound is wired to the **`PermissionRequest`** hook
+  event, not `Notification`
+- `Glass.aiff` (`afplay /System/Library/Sounds/Glass.aiff`) fires
+  **before** the Repository Author interacts with the approval prompt
+- the `Notification` hook is deliberately **not** used for this purpose
+- no duplicate attention sound fires for the same boundary
+
+**Codex** (its own local configuration surface): the same
+`PermissionRequest`-equivalent event drives `Glass.aiff` as the intended
+attention sound; a duplicate BEL/notification behavior that fired
+separately was identified and removed. No completion sound is
+configured for Codex, for the same reason described below.
+
+### The critical testing lesson: structural configuration alone is not sufficient
+
+The first configuration attempt in this project wired the sound to the
+`Notification` hook event, based on that event's name and its
+documented association with permission prompts. It was syntactically
+valid, schema-conformant, and the sound command itself worked when run
+directly - and it was still wrong: live use showed `Notification` fired
+**after** the Repository Author had already approved the prompt, not
+before. A second attempt, `PermissionRequest`, was verified correct only
+through a live, real-world test - a genuinely benign, not-yet-allow-listed
+command was run specifically to trigger a real approval prompt, and the
+Repository Author confirmed, by direct observation, that the sound
+played before they interacted with it.
+
+**The lesson: a hook configuration that looks correct against the
+settings schema has not been verified until it has been live-tested
+against the actual event ordering.** Confirm specifically that the sound
+fires:
+
+- before approval or input is supplied - not
+- after approval, not after the command executes, not on every tool
+  call, and not on ordinary model turns.
+
+Only a live test, observed by a human who can actually hear the result,
+distinguishes these. Do not treat schema conformance as behavioral
+proof.
+
+### Reload/restart may be required
+
+If notification configuration is added to an already-running VS
+Code/Codex session, the running process may not pick up the change
+until the session or window is reloaded or restarted. When a
+newly-configured hook does not appear to fire at all (not merely at the
+wrong time), a reload is the first thing to try before assuming the
+configuration itself is wrong.
+
+### Completion-sound limitation, stated honestly
+
+No hook event reliably distinguishes "a substantial task/delivery
+finished" from "an ordinary turn ended" in either Claude Code or Codex's
+currently available configuration surface - the natural end-of-turn
+event fires identically for both. Rather than accept either constant
+noise (sounding on every turn) or a false claim of reliable completion
+detection, this project deliberately does not configure an automatic
+completion sound. Where a completion signal is wanted, it is produced by
+the agent explicitly choosing to play a sound at a moment it judges to
+be a genuine delivery boundary - a deliberate, occasional, agent-invoked
+action, not a structural guarantee.
+
 ## Bootstrap Acceptance Criterion
 
 A future project's AI-assisted development setup should be measured
 against one concrete criterion:
 
 > **AI-assisted development setup is not complete until routine
-> repository work can proceed without repetitive approval prompts,
-> while destructive, privileged, secret-sensitive, merge-governed, and
-> production-sensitive actions remain explicitly gated.**
+> repository work can proceed without repetitive approval prompts;
+> destructive, privileged, secret-sensitive, merge-governed, and
+> production-sensitive actions remain explicitly gated; a genuine
+> human-attention boundary produces one reliable audible notification
+> before the Repository Author interacts with the prompt; and that
+> notification behavior has been verified live, not merely configured.**
 
-Neither half is optional. A setup that still prompts for every `git
-status` has not actually removed friction. A setup that auto-approves
-`git push --force` or a database drop has not actually preserved
-control. Both failure modes were observed and corrected during this
-delivery; this document exists so the next project starts from the
-corrected state instead of rediscovering both failure modes again.
+None of these parts is optional. A setup that still prompts for every
+`git status` has not actually removed friction. A setup that
+auto-approves `git push --force` or a database drop has not actually
+preserved control. A setup with a notification hook that looks correct
+but has never been heard firing at the right moment has not actually
+solved the "is the agent blocked or still working?" problem - it has
+only moved the uncertainty from "will it prompt too much?" to "will it
+tell me when it needs me?" All of these failure modes were observed and
+corrected during this delivery; this document exists so the next
+project starts from the corrected state instead of rediscovering them
+again.

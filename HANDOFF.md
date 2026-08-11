@@ -152,7 +152,16 @@ The foundation objective sequence is complete; no further action is
 pending on it. See `ROADMAP.md` ("Version 2 Checkpoint") and
 `docs/product/version2/Web_Product_Foundation_v1.md` (Section 13) for
 full detail. Web Walking Skeleton 02 (Editorial Plan + Draft) is the next
-candidate vertical slice and has not been authorized or started.
+candidate vertical slice and has not been authorized or started - see
+`BACKLOG.md` for its current priority relative to the Editorial
+Direction quality observation below.
+
+Real hosted acceptance also surfaced a material product observation:
+Editorial Direction output was technically functional but materially
+weaker editorially than the locked GPT baseline. This is tracked as
+`BACKLOG.md` BL-001 and BL-002 (model selection); it has not been
+formalized as a Product Validation Log entry, and no fix has been
+authorized or implemented.
 
 ---
 
@@ -267,19 +276,28 @@ Guidelines
 
 # Current Priorities
 
-1. Repository Author release approval for Version 1.0, Version 1.1, or both.
-2. Promote `develop` to `main` for the approved release(s).
-3. Create the applicable release tag(s) and publish the GitHub Release and release notes.
-4. Publish an external announcement, if approved, and verify the release.
-5. Post-RC1 Improvements.
-6. B002 Brand Refinement.
-7. ~~Configure `OPENAI_API_KEY` and verify real OpenAI Editorial Direction
-   generation for Web Walking Skeleton 01~~ - done (2026-08-10).
-8. ~~Configure a development deployment and obtain a hosted development
-   URL; validate in a real browser~~ - done (2026-08-11): Render,
-   `https://studio.ramrattan.com`, literal browser acceptance complete.
-9. Web Walking Skeleton 02 - Editorial Plan + Draft (next candidate;
-   not authorized or started).
+**`BACKLOG.md` (repository root) is now the canonical source for
+backlog items, priority, and Kanban state - operated under
+`docs/engineering/Delivery_Operating_Model.md`.** This section no longer
+duplicates that detail; it is retained only as a short cross-cutting
+summary so a session can orient without opening `BACKLOG.md` first.
+
+Two independent tracks remain active:
+
+1. **Manual Version 1.0 / Version 1.1 release decision** - `develop`-to-
+   `main` promotion, tagging, GitHub Release, and announcement, all
+   pending Repository Author approval. Tracked as `BACKLOG.md` BL-011
+   (P1).
+2. **Web Product Track** - Web Walking Skeleton 01's foundation is
+   complete and hosted-browser-accepted. The next candidate slice (Web
+   Walking Skeleton 02) is deliberately not assumed to be the next
+   priority - see `BACKLOG.md` BL-001 through BL-003 for the current,
+   evidence-based ordering (Editorial Direction quality parity with the
+   locked GPT baseline is currently ranked ahead of deepening the
+   generation workflow).
+
+B002 Brand Refinement and every other still-open item are tracked in
+`BACKLOG.md`, not enumerated here.
 
 ---
 
@@ -338,9 +356,11 @@ Every AI session should
    - Current branch
    - Clean working tree
    - Synchronisation with origin
-5. Review the active GitHub issue.
-6. Identify the active delivery profile.
-7. Begin only the approved engineering objective.
+5. Review `BACKLOG.md` (canonical backlog/Kanban) and its "Current
+   Sprint" / "Latest Closeout" sections.
+6. Review the active GitHub issue.
+7. Identify the active delivery profile.
+8. Begin only the approved engineering objective.
 
 ---
 
@@ -404,6 +424,18 @@ Recent engineering milestones
   requirement, not a late-stage convenience - so a future project starts
   with low-friction routine work and deliberately gated
   destructive/privileged/secret/merge/production actions from day one.
+- Lean delivery operating model established (2026-08-11): `BACKLOG.md`
+  (repository root) is now the single canonical source for backlog
+  items, priority, and Kanban state, operated under
+  `docs/engineering/Delivery_Operating_Model.md` (daily sprint, daily
+  closeout, Kanban with WIP limits, prioritization, weekly demo, weekly
+  retrospective, and document synchronization cadence). Reconciled 14
+  backlog items from authoritative repository state, including the
+  Editorial Direction quality observation (BL-001/BL-002) and the
+  Render free-tier PostgreSQL lifecycle deadline (BL-005, P0). GitHub
+  Project #1 was inspected and found stale since Version 1.1 completion
+  (no Web Product Track items); not used as canonical. No product
+  implementation began.
 
 ---
 
@@ -445,12 +477,14 @@ literal browser acceptance**
 
 Current Objective
 
-**(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-foundation complete; awaiting authorization for Web Walking Skeleton 02**
+**See `BACKLOG.md` (canonical). Summary: (1) Manual Version 1 and
+Version 1.1 Release Decisions (BL-011); (2) Web Product Track - a lean
+daily-sprint operating model is now active; next Daily Sprint selects
+from `BACKLOG.md`, not decided here.**
 
 Deferred
 
-**B002**
+**See `BACKLOG.md` for the full backlog, including B002 (BL-012)**
 
 Validation
 
@@ -479,4 +513,5 @@ Last Updated
 Current Phase
 
 **(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-foundation complete; awaiting authorization for Web Walking Skeleton 02**
+foundation complete, lean delivery operating model active - see
+`BACKLOG.md` for current backlog/Kanban state**

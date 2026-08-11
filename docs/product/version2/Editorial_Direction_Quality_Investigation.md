@@ -207,3 +207,42 @@ Recorded 2026-08-11, before any evaluation call was made, in response to the Rep
 This pattern is consistent with, and provides the first empirical support for, Section 9's provisional Category E finding (prompt and model both contribute, in different and complementary ways) - but it is one source, one pass, no repetitions, and Repository Author review has not happened.  It should not yet be treated as proof.
 
 **Not done:** no winner declared, no production change made, BL-001 remains In Progress (not Review / Validation) pending this review, per the Repository Author's explicit condition.
+
+## 14. Second Pass - Cross-Source Generalization Check (2026-08-11) - Awaiting Repository Author Review
+
+**Not a conclusion.**  A second, independently authorized bounded pass (4 more calls, variants A/B/C/D, no repetitions) was run against a materially different source to test whether Section 13's pattern generalizes or was an artifact of one source.  Same extraction method, same matrix, same rubric, no manual trimming, exactly as instructed.  The Repository Author has not yet reviewed this section either; Category E remains provisional.
+
+**Source:** `https://www.nasa.gov/news-release/nasa-joins-genesis-mission-to-accelerate-ai-driven-discovery/` (NASA science/AI-policy, versus Section 13's cybersecurity source - a materially different topic and domain).  Extraction produced 11,527 characters, of which approximately the first 1,258 lines were navigation-menu noise (NASA.gov's mega-menu is not wrapped in semantic `<nav>` tags any more than Section 13's source's chrome was) - proportionally *more* noise than Section 13's source, making this an incidental stress test of the noise question below.  The real article content was fully present, unmodified, and untrimmed within the 12,000-character cap.
+
+**Usage, latency, and cost (all measured):**
+
+| Variant | Model | Prompt | Tokens (prompt/completion/total) | Latency | Actual cost |
+|---|---|---|---|---|---|
+| A | `gpt-4o-mini` | current | 2950 / 240 / 3190 | 3278ms | $0.000586 |
+| B | `gpt-4o-mini` | improved | 3151 / 244 / 3395 | 2518ms | $0.000619 |
+| C | `gpt-5.6-terra` | current | 2948 / 313 / 3261 | 5707ms | $0.009652 |
+| D | `gpt-5.6-terra` | improved | 3149 / 401 / 3550 | 6875ms | $0.011110 |
+
+**Total measured cost for this pass: $0.021967** (combined with Section 13: $0.04263 across both passes).  All four calls returned schema-valid output on the first attempt; no retries needed.
+
+**Generated output** (`primary_angle` and `editorial_thesis` per variant; full seven-field JSON is in the local, uncommitted results file):
+
+- **A** (`gpt-4o-mini` / current): *Primary angle:* "The role of artificial intelligence in enhancing scientific discovery and accelerating innovations in space and related fields through the Genesis Mission." *Thesis:* "NASA's involvement in the Genesis Mission signifies a transformative step in employing artificial intelligence to not only speed up scientific discoveries but also to redefine how humanity explores and understands the universe."
+- **B** (`gpt-4o-mini` / improved): *Primary angle:* "The Genesis Mission represents a significant integration of AI into government-funded scientific research, positioning NASA to transform its vast data reserves into actionable knowledge..." *Thesis:* "Harnessing AI through the Genesis Mission will not only streamline NASA's research processes but also unlock previously inaccessible scientific insights, solidifying the United States' position as a leader in space and technology innovation." (`supporting_lenses` was empty for this variant - the improved prompt's "do not pad the list" instruction produced zero rather than the one-or-two seen elsewhere.)
+- **C** (`gpt-5.6-terra` / current): *Primary angle:* "From data archive to discovery engine: how NASA plans to use AI to extract more value from 150+ petabytes of mission data while accelerating the design and operational readiness of integrated space systems." *Thesis:* "NASA's participation in the Genesis Mission shows that AI's highest-value role in science may be turning decades of complex, underused mission data and engineering expertise into faster, more connected discovery and mission readiness."
+- **D** (`gpt-5.6-terra` / improved): *Primary angle:* "From archive to advantage: NASA's AI opportunity is to unlock returns from existing public investments by connecting vast historical data with mission engineering - not merely to automate research." *Thesis:* "NASA's Genesis Mission signals that the strategic value of AI in science is not simply faster analysis: it is the ability to turn decades of fragmented, under-examined mission data and engineering knowledge into a continuously reusable discovery and mission-readiness asset, provided AI is integrated with domain expertise and operational systems." *Source understanding* explicitly noted: "the release... provides no implementation plan, governance details, technical benchmarks, funding information, or evidence that these outcomes have yet been achieved" - an even more explicit instance of the improved prompt's verification/uncertainty instruction than Section 13's D variant produced.
+
+**Agent rubric assessment (supporting evidence only).**  Approximate 1-5 averages: A ~2.7, B ~3.0, C ~3.9, D ~4.6 - the same ordering as Section 13 (D > C > B > A).
+
+### Answering the four generalization questions
+
+- **Does A -> B demonstrate a repeatable prompt effect?**  Directionally yes, but weaker here than in Section 13.  B added audience specificity ("managers and practitioners") and a marginally sharper thesis, but the jump from A was less pronounced than Section 13's, and `supporting_lenses` came back empty rather than populated.  The prompt effect appears real but source-dependent in magnitude, not a fixed, uniform improvement.
+- **Does A -> C demonstrate a repeatable model effect?**  Yes, and strongly.  In both passes, C reframed the story with a distinct, specific angle ("data archive to discovery engine" here; "trust-boundary failure" in Section 13) using the *identical, weaker prompt as A* - the cleanest repeated evidence in this investigation, since prompt is held constant and only the model changes.
+- **Does D remain strongest overall?**  Yes in both passes, by the same rubric and the same qualitative markers (most distinctive framing, most explicit epistemic hedging, most actionable for the stated audience).
+- **Does source-extraction noise materially change the result?**  No evidence that it did, in either pass.  This source had proportionally more raw navigation noise than Section 13's, yet all four variants correctly identified and summarized the real article content with no visible contamination from the surrounding menu text.  This is reassuring but based on only two sources - it should not be read as a general guarantee that extraction noise never matters.
+
+### Assessment: no material contradiction found
+
+Per the Repository Author's stop condition, the two passes were compared for material contradiction before writing this section.  None was found: the core pattern (model effect strong and repeatable; prompt effect real but variable in magnitude; D strongest in both; noise not clearly harmful in either case) held across two materially different sources.  No further calls were made or are proposed.  This strengthens, but does not prove, Section 9's provisional Category E hypothesis - two sources, one pass each, is still a small evidence base.
+
+**Not done:** no winner declared, no production change made, BL-001 remains In Progress, per the Repository Author's explicit condition.

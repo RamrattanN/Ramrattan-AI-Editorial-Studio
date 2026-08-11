@@ -59,4 +59,4 @@ services:
       - key: OPENAI_MODEL
         value: gpt-4o-mini
       - key: CLIENT_ORIGIN
-        value: https://ramrattan-studio.onrender.com
+        value: https://studio.ramrattan.com

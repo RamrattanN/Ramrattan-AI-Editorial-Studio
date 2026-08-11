@@ -48,6 +48,22 @@ describe("authentication", () => {
     expect(projectsResponse.status).toBe(200);
   });
 
+  it("builds the magic-link callback URL from the configured CLIENT_ORIGIN", async () => {
+    // Regression: the hosted deployment's magic link once pointed at the
+    // wrong origin because CLIENT_ORIGIN was misconfigured, not because
+    // the application hardcoded anything - this proves the link is always
+    // derived from whatever origin the app was configured with.
+    const { app, emailProvider } = buildTestApp(pool, undefined, "https://studio.ramrattan.com");
+    const agent = supertest.agent(app);
+
+    await agent.post("/api/auth/request-link").send({ email: "custom-domain@example.com" });
+
+    expect(emailProvider.sent).toHaveLength(1);
+    expect(emailProvider.sent[0].link).toMatch(
+      /^https:\/\/studio\.ramrattan\.com\/auth\/callback\?token=/,
+    );
+  });
+
   it("rejects an invalid or already-used token", async () => {
     const { app, emailProvider } = buildTestApp(pool);
     const agent = supertest.agent(app);

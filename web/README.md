@@ -108,16 +108,26 @@ npm run build
 hosted development deployment: one Render PostgreSQL database and one
 Render Node web service.
 
-**Topology — single origin.** The web service runs the Express server
-(`npm run build && npm run start --workspace server`) and also serves
-the built React SPA (`client/dist`) from the same origin: `app.ts`
-serves static assets and falls back to `index.html` for client-routed
-paths whenever `clientDistDir` is configured (see `src/index.ts`), so a
-full page load/refresh on any React Router route works. This keeps
-session cookies same-origin (no cross-site cookie/CORS complexity) and
-avoids a second Render service. The client build defaults to same-origin
+**Topology — single origin.** Render builds with `npm ci --include=dev
+&& npm run build`, then starts the Express server with `npm run start
+--workspace server`; the server also serves the built React SPA
+(`client/dist`) from the same origin: `app.ts` serves static assets and
+falls back to `index.html` for client-routed paths whenever
+`clientDistDir` is configured (see `src/index.ts`), so a full page
+load/refresh on any React Router route works. This keeps session
+cookies same-origin (no cross-site cookie/CORS complexity) and avoids a
+second Render service. The client build defaults to same-origin
 relative API requests (`VITE_API_BASE_URL` is unset in `render.yaml`;
 `src/api.ts` falls back to `""`, not `localhost`, when unset).
+
+`npm ci --include=dev` (not `npm install`) is required in `buildCommand`
+because `NODE_ENV=production` (set below for secure cookies) also
+applies during the build step, and npm skips `devDependencies` under
+`NODE_ENV=production` unless told otherwise — but `typescript` and the
+`@types/*` packages the build needs are `devDependencies` (build-time
+only, not needed at runtime), so a plain `npm install` there fails with
+missing-declaration TypeScript errors. `npm ci` also has the advantage
+of installing strictly from the committed lockfile.
 
 **Database.** `DATABASE_URL` is wired via Render's `fromDatabase`
 Blueprint reference — never a hardcoded connection string. The server's

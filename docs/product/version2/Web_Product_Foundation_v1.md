@@ -498,30 +498,58 @@ the project advancing. Migration `002_add_editorial_plan_stage.sql` adds
 `editorial_plan` to the project stage constraint. Editorial Plan
 generation itself remains out of scope.
 
-**NOT YET VERIFIED:**
+**VERIFIED (2026-08-11, Render hosted development deployment and literal
+browser acceptance):** Web Walking Skeleton 01 is deployed to Render -
+one free-tier PostgreSQL database and one free-tier Node web service
+(`ramrattan-studio`), the Express server also serving the built React
+SPA from the same origin (`docs`/`web/README.md`'s "Hosted development
+deployment (Render)" section has the full topology). Hosted URLs:
+`https://ramrattan-studio.onrender.com` (Render-native) and the custom
+domain `https://studio.ramrattan.com` (DNS via Hostinger, TLS
+provisioned automatically by Render after verification). The Repository
+Author performed literal browser acceptance directly (this environment
+has no browser-automation tool), against both URLs, and confirmed:
 
-- Literal browser click-through - the implementation environment did not
-  expose browser automation; HTTP/API-level verification was substituted.
-- A hosted development URL - no development-deployment platform or account
-  has been configured.
-- Real outbound email delivery - no SMTP credentials are configured;
-  `ConsoleEmailProvider` is working for local development.
+- sign-in via email magic link, `EMAIL_PROVIDER=console` (the link is
+  read from Render's authenticated Logs tab, not emailed - see "Hosted
+  authentication" below);
+- Editorial Project creation with a persistent `REP-`-shaped id;
+- a real public article URL submitted, retrieved, and processed;
+- a real, non-mocked OpenAI Editorial Direction generated and displayed;
+- native Approve/Reject controls; Approve persisted and advanced the
+  project to the `editorial_plan` stage;
+- state survived a page refresh;
+- sign-out revoked access, and a **second, independent sign-in** (a
+  fresh magic link, a new session) recovered the **same** project at its
+  persisted `editorial_plan` stage - proving persistence is real
+  database state, not session- or client-local;
+- on the custom domain specifically: a magic link requested from
+  `https://studio.ramrattan.com` correctly resolved to
+  `https://studio.ramrattan.com/auth/callback?...` (not the Render-native
+  hostname), confirming `CLIENT_ORIGIN` is wired correctly end to end.
+
+No token, credential, or magic-link value is recorded here or anywhere
+in the repository; the evidence above is the outcome, not the secret.
+
+**Hosted authentication.** `EMAIL_PROVIDER=console` remains the hosted
+development mechanism: the magic link is written to the service's
+stdout, visible only to the Repository Author via Render's authenticated
+Logs tab. Real outbound email delivery (SMTP) remains not yet configured
+and was not required for the acceptance above; `SmtpEmailProvider`
+already exists and is production-capable if needed later.
 
 **DEFERRED** (unchanged from Section 9 and Section 10): Editorial Plan,
 article drafting, Editorial Audit, Hero Visual, LinkedIn publishing, Reader
 Engagement, and all billing/org/analytics scope.
 
-**Immediate external-dependency plan**, in sequence: ~~(1) configure
-`OPENAI_API_KEY`~~ - done; ~~(2) execute and verify a real OpenAI
-Editorial Direction request~~ - done; (3) validate in a real browser; (4)
-configure a development deployment - **Render** is the current
-recommended target (clean fit for the implemented
-React/Express/PostgreSQL/environment-secret model), not yet configured,
-and not an irreversible production-platform commitment; (5) obtain a
-hosted development URL; (6) continue `ConsoleEmailProvider` for
-development and defer real outbound SMTP delivery until hosted browser
-testing requires it - **Resend via SMTP** is a candidate production
-provider, not yet implemented or selected.
+**External-dependency plan status:** ~~(1) configure `OPENAI_API_KEY`~~ -
+done; ~~(2) execute and verify a real OpenAI Editorial Direction
+request~~ - done; ~~(3) validate in a real browser~~ - done; ~~(4)
+configure a development deployment~~ - done (Render); ~~(5) obtain a
+hosted development URL~~ - done (`studio.ramrattan.com`); (6) continue
+`ConsoleEmailProvider` for development and defer real outbound SMTP
+delivery until it is genuinely required - **Resend via SMTP** remains a
+candidate production provider, not yet implemented or selected.
 
 Full status detail and sequencing are also recorded in `ROADMAP.md`
 ("Version 2 Checkpoint" section), which is authoritative for current

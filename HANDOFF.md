@@ -138,18 +138,21 @@ decisions require explicit Repository Author approval:
 No release action or additional feature work should begin unless explicitly
 approved by the Repository Author.
 
-**2. Web Product - Development Deployment and Browser Acceptance**
+**2. Web Product - Foundation Complete (Hosted, Browser-Accepted)**
 
-Web Walking Skeleton 01 (PR #111) is implemented; real OpenAI Editorial
-Direction generation is now verified (2026-08-10) - `OPENAI_API_KEY` is
-configured locally, and two real end-to-end Editorial Direction requests
-have been executed, approved, and persisted through the actual
-application path. Remaining sequence: validate in a real browser;
-configure a development deployment (Render recommended, not yet
-configured); obtain a hosted development URL. See `ROADMAP.md` ("Version 2
-Checkpoint") and `docs/product/version2/Web_Product_Foundation_v1.md`
-(Section 13) for full detail. Web Walking Skeleton 02 (Editorial Plan +
-Draft) is the next vertical slice and has not started.
+Web Walking Skeleton 01 is implemented, real OpenAI Editorial Direction
+generation is verified, and the application is now deployed to Render at
+both `https://ramrattan-studio.onrender.com` and the custom domain
+`https://studio.ramrattan.com` (Hostinger DNS, TLS via Render). The
+Repository Author completed literal browser acceptance against both
+URLs, including sign-in, project creation, real OpenAI Editorial
+Direction, Approve advancing to `editorial_plan`, refresh persistence,
+sign-out, and a second independent sign-in recovering the same project.
+The foundation objective sequence is complete; no further action is
+pending on it. See `ROADMAP.md` ("Version 2 Checkpoint") and
+`docs/product/version2/Web_Product_Foundation_v1.md` (Section 13) for
+full detail. Web Walking Skeleton 02 (Editorial Plan + Draft) is the next
+candidate vertical slice and has not been authorized or started.
 
 ---
 
@@ -272,9 +275,11 @@ Guidelines
 6. B002 Brand Refinement.
 7. ~~Configure `OPENAI_API_KEY` and verify real OpenAI Editorial Direction
    generation for Web Walking Skeleton 01~~ - done (2026-08-10).
-8. Configure a development deployment (Render recommended) and obtain a
-   hosted development URL; validate in a real browser.
-9. Web Walking Skeleton 02 - Editorial Plan + Draft (not started).
+8. ~~Configure a development deployment and obtain a hosted development
+   URL; validate in a real browser~~ - done (2026-08-11): Render,
+   `https://studio.ramrattan.com`, literal browser acceptance complete.
+9. Web Walking Skeleton 02 - Editorial Plan + Draft (next candidate;
+   not authorized or started).
 
 ---
 
@@ -379,6 +384,18 @@ Recent engineering milestones
   Codex review found Approve did not advance `EditorialProject.stage`.
   `approveDirection` now advances the project to `editorial_plan` in the
   same transaction as the direction update.
+- Render development deployment complete and literal browser acceptance
+  passed (2026-08-11): deployed via `render.yaml` to
+  `https://ramrattan-studio.onrender.com` and the custom domain
+  `https://studio.ramrattan.com` (Hostinger DNS, Render-provisioned TLS).
+  Two follow-on fixes delivered: the build's `npm install` was silently
+  skipping `devDependencies` under `NODE_ENV=production` (fixed with
+  `npm ci --include=dev`), and the magic-link `CLIENT_ORIGIN` still
+  pointed at the Render-native hostname after the custom domain went
+  live (fixed, with regression coverage). The Repository Author
+  completed full browser acceptance against both URLs, including a
+  second independent sign-in recovering the same persisted project.
+  Web Walking Skeleton 01's foundation is now fully verified end to end.
 
 ---
 
@@ -413,13 +430,15 @@ Version 1.1
 Version 2 (Web Product Track)
 
 **GPT Recovery RC5 locked; Reader Engagement discovery recorded; Web
-Product Foundation v1 adopted; Web Walking Skeleton 01 implemented; real
-OpenAI Editorial Direction foundation verified**
+Product Foundation v1 adopted; Web Walking Skeleton 01 implemented and
+hosted on Render (`https://studio.ramrattan.com`); foundation fully
+verified including real OpenAI, real Approve/Reject persistence, and
+literal browser acceptance**
 
 Current Objective
 
 **(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-Development Deployment and Browser Acceptance**
+foundation complete; awaiting authorization for Web Walking Skeleton 02**
 
 Deferred
 
@@ -447,9 +466,9 @@ Version
 
 Last Updated
 
-**2026-08-10**
+**2026-08-11**
 
 Current Phase
 
 **(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-Development Deployment and Browser Acceptance**
+foundation complete; awaiting authorization for Web Walking Skeleton 02**

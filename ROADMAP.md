@@ -679,6 +679,15 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   request id, token counts, timestamp) is now logged server-side for
   future cost-per-Editorial-Project measurement.
 
+- Durable Reject contract reconciled (DEC-029, 2026-08-11) - an
+  independent Codex review found that Section 9's acceptance criteria
+  stated persistence for Approve only, while the implemented Reject
+  endpoint already persisted rejected status, Author feedback, and
+  decision time. The Repository Author confirmed both Approve and Reject
+  are durable project-state decisions; Reject is **stage-local** (the
+  workflow neither advances nor restarts), not client-local or ephemeral.
+  Documentation corrected; no application code change was required.
+
 ### Verified
 
 - Web automated tests, `npm install`, typecheck, lint, production build, and

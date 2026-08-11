@@ -199,9 +199,14 @@ describe("editorial projects", () => {
     expect(rejected.body.editorialDirection.rejectFeedback).toBe(
       "Please sharpen the primary angle.",
     );
+    // DEC-029: Reject is a durable, stage-local decision - it persists a
+    // decision timestamp like Approve does, and does not advance the
+    // project stage (unlike Approve, which does).
+    expect(rejected.body.editorialDirection.decidedAt).not.toBeNull();
 
     const view = await agent.get(`/api/projects/${projectId}`);
     expect(view.body.project.id).toBe(projectId);
+    expect(view.body.project.stage).toBe("editorial_direction");
     expect(view.body.source.rawReference).toBe("https://example.com/article");
     expect(view.body.editorialDirection.status).toBe("rejected");
   });

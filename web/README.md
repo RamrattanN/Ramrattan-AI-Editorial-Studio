@@ -164,6 +164,12 @@ domain only after the `.onrender.com` deployment is verified healthy end
 to end. DNS (Hostinger) is never automated — Render's exact required DNS
 record is provided to the Repository Author to enter manually.
 
+**Status (2026-08-11).** Live and browser-accepted at both
+`https://ramrattan-studio.onrender.com` and
+`https://studio.ramrattan.com` (Hostinger DNS, TLS via Render). See
+`docs/product/version2/Web_Product_Foundation_v1.md` Section 13 for the
+full acceptance evidence.
+
 ## Deferred scope
 
 Editorial Plan generation, article drafting, Editorial Audit, Hero Visual

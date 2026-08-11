@@ -696,6 +696,24 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   (migration `002_add_editorial_plan_stage.sql`). Editorial Plan
   generation itself remains unimplemented.
 
+- Render development deployment complete and browser-accepted
+  (2026-08-11) - deployed via `render.yaml` (one free-tier PostgreSQL
+  database, one free-tier Node web service serving both the API and the
+  built SPA from a single origin). Two follow-on fixes were required and
+  delivered: the Render build initially failed because `NODE_ENV=production`
+  caused `npm install` to skip `devDependencies` (`typescript`, `@types/*`)
+  needed only at build time - fixed by using `npm ci --include=dev` in
+  `buildCommand`; and the magic-link `CLIENT_ORIGIN` was still the
+  Render-native `onrender.com` hostname after the custom domain went
+  live - fixed by updating the value and adding regression coverage.
+  `studio.ramrattan.com` is live over HTTPS (Hostinger DNS, TLS
+  provisioned by Render). The Repository Author completed literal
+  browser acceptance against both the Render-native and custom-domain
+  URLs, including a second independent sign-in (new magic link, new
+  session) that recovered the same Editorial Project at its persisted
+  `editorial_plan` stage - see Web Product Foundation v1 Section 13 for
+  full evidence.
+
 ### Verified
 
 - Web automated tests, `npm install`, typecheck, lint, production build, and
@@ -711,40 +729,52 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   Foundation document): real source retrieval, real `gpt-4o-mini`
   Structured Outputs request, schema validation, persistence, real Approve,
   and refresh-safe rehydration, all through the actual application path.
+- **Literal browser acceptance**, both Render-native
+  (`ramrattan-studio.onrender.com`) and custom-domain
+  (`studio.ramrattan.com`): sign-in, project creation, real public-URL
+  submission and processing, real OpenAI Editorial Direction, native
+  Approve/Reject, Approve advancing to `editorial_plan`, refresh
+  persistence, sign-out, and a second independent sign-in (fresh magic
+  link, new session) recovering the same project at its persisted stage.
+- **Hosted development URL and custom domain**: Render Blueprint
+  deployment (`render.yaml`) live at both the Render-native hostname and
+  `https://studio.ramrattan.com`, DNS via Hostinger, TLS provisioned by
+  Render after verification.
 
 ### Not Yet Verified
 
-- **Literal browser click-through** - the implementation environment did not
-  expose browser automation; HTTP/API-level behavior was verified instead.
-- **Hosted development URL** - not yet available; no development-deployment
-  platform/account has been configured.
 - **Real outbound email delivery** - not yet verified; no SMTP credentials
-  are configured. `ConsoleEmailProvider` is working for local development.
+  are configured. `ConsoleEmailProvider` (Render Logs tab) is working for
+  hosted development, per DEC-028/Section 9's "thinnest safe hosted-dev
+  authentication path."
 
-### Current Phase - Development Deployment and Browser Acceptance
+### Current Phase - Foundation Complete; Awaiting Next Delivery Authorization
 
-Immediate objectives, in sequence:
+The immediate objective sequence from the previous checkpoint is now
+complete:
 
 1. ~~Configure `OPENAI_API_KEY` securely~~ - done.
 2. ~~Execute a real OpenAI Editorial Direction request and verify the
    result~~ - done.
-3. Validate the walking skeleton end-to-end in a real browser.
-4. Configure a development deployment target. **Render** is the current
-   recommended platform - it maps cleanly to the implemented React frontend,
-   Express backend, PostgreSQL, environment-secret model, and Git-connected
-   deployment - but no Render account or configuration exists yet; this is a
-   recommendation, not an implementation.
-5. Obtain a hosted development URL.
-6. Continue using `ConsoleEmailProvider` for local/development auth unless
-   and until hosted browser testing requires real outbound email delivery.
+3. ~~Validate the walking skeleton end-to-end in a real browser~~ - done.
+4. ~~Configure a development deployment target~~ - done (Render).
+5. ~~Obtain a hosted development URL~~ - done
+   (`https://studio.ramrattan.com`).
+6. Continue using `ConsoleEmailProvider` for hosted development unless and
+   until real outbound email delivery is genuinely required.
    Production-compatible SMTP support (`SmtpEmailProvider`/nodemailer)
    already exists in the walking skeleton; **Resend via SMTP** is a
    candidate production provider, not yet implemented or selected.
 
+Web Walking Skeleton 01's foundation is now fully verified end to end,
+including hosted browser acceptance. Web Walking Skeleton 02 (below) is
+the next candidate but has not been authorized or started by this
+checkpoint.
+
 ### Next Vertical Slice (Not Started)
 
-**Web Walking Skeleton 02 - Editorial Plan + Draft**, once the foundation
-above is verified:
+**Web Walking Skeleton 02 - Editorial Plan + Draft**, now that the
+foundation above is fully verified:
 
 ```text
 Approved Editorial Direction -> Editorial Plan -> native Approve/Reject ->

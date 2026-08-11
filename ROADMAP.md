@@ -20,7 +20,8 @@
 - [ ] Versioning guide
 - [ ] Release process
 - [ ] Full handoff document
-- [ ] Kanban project board
+- [x] Kanban project board - `BACKLOG.md` (repository root), operated
+      under `docs/engineering/Delivery_Operating_Model.md`
 
 ## Next - Guided Editorial Studio
 
@@ -767,9 +768,20 @@ complete:
    candidate production provider, not yet implemented or selected.
 
 Web Walking Skeleton 01's foundation is now fully verified end to end,
-including hosted browser acceptance. Web Walking Skeleton 02 (below) is
-the next candidate but has not been authorized or started by this
-checkpoint.
+including hosted browser acceptance. Real hosted acceptance also
+surfaced a material product-quality observation - Editorial Direction
+output was technically functional but materially weaker editorially
+than the locked GPT baseline - which is now tracked as `BACKLOG.md`
+item BL-001. Web Walking Skeleton 02 (below) is the next previously
+named candidate, but is deliberately **not** treated as automatically
+next-in-priority; see `BACKLOG.md` (BL-001 through BL-003) for the
+current, evidence-based priority ordering, which is authoritative for
+day-to-day sequencing going forward. A lean daily-sprint/Kanban
+operating model is now established -
+`docs/engineering/Delivery_Operating_Model.md` - and `BACKLOG.md` is
+the canonical operational view; this ROADMAP section remains
+authoritative for the strategic sequence and milestone narrative, not
+day-to-day backlog detail.
 
 ### Next Vertical Slice (Not Started)
 

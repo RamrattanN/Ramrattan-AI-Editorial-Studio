@@ -370,6 +370,11 @@ Recent engineering milestones
   the actual application path; non-secret usage-metadata logging added.
   Browser click-through, hosted development URL, and production email
   delivery remain not yet verified/available.
+- Durable Reject contract reconciled (DEC-029, 2026-08-11): independent
+  Codex review found Section 9's acceptance criteria stated persistence
+  for Approve only, while Reject already persisted correctly. Repository
+  Author confirmed both are durable, stage-local decisions; documentation
+  corrected, no application code changed.
 
 ---
 

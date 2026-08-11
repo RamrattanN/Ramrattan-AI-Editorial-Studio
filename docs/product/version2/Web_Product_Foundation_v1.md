@@ -308,7 +308,8 @@ Required journey:
 Sign In -> Create Editorial Project -> Paste URL ->
 application retrieves/processes the source -> real OpenAI call returns
 consolidated Editorial Direction -> browser presents real Approve /
-Reject controls -> Approve persists project state
+Reject controls -> the Author's decision persists as durable project
+state (Approve advances the workflow; Reject remains stage-local)
 ```
 
 **Acceptance criteria:**
@@ -327,10 +328,16 @@ Reject controls -> Approve persists project state
   GPT UX lesson, per Section 12's Web UX Principles);
 - the browser presents real native **Approve** and **Reject** buttons -
   no typed numeric commands, no magic words;
-- Approve changes and persists `EditorialDirection.status` and
-  `EditorialProject.state`;
-- a page refresh does not lose project state (real persistence, not
-  client-only state);
+- both Approve and Reject are durable project-state decisions, per
+  DEC-029: Approve persists `EditorialDirection.status`, persists
+  decision metadata, and advances `EditorialProject.state`; Reject
+  persists `EditorialDirection.status`, persists Author feedback when
+  supplied, persists decision metadata, and remains at the current
+  workflow stage (**stage-local**, not client-local, ephemeral, or
+  non-persistent) while preserving the `Source` and the project;
+- a page refresh does not lose project state, for either an approved or
+  a rejected Editorial Direction (real persistence, not client-only
+  state);
 - a project is visible only to its owning Author (`author_id` scoping
   enforced server-side);
 - the application is deployable to a development environment (Section
@@ -467,6 +474,18 @@ cross-Author isolation, sign-out revocation.
   an invalid key is rejected by the OpenAI API with `401` before any
   usage is billed. Neither path exposes the key or internal detail to the
   browser.
+
+**RECONCILED (2026-08-11, DEC-029):** an independent Codex review of Web
+Walking Skeleton 01 found that this section's acceptance criteria and
+required-journey diagram stated persistence explicitly for Approve only,
+while the implemented Reject endpoint already persisted rejected status,
+Author feedback, and decision time. The Repository Author confirmed the
+implementation, not the acceptance criteria, was correct: both Approve
+and Reject are durable project-state decisions (DEC-029). Section 9 above
+is corrected to state this explicitly. No application code changed;
+`web/server/tests/projects.test.ts` was extended to assert the decision
+timestamp and stage non-advancement that the implementation already
+provided.
 
 **NOT YET VERIFIED:**
 

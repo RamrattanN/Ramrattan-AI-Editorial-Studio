@@ -84,6 +84,7 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | [DEC-026](#dec-026) | PV-027 | Custom GPT terminal Hero Visual model |
 | [DEC-027](#dec-027) | PV-028 | Published Editorial Projects may continue into Reader Engagement |
 | [DEC-028](#dec-028) | Web Product Foundation discovery spike | Web Product Foundation v1 adopted |
+| [DEC-029](#dec-029) | Independent Codex implementation review | Web approval-boundary decisions are durable project state |
 
 ---
 
@@ -504,3 +505,18 @@ at "GPT Recovery RC5" is the reference private-GPT implementation.
 | Affected Product Areas | Future web-product architecture, authentication, OpenAI integration, data model, Hero Visual pipeline, and LinkedIn integration planning. |
 | Implementation Status | Foundation adopted; NOT an authorization to implement the full web product. Only "Web Walking Skeleton 01," as scoped in `docs/product/version2/Web_Product_Foundation_v1.md` Section 9, is build-ready for the next Engineering Delivery. Does not change the locked private GPT baseline (`deployment/openai_gpt/GPT_Configuration_v2_RC1.md`, GPT Recovery RC5, unchanged) or DEC-013. |
 | Repository References | `docs/product/version2/Web_Product_Foundation_v1.md` |
+
+---
+
+## DEC-029
+
+| Field | Value |
+|---|---|
+| Decision ID | DEC-029 |
+| Validation Reference | Independent Codex implementation review of Web Walking Skeleton 01 (Reject-persistence discrepancy) |
+| Date Approved | 2026-08-11 |
+| Decision | Web approval-boundary decisions are durable project state. Both Approve and Reject persist to the database as an explicit product decision, not an implementation detail. Approve persists the Author's decision, persists decision metadata, and advances the workflow to the next stage. Reject persists the Author's decision, persists Author feedback when supplied, persists decision metadata, and remains at the current workflow stage; it preserves the originating Source, the project, and any already-approved upstream work, and it does not restart the project or require already-supplied information to be re-entered. "Reject remains local to the stage" means **stage-local** - the workflow neither advances nor restarts - and explicitly does **not** mean client-local, ephemeral, or non-persistent. A browser refresh, sign-out/sign-in, device change, or later return to the project must not erase the fact that the Author rejected the current artifact. This decision generalizes DEC-017's stage-local rejection principle from the stateless private Custom GPT surface (where "stage-local" and "non-persistent" were indistinguishable because the GPT has no database) to the persistent web product, where the two are no longer the same thing and must be stated explicitly. |
+| Reason | Independent review of Web Walking Skeleton 01 found that the implemented Reject endpoint persists rejected status, Author feedback, and decision time, while `docs/product/version2/Web_Product_Foundation_v1.md` Section 9's acceptance criteria and required-journey diagram stated persistence explicitly for Approve only, creating the appearance of a contract violation. The Repository Author reviewed the finding and confirmed the implementation was correct: persistent Editorial Projects are intended to retain Author decisions durably, which is one of their advantages over the stateless Custom GPT surface. The documentation, not the implementation, was stale and is corrected by this decision. |
+| Affected Product Areas | Web product Editorial Direction approval boundary (Web Walking Skeleton 01) and every future web-product approval boundary (Editorial Plan, Draft, Hero Visual, and later stages) that persists Author decisions to the database. |
+| Implementation Status | Already conformant at time of decision - no application code change required. `web/server/src/projects/repository.ts`'s `rejectDirection` already persists `status`, `reject_feedback`, and `decided_at`, and leaves `EditorialProject.stage` unchanged. Acceptance-criteria wording in `docs/product/version2/Web_Product_Foundation_v1.md` Section 9 corrected to match; automated test coverage in `web/server/tests/projects.test.ts` extended to assert the decision timestamp and stage non-advancement explicitly. Does not change the locked private GPT baseline or DEC-017, which remains the authoritative decision for the Custom GPT surface. |
+| Repository References | `docs/product/version2/Web_Product_Foundation_v1.md`; `web/server/src/projects/repository.ts`; `web/server/tests/projects.test.ts`; DEC-017 |

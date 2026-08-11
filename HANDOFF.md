@@ -156,12 +156,22 @@ candidate vertical slice and has not been authorized or started - see
 `BACKLOG.md` for its current priority relative to the Editorial
 Direction quality observation below.
 
-Real hosted acceptance also surfaced a material product observation:
-Editorial Direction output was technically functional but materially
-weaker editorially than the locked GPT baseline. This is tracked as
-`BACKLOG.md` BL-001 and BL-002 (model selection); it has not been
-formalized as a Product Validation Log entry, and no fix has been
-authorized or implemented.
+Real hosted acceptance also surfaced a material product observation,
+now formalized as `product/validation/Product_Validation_Log.md`
+PV-029: Editorial Direction output was technically functional but
+materially weaker editorially than the locked GPT baseline.  PV-029
+records the observation only and does not prejudge a model, prompt, or
+implementation cause.  This is tracked as `BACKLOG.md` BL-001 (the
+proposed primary sprint item) and BL-002 (supporting model-selection
+investigation, not a second primary WIP item); no fix has been
+authorized or implemented, and neither item is In Progress.
+
+No Daily Sprint is currently active, and nothing is in the In Progress
+Kanban column.  DS-01 - Editorial Direction Quality Investigation vs.
+Locked GPT Baseline - is recommended (see `BACKLOG.md`) but has not
+been authorized.  The next working session begins with Daily Start,
+Repository Author approval of one sprint outcome, and only then moving
+the approved primary item to In Progress.
 
 ---
 
@@ -436,6 +446,22 @@ Recent engineering milestones
   Project #1 was inspected and found stale since Version 1.1 completion
   (no Web Product Track items); not used as canonical. No product
   implementation began.
+- Minimal GitHub Wiki initialized and current (2026-08-11): Home and
+  `_Sidebar` orient a human reader and link to authoritative repository
+  sources on `develop`; the repository remains authoritative, and Wiki
+  synchronization now has an explicit cadence rule in
+  `docs/engineering/Delivery_Operating_Model.md`.  A repository prose
+  convention (no em/en dashes, one space after a comma, two spaces
+  after a sentence period, with explicit technical exceptions) is now
+  established in `AGENTS.md` for Claude, Codex, and future
+  collaborators.  Sprint Preflight Governance completed ahead of DS-01
+  (2026-08-11): PV-029 records the Editorial Direction quality
+  observation as evidence only; `BACKLOG.md` BL-001 is clarified as
+  the primary WIP=1 sprint item with BL-002 as supporting work; BL-005
+  (Render PostgreSQL lifecycle) and BL-011 (Version 1.0/1.1 release
+  decision) were reviewed and remain unresolved Repository Author
+  decisions, with no invented deadline and no release action taken.
+  No product implementation began.
 
 ---
 

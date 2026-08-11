@@ -375,6 +375,10 @@ Recent engineering milestones
   for Approve only, while Reject already persisted correctly. Repository
   Author confirmed both are durable, stage-local decisions; documentation
   corrected, no application code changed.
+- Approve stage-advancement gap fixed (DEC-029, 2026-08-11): a follow-up
+  Codex review found Approve did not advance `EditorialProject.stage`.
+  `approveDirection` now advances the project to `editorial_plan` in the
+  same transaction as the direction update.
 
 ---
 

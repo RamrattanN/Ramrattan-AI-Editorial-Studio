@@ -261,22 +261,54 @@ export class ProjectRepository {
     }
   }
 
+  /**
+   * DEC-029: Approve persists the decision, persists decision metadata,
+   * and advances the workflow - both writes happen in one transaction so
+   * an Editorial Direction is never left approved without the project
+   * stage advancing (or vice versa).
+   */
   async approveDirection(
     projectId: string,
     authorId: string,
-  ): Promise<EditorialDirection | null> {
+  ): Promise<{ direction: EditorialDirection; project: EditorialProject } | null> {
     const owned = await this.getProjectForAuthor(projectId, authorId);
     if (!owned) throw new ProjectNotFoundError();
 
-    const { rows } = await this.pool.query(
-      `UPDATE editorial_directions
-       SET status = 'approved', decided_at = now()
-       WHERE editorial_project_id = $1
-       RETURNING *`,
-      [projectId],
-    );
-    if (rows.length === 0) return null;
-    return mapDirection(rows[0]);
+    const client = await this.pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const { rows: directionRows } = await client.query(
+        `UPDATE editorial_directions
+         SET status = 'approved', decided_at = now()
+         WHERE editorial_project_id = $1
+         RETURNING *`,
+        [projectId],
+      );
+      if (directionRows.length === 0) {
+        await client.query("ROLLBACK");
+        return null;
+      }
+
+      const { rows: projectRows } = await client.query(
+        `UPDATE editorial_projects
+         SET stage = 'editorial_plan', updated_at = now()
+         WHERE id = $1
+         RETURNING *`,
+        [projectId],
+      );
+
+      await client.query("COMMIT");
+      return {
+        direction: mapDirection(directionRows[0]),
+        project: mapProject(projectRows[0]),
+      };
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
   }
 
   async rejectDirection(

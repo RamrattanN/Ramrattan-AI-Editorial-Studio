@@ -487,6 +487,17 @@ is corrected to state this explicitly. No application code changed;
 timestamp and stage non-advancement that the implementation already
 provided.
 
+**FIXED (2026-08-11, DEC-029):** a follow-up Codex review of the same PR
+found that, unlike Reject, Approve did not yet advance
+`EditorialProject.stage` - it persisted only `EditorialDirection.status`
+and `decided_at`. `web/server/src/projects/repository.ts`'s
+`approveDirection` now updates both the Editorial Direction and the
+project's stage (to the already-named `editorial_plan` stage) in one
+transaction, so an Editorial Direction can never be left approved without
+the project advancing. Migration `002_add_editorial_plan_stage.sql` adds
+`editorial_plan` to the project stage constraint. Editorial Plan
+generation itself remains out of scope.
+
 **NOT YET VERIFIED:**
 
 - Literal browser click-through - the implementation environment did not

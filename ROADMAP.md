@@ -688,6 +688,14 @@ Version 1.0/1.1 and are not superseded by this section for that scope.
   workflow neither advances nor restarts), not client-local or ephemeral.
   Documentation corrected; no application code change was required.
 
+- Approve stage-advancement gap fixed (DEC-029, 2026-08-11) - a follow-up
+  Codex review found Approve persisted `EditorialDirection.status` and
+  `decided_at` but did not advance `EditorialProject.stage`, unlike
+  Reject. Fixed: `approveDirection` now advances the project to the
+  `editorial_plan` stage in the same transaction as the direction update
+  (migration `002_add_editorial_plan_stage.sql`). Editorial Plan
+  generation itself remains unimplemented.
+
 ### Verified
 
 - Web automated tests, `npm install`, typecheck, lint, production build, and

@@ -45,6 +45,7 @@ the observation that motivated them.
 | [PV-026](#pv-026) | 2026-08-09 | Hero Visual rendered but workflow halted | Validated and approved for Recovery RC4 |
 | [PV-027](#pv-027) | 2026-08-09 | Post-image continuation is not reliable in Custom GPT | Validated, approved, and locked for the private GPT baseline |
 | [PV-028](#pv-028) | 2026-08-10 | Post-publication Reader Engagement extends Editorial Project value | Validated real-use discovery - candidate requirement for web-product discovery |
+| [PV-029](#pv-029) | 2026-08-11 | Web Editorial Direction quality compared against the locked GPT baseline | Validated real-use discovery - investigation pending |
 
 ---
 
@@ -465,3 +466,18 @@ the observation that motivated them.
 | Analysis | Post-publication discussion is part of the Author's editorial lifecycle. Reader comments may contain agreement, disagreement, questions, challenges, misunderstandings, additional evidence, alternative perspectives, requests for clarification, or ideas for future articles. Because the Studio already understands the originating article and its evidence context, it may provide higher-value analysis than a fresh, context-free AI conversation - particularly when the Author wants to understand a reader's point before deciding whether or how to respond. The observed behavior depends on the original conversation remaining available with its in-session context; this must not be misrepresented as persistent cross-session product memory. |
 | Decision | Record Reader Engagement as a candidate future web-product capability, extending the Editorial Project lifecycle to Create -> Publish -> Engage. A future web Editorial Project should remain available after publication and may enter a Reader Engagement state. This is a product discovery, not authorization to modify the locked private GPT, implement LinkedIn integration, implement automatic replies, or change canonical Author Ownership rules. |
 | Status | Validated real-use discovery. Not yet implemented as a formal new GPT capability. Candidate requirement for web-product discovery. |
+
+---
+
+## PV-029
+
+| Field | Detail |
+|---|---|
+| Date | 2026-08-11 |
+| Validation Session | Web Walking Skeleton 01 literal hosted browser acceptance (Render, https://studio.ramrattan.com) |
+| Scenario | Web Editorial Direction quality compared against the locked GPT baseline |
+| Observation | The hosted Web Editorial Direction successfully completed the technical workflow but produced materially weaker editorial framing than the accepted locked GPT baseline during direct Repository Author comparison. |
+| Evidence | Real hosted browser acceptance against https://studio.ramrattan.com (2026-08-11): a real public source URL was submitted, retrieved, and processed; a real, non-mocked, server-side OpenAI Editorial Direction request executed through the application's own path; the resulting Editorial Direction was schema-valid, persisted, and displayed, and native Approve/Reject functioned correctly.  The Repository Author's direct comparison against the GPT Recovery RC5 - Locked Private GPT Baseline found the web output materially weaker editorially for comparable source material. |
+| Analysis | Publication-quality editorial intelligence for the Web Product is not yet proven, even though the technical foundation (retrieval, OpenAI integration, schema validation, persistence, and Approve/Reject) is proven.  The specific cause of the gap is not yet established; candidate factors include model selection, prompt/instruction quality, context construction, source processing, and schema constraints, none of which is prejudged by this entry. |
+| Decision | Investigate the quality gap before deepening the generation pipeline.  Tracked as BACKLOG.md BL-001 (quality parity with the locked GPT baseline) and BL-002 (model-selection evaluation); no model, prompt, or implementation change is adopted by this entry. |
+| Status | Validated real-use discovery.  Investigation pending under BACKLOG.md BL-001 and BL-002.  Not yet resolved. |

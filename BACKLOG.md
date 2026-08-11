@@ -94,6 +94,7 @@ versus what goes to the backlog) are defined in
 | Kanban State | Backlog |
 | Dependencies | Closely coupled to BL-002 (model selection); recommend resolving before deepening the generation pipeline (BL-003). |
 | Acceptance Summary | Not yet defined - requires a product decision on target quality bar, comparison method, and whether the gap is prompt-only or model-selection-related. |
+| Notes | Primary WIP=1 In Progress item when this work begins.  BL-002 is resolved alongside it as supporting investigation and does not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule. |
 
 ### BL-002 - Model-selection quality/cost evaluation for Editorial Direction
 
@@ -105,6 +106,7 @@ versus what goes to the backlog) are defined in
 | Kanban State | Backlog |
 | Dependencies | Informs BL-001; may be resolved together. |
 | Acceptance Summary | Not yet defined - candidate output: a short model comparison and recommendation, reviewed by the Repository Author. |
+| Notes | Supporting investigation for BL-001, not a second primary In Progress item.  Resolved within the same sprint as BL-001 without independently entering the In Progress column, per the Delivery Operating Model's WIP=1 rule. |
 
 ### BL-003 - Web Walking Skeleton 02 - Editorial Plan + Draft
 

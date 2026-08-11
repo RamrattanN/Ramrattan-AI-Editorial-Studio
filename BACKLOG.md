@@ -200,6 +200,17 @@ versus what goes to the backlog) are defined in
 | Dependencies | BL-004 (SMTP), BL-005/BL-006 (Render tier decisions), and BL-011 (Version 1/1.1 release decision). Umbrella item - does not duplicate their individual tracking. |
 | Acceptance Summary | Not yet written. |
 
+### BL-016 - Dependency Supply-Chain Security Visibility
+
+| Field | Value |
+|---|---|
+| Outcome | Verify and maintain GitHub dependency supply-chain visibility without remediating packages, including Dependency Graph coverage, Dependabot vulnerability alerts, and a documented follow-up policy for security updates and version-update automation. |
+| Evidence / Source | GitHub repository dependency state, security visibility configuration, and current alert findings. |
+| Priority | P2 |
+| Kanban State | Backlog |
+| Dependencies | None technical; depends on repository owner review of security visibility and vulnerability findings. |
+| Acceptance Summary | GitHub dependency graph and Dependabot alerts are verified, security-update automation is intentionally left unchanged, and a follow-up remediation priority policy is recorded in the backlog. |
+
 ### BL-012 - B002 - Brand Identity Refinement
 
 | Field | Value |

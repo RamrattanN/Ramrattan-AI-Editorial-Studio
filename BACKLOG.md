@@ -43,15 +43,23 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-001 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
+| BL-002 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | BL-001 | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history)* |
 
 ## Current Sprint
 
-**No active Daily Sprint.** The next Daily Sprint is selected from this
-backlog at the start of the next session, per
-`docs/engineering/Delivery_Operating_Model.md`'s Daily Start sequence.
-This delivery explicitly does not select it - see "Tomorrow's Sprint
-Readiness" as the next authorized task.
+| Field | Value |
+|---|---|
+| Sprint Date / ID | DS-01, 2026-08-11 |
+| Outcome | Determine why the Web Product's Editorial Direction is materially weaker editorially than the locked GPT baseline (PV-029), and produce an evidence-backed recommendation for the Web Product's Editorial Direction configuration. |
+| Must Complete | Baseline reconstruction (locked GPT and current Web path); difference analysis; a controlled evaluation; a bounded finding on primary cause (prompt, model, context, source processing, schema, or a combination); a model/configuration recommendation with quality/cost rationale; a finding on whether Editorial Direction quality is now sufficiently understood to permit Web Walking Skeleton 02. |
+| Stretch | A narrow, reversible, prompt-only production change, authorized only if evidence clearly isolates a prompt-only cause requiring no model, schema, persistence, source-processing, or architecture change. |
+| Acceptance Criteria | The sprint's five governing questions are each answered with a bounded, evidence-based conclusion, not "more investigation is required"; a durable evidence artifact exists; the Repository Author has a concise comparison to review before any implementation decision. |
+| Dependencies | BL-002 (model-selection evaluation), resolved as supporting investigation under this sprint; does not independently enter In Progress. |
+| Risks | Real OpenAI evaluation cost; editorial-quality judgment remains the Repository Author's, not the agent's; rework risk if Web Walking Skeleton 02 is deemed ready prematurely. |
+| Explicit Non-Goals | Web Walking Skeleton 02, Editorial Plan, Draft, Hero Visual, LinkedIn publishing, Reader Engagement, locked GPT or GPT Knowledge changes, SMTP, Render/DNS changes, `main` promotion, tagging, BL-011, BL-016, Codex audible-notification troubleshooting, Wiki expansion. |
+| Owner / Execution Agent | Claude |
+| Review Agent | Codex, scope determined by findings (see final report) |
+| Status | Review / Validation - investigation and recommendation complete; live evaluation execution (Section 5 of the evidence artifact) not run in this environment, no `OPENAI_API_KEY` was available - see `docs/product/version2/Editorial_Direction_Quality_Investigation.md` |
 
 ## Latest Closeout
 
@@ -89,12 +97,12 @@ versus what goes to the backlog) are defined in
 | Field | Value |
 |---|---|
 | Outcome | Web Editorial Direction output is at least as strong, editorially, as the locked private GPT's (`GPT Recovery RC5`) output for comparable source material. |
-| Evidence / Source | Repository Author, real hosted browser acceptance (2026-08-11): the Web Editorial Direction was technically functional (real OpenAI call, schema-valid, persisted, Approve/Reject working) but materially weaker editorially than the locked GPT baseline. **Not yet formalized as a Product Validation Log entry** - this backlog item is the interim record; promoting it to a formal `PV-029` entry is a reasonable next step for the Repository Author to authorize separately, not done in this delivery. |
+| Evidence / Source | Repository Author, real hosted browser acceptance (2026-08-11): the Web Editorial Direction was technically functional (real OpenAI call, schema-valid, persisted, Approve/Reject working) but materially weaker editorially than the locked GPT baseline.  Formalized as `product/validation/Product_Validation_Log.md` PV-029 (observational evidence only, no cause prejudged). |
 | Priority | P1 |
-| Kanban State | Backlog |
+| Kanban State | Review / Validation (DS-01) |
 | Dependencies | Closely coupled to BL-002 (model selection); recommend resolving before deepening the generation pipeline (BL-003). |
-| Acceptance Summary | Not yet defined - requires a product decision on target quality bar, comparison method, and whether the gap is prompt-only or model-selection-related. |
-| Notes | Primary WIP=1 In Progress item when this work begins.  BL-002 is resolved alongside it as supporting investigation and does not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule. |
+| Acceptance Summary | DS-01 (2026-08-11) answered the deferred product decision: the quality gap is a combination of prompt/instruction completeness and model capability, with missing verification/browsing tooling as a secondary, architecturally larger contributing factor.  Recommendation: `gpt-5.6-terra` plus a baseline-aligned prompt revision, pending empirical confirmation - see `docs/product/version2/Editorial_Direction_Quality_Investigation.md`.  Live evaluation execution was designed and tooled (`web/server/eval/editorial-direction-eval.mjs`) but not run in this environment - no `OPENAI_API_KEY` was available. |
+| Notes | Primary WIP=1 item for DS-01; BL-002 was resolved alongside it as supporting investigation and did not separately enter In Progress, per the Delivery Operating Model's WIP=1 rule.  Remains in Review / Validation, not Done, pending Repository Author review and the still-outstanding live evaluation run. |
 
 ### BL-002 - Model-selection quality/cost evaluation for Editorial Direction
 
@@ -103,9 +111,9 @@ versus what goes to the backlog) are defined in
 | Outcome | A deliberate, evidence-based decision on which OpenAI model to use for Editorial Direction (and future Editorial Plan/Draft), balancing quality against cost. |
 | Evidence / Source | `docs/product/version2/Web_Product_Foundation_v1.md` Section 5 explicitly deferred "model-selection policy beyond 'use a capable general-purpose model.'" `gpt-4o-mini` was used for foundation verification as an implementation detail, never accepted as a product quality decision. |
 | Priority | P1 |
-| Kanban State | Backlog |
-| Dependencies | Informs BL-001; may be resolved together. |
-| Acceptance Summary | Not yet defined - candidate output: a short model comparison and recommendation, reviewed by the Repository Author. |
+| Kanban State | Backlog (resolved as DS-01 supporting investigation; not moved independently) |
+| Dependencies | Informs BL-001; resolved together in DS-01. |
+| Acceptance Summary | DS-01 (2026-08-11) produced a candidate recommendation - `gpt-5.6-terra`, OpenAI's current "balance of intelligence and cost" tier - grounded in authoritative OpenAI pricing/model documentation, with an estimated per-request cost comparison against `gpt-4o-mini`, `gpt-5.6-luna`, `gpt-5.6-sol`, and `gpt-4o`.  Not yet empirically confirmed by live comparison (no `OPENAI_API_KEY` in this environment) and not yet reviewed or accepted by the Repository Author.  See `docs/product/version2/Editorial_Direction_Quality_Investigation.md` Section 6 and Section 9. |
 | Notes | Supporting investigation for BL-001, not a second primary In Progress item.  Resolved within the same sprint as BL-001 without independently entering the In Progress column, per the Delivery Operating Model's WIP=1 rule. |
 
 ### BL-003 - Web Walking Skeleton 02 - Editorial Plan + Draft

@@ -1,0 +1,154 @@
+# Editorial Direction Quality Investigation
+
+**Status:** DS-01 Investigation Complete - Recommendation Pending Repository Author Review
+**Classification:** Evidence and recommendation artifact (Informative - not a Product Decision)
+**Backlog:** BL-001 (primary), BL-002 (supporting)
+**Evidence base:** PV-029
+
+## 1. Question
+
+PV-029 recorded that the hosted Web Editorial Direction completed its technical workflow successfully but was judged materially weaker editorially than the locked private GPT baseline (`GPT Recovery RC5`) during direct Repository Author comparison.  PV-029 deliberately did not diagnose a cause.  This document answers DS-01's five governing questions:
+
+1. What materially causes the observed quality gap?
+2. Is the gap prompt-related, model-related, context-construction-related, source-processing-related, schema-related, or a combination?
+3. Which model/configuration should the Web Product use?
+4. What quality/cost tradeoff does that recommendation imply?
+5. Is Editorial Direction quality now sufficiently understood to permit Web Walking Skeleton 02 to proceed?
+
+## 2. Baseline
+
+### 2.A Locked GPT baseline (read-only reference, not modified)
+
+Reconstructed from `deployment/openai_gpt/GPT_Configuration_v2_RC1.md` (GPT Recovery RC5, locked):
+
+- **Persona and quality bar.**  The Instructions open with "You are the Editor inside Ramrattan AI Editorial Studio... Work like a skilled editor - concise, accurate, useful, and low-friction."  This framing governs every stage, including Editorial Direction.
+- **Editorial Direction behavior.**  "For a URL or source, retrieve it, verify important claims, and infer audience, objective, publication language, and editorial angle... Recommend one primary angle plus up to two supporting lenses only when useful."
+- **Retrieval and verification tooling.**  Web Search capability is **ON** - the model can browse and cross-reference, not just read one pre-fetched snapshot.  The Instructions explicitly require verifying important claims, which presumes this tool access.
+- **Recommended model.**  Section 9: "the platform's current general-purpose flagship conversational model... rather than a pure reasoning-optimized model," reasoned specifically because the workload is "long-form editorial writing plus moderate evidence reasoning and web browsing."
+- **House Style.**  US English, no em/en dashes, one space after commas, two spaces after sentence periods - the same convention this repository now applies to its own documentation (`AGENTS.md`, "Prose Convention").
+
+### 2.B Current Web path (traced from source, 2026-08-11)
+
+Traced directly from `web/server/src/openai/editorialDirection.ts`, `client.ts`, `schema.ts`, and `source/retrieve.ts` (code is authoritative; `web/README.md` was not relied on for behavior):
+
+- **Model.**  `getConfiguredModel()` in `client.ts` returns `process.env.OPENAI_MODEL ?? "gpt-4o-mini"` - `gpt-4o-mini` is the default, and no `OPENAI_MODEL` override has been adopted as a product decision (`Web_Product_Foundation_v1.md` Section 5 explicitly deferred model-selection policy).
+- **API and tooling.**  `client.chat.completions.create(...)` with `response_format: { type: "json_schema", ... }` (Structured Outputs, strict mode).  No tool calling, no web-browsing tool - the model sees only the `sourceText` string already extracted server-side.  It cannot browse, search, or verify anything beyond what is in that one string.
+- **System prompt.**  A single paragraph instructing the model to infer audience/objective/angle, recommend one primary angle plus up to two lenses, default to US English, and "respond with the requested JSON object only."  It does **not** instruct the model to verify claims, does not establish an editor persona or quality bar, and does not mention analytical depth, distinctiveness, or a target audience's practical needs.
+- **Source retrieval.**  `retrieveSource()`: a single `fetch()` (10s timeout, 2MB cap), `html-to-text` conversion stripping `script`/`style`/`nav`/`footer`/`img`, then `.slice(0, 12_000)` (`MAX_SUMMARY_CHARS`).  No readability/main-content extraction beyond tag-based stripping; no retry, no JavaScript rendering.
+- **Schema.**  `source_understanding` (max 2000 chars), `audience` (max 300), `objective` (max 300), `publication_language` (max 60), `primary_angle` (max 500), `supporting_lenses` (0-2 items, each max 500), `editorial_thesis` (max 1000).  Enforced twice: OpenAI's strict `json_schema` mode, then a `zod` schema (`schema.ts`) before persistence.
+- **Retry.**  One bounded retry (`MAX_ATTEMPTS = 2`) on schema-validation failure only - not on quality grounds.
+- **Persistence.**  `ProjectRepository.createEditorialDirection` persists the seven fields as-is (no transformation) and advances `EditorialProject.stage`.
+
+## 3. Difference Analysis
+
+| Dimension | Locked GPT | Current Web | Classification |
+|---|---|---|---|
+| Model capability | Current flagship conversational model (explicit recommendation) | `gpt-4o-mini` (small/cheap tier, explicitly deferred as "an implementation detail, never accepted as a product quality decision") | **Likely quality-relevant** |
+| Instruction completeness / persona | Full "skilled editor" framing, applies to every stage | Narrow, mechanical, schema-filling instructions only | **Likely quality-relevant** |
+| Verification requirement | Explicit: "verify important claims" | Absent entirely | **Likely quality-relevant** |
+| Retrieval / verification tooling | Real web-search/browsing tool (Web Search: ON) | None - one static pre-fetched text snapshot only | **Likely quality-relevant** (context/source-processing) |
+| Analytical depth / distinctiveness bar | Implied by editor persona; explicit at Draft stage ("specific evidence, no padding") | Not present at the Direction stage | **Possibly quality-relevant** |
+| Source extraction quality | N/A (model's own browsing) | Basic tag-stripped `html-to-text`, no main-content/readability extraction | **Possibly quality-relevant** |
+| Source length bound | N/A (model's own browsing, can revisit) | Hard cut at 12,000 characters | **Possibly quality-relevant** (mainly for long sources) |
+| Schema field-length limits | N/A (free-form chat) | `source_understanding` <= 2000, `editorial_thesis` <= 1000, etc. | **Unlikely quality-relevant** - generous for a consolidated direction |
+| Retry policy | N/A | Schema-validation retry only, not quality-based | **Implementation-only / not editorially relevant** |
+| Persistence / transformation | N/A | Fields persisted as-is, no post-processing | **Implementation-only / not editorially relevant** |
+| House style (dash/spacing) | Explicit, enforced by instruction | Not addressed in the Direction task's system prompt | **Unlikely quality-relevant** to substance; cosmetic |
+
+No assumption was made that the model alone explains the gap merely because it differs, or that the prompt alone explains it merely because the locked GPT's instructions are longer - both are supported independently above: the model difference is evidenced by the explicit Section 9 recommendation the Web Product has not adopted, and the prompt difference is evidenced by concrete missing instructions (verification, persona, depth), not merely length.
+
+## 4. Evaluation Design
+
+### 4.A Rubric (1-5 per dimension; Repository Author judgment is authoritative, agent scoring is supporting evidence only)
+
+1. Source fidelity - does it accurately reflect the source, including material uncertainty?
+2. Strength of central editorial thesis
+3. Specificity (vs. generic restatement)
+4. Analytical depth
+5. Usefulness to a manager/practitioner audience
+6. Identification of the non-obvious implication
+7. Practical direction
+8. Absence of generic filler
+9. Appropriate confidence/qualification
+10. Structural completeness (all seven fields genuinely useful, not filler)
+11. Editorial distinctiveness
+
+### 4.B Evaluation matrix
+
+Four variants, holding one variable constant per comparison, using the same source material throughout:
+
+| Variant | Model | Prompt | Context / Schema | Isolates |
+|---|---|---|---|---|
+| A | `gpt-4o-mini` (current default) | Current production prompt | Current (unchanged) | Reproduces current production baseline |
+| B | `gpt-4o-mini` | Improved, baseline-aligned prompt (adds editor persona, claim-uncertainty handling, distinctiveness bar - no browsing tool assumed) | Current (unchanged) | Prompt effect |
+| C | `gpt-5.6-terra` (candidate) | Current production prompt | Current (unchanged) | Model effect |
+| D | `gpt-5.6-terra` | Improved prompt | Current (unchanged) | Combined effect / best achievable configuration |
+
+The "improved" prompt is implemented in the evaluation harness (Section 5) as `IMPROVED_SYSTEM_PROMPT` and is a candidate for review, not an adopted change.
+
+### 4.C Source material
+
+The original 2026-08-11 hosted-acceptance source URL is not recorded in `ROADMAP.md`, `HANDOFF.md`, or PV-029 - only the Repository Author's qualitative judgment is recorded, not the specific source or generated output.  Per this sprint's instruction not to invent unrecoverable evidence, the original comparison cannot be reproduced verbatim.  A representative substitute is recommended instead: the same URL already used and recorded for the locked GPT's own PV-017 validation (`https://thehackernews.com/2026/08/new-css-attacks-can-break-webmail.html`), which keeps the evaluation within the same source category (technical/professional article suitable for LinkedIn thought leadership) already precedented in this repository's own validation history.
+
+## 5. Evaluation Harness (built, not yet executed)
+
+`web/server/eval/editorial-direction-eval.mjs` - a standalone, dependency-free script (Node's built-in `fetch` only; no `npm install` required) that replicates the exact production request shape (model, both prompt variants, JSON schema, Structured Outputs).  It fails closed with a clear error and makes no network call when `OPENAI_API_KEY` is unset - verified directly in this session (see Section 8).
+
+**Not executed in this session:** this sandboxed environment has no `OPENAI_API_KEY` in its process environment and no `web/server` npm dependencies installed (`node_modules` is empty and gitignored).  Real evaluation calls were authorized for this sprint but require an environment with a configured key.  The harness is ready to run as-is, by the Repository Author or a future Claude session with `OPENAI_API_KEY` configured, following the usage instructions in the script's header comment.
+
+## 6. Usage / Cost Comparison
+
+**Measured usage:** none - no evaluation calls were executed in this session (Section 5).
+
+**Estimated cost**, from reference pricing captured 2026-08-11 (`developers.openai.com/api/docs/pricing`; verify before relying on it, pricing changes independently of this document) and a representative 3,000-input / 400-output-token Editorial Direction request (approximate size for a 12,000-character source and a seven-field structured response):
+
+| Model | Input $/1M | Output $/1M | Est. cost per request | Positioning (OpenAI's own guidance) |
+|---|---|---|---|---|
+| `gpt-4o-mini` (current default) | $0.15 | $0.60 | ~$0.0007 | Small/cheap tier, superseded generation |
+| `gpt-5.6-luna` | $0.20 | $1.20 | ~$0.0011 | "Efficient, high-volume workloads" |
+| `gpt-5.6-terra` (recommended candidate) | $2.00 | $12.00 | ~$0.0108 | "A balance of intelligence and cost" |
+| `gpt-5.6-sol` | $5.00 | $30.00 | ~$0.0270 | "Complex production workflows... frontier capability" |
+| `gpt-4o` (for reference) | $2.50 | $10.00 | ~$0.0115 | Prior-generation flagship |
+
+At current, pre-scale Editorial Project volumes, the absolute cost difference between `gpt-4o-mini` and `gpt-5.6-terra` is small in dollar terms (roughly one cent per request) even though it is a roughly 15x per-token cost increase - the quality question, not the absolute cost, should govern this decision at this product stage.
+
+Sources: [OpenAI API pricing](https://developers.openai.com/api/docs/pricing), [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model), [OpenAI Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+## 7. Findings
+
+Ranked by strength of evidence, not assumption:
+
+1. **Prompt/instruction completeness (primary suspect).**  The current system prompt omits verification, editor-quality framing, and any distinctiveness/depth bar - not merely "shorter" than the locked GPT's, but missing specific, evidenced instructions the locked GPT relies on.  This is a zero-marginal-cost factor and the most concretely evidenced difference.
+2. **Model capability (significant contributing factor).**  `gpt-4o-mini` was adopted as an implementation detail during Web Walking Skeleton 01, never evaluated as a quality decision, and directly contradicts the locked GPT's own explicit flagship-model recommendation for this exact kind of task (long-form editorial writing, moderate evidence reasoning).
+3. **Missing verification/browsing capability (significant, but architecturally distinct).**  The locked GPT can search and cross-reference; the Web path sees one static, already-truncated text snapshot.  This plausibly explains weaker "verify important claims" behavior specifically, but adding real-time browsing is a larger architectural change than a prompt or model swap and is not recommended as part of this sprint's immediate next step.
+4. **Source extraction and truncation (possible, secondary).**  Reasonable for most single-article sources; more likely to matter for unusually long sources.  Not the primary explanation for a "materially weaker" result on ordinary source material.
+5. **Schema constraints (unlikely primary cause).**  Field-length limits are generous for a consolidated direction; strict-mode Structured Outputs is standard practice and shared by every current-generation model considered here.
+
+## 8. Limitations
+
+- No live model comparison was executed in this session - `OPENAI_API_KEY` is not available in this environment, and `web/server`'s npm dependencies are not installed here.  Findings above are based on code- and documentation-level evidence, not empirical output comparison.
+- The original 2026-08-11 acceptance source/output could not be recovered (Section 4.C); a representative substitute source is recommended instead.
+- Harness safety was verified (fails closed, no network call, no secret exposure without a key - Section 5), but its actual generation behavior across the four variants has not been observed.
+- Cost estimates use a representative token-count assumption, not measured usage; actual costs will vary by source length and output verbosity.
+
+## 9. Recommendation
+
+**Category: E - combination (prompt + model, with an architecturally larger factor noted but not recommended for immediate action).**
+
+- **Model/configuration:** adopt `gpt-5.6-terra` as the Editorial Direction model, pending empirical confirmation via the evaluation matrix (Section 4.B) run through the harness (Section 5).  It is OpenAI's own current "balance of intelligence and cost" tier, directly answering BL-002, and aligns with the locked GPT's flagship-not-reasoning-optimized principle applied to the current model lineup.
+- **Prompt:** adopt the `IMPROVED_SYSTEM_PROMPT` candidate in the harness (or a Repository-Author-refined version of it) after review - it closes the concretely identified gaps (verification framing, editor persona, distinctiveness bar) without requiring browsing-tool access the Web path does not have.
+- **Not recommended for this sprint:** adding real-time web-search/verification tooling.  It is a plausible contributing factor but a materially larger architecture change; revisit only if the prompt+model change (once empirically tested) does not close the gap sufficiently.
+- **Quality/cost tradeoff:** the model change is a real per-token cost increase (roughly 13x versus `gpt-4o-mini`) but a small absolute cost at current volumes (Section 6); the prompt change is free.  Neither implies a schema, persistence, or architecture change - both are configuration/prompt-level changes to the existing `chat.completions.create` call.
+- **Web Walking Skeleton 02 readiness (Question 5):** **not yet.**  The causal hypothesis is now well-evidenced and specific, but not empirically confirmed - proceeding to deepen the generation pipeline (BL-003) before running the designed evaluation would still carry the rework risk `BACKLOG.md` already flags.  Running Section 4.B's matrix through the harness is a small, fast next step relative to that risk.
+
+This recommendation requires a model swap, which is a production change - per this sprint's implementation-authorization boundary, no code change is made here.  The optional narrow prompt-only stretch was considered and **not attempted**: the evidence supports prompt **and** model together, not a prompt-only fix in isolation, and Section 8's limitations mean condition 1 of the stretch ("evidence clearly identifies a prompt/instruction-only improvement") is not confidently met without the empirical comparison this session could not run.
+
+## 10. Remaining Repository Author Decisions
+
+1. Whether to run the evaluation harness (Section 5) - in an environment with `OPENAI_API_KEY` configured and `web/server` dependencies installed via the repository's normal `npm ci` process - and review the resulting four-variant comparison before any implementation decision.
+2. Whether to authorize the `gpt-5.6-terra` model change and the `IMPROVED_SYSTEM_PROMPT` (or a refined version) for implementation, once the comparison is reviewed.
+3. Whether BL-003 (Web Walking Skeleton 02) should remain sequenced after this resolution, per `BACKLOG.md`'s existing dependency note.
+
+## 11. Recommended Codex Review Scope
+
+Not started automatically.  If the Repository Author authorizes the model/prompt change for implementation, recommend a narrow Codex review scoped specifically to: (a) confirming the change is genuinely prompt/configuration-only with no schema, persistence, or Approve/Reject workflow drift, and (b) independently reproducing at least one of the four evaluation variants to confirm the reported comparison is genuine and reproducible - matching the risk categories (persistence, workflow state, evidence verification) the Delivery Operating Model reserves Codex review for, not a blanket second pass.

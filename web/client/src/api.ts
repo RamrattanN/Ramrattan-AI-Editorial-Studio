@@ -1,4 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:4000";
+// Empty by default: same-origin relative requests, correct for the hosted
+// single-service deployment (client and API share one origin). Local dev
+// sets VITE_API_BASE_URL explicitly (see .env.example) because the Vite
+// dev server and the API run on different ports.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
 export interface Author {
   id: string;

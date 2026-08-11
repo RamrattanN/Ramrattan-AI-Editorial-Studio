@@ -21,7 +21,10 @@ export class CapturingEmailProvider implements EmailProvider {
   }
 }
 
-export function buildTestApp(pool: Pool): {
+export function buildTestApp(
+  pool: Pool,
+  clientDistDir?: string,
+): {
   app: Express;
   emailProvider: CapturingEmailProvider;
 } {
@@ -31,6 +34,7 @@ export function buildTestApp(pool: Pool): {
     pool,
     emailProvider,
     clientOrigin: "http://localhost:5173",
+    clientDistDir,
   });
   return { app, emailProvider };
 }

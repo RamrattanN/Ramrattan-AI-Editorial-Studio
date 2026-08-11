@@ -20,6 +20,13 @@ export function getOpenAIClient(): OpenAI {
   return client;
 }
 
+/**
+ * DEC-030 (product/validation/Product_Decisions.md): `gpt-5.6-terra` is the
+ * approved Editorial Direction model, replacing `gpt-4o-mini`, following
+ * DS-01's two-source controlled evaluation
+ * (docs/product/version2/Editorial_Direction_Quality_Investigation.md).
+ * `OPENAI_MODEL` remains available as an explicit override.
+ */
 export function getConfiguredModel(): string {
-  return process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+  return process.env.OPENAI_MODEL ?? "gpt-5.6-terra";
 }

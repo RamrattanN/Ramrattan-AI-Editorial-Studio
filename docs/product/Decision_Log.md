@@ -250,3 +250,34 @@ ADR-016 and proposed Architecture Baseline `2026.08.02v12` record the durable
 architecture.
 
 <!-- CAPABILITY_010_DECISION_LOG_END -->
+
+<!-- VERSION_1_1_DECISION_LOG_START -->
+
+## Version 1.1 Decisions
+
+| Date | Level | Decision | Rationale |
+|---|---:|---|---|
+| 2026-08-03 | D4 | Adopt Author Ownership for Publication Studio: Generate Once, the Author edits, the Studio does not | A workspace that can still rewrite the Author's words asks the Author to trust every future rewrite; removing the capability removes the need for that trust. |
+| 2026-08-03 | D4 | Require a completed Editorial Audit, not an unconditional block, to gate Copy LinkedIn Publication | Closes the post-edit publication-risk gap Author Edits Freely opened, without reintroducing the Studio as a publication gatekeeper. |
+| 2026-08-03 | D4 | A High or Severe Editorial Audit result withholds a positive recommendation; it never disables the action, blocks editing, or triggers a rewrite | Author Ownership means the Author, not the Studio, holds final authority over the copy action once informed. |
+| 2026-08-03 | D4 | Separate Editorial Review from Publication Content in Publication Studio | The Studio's own judgement must never be positioned where it could be mistaken for the Author's words. |
+| 2026-08-03 | D4 | Keep Branding architecturally independent of Editorial Source | Material approved for one purpose must not silently shape a different purpose. |
+| 2026-08-03 | D4 | Adopt Studio Configuration as a minimal, two-field, JSON-only preference file, distinct from the Portable Editorial Project | Continuity of preference and continuity of editorial substance are different responsibilities and must not be conflated. |
+| 2026-08-03 | D4 | Sequence Resume Existing Project as a sibling Entry Path to Start New Publication, never combined with Configuration Load | Configuration and a resumed project must never be able to collide in the same session. |
+| 2026-08-04 | D2 | Adopt JSON as the sole canonical Ramrattan AI Configuration format; Markdown Configuration input is out of Version 1.1 scope | Deterministic parsing, explicit schema validation, and portability outweigh Markdown's ambiguity for a machine-loaded preference file. |
+| 2026-08-04 | D2 | Adopt Editorial Confidence as the sole canonical field for the Editorial Audit's publication-readiness conclusion; no separate "Publication Readiness" field exists | Two names for the same Author-facing conclusion violates Language Shapes Behaviour's "one concept, one canonical name" rule; Editorial Audit recomputes the existing Editorial Confidence field rather than introducing a duplicate. |
+| 2026-08-04 | D4 | Complete the Constitutional Impact Review for ADR-018's Editorial Audit Gate resolution | ADR-018's Governance Question Resolved section requires this review as normal pre-delivery governance housekeeping before Version 1.1 delivers against the decision; the review found no constitutional conflict, subject to the two decisions recorded above. |
+| 2026-08-04 | D4 | Create Architecture Baseline `2026.08.04v14` | Records the delivered Version 1.1 runtime: V11-01 through V11-10, Issues #70-#79, PRs #81-#91. |
+
+ADR-018 and ADR-019 record the durable architecture, both Accepted against
+this delivery. Architecture Baseline `2026.08.04v14` is current.
+
+## Version 1.1 Learning
+
+Terminology drift between governing documents (a new Author-facing concept
+introduced under two different names) is a real, recurring risk distinct
+from behavioral drift, and is caught by the same discipline: read the
+concept's full definition across every governing document before treating
+two similar phrases as synonyms or as genuinely separate concepts.
+
+<!-- VERSION_1_1_DECISION_LOG_END -->

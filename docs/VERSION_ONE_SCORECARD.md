@@ -277,3 +277,15 @@ Progress until Issue #18 is reviewed and delivered.
 Release readiness is not claimed until this increment is delivered.
 
 <!-- ISSUE_018_SCORECARD_END -->
+
+<!-- VERSION_1_1_SCORECARD_POINTER_START -->
+
+## Version 1.1
+
+This scorecard tracks Version 1.0 only. Version 1.1 (V11-01 through
+V11-10, Issues #70-#79) is complete on `develop`; its status is tracked in
+`docs/product/Version_1_1_Engineering_Epic.md` (Section 16, Epic Progress
+Model) and `ROADMAP.md` (Version 1.1 section), not duplicated here.
+Architecture Baseline `2026.08.04v14` records the delivered runtime.
+
+<!-- VERSION_1_1_SCORECARD_POINTER_END -->

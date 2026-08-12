@@ -104,6 +104,11 @@ It is not a hosted library or cloud-storage path.
 
 The primary Author-facing publication-readiness conclusion.
 
+Editorial Confidence is the sole canonical field for this conclusion. In
+Version 1.1, an Editorial Audit recomputes this same field for the current,
+Author-edited publication, in addition to Generation. No separate
+"Publication Readiness" field exists.
+
 ### LMHS Editorial Risk
 
 The internal editorial assessment:
@@ -242,3 +247,47 @@ Editorial Confidence remains the primary Author-facing conclusion. LMHS
 Editorial Risk remains the internal assessment.
 
 <!-- CAPABILITY_008_EVIDENCE_VOCABULARY_END -->
+
+## Version 1.1 Vocabulary
+
+Terms introduced by the Version 1.1 Author Journey: Publication Studio,
+the Editorial Audit, and the Copy LinkedIn Publication gate. Definitions
+match `docs/product/Version_1_1_Author_Experience_Baseline.md`,
+`docs/architecture/adr/ADR-018-author-ownership-and-publication-studio.md`,
+`docs/architecture/Version_1_1_State_Machine.md`, and
+`docs/product/Version_1_1_Acceptance_Criteria.md`.
+
+### Editorial Audit
+
+An on-demand, analysis-only re-assessment of the Author-edited publication,
+available any number of times within Author Editing. It produces an LMHS
+Assessment, an Editorial Drift assessment, and an updated Editorial
+Confidence. It never generates, rewrites, overwrites, or otherwise alters
+Publication Content.
+
+### Editorial Drift
+
+The Editorial Audit's assessment of how far the Author's edits have moved
+the publication from the approved Editorial Plan and the evidence-supported
+claims established during Editorial Discovery. Drift is reported for the
+Author's visibility, not to block or reverse an edit.
+
+### LMHS Assessment
+
+The Editorial Audit's re-evaluation of LMHS Editorial Risk against the
+current, Author-edited publication, using the same Low, Moderate, High,
+Severe scale established in Version 1.0.
+
+### Author Editing
+
+The Publication Studio state in which the Author freely edits the generated
+publication. The Studio observes edits; it never writes to Publication
+Content except as a direct result of an explicit Author edit.
+
+### Copy LinkedIn Publication
+
+The Publication Editor's single Studio-provided action. It copies exactly
+the Author's current Publication Content, with no Editorial Review content
+included. Enabled only when the Editorial Audit Gate is matched: a
+completed Editorial Audit reflects the currently displayed content, and no
+edit has occurred since.

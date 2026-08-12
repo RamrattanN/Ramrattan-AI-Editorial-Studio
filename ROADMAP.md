@@ -579,3 +579,44 @@ No release tag, published release, external-service claim, B002 work, or
 Version 2 behavior is included.
 
 <!-- ISSUE_018_RELEASE_READINESS_END -->
+
+<!-- VERSION_1_1_ROADMAP_START -->
+
+## Version 1.1 - Author Journey, Publication Studio, and Editorial Audit
+
+Status: **Complete**
+
+Version 1.1 is governed by
+`docs/product/Version_1_1_Author_Experience_Baseline.md`,
+`docs/architecture/Version_1_1_State_Machine.md`,
+`docs/product/Version_1_1_Acceptance_Criteria.md`, ADR-018, and ADR-019, and
+tracked by the Version 1.1 Engineering Epic (Issue #69).
+
+Delivered slices:
+
+- [x] V11-01 - Author Journey Foundation (Issue #70, PR #81)
+- [x] V11-02 - Editorial Source and Branding Intake (Issue #71, PR #82)
+- [x] V11-03 - Editorial Discovery and Editorial Plan Gates (Issue #72, PR #83)
+- [x] V11-04 - Generation Orchestration and Blocked/Failed Handling (Issue #73, PR #84)
+- [x] V11-05 - Publication Studio Workspace (Issue #74, PR #85)
+- [x] V11-06 - Editorial Audit and the Copy LinkedIn Publication Gate (Issue #75, PR #88)
+- [x] V11-07 - Resume Existing Project Integration (Issue #76, PR #89)
+- [x] V11-08 - Session Completion, Configuration Generation, and Session Artifacts (Issue #77, PR #90)
+- [x] V11-09 - End-to-End Author Acceptance Evidence (Issue #78, PR #91)
+- [x] V11-10 - Documentation and Status Reconciliation (Issue #79)
+
+Architecture Baseline `2026.08.04v14` records the delivered runtime.
+ADR-018 and ADR-019 are Accepted. No Resume Existing Project, Session
+Completion, or Editorial Audit behavior remains a routing seam; all ten
+slices are implemented and tested.
+
+Explicitly excluded from Version 1.1, unchanged from the Implementation
+Plan and Engineering Epic: Publish to Platform, the Portable Author
+Context (Capability 012 candidate), user accounts or persistent Author
+identity, hosted storage, and multi-user collaboration.
+
+Version 1.1 Epic completion does not authorize release. `main` promotion,
+tagging, and GitHub Release publication each remain a separate, explicit
+Repository Author decision, exactly as for Version 1.0.
+
+<!-- VERSION_1_1_ROADMAP_END -->

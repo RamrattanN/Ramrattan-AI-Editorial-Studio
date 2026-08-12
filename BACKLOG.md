@@ -43,7 +43,7 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-003 through BL-010, BL-012 through BL-015 | *(none)* | BL-011 | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance)* |
+| BL-003 through BL-010, BL-012 through BL-015 | *(none)* | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance; BL-011 completed 2026-08-11, see `v1.1.0` GitHub Release and PR #133)* |
 
 ## Current Sprint
 
@@ -59,7 +59,7 @@ more work.
 | Explicit Non-Goals | Merge `develop` to `main`, Git tag creation, GitHub Release creation, Render or infrastructure change, Version 1.0/1.1 version-identifier changes, Web Walking Skeleton 02, BL-005, BL-016, another DS-01 OpenAI generation or hosted-acceptance repeat. |
 | Owner / Execution Agent | Claude |
 | Review Agent | None required - decision-support assessment, not implementation; no risk category (architecture, security, persistence, workflow state) from the Delivery Operating Model's Codex-review trigger list applies. |
-| Status | In Progress - assessment and recommendation complete (see delivery report); awaiting Repository Author decision on the actual promotion action. |
+| Status | Closed. The Repository Author authorized the pinned Version 1.1 promotion; `v1.1.0` was promoted, tagged, and released (PR #133, merged 2026-08-11). BL-011 is Done. |
 
 ## Latest Closeout
 
@@ -100,9 +100,9 @@ versus what goes to the backlog) are defined in
 | Outcome | Repository Author decision on `develop`-to-`main` promotion, release tag(s), GitHub Release publication, release notes, and external announcement for Version 1.0 and/or Version 1.1. |
 | Evidence / Source | `HANDOFF.md` "Current Focus" #1; Issue #18 and the Version 1.1 Engineering Epic (Issue #69) are both functionally complete but not promoted to `main`. |
 | Priority | P1 |
-| Kanban State | Ready - fully defined, blocked only on Repository Author decision, no further engineering scoping needed |
+| Kanban State | Done - `v1.0.0` was already released (2026-08-03); the Repository Author authorized a pinned Version 1.1 promotion from the verified completion boundary (commit `a00111d`, PR #92) to `main` via PR #133 (merged 2026-08-11), deliberately excluding subsequent Version 2 Web Product work. Tagged `v1.1.0` and published as a GitHub Release ("Ramrattan AI Editorial Studio v1.1.0 - Author Experience"). Issue #69 closed. |
 | Dependencies | None technical - pure decision. Independent of the Web Product Track (BL-001 through BL-010). |
-| Acceptance Summary | Decision recorded; if approved, promotion/tag/release executed per the existing release process. |
+| Acceptance Summary | Met. Decision recorded and executed: `v1.1.0` promoted, tagged, and released per the existing release process. External announcement was not part of this decision's scope and remains a separate, not-yet-requested action. |
 
 ### BL-001 - Editorial Direction quality parity with the locked GPT baseline
 

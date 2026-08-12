@@ -120,23 +120,18 @@ Version 2 status, including what remains not yet verified.
 Two independent objectives are active in parallel; neither blocks the
 other.
 
-**1. Manual Version 1 and Version 1.1 Release Decisions**
+**1. Manual Version 1 and Version 1.1 Release Decisions - Resolved**
 
-Issue #18 and Version 1 RC1 Release Readiness are Complete. Version 1.1
-(V11-01 through V11-10, Issue #69 Epic) is also now Complete on `develop`.
-Neither version has been promoted to `main`; both remaining release
-decisions require explicit Repository Author approval:
-
-- Repository Author release approval, for Version 1.0, Version 1.1, or both
-- `develop`-to-`main` release promotion
-- Creation of the applicable release tag(s)
-- GitHub Release publication
-- Release-note publication
-- External announcement, if approved
-- Post-release verification
-
-No release action or additional feature work should begin unless explicitly
-approved by the Repository Author.
+Issue #18 and Version 1 RC1 Release Readiness are Complete and released
+(`v1.0.0`, GitHub Release published 2026-08-03). Version 1.1 (V11-01
+through V11-10, Issue #69 Epic, closed) is also Complete and released:
+the Repository Author authorized a pinned promotion from the verified
+Version 1.1 completion boundary (commit `a00111d`, PR #92) to `main`
+via PR #133 (merged 2026-08-11), intentionally excluding subsequent
+Version 2 Web Product work. Tagged `v1.1.0` and published as a GitHub
+Release ("Ramrattan AI Editorial Studio v1.1.0 - Author Experience",
+2026-08-11). `BACKLOG.md` BL-011 is Done. No external announcement has
+been published yet - that remains a separate, not-yet-requested action.
 
 **2. Web Product - Foundation Complete (Hosted, Browser-Accepted)**
 
@@ -292,12 +287,12 @@ backlog items, priority, and Kanban state - operated under
 duplicates that detail; it is retained only as a short cross-cutting
 summary so a session can orient without opening `BACKLOG.md` first.
 
-Two independent tracks remain active:
+One track remains active; the other is resolved:
 
-1. **Manual Version 1.0 / Version 1.1 release decision** - `develop`-to-
-   `main` promotion, tagging, GitHub Release, and announcement, all
-   pending Repository Author approval. Tracked as `BACKLOG.md` BL-011
-   (P1).
+1. **Manual Version 1.0 / Version 1.1 release decision - Done.** `v1.0.0`
+   and `v1.1.0` are both promoted to `main`, tagged, and published as
+   GitHub Releases. `BACKLOG.md` BL-011 is Done. External announcement,
+   if wanted, remains a separate, not-yet-requested action.
 2. **Web Product Track** - Web Walking Skeleton 01's foundation is
    complete and hosted-browser-accepted. The next candidate slice (Web
    Walking Skeleton 02) is deliberately not assumed to be the next
@@ -462,6 +457,19 @@ Recent engineering milestones
   decision) were reviewed and remain unresolved Repository Author
   decisions, with no invented deadline and no release action taken.
   No product implementation began.
+- DS-01 closed and BL-001 delivered (2026-08-11): the DEC-030
+  implementation (`gpt-5.6-terra`, Variant D instructions) merged as
+  PR #130 and hosted-verified through the real Web Product path; DS-01
+  closeout merged as PR #131. BL-001 and BL-002 are Done.
+- Version 1.1 promoted and released (2026-08-11): the Repository Author
+  authorized BL-011's release decision. A pinned promotion from the
+  verified Version 1.1 completion boundary (commit `a00111d`, PR #92)
+  to `main` merged as PR #133, deliberately excluding subsequent
+  Version 2 Web Product work (Web Walking Skeleton 01, DS-01, DEC-030,
+  BL-001 closeout), which remain on `develop` only. Tagged `v1.1.0` and
+  published as a GitHub Release. Issue #69 (Version 1.1 Engineering
+  Epic) closed - all ten V11-01 through V11-10 sub-issues were already
+  closed. BL-011 is Done.
 
 ---
 
@@ -538,6 +546,6 @@ Last Updated
 
 Current Phase
 
-**(1) Manual Version 1 and Version 1.1 Release Decisions; (2) Web Product -
-foundation complete, lean delivery operating model active - see
+**(1) Version 1.0 and Version 1.1 released (`v1.0.0`, `v1.1.0`); (2) Web
+Product - foundation complete, lean delivery operating model active - see
 `BACKLOG.md` for current backlog/Kanban state**

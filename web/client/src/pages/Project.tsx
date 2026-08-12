@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { type ProjectView, api, ApiError } from "../api.js";
+import { ArticleDraftCard } from "../components/ArticleDraftCard.js";
 import { EditorialDirectionCard } from "../components/EditorialDirectionCard.js";
+import { EditorialPlanCard } from "../components/EditorialPlanCard.js";
 import { UrlIntakeForm } from "../components/UrlIntakeForm.js";
 
 export function Project() {
@@ -71,6 +73,44 @@ export function Project() {
     }
   }
 
+  async function handleApprovePlan() {
+    if (!id) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await api.approvePlan(id);
+      if (result.draftError) {
+        setError(
+          "The draft could not be generated right now. Please try approving again.",
+        );
+      }
+      await load();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Could not approve the plan.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleReviseRequest() {
+    if (!id) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await api.revisePlan(id);
+      if (result.planError) {
+        setError(
+          "A new plan could not be generated right now. Please try again.",
+        );
+      }
+      await load();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Could not request a revision.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   if (!view) {
     return (
       <div className="page">
@@ -113,6 +153,17 @@ export function Project() {
           busy={busy}
         />
       )}
+
+      {view.editorialPlan && (
+        <EditorialPlanCard
+          plan={view.editorialPlan}
+          onApprove={handleApprovePlan}
+          onReviseRequest={handleReviseRequest}
+          busy={busy}
+        />
+      )}
+
+      {view.article && <ArticleDraftCard article={view.article} />}
     </div>
   );
 }

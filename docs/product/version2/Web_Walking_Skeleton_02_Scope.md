@@ -1,6 +1,6 @@
 # Web Walking Skeleton 02 Scope - Editorial Plan + Draft
 
-**Status:** Scoped - approved slice definition and acceptance contract; implementation not authorized.
+**Status:** Scoped and implementation-ready - approved slice definition, acceptance contract, and both flagged Repository Author decisions (Section 11) resolved; implementation itself not yet authorized.
 **Classification:** Product scope and acceptance-contract artifact (Informative - not a Product Decision).
 **Backlog:** BL-003.
 **Evidence base:** `ROADMAP.md` "Version 2 Checkpoint" (Next Vertical Slice); `docs/product/version2/Web_Product_Foundation_v1.md` Sections 6, 9-10; `docs/architecture/Version_1_1_State_Machine.md` (Editorial Plan, Generation); `docs/product/Version_1_1_Author_Experience_Baseline.md` (Editorial Plan); `studio/article_engine.py` (`ArticleDraft`).
@@ -22,10 +22,10 @@ The same `EditorialProject` at a new terminal stage for this slice - `stage = 'd
 ## 4. Editorial Plan Capability (Minimum)
 
 - **Fields**, per `Web_Product_Foundation_v1.md` Section 6's already-sketched `EditorialPlan` shape: `headline`, `hook`, `key_insights` (jsonb array), `practical_takeaway`, `cta_direction`.
-- **Generation trigger**: proposed automatically as part of the same request that approves the `EditorialDirection` - the existing `POST /:id/direction/approve` endpoint is extended to synchronously generate and persist the initial `EditorialPlan` proposal in the same transaction as the stage advance. This mirrors the existing precedent already established by `POST /:id/source` (source retrieval and Editorial Direction generation happen synchronously in one request) rather than introducing a new asynchronous or two-step pattern. See Section 11 for the one point this needs explicit confirmation on.
-- **Author decision**: exactly two outcomes, per the State Machine (not the three-outcome `proposed | approved | rejected` pattern `EditorialDirection` uses):
-  - **Approve** - advances the project to `stage = 'draft'` and triggers Draft generation (Section 5).
-  - **Request revision** - regenerates a new plan proposal and the project remains at `stage = 'editorial_plan'`. This is a real behavioral difference from `EditorialDirection`'s Reject (which is terminal and stage-local, never regenerates) - see Section 11.
+- **Generation trigger**: **Repository Author decision (confirmed): synchronous.** Proposed automatically as part of the same request that approves the `EditorialDirection` - the existing `POST /:id/direction/approve` endpoint is extended to synchronously generate and persist the initial `EditorialPlan` proposal in the same transaction as the stage advance. This mirrors the existing precedent already established by `POST /:id/source` (source retrieval and Editorial Direction generation happen synchronously in one request) rather than introducing a new asynchronous or two-step pattern.
+- **`EditorialPlan.status`: `proposed | approved | revision_requested` - Repository Author decision (confirmed), a distinct vocabulary from `EditorialDirection`'s `proposed | approved | rejected`, precisely because the two behave differently:**
+  - **Approve** - status becomes `approved`; advances the project to `stage = 'draft'` and triggers Draft generation (Section 5).
+  - **Request revision** - status becomes `revision_requested`, which synchronously triggers regeneration of a new plan proposal (status returns to `proposed` on the new row/version); the project remains at `stage = 'editorial_plan'`. `revision_requested` is a transient, self-clearing state, not a terminal one - it never means the same thing `EditorialDirection`'s terminal, stage-local `rejected` means, and the two words are deliberately not reused for each other.
 - **No independent Approve/Reject exists for the Draft itself** in this slice - `ROADMAP.md`'s wording places `Approve/Reject` between Editorial Plan and Draft generation, not after it, matching the State Machine's Generation stage being automatic, not an Author decision point.
 
 ## 5. Draft Capability (Minimum)
@@ -37,7 +37,7 @@ A new `Article` entity, deliberately narrower than the full `studio/article_engi
 - `article_markdown` - the generated article body
 - `source_attributions` - grounding back to the project's `Source`, consistent with `Evidence Before Generation`
 
-**Explicitly excluded from this slice** (see Section 9): `hashtags`, `linkedin_description` (LinkedIn-publication-specific formatting; belongs with the deferred LinkedIn slices), `hero_visual_prompt` and any Hero Visual artifact (its own deferred slice), and the full LMHS Editorial Risk / Evidence Validation blocking machinery (`used_claim_identifiers` and the "High or Severe Editorial Risk block" outcome) - see Section 11.
+**Explicitly excluded from this slice** (see Section 9): `hashtags`, `linkedin_description` (LinkedIn-publication-specific formatting; belongs with the deferred LinkedIn slices), `hero_visual_prompt` and any Hero Visual artifact (its own deferred slice), and the full LMHS Editorial Risk / Evidence Validation blocking machinery (`used_claim_identifiers` and the "High or Severe Editorial Risk block" outcome) - see Section 9.
 
 - **Generation trigger**: automatic, synchronous, immediately on Editorial Plan approval (`Generate Once`) - one request produces both the stage advance and the persisted `Article` row, mirroring the same synchronous-generation precedent as Section 4.
 - **Outcomes**: **complete** (persists the `Article`, advances to `stage = 'draft'`) or **technical failure** (does not persist an `Article`, project remains at `stage = 'editorial_plan'` with an explanation, mirroring `EditorialDirection`'s existing bounded-retry-then-fail pattern in `web/server/src/openai/editorialDirection.ts`). The risk-based "block" outcome is out of scope per Section 9/11.
@@ -76,14 +76,12 @@ Per `ROADMAP.md`'s "Later Web Slices" and this document's own narrowing above:
 - The synchronous generate-on-request pattern, bounded-retry OpenAI integration, Structured Outputs/zod validation, and malformed-output-never-persisted contract all already exist (`web/server/src/openai/`) and are reused, not redesigned.
 - Editorial quality/model configuration is governed by DEC-030 (`gpt-5.6-terra`, Variant D-equivalent instruction quality bar) - this slice must follow the same instruction-quality discipline for its own prompts, not introduce a separate, unreviewed prompting approach.
 
-## 11. Unresolved Repository Author Decisions
+## 11. Repository Author Decisions - Resolved
 
-Two points genuinely require confirmation before implementation, not invented here:
+Both points flagged during scoping have been confirmed by the Repository Author. No unresolved implementation-blocking decision remains in this slice.
 
-1. **Synchronous vs. explicit-trigger generation.** Section 4/5 recommends synchronous generation (Plan on Direction-approve; Draft on Plan-approve), matching the existing `POST /:id/source` precedent. An explicit separate "generate" endpoint per stage is the alternative. Recommendation: synchronous, for consistency; needs confirmation, not assumed.
-2. **Editorial Plan revision semantics.** Section 4 notes Editorial Plan's "Request revision" regenerates a new proposal, unlike `EditorialDirection`'s terminal Reject. Confirm whether `EditorialPlan.status` should reuse the same `proposed | approved | rejected` enum with `rejected` behaviorally meaning "regenerate," or use a distinct status vocabulary to avoid conflating two different behaviors under the same word Walking Skeleton 01 already uses for something else.
-
-Both are product/architecture judgment calls, not technical blockers - each is answerable in one Repository Author decision before implementation begins.
+1. **Generation trigger: synchronous (confirmed).** Plan generation is synchronous with Direction approval; Draft generation is synchronous with Plan approval - both extend an existing endpoint's transaction rather than introducing a new asynchronous or two-step pattern. See Section 4/5.
+2. **Editorial Plan revision semantics: `proposed | approved | revision_requested` (confirmed).** `EditorialPlan.status` uses its own vocabulary, distinct from `EditorialDirection`'s `proposed | approved | rejected`. Flow: `proposed -> revision_requested -> (regenerate) -> proposed`, or `proposed -> approved` (advances to Draft). `rejected` is deliberately not reused for Editorial Plan revision - it already means something else (terminal, stage-local) for `EditorialDirection`, and reusing it here would conflate two different behaviors under the same word. See Section 4.
 
 ## 12. Acceptance Criteria
 
@@ -129,7 +127,8 @@ real Web Product, persisted and refresh-safe.
 document's verification as current. At minimum confirm: current
 branch is develop; local develop matches origin/develop; no primary
 Kanban item is In Progress other than BL-003; this scope document and
-its two Repository Author decisions (Section 11) are still current.]
+its resolved Repository Author decisions (Section 11) are still
+current and unreversed.]
 
 ## 6. Governing Inputs
 - docs/product/version2/Web_Walking_Skeleton_02_Scope.md (this document)
@@ -143,9 +142,9 @@ its two Repository Author decisions (Section 11) are still current.]
 - web/server/src/db/migrations/ (migration sequence to extend)
 
 ## 7. Repository Author Decisions
-Section 11's two decisions (synchronous generation; Editorial Plan
-revision semantics) must be resolved before this work order is
-executed - they are not resolved by this scope document.
+Section 11's two decisions are resolved: generation is synchronous;
+`EditorialPlan.status` uses `proposed | approved | revision_requested`.
+This work order applies both without re-litigating them.
 
 ## 8. Exact Scope
 - New migration: web/server/src/db/migrations/003_add_editorial_plan_and_article.sql
@@ -204,10 +203,10 @@ Merge to main, tag/release creation, Render modification, and
 everything in Section 9 of this scope document.
 
 ## 16. Failure and Stop Conditions
-Any ambiguity about Section 11's two decisions, any conflict with
-DEC-030's instruction-quality bar, or any required schema change
-beyond the additive migration in Section 8: stop and report, do not
-infer.
+Any conflict between the resolved Section 11 decisions and what is
+found in the repository at execution time, any conflict with DEC-030's
+instruction-quality bar, or any required schema change beyond the
+additive migration in Section 8: stop and report, do not infer.
 
 ## 17. Required Final Report
 What changed (exact files), validation results (all four suites),

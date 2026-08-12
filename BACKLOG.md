@@ -136,9 +136,9 @@ versus what goes to the backlog) are defined in
 | Evidence / Source | `ROADMAP.md`, "Version 2 Checkpoint" - "Next Vertical Slice (Not Started)." |
 | Priority | P2 - deliberately **not** auto-elevated to P1 merely because it was previously named "next." Building a deeper generation workflow on top of unproven editorial quality (BL-001) carries real rework risk. |
 | Kanban State | In Progress (scoping sprint) - BL-001/BL-002 are now Done, resolving the prior dependency; a bounded scoping delivery defined the slice without implementing it. |
-| Dependencies | BL-001/BL-002 resolution (Done, see DEC-030). Two Repository Author decisions remain open before implementation: see `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` Section 11. |
-| Acceptance Summary | Scope defined, not yet implemented. `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` defines the exact starting/ending project state, the minimum Editorial Plan and Draft capability, persistence/refresh requirements, eight literal Acceptance Criteria, and a prepared (not executed) Engineering Work Order per `docs/engineering/AI_Engineering_Work_Order_Template.md`. |
-| Notes | Scoping only - no implementation performed. Two decisions require explicit Repository Author confirmation before an implementation delivery can be authorized (synchronous generation trigger; Editorial Plan revision semantics) - see the scope document Section 11. |
+| Dependencies | BL-001/BL-002 resolution (Done, see DEC-030). No longer blocked on open decisions - both flagged during scoping (generation trigger; Editorial Plan revision semantics) are resolved: see `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` Section 11. |
+| Acceptance Summary | Scope defined and implementation-ready, not yet implemented. `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` defines the exact starting/ending project state, the minimum Editorial Plan and Draft capability, persistence/refresh requirements, eight literal Acceptance Criteria, and a prepared (not executed) Engineering Work Order per `docs/engineering/AI_Engineering_Work_Order_Template.md`. |
+| Notes | Scoping only - no implementation performed. Both decisions previously flagged for Repository Author confirmation (synchronous generation trigger; `proposed \| approved \| revision_requested` for Editorial Plan) are now resolved - see the scope document Section 11. Implementation itself remains a separate, not-yet-authorized delivery. |
 
 ### BL-004 - Real outbound email / SMTP for the production Author experience
 

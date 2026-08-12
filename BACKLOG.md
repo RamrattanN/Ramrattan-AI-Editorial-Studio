@@ -43,23 +43,23 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-003 through BL-010, BL-012 through BL-015 | BL-011 | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance)* |
+| BL-003 through BL-010, BL-012 through BL-015 | *(none)* | BL-011 | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance)* |
 
 ## Current Sprint
 
 | Field | Value |
 |---|---|
-| Sprint Date / ID | DS-01, 2026-08-11 |
-| Outcome | Determine why the Web Product's Editorial Direction is materially weaker editorially than the locked GPT baseline (PV-029), and produce an evidence-backed recommendation for the Web Product's Editorial Direction configuration. |
-| Must Complete | Baseline reconstruction (locked GPT and current Web path); difference analysis; a controlled evaluation; a bounded finding on primary cause (prompt, model, context, source processing, schema, or a combination); a model/configuration recommendation with quality/cost rationale; a finding on whether Editorial Direction quality is now sufficiently understood to permit Web Walking Skeleton 02. |
-| Stretch | A narrow, reversible, prompt-only production change, authorized only if evidence clearly isolates a prompt-only cause requiring no model, schema, persistence, source-processing, or architecture change. |
-| Acceptance Criteria | The sprint's five governing questions are each answered with a bounded, evidence-based conclusion, not "more investigation is required"; a durable evidence artifact exists; the Repository Author has a concise comparison to review before any implementation decision. |
-| Dependencies | BL-002 (model-selection evaluation), resolved as supporting investigation under this sprint; does not independently enter In Progress. |
-| Risks | Real OpenAI evaluation cost; editorial-quality judgment remains the Repository Author's, not the agent's; rework risk if Web Walking Skeleton 02 is deemed ready prematurely. |
-| Explicit Non-Goals | Web Walking Skeleton 02, Editorial Plan, Draft, Hero Visual, LinkedIn publishing, Reader Engagement, locked GPT or GPT Knowledge changes, SMTP, Render/DNS changes, `main` promotion, tagging, BL-011, BL-016, Codex audible-notification troubleshooting, Wiki expansion. |
+| Sprint Date / ID | DS-02, 2026-08-11 |
+| Outcome | Make and record the Repository Author decision on Version 1.0/1.1 promotion readiness and the appropriate next release action (BL-011). |
+| Must Complete | Verify Version 1.0/1.1 functional-completion evidence; compare `develop` and `main` divergence; assess promotion readiness across functional completion, validation, known defects, governance, branch integrity, deployment risk, release semantics, and rollback/recovery; classify every finding as a blocker, non-blocking note, deferred item, or Repository Author decision; produce promote-now / defer / conditional-promotion options; deliver a recommendation with a stated confidence level. |
+| Stretch | None - this is a decision-support sprint; the actual promotion, tag, and release action remain a separately gated Repository Author decision, not part of this sprint's scope. |
+| Acceptance Criteria | The Repository Author has an evidence-based set of promotion options, a clear recommendation, and an explicit statement of what decision is required next. |
+| Dependencies | None technical - pure decision, per BL-011's canonical definition. |
+| Risks | None from the assessment itself (read-only); the risk being evaluated is entirely about the promotion decision's own consequences, not about performing this sprint. |
+| Explicit Non-Goals | Merge `develop` to `main`, Git tag creation, GitHub Release creation, Render or infrastructure change, Version 1.0/1.1 version-identifier changes, Web Walking Skeleton 02, BL-005, BL-016, another DS-01 OpenAI generation or hosted-acceptance repeat. |
 | Owner / Execution Agent | Claude |
-| Review Agent | Codex, scope determined by findings (see final report) |
-| Status | Closed.  The sprint's five governing questions were each answered with a bounded, evidence-based conclusion (Sections 9, 13-14 of the evidence artifact); the Repository Author approved the resulting model/prompt recommendation as `product/validation/Product_Decisions.md` DEC-030; the separate, bounded implementation delivery DEC-030 authorized was completed and merged (PR #130, commit `afb07eb`); and post-merge hosted acceptance through the real Web Product path passed all required criteria.  See BACKLOG.md's "Latest Closeout" section below for the full record. |
+| Review Agent | None required - decision-support assessment, not implementation; no risk category (architecture, security, persistence, workflow state) from the Delivery Operating Model's Codex-review trigger list applies. |
+| Status | In Progress - assessment and recommendation complete (see delivery report); awaiting Repository Author decision on the actual promotion action. |
 
 ## Latest Closeout
 

@@ -43,23 +43,23 @@ more work.
 
 | Backlog | Ready | In Progress (0/1) | Review / Validation (0/2) | Done |
 |---|---|---|---|---|
-| BL-003 through BL-010, BL-012 through BL-015 | *(none)* | *(none)* | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance; BL-011 completed 2026-08-11, see `v1.1.0` GitHub Release and PR #133)* |
+| BL-004 through BL-010, BL-012 through BL-015 | *(none)* | BL-003 | *(none)* | *(see completed capabilities in ROADMAP.md - this board tracks forward-looking work, not delivery history; BL-002 completed 2026-08-11, see DEC-030; BL-001 completed 2026-08-11, see DEC-030 and PR #130 hosted acceptance; BL-011 completed 2026-08-11, see `v1.1.0` GitHub Release and PR #133)* |
 
 ## Current Sprint
 
 | Field | Value |
 |---|---|
-| Sprint Date / ID | DS-02, 2026-08-11 |
-| Outcome | Make and record the Repository Author decision on Version 1.0/1.1 promotion readiness and the appropriate next release action (BL-011). |
-| Must Complete | Verify Version 1.0/1.1 functional-completion evidence; compare `develop` and `main` divergence; assess promotion readiness across functional completion, validation, known defects, governance, branch integrity, deployment risk, release semantics, and rollback/recovery; classify every finding as a blocker, non-blocking note, deferred item, or Repository Author decision; produce promote-now / defer / conditional-promotion options; deliver a recommendation with a stated confidence level. |
-| Stretch | None - this is a decision-support sprint; the actual promotion, tag, and release action remain a separately gated Repository Author decision, not part of this sprint's scope. |
-| Acceptance Criteria | The Repository Author has an evidence-based set of promotion options, a clear recommendation, and an explicit statement of what decision is required next. |
-| Dependencies | None technical - pure decision, per BL-011's canonical definition. |
-| Risks | None from the assessment itself (read-only); the risk being evaluated is entirely about the promotion decision's own consequences, not about performing this sprint. |
-| Explicit Non-Goals | Merge `develop` to `main`, Git tag creation, GitHub Release creation, Render or infrastructure change, Version 1.0/1.1 version-identifier changes, Web Walking Skeleton 02, BL-005, BL-016, another DS-01 OpenAI generation or hosted-acceptance repeat. |
+| Sprint Date / ID | DS-03, 2026-08-11 |
+| Outcome | Define the smallest coherent and testable scope for BL-003 - Web Walking Skeleton 02: Editorial Plan + Draft - and prepare it for a later engineering delivery, without beginning implementation. |
+| Must Complete | User-visible outcome; exact starting/ending project state; minimum Editorial Plan and Draft capability; persistence/refresh requirements; deferred scope; dependencies already satisfied; any genuine unresolved Repository Author decision; literal, testable Acceptance Criteria; a prepared (not executed) Engineering Work Order. |
+| Stretch | None - a scoping sprint; implementation is explicitly out of scope. |
+| Acceptance Criteria | A durable scope document exists with all Must-Complete elements; BL-003 is implementation-ready pending the Repository Author's resolution of the two flagged decisions. |
+| Dependencies | BL-001/BL-002 (Done, DEC-030) - previously the reason BL-003 was not auto-elevated; now resolved. |
+| Risks | None from scoping itself (no implementation, no OpenAI calls); rework risk if implementation began without the Repository Author confirming Section 11's two decisions first - avoided by not implementing. |
+| Explicit Non-Goals | Editorial Plan or Draft implementation, any OpenAI call, redesigning Walking Skeleton 01, reopening DS-01/DEC-030, Render changes, BL-005, BL-016, another backlog item. |
 | Owner / Execution Agent | Claude |
-| Review Agent | None required - decision-support assessment, not implementation; no risk category (architecture, security, persistence, workflow state) from the Delivery Operating Model's Codex-review trigger list applies. |
-| Status | Closed. The Repository Author authorized the pinned Version 1.1 promotion; `v1.1.0` was promoted, tagged, and released (PR #133, merged 2026-08-11). BL-011 is Done. |
+| Review Agent | None required for this scoping pass - no architecture, security, persistence, or workflow-state risk category applies to a documentation-only scope; the prepared Engineering Work Order itself designates Codex/independent review at the point it is actually executed. |
+| Status | Scoping complete - see `docs/product/version2/Web_Walking_Skeleton_02_Scope.md`. Awaiting Repository Author resolution of Section 11's two decisions before an implementation delivery can be authorized. |
 
 ## Latest Closeout
 
@@ -135,10 +135,10 @@ versus what goes to the backlog) are defined in
 | Outcome | `Approved Editorial Direction -> Editorial Plan -> native Approve/Reject -> Draft generation -> persistent article workspace`, per `ROADMAP.md`'s Version 2 Checkpoint. |
 | Evidence / Source | `ROADMAP.md`, "Version 2 Checkpoint" - "Next Vertical Slice (Not Started)." |
 | Priority | P2 - deliberately **not** auto-elevated to P1 merely because it was previously named "next." Building a deeper generation workflow on top of unproven editorial quality (BL-001) carries real rework risk. |
-| Kanban State | Backlog |
-| Dependencies | Should weigh BL-001/BL-002 resolution first. |
-| Acceptance Summary | Not yet written - no Engineering Delivery Order exists for this slice. |
-| Notes | Not started. Not authorized by this delivery. |
+| Kanban State | In Progress (scoping sprint) - BL-001/BL-002 are now Done, resolving the prior dependency; a bounded scoping delivery defined the slice without implementing it. |
+| Dependencies | BL-001/BL-002 resolution (Done, see DEC-030). Two Repository Author decisions remain open before implementation: see `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` Section 11. |
+| Acceptance Summary | Scope defined, not yet implemented. `docs/product/version2/Web_Walking_Skeleton_02_Scope.md` defines the exact starting/ending project state, the minimum Editorial Plan and Draft capability, persistence/refresh requirements, eight literal Acceptance Criteria, and a prepared (not executed) Engineering Work Order per `docs/engineering/AI_Engineering_Work_Order_Template.md`. |
+| Notes | Scoping only - no implementation performed. Two decisions require explicit Repository Author confirmation before an implementation delivery can be authorized (synchronous generation trigger; Editorial Plan revision semantics) - see the scope document Section 11. |
 
 ### BL-004 - Real outbound email / SMTP for the production Author experience
 

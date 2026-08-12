@@ -176,7 +176,7 @@ new OpenAI prompt. The locked GPT and GPT Knowledge are unchanged.
 ## 11. Required Deliverables
 Migration 003; extended types/repository/routes; two new OpenAI
 generation modules; client components rendering both new stages;
-passing regression tests; this scope document's twelve Acceptance
+passing regression tests; this scope document's eight Acceptance
 Criteria demonstrated through the real application path (local, then
 one bounded hosted verification, mirroring DEC-030's delivery
 standard).

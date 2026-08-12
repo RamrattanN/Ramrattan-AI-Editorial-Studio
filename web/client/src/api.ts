@@ -9,7 +9,11 @@ export interface Author {
   email: string;
 }
 
-export type ProjectStage = "source_intake" | "editorial_direction";
+export type ProjectStage =
+  | "source_intake"
+  | "editorial_direction"
+  | "editorial_plan"
+  | "draft";
 
 export interface EditorialProject {
   id: string;
@@ -42,10 +46,39 @@ export interface Source {
   retrievalError: string | null;
 }
 
+export type EditorialPlanStatus = "proposed" | "approved" | "revision_requested";
+
+export interface EditorialPlan {
+  id: string;
+  headline: string;
+  hook: string;
+  keyInsights: string[];
+  practicalTakeaway: string;
+  ctaDirection: string;
+  status: EditorialPlanStatus;
+}
+
+export interface SourceAttribution {
+  citation: string;
+}
+
+export interface Article {
+  id: string;
+  headline: string;
+  hook: string;
+  keyInsights: string[];
+  practicalTakeaway: string;
+  cta: string;
+  articleMarkdown: string;
+  sourceAttributions: SourceAttribution[];
+}
+
 export interface ProjectView {
   project: EditorialProject;
   source: Source | null;
   editorialDirection: EditorialDirection | null;
+  editorialPlan: EditorialPlan | null;
+  article: Article | null;
 }
 
 export class ApiError extends Error {
@@ -115,14 +148,30 @@ export const api = {
     }),
 
   approveDirection: (id: string) =>
-    request<{ editorialDirection: EditorialDirection }>(
-      `/api/projects/${id}/direction/approve`,
-      { method: "POST" },
-    ),
+    request<{
+      editorialDirection: EditorialDirection;
+      project: EditorialProject;
+      editorialPlan: EditorialPlan | null;
+      planError?: string;
+    }>(`/api/projects/${id}/direction/approve`, { method: "POST" }),
 
   rejectDirection: (id: string, feedback: string) =>
     request<{ editorialDirection: EditorialDirection }>(
       `/api/projects/${id}/direction/reject`,
       { method: "POST", body: JSON.stringify({ feedback }) },
+    ),
+
+  approvePlan: (id: string) =>
+    request<{
+      editorialPlan: EditorialPlan;
+      article: Article | null;
+      project?: EditorialProject;
+      draftError?: string;
+    }>(`/api/projects/${id}/plan/approve`, { method: "POST" }),
+
+  revisePlan: (id: string) =>
+    request<{ editorialPlan: EditorialPlan; planError?: string }>(
+      `/api/projects/${id}/plan/revise`,
+      { method: "POST" },
     ),
 };

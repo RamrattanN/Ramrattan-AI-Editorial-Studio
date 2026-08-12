@@ -17,6 +17,8 @@ export async function setupTestDb(): Promise<Pool> {
 }
 
 const APP_TABLES = [
+  "articles",
+  "editorial_plans",
   "editorial_directions",
   "sources",
   "editorial_projects",

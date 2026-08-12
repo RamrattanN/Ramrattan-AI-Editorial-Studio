@@ -7,7 +7,8 @@ export interface Author {
 export type ProjectStage =
   | "source_intake"
   | "editorial_direction"
-  | "editorial_plan";
+  | "editorial_plan"
+  | "draft";
 
 export interface EditorialProject {
   id: string;
@@ -50,8 +51,42 @@ export interface EditorialDirection {
   createdAt: string;
 }
 
+export type EditorialPlanStatus = "proposed" | "approved" | "revision_requested";
+
+export interface EditorialPlan {
+  id: string;
+  editorialProjectId: string;
+  headline: string;
+  hook: string;
+  keyInsights: string[];
+  practicalTakeaway: string;
+  ctaDirection: string;
+  status: EditorialPlanStatus;
+  decidedAt: string | null;
+  createdAt: string;
+}
+
+export interface SourceAttribution {
+  citation: string;
+}
+
+export interface Article {
+  id: string;
+  editorialProjectId: string;
+  headline: string;
+  hook: string;
+  keyInsights: string[];
+  practicalTakeaway: string;
+  cta: string;
+  articleMarkdown: string;
+  sourceAttributions: SourceAttribution[];
+  createdAt: string;
+}
+
 export interface ProjectView {
   project: EditorialProject;
   source: Source | null;
   editorialDirection: EditorialDirection | null;
+  editorialPlan: EditorialPlan | null;
+  article: Article | null;
 }
